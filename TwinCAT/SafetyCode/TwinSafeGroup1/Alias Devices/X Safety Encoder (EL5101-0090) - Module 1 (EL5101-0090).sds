@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SafetyDeviceDesc Crc="3422400849" FileFormatVersion="1.8">
+  <AliasDeviceType>
+    <Type>4</Type>
+    <SubType>5101</SubType>
+    <VendorId>2</VendorId>
+  </AliasDeviceType>
+  <SDSID>22</SDSID>
+  <SafetyAliasDevice>
+    <ObjectId>50921476</ObjectId>
+    <LinkingMode>Automatic</LinkingMode>
+    <ConnectionId>22</ConnectionId>
+    <ConnectionMode>master</ConnectionMode>
+    <ConnectionType>TwinSafeScCrc1</ConnectionType>
+    <MapDiag>false</MapDiag>
+    <MapInputs>false</MapInputs>
+    <MapOutputs>false</MapOutputs>
+    <MapState>false</MapState>
+    <ModuleFaultIsComErr>false</ModuleFaultIsComErr>
+    <SafeAddress>100</SafeAddress>
+    <Watchdog>100</Watchdog>
+    <ComErrAck Type="Unset" />
+    <Params>
+      <Param Index="5648" SubIndex="0">04</Param>
+      <Param Index="5648" SubIndex="1">08012070</Param>
+      <Param Index="5648" SubIndex="2">08000000</Param>
+      <Param Index="5648" SubIndex="3">10032070</Param>
+      <Param Index="5648" SubIndex="4">10022070</Param>
+      <Param Index="6672" SubIndex="0">0A</Param>
+      <Param Index="6672" SubIndex="1">08012060</Param>
+      <Param Index="6672" SubIndex="2">101D1060</Param>
+      <Param Index="6672" SubIndex="3">10032060</Param>
+      <Param Index="6672" SubIndex="4">10022060</Param>
+      <Param Index="6672" SubIndex="5">00000000</Param>
+      <Param Index="6672" SubIndex="6">00000000</Param>
+      <Param Index="6672" SubIndex="7">00000000</Param>
+      <Param Index="6672" SubIndex="8">00000000</Param>
+      <Param Index="6672" SubIndex="9">00000000</Param>
+      <Param Index="6672" SubIndex="10">00000000</Param>
+      <Param Index="6672" SubIndex="11">00000000</Param>
+      <Param Index="6672" SubIndex="12">00000000</Param>
+      <Param Index="6672" SubIndex="13">00000000</Param>
+      <Param Index="6672" SubIndex="14">00000000</Param>
+      <Param Index="6672" SubIndex="15">00000000</Param>
+      <Param Index="6672" SubIndex="16">00000000</Param>
+      <Param Index="6672" SubIndex="17">00000000</Param>
+      <Param Index="6672" SubIndex="18">00000000</Param>
+      <Param Index="6672" SubIndex="19">00000000</Param>
+      <Param Index="6672" SubIndex="20">00000000</Param>
+      <Param Index="32800" SubIndex="1">6400</Param>
+      <Param Index="32800" SubIndex="2">00000000</Param>
+      <Messages>
+        <IO>
+          <Name>Master Cmd</Name>
+          <Index>28704</Index>
+          <SubIndex>1</SubIndex>
+          <DataType>USINT</DataType>
+          <Direction>Out</Direction>
+          <SafetyType>ProtocolData</SafetyType>
+          <BitSize>8</BitSize>
+          <BitOffsMessage>0</BitOffsMessage>
+          <BitOffsData>-1</BitOffsData>
+        </IO>
+        <IO>
+          <Name />
+          <Index>0</Index>
+          <SubIndex>0</SubIndex>
+          <DataType />
+          <Direction>Out</Direction>
+          <SafetyType>SafetySil2</SafetyType>
+          <BitSize>8</BitSize>
+          <BitOffsMessage>8</BitOffsMessage>
+          <BitOffsData>0</BitOffsData>
+        </IO>
+        <IO>
+          <Name>Master CRC_0</Name>
+          <Index>28704</Index>
+          <SubIndex>3</SubIndex>
+          <DataType>UINT</DataType>
+          <Direction>Out</Direction>
+          <SafetyType>ProtocolData</SafetyType>
+          <BitSize>16</BitSize>
+          <BitOffsMessage>16</BitOffsMessage>
+          <BitOffsData>-1</BitOffsData>
+        </IO>
+        <IO>
+          <Name>Master ConnID</Name>
+          <Index>28704</Index>
+          <SubIndex>2</SubIndex>
+          <DataType>UINT</DataType>
+          <Direction>Out</Direction>
+          <SafetyType>ProtocolData</SafetyType>
+          <BitSize>16</BitSize>
+          <BitOffsMessage>32</BitOffsMessage>
+          <BitOffsData>-1</BitOffsData>
+        </IO>
+        <IO>
+          <Name>Slave Cmd</Name>
+          <Index>24608</Index>
+          <SubIndex>1</SubIndex>
+          <DataType>USINT</DataType>
+          <Direction>In</Direction>
+          <SafetyType>ProtocolData</SafetyType>
+          <BitSize>8</BitSize>
+          <BitOffsMessage>0</BitOffsMessage>
+          <BitOffsData>-1</BitOffsData>
+        </IO>
+        <IO>
+          <Name>Counter value</Name>
+          <Index>24592</Index>
+          <SubIndex>29</SubIndex>
+          <DataType>UINT</DataType>
+          <Direction>In</Direction>
+          <SafetyType>SafetySil2</SafetyType>
+          <BitSize>16</BitSize>
+          <BitOffsMessage>8</BitOffsMessage>
+          <BitOffsData>0</BitOffsData>
+        </IO>
+        <IO>
+          <Name>Slave CRC_0</Name>
+          <Index>24608</Index>
+          <SubIndex>3</SubIndex>
+          <DataType>UINT</DataType>
+          <Direction>In</Direction>
+          <SafetyType>ProtocolData</SafetyType>
+          <BitSize>16</BitSize>
+          <BitOffsMessage>24</BitOffsMessage>
+          <BitOffsData>-1</BitOffsData>
+        </IO>
+        <IO>
+          <Name>Slave ConnID</Name>
+          <Index>24608</Index>
+          <SubIndex>2</SubIndex>
+          <DataType>UINT</DataType>
+          <Direction>In</Direction>
+          <SafetyType>ProtocolData</SafetyType>
+          <BitSize>16</BitSize>
+          <BitOffsMessage>40</BitOffsMessage>
+          <BitOffsData>-1</BitOffsData>
+        </IO>
+      </Messages>
+    </Params>
+  </SafetyAliasDevice>
+</SafetyDeviceDesc>
