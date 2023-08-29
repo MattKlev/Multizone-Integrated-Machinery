@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<SafetyDeviceDesc Crc="3422400849" FileFormatVersion="1.8">
+<SafetyDeviceDesc Crc="3782757452" FileFormatVersion="1.8">
   <AliasDeviceType>
     <Type>4</Type>
     <SubType>5101</SubType>
     <VendorId>2</VendorId>
   </AliasDeviceType>
-  <SDSID>22</SDSID>
+  <SDSID>40</SDSID>
   <SafetyAliasDevice>
     <ObjectId>50921476</ObjectId>
     <LinkingMode>Automatic</LinkingMode>
-    <ConnectionId>22</ConnectionId>
+    <ConnectionId>40</ConnectionId>
     <ConnectionMode>master</ConnectionMode>
     <ConnectionType>TwinSafeScCrc1</ConnectionType>
     <MapDiag>false</MapDiag>
@@ -17,7 +17,7 @@
     <MapOutputs>false</MapOutputs>
     <MapState>false</MapState>
     <ModuleFaultIsComErr>false</ModuleFaultIsComErr>
-    <SafeAddress>100</SafeAddress>
+    <SafeAddress>108</SafeAddress>
     <Watchdog>100</Watchdog>
     <ComErrAck Type="Unset" />
     <Params>
@@ -47,7 +47,7 @@
       <Param Index="6672" SubIndex="18">00000000</Param>
       <Param Index="6672" SubIndex="19">00000000</Param>
       <Param Index="6672" SubIndex="20">00000000</Param>
-      <Param Index="32800" SubIndex="1">6400</Param>
+      <Param Index="32800" SubIndex="1">6C00</Param>
       <Param Index="32800" SubIndex="2">00000000</Param>
       <Messages>
         <IO>

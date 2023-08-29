@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TargetSystemConfig Crc="1288647294" Version="1.5">
+<TargetSystemConfig Crc="403681336" Version="1.5">
   <TargetSystemType>HSafetyPLC</TargetSystemType>
   <TargetSystemSubType>EL6910</TargetSystemSubType>
   <IsExternalDevice>false</IsExternalDevice>
   <TargetSystemObjectId>50462724</TargetSystemObjectId>
-  <TargetSystemObjectName>Machine Safety Logic (EL6910)</TargetSystemObjectName>
+  <TargetSystemObjectName>Machine Safety Controller (EL6910)</TargetSystemObjectName>
   <SoftwareVersion>03 (V01.09)     </SoftwareVersion>
   <SerialNumber>1887551</SerialNumber>
-  <ProjectCRC>46668</ProjectCRC>
+  <ProjectCRC>61269</ProjectCRC>
   <MapProjectCRC>false</MapProjectCRC>
   <MapSerialNumber>false</MapSerialNumber>
   <VersionNumber>1</VersionNumber>

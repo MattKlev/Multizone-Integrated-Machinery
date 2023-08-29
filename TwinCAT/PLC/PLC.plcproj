@@ -32,6 +32,9 @@
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Tc2_MC2">
+      <DefaultResolution>Tc2_MC2, * (Beckhoff Automation GmbH)</DefaultResolution>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
@@ -46,6 +49,7 @@
     </PlaceholderReference>
     <PlaceholderReference Include="Util">
       <DefaultResolution>Util, * (System)</DefaultResolution>
+      <Namespace>Util</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
