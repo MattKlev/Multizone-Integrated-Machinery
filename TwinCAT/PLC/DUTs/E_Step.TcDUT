@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="E_Step" Id="{86ae9357-b7cb-4424-afc0-a7f92ad0c847}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE
+	E_Step :
+	(
+		Init := 0,
+		Idel,
+		Enable,
+		MoveToHome,			// Move X and Z to home poisition
+		WaitForAToBeReady,	// Wait at home postion for A to be ready
+		MoveToAPickPos,		// Move X and Z to A position
+		PickFromA,			// Close Grippers
+		MoveToBWaitPos,		// Move X and Z to safe B position
+		WaitForBToBeReady,
+		MoveToBPlacePosition,	// Move X and Z to B Position
+		PlaceOnB,				// Open grippers
+		MoveToBWorkPos,			// Move Carrier up and out of the way for B to do work
+		BDoingWork,
+		MoveToBPickPos,	// Move carrier to B to retreive part
+		PickPartFromB,	// Close grippers
+		MoveToCWaitPos,	// Move to C wait position
+		WaitForCToBeReady,
+		MoveToCPlacePos,	// Move down to C place position
+		PlaceOnC,			// Open Grippers
+		MoveToCWorkPos,		// Move Carrier up and out of the wayt for C to do work
+		CDoingWork,
+		Error,
+		Reset,
+		Reseting
+	);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

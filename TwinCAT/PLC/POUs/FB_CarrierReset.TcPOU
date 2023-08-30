@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_CarrierReset" Id="{b990260e-59ae-4992-829e-5901fb48bceb}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CarrierReset
+VAR_INPUT
+	Execute : BOOL;
+END_VAR
+VAR_OUTPUT
+	Busy	: BOOL;
+	Done	: BOOL;
+	Error	: BOOL;
+END_VAR
+VAR
+	X_AxisReset	: MC_Reset;
+	Z_AxisReset	: MC_Reset;
+
+	{attribute 'hide'}
+	_X_Axis :POINTER TO AXIS_REF;
+	{attribute 'hide'}
+	_Z_Axis :POINTER TO AXIS_REF;
+	_SetPoint : ST_CarrierSetpoint;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF _X_Axis= 0 OR _Z_Axis=0 THEN
+	RETURN;
+END_IF
+
+X_AxisReset(Axis	:= _X_Axis^,
+			Execute	:= Execute AND _X_Axis^.Status.Error);
+
+Z_AxisReset(Axis	:= _Z_Axis^,
+			Execute	:= Execute AND _Z_Axis^.Status.Error);
+
+Busy := X_AxisReset.Busy OR Z_AxisReset.Busy;
+
+Done := X_AxisReset.Done AND Z_AxisReset.Done;
+
+Error := X_AxisReset.Error OR Z_AxisReset.Error;]]></ST>
+    </Implementation>
+    <Property Name="X_AxisRef" Id="{5260bef5-2298-491f-9725-d71827cc0783}">
+      <Declaration><![CDATA[PROPERTY X_AxisRef : POINTER TO AXIS_REF]]></Declaration>
+      <Get Name="Get" Id="{03705336-211d-47b3-95b3-f50a7847fcca}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[X_AxisRef := _X_Axis;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{e75de4b7-6ea7-4e0d-b645-c0bd19391d59}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_X_Axis := X_AxisRef;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="Z_AxisRef" Id="{33f0f1c7-28a6-4dfb-937a-97c2b92458c6}">
+      <Declaration><![CDATA[PROPERTY Z_AxisRef : POINTER TO AXIS_REF]]></Declaration>
+      <Get Name="Get" Id="{ef67b652-e2a5-4887-835e-f1ad55ca1908}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Z_AxisRef := _Z_Axis;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{e9a15d2d-4b28-4db3-bbbf-404f13d01f18}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_Z_Axis := Z_AxisRef;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="FB_CarrierReset">
+      <LineId Id="76" Count="1" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="65" Count="9" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierReset.X_AxisRef.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierReset.X_AxisRef.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierReset.Z_AxisRef.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierReset.Z_AxisRef.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_CarrierSetpoint" Id="{1be24176-fc82-4357-9b17-1e0d899d0116}">
+    <Declaration><![CDATA[TYPE
+	ST_CarrierSetpoint :
+	STRUCT
+		X_Pos	: LREAL;
+		X_Velo	: LREAL;
+		Z_Pos	: LREAL;
+		Z_Velo	: LREAL;
+	END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

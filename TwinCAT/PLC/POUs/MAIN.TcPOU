@@ -3,22 +3,15 @@
   <POU Name="MAIN" Id="{aa01f370-733e-448c-acf5-951e36636772}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	TsErrAck	AT%Q*	:BOOL;
-	TsRunStop	AT%Q*	:BOOL:=TRUE;
-	TSComErr	AT%I*	:BOOL;
-	
-	FromTsSumXandZ	AT%I*	:UINT;
-	
+	Machine : FB_Machine;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-
+      <ST><![CDATA[Machine();
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="2" Count="0" />
-      <LineId Id="15" Count="0" />
+      <LineId Id="36" Count="0" />
       <LineId Id="14" Count="0" />
     </LineIds>
   </POU>

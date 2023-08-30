@@ -1606,13 +1606,20 @@ External Setpoint Generation:
 			</SubItem>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000007}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..6] OF BIT</Name>
-			<BitSize>7</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>7</Elements>
-			</ArrayInfo>
+			<Name GUID="{1553EE7F-0490-4879-4F41-423085C83887}" AutoDeleteType="true">INFODATA_GRP_3</Name>
+			<BitSize>16</BitSize>
+			<SubItem>
+				<Name>State</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000002}">USINT</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Diag</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000002}">USINT</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>8</BitOffs>
+			</SubItem>
 		</DataType>
 		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-002000000010}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..1] OF BYTE</Name>
@@ -1947,28 +1954,66 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{0C5A0548-FA4F-4B8E-B05E-82A0037B3227}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{ADBD401D-935F-6E93-26D7-9A094F89BF41}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{F8BA5EA4-EB4A-FA48-91B8-94AA0B82D608}">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
-							<Name>MAIN.TSComErr</Name>
+							<Name>MAIN.Machine.Start</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.FromTsSumXandZ</Name>
-							<Type>UINT</Type>
+							<Name>MAIN.Machine.Stop</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.Reset</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.TwinSAFEGroupState</Name>
+							<Type>USINT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.TwinSAFEGroupDiag</Name>
+							<Type>USINT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.AxisEnable</Name>
+							<Comment><![CDATA[TwinSAFE E-stop out]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.X_Axis.NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.Z_Axis.NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>MAIN.TsErrAck</Name>
+							<Name>MAIN.Machine.TwinSAFEGroupErrAck</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.TsRunStop</Name>
+							<Name>MAIN.Machine.X_Axis.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.Z_Axis.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.Machine_D_Carrier_Gripper</Name>
+							<Comment><![CDATA[Machine D]]></Comment>
+							<Type>BIT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.TwinSAFEGroupRun</Name>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>
@@ -4818,7 +4863,7 @@ Bit 8 - 15 : reserved]]></Comment>
 						</EtherCAT>
 					</Box>
 				</Box>
-				<EtherCAT DcSyncMode="3"/>
+				<EtherCAT MaxCdl="1" DcSyncMode="3"/>
 			</Device>
 			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="5.42.87.238.2.1" RemoteName="Real IO" InfoImageId="2">
 				<Name>Real IO</Name>
@@ -4879,7 +4924,7 @@ Bit 8 - 15 : reserved]]></Comment>
 							<SyncMan>001000012600010001000000000100010001001026010000</SyncMan>
 							<SyncMan>001100012200010002000000000100010001001122010000</SyncMan>
 							<SyncMan>001241002400010003000000000000000200001224010000</SyncMan>
-							<SyncMan>001d41002000010004000000000000000200001d20010000</SyncMan>
+							<SyncMan>001d42002000010004000000000000000200001d20010000</SyncMan>
 							<SyncMan>002e00002400000003000000000000000000002e24000000</SyncMan>
 							<SyncMan>002f00002000000004000000000000000000002f20000000</SyncMan>
 							<Fmmu>0000000000000000001200020100000001000000060000000200000000000000</Fmmu>
@@ -4957,12 +5002,6 @@ Bit 8 - 15 : reserved]]></Comment>
 								<Entry Name="Standard Out Var 24" Index="#x7000" Sub="#x01">
 									<Type>UINT</Type>
 								</Entry>
-								<Entry Name="Standard Out Var 27" Index="#x7000" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry>
-									<Type GUID="{18071995-0000-0000-0000-002000000007}">ARRAY [0..6] OF BIT</Type>
-								</Entry>
 							</Pdo>
 							<Pdo Name="StandardOutputs" Index="#x17f0" InOut="1" Flags="#x2011" SyncMan="2">
 								<Entry Name="Standard In Var 1" Index="#x6000" Sub="#x01">
@@ -4973,6 +5012,11 @@ Bit 8 - 15 : reserved]]></Comment>
 								</Entry>
 								<Entry>
 									<Type GUID="{18071995-0000-0000-0000-002000000006}">ARRAY [0..5] OF BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="TwinSAFE Group Info Data" Index="#x1bfa" Flags="#x2011" SyncMan="3">
+								<Entry Name="TwinSafeGroup1 Info Data" Index="#x7000" Sub="#x01">
+									<Type GUID="{1553EE7F-0490-4879-4F41-423085C83887}">INFODATA_GRP_3</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="FSLOGIC Inputs" Index="#x1bff" Flags="#x0011" SyncMan="3">
@@ -5125,9 +5169,11 @@ Bit 8 - 15 : reserved]]></Comment>
 		</Io>
 	</Project>
 	<Mappings>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500810000403}" Id="#x02030040"/>
 		<MappingInfo Identifier="{00000000-0040-0304-3000-040340000403}" Id="#x02030010"/>
-		<MappingInfo Identifier="{00000000-0040-0304-4000-040310000403}" Id="#x02030030"/>
-		<MappingInfo Identifier="{00000000-0050-0304-3000-040351000403}" Id="#x02030020"/>
+		<MappingInfo Identifier="{00000000-0050-0304-3000-040351000403}" Id="#x02030060"/>
+		<MappingInfo Identifier="{05000010-2001-0850-3000-040300205008}" Id="#x02030050" Watchdog="14000000040000000400000004000000"/>
+		<MappingInfo Identifier="{03040040-0010-0304-4000-040310000403}" Id="#x02030020" Watchdog="14000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Real IO">
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine A (EK1100)^Machine A Safe out (EL2904)">
 				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_33 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
@@ -5208,10 +5254,21 @@ Bit 8 - 15 : reserved]]></Comment>
 		</OwnerA>
 		<OwnerA Name="TIPC^PLC^PLC Instance">
 			<OwnerB Name="TIID^Real IO^Term 3 (EK1101)^Machine Safety Controller (EL6910)">
-				<Link VarA="PlcTask Inputs^MAIN.FromTsSumXandZ" VarB="StandardInputs^Standard Out Var 24"/>
-				<Link VarA="PlcTask Inputs^MAIN.TSComErr" VarB="StandardInputs^Standard Out Var 27"/>
-				<Link VarA="PlcTask Outputs^MAIN.TsErrAck" VarB="StandardOutputs^Standard In Var 1"/>
-				<Link VarA="PlcTask Outputs^MAIN.TsRunStop" VarB="StandardOutputs^Standard In Var 2"/>
+				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFEGroupDiag" VarB="TwinSAFE Group Info Data^TwinSafeGroup1 Info Data^Diag"/>
+				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFEGroupState" VarB="TwinSAFE Group Info Data^TwinSafeGroup1 Info Data^State"/>
+				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupErrAck" VarB="StandardOutputs^Standard In Var 1"/>
+				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupRun" VarB="StandardOutputs^Standard In Var 2"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier Gripper (EL2002)">
+				<Link VarA="PlcTask Outputs^MAIN.Machine.Machine_D_Carrier_Gripper" VarB="Fingers^Output"/>
+			</OwnerB>
+			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^X">
+				<Link VarA="PlcTask Inputs^MAIN.Machine.X_Axis.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Outputs^MAIN.Machine.X_Axis.PlcToNc" VarB="Inputs^FromPlc"/>
+			</OwnerB>
+			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Z">
+				<Link VarA="PlcTask Inputs^MAIN.Machine.Z_Axis.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Outputs^MAIN.Machine.Z_Axis.PlcToNc" VarB="Inputs^FromPlc"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

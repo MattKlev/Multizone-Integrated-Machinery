@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_Machine" Id="{477547fc-3ea9-469c-94c5-8bd12891e1bc}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Machine
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	Mode				: E_Mode;
+	Start AT %I*		: BOOL;
+	rtStart				: R_TRIG;
+	Stop AT %I*			: BOOL;
+	rtStop				: R_TRIG;
+	Reset AT %I*		: BOOL;
+	rtReset				: R_TRIG;
+
+	TwinSAFEGroupErrAck	AT %Q*	: BOOL;
+	TwinSAFEGroupState	AT %I*	: USINT;
+	TwinSAFEGroupDiag	AT %I*	: USINT;
+
+	AxisPowerStatus		: BOOL; //All Axis ready
+	AxisInError			: BOOL; //One or more axis in error
+	AxisEnable AT %I*	: BOOL := TRUE; //TwinSAFE E-stop out
+
+	X_Axis				: AXIS_REF;
+	Z_Axis				: AXIS_REF;
+	fbCarrierReset		: FB_CarrierReset;
+
+	Step : E_Step;
+
+	fbMoveCarrier		: FB_CarrierAbsMove;
+	HomePosSetPoint		: ST_CarrierSetPoint	:= (X_Pos := 100, X_Velo := 500, Z_Pos := 100, Z_Velo := 800);
+	APickPosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 290, X_Velo := 500, Z_Pos := 1100, Z_Velo := 800);
+	BWaitPosSetpoint	: ST_CarrierSetPoint	:= (X_Pos := 600, X_Velo := 500, Z_Pos := 100, Z_Velo := 800);
+	BPlacePosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 1000, X_Velo := 500, Z_Pos := 1200, Z_Velo := 800);
+	BWorkPosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 1000, X_Velo := 500, Z_Pos := 100, Z_Velo := 800);
+	BPickPosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 1000, X_Velo := 500, Z_Pos := 1200, Z_Velo := 800);
+	CWaitPosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 1350, X_Velo := 500, Z_Pos := 100, Z_Velo := 800);
+	CPlacePosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 1700, X_Velo := 500, Z_Pos := 1000, Z_Velo := 800);
+	CWorkPosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 1800, X_Velo := 500, Z_Pos := 100, Z_Velo := 800);
+
+	//Machine A
+	WaitTimeForAToBeReady : TIME := T#1S;
+
+	//Machine B
+	WaitTimeForBtoBeReady	: TIME	:= T#1.5S;
+	BDoingWorkTime			: TIME	:= T#2S;
+
+	//Machine C
+	WaitTimeForCtoBeReady	: TIME	:= T#0.5S;
+	CDoingWorkTime			: TIME	:= T#750MS;
+
+	//Machine D
+	Machine_D_Carrier_Gripper AT %Q* : BIT;
+END_VAR
+VAR CONSTANT
+	TwinSAFEGroupRun AT %Q* : BOOL := TRUE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[rtStart(CLK := Start);
+rtStop(CLK := Stop);
+rtReset(CLK := Reset);
+
+CASE Step OF
+	E_Step.Init:
+		fbMoveCarrier.X_AxisRef	:= ADR(X_Axis);
+		fbMoveCarrier.Z_AxisRef	:= ADR(Z_Axis);
+		fbMoveCarrier(Execute := FALSE);
+		Machine_D_Carrier_Gripper := FALSE;
+
+		fbCarrierReset(Execute := FALSE);
+		fbCarrierReset.X_AxisRef	:= ADR(X_Axis);
+		fbCarrierReset.Z_AxisRef	:= ADR(Z_Axis);
+
+		Step := E_Step.Idel;
+
+	E_Step.Idel:
+		IF rtStart.Q THEN
+			Step := E_Step.Enable;
+		ELSIF rtReset.Q THEN
+			Step := E_Step.Reset;
+		ELSIF AxisInError THEN
+			Step := E_Step.Error;
+		END_IF
+
+	E_Step.Enable:
+		IF AxisPowerStatus AND TwinSAFEGroupState=1 THEN
+			Step := E_Step.MoveToHome;
+		ELSIF AxisInError OR TwinSAFEGroupState<>1 THEN
+			Step := E_Step.Error;
+		END_IF
+
+	E_Step.MoveToHome:
+		fbMoveCarrier.SetPoint := HomePosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			Step := E_Step.WaitForAToBeReady;
+		ELSIF fbMoveCarrier.Error THEN
+			Step := E_Step.Error;
+		END_IF
+
+	E_Step.WaitForAToBeReady:
+		IF M_ProcessDelay(WaitTimeForAToBeReady) THEN
+			Step := E_Step.MoveToAPickPos;
+		END_IF
+
+	E_Step.MoveToAPickPos:
+		fbMoveCarrier.SetPoint := APickPosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			Step := E_Step.PickFromA;
+		ELSIF fbMoveCarrier.Error THEN
+			Step := E_Step.Error;
+		END_IF
+
+	E_Step.PickFromA:
+		IF M_CloseGripper() THEN
+			Step := E_Step.MoveToBWaitPos;
+		END_IF
+
+	E_Step.MoveToBWaitPos:
+		fbMoveCarrier.SetPoint := BWaitPosSetpoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			Step := E_Step.WaitForBToBeReady;
+		ELSIF fbMoveCarrier.Error THEN
+			Step := E_Step.Error;
+		END_IF
+
+	E_Step.WaitForBToBeReady:
+		IF M_ProcessDelay(WaitTimeForBtoBeReady) THEN
+			Step := E_Step.MoveToBPlacePosition;
+		END_IF
+
+	E_Step.MoveToBPlacePosition:
+		fbMoveCarrier.SetPoint := BPlacePosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			Step := E_Step.PlaceOnB;
+		ELSIF fbMoveCarrier.Error THEN
+			Step := E_Step.Error;
+		END_IF
+
+	E_Step.PlaceOnB:
+		IF M_OpenGripper() THEN
+			Step := E_Step.MoveToBWorkPos;
+		END_IF
+
+	E_Step.MoveToBWorkPos:
+		fbMoveCarrier.SetPoint := BWorkPosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			Step := E_Step.BDoingWork;
+		ELSIF fbMoveCarrier.Error THEN
+			Step := E_Step.Error;
+		END_IF
+
+	E_Step.BDoingWork:
+		IF M_ProcessDelay(BDoingWorkTime) THEN
+			Step := E_Step.MoveToBPickPos;
+		END_IF
+
+	E_Step.MoveToBPickPos:
+		fbMoveCarrier.SetPoint := BPickPosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			Step := E_Step.PickPartFromB;
+		ELSIF fbMoveCarrier.Error THEN
+			Step := E_Step.Error;
+		END_IF
+
+	E_Step.PickPartFromB:
+		IF M_CloseGripper() THEN
+			Step := E_Step.MoveToCWaitPos;
+		END_IF
+
+	E_Step.MoveToCWaitPos:
+		fbMoveCarrier.SetPoint := CWaitPosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			Step := E_Step.WaitForCToBeReady;
+		ELSIF fbMoveCarrier.Error THEN
+			Step := E_Step.Error;
+		END_IF
+
+	E_Step.WaitForCToBeReady:
+		IF M_ProcessDelay(WaitTimeForCtoBeReady) THEN
+			Step := E_Step.MoveToCPlacePos;
+		END_IF
+
+	E_Step.MoveToCPlacePos:
+		fbMoveCarrier.SetPoint := CPlacePosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			Step := E_Step.PlaceOnC;
+		ELSIF fbMoveCarrier.Error THEN
+			Step := E_Step.Error;
+		END_IF
+
+	E_Step.PlaceOnC:
+		IF M_OpenGripper() THEN
+			Step := E_Step.MoveToCWorkPos;
+		END_IF
+
+	E_Step.MoveToCWorkPos:
+		fbMoveCarrier.SetPoint := CWorkPosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			Step := E_Step.CDoingWork;
+		ELSIF fbMoveCarrier.Error THEN
+			Step := E_Step.Error;
+		END_IF
+
+	E_Step.CDoingWork:
+		IF M_ProcessDelay(CDoingWorkTime) THEN
+			IF Mode = E_Mode.Auto THEN
+				Step := E_Step.MoveToHome;
+			ELSIF Mode = E_Mode.Manual THEN
+				Step := E_Step.Idel;
+			END_IF
+		END_IF
+
+	E_Step.Error:
+		IF rtReset.Q THEN
+			Step := E_Step.Reseting;
+			TwinSAFEGroupErrAck:=TRUE;
+		END_IF
+
+	E_Step.Reseting:
+		fbCarrierReset(Execute := TRUE);
+		TwinSAFEGroupErrAck:=FALSE;
+		IF NOT fbCarrierReset.Busy THEN
+			fbCarrierReset(Execute := FALSE);
+			Step := E_Step.Init;
+		END_IF
+
+END_CASE
+
+M_AxisPower();]]></ST>
+    </Implementation>
+    <Method Name="M_AxisPower" Id="{677ce463-30f2-4570-893a-c6b140cbb6b7}">
+      <Declaration><![CDATA[METHOD M_AxisPower : BOOL
+VAR_INPUT
+END_VAR
+VAR_INST
+	X_Power	: MC_Power;
+	Z_Power	: MC_Power;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[X_Power(Axis			:= X_Axis,
+		Enable			:= AxisEnable,
+		Enable_Positive	:= TRUE,
+		Enable_Negative	:= TRUE,
+		Override		:= 100.0);
+
+Z_Power(Axis			:= Z_Axis,
+		Enable			:= AxisEnable,
+		Enable_Positive	:= TRUE,
+		Enable_Negative	:= TRUE,
+		Override		:= 100.0);
+
+AxisPowerStatus := X_Power.Status AND Z_Power.Status;
+
+X_Axis.ReadStatus();
+Z_Axis.ReadStatus();
+
+AxisInError := X_Axis.Status.Error OR Z_Axis.Status.Error;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_CloseGripper" Id="{bb5f6fbc-361e-4823-9fe0-7bae5c45e5a8}">
+      <Declaration><![CDATA[METHOD M_CloseGripper : BOOL
+VAR_INPUT
+END_VAR
+
+VAR_INST
+	tonDelay : TON;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[tonDelay(IN := TRUE, PT := T#200MS);
+
+Machine_D_Carrier_Gripper := TRUE;
+
+IF tonDelay.Q THEN
+	tonDelay(IN := FALSE);
+	M_CloseGripper := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_OpenGripper" Id="{bc5ae333-e81c-4a39-98d0-d42ee8d75e01}">
+      <Declaration><![CDATA[METHOD M_OpenGripper : BOOL
+VAR_INPUT
+END_VAR
+VAR_INST
+	tonDelay : TON;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[tonDelay(IN := TRUE, PT := T#200MS);
+Machine_D_Carrier_Gripper := FALSE;
+
+IF tonDelay.Q THEN
+	tonDelay(IN := FALSE);
+	M_OpenGripper := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_ProcessDelay" Id="{3395a5bb-7516-43c6-b5c3-a43eefaec935}">
+      <Declaration><![CDATA[METHOD M_ProcessDelay : BOOL
+VAR_INPUT
+	pt : TIME;
+END_VAR
+VAR_INST
+	tonDelay : TON;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[tonDelay(IN := TRUE, PT := pt, Q =>, ET =>);
+
+IF tonDelay.Q THEN
+	M_ProcessDelay := TRUE;
+	tonDelay(IN := FALSE, PT := pt, Q =>, ET =>);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_Machine">
+      <LineId Id="1829" Count="190" />
+      <LineId Id="2025" Count="0" />
+      <LineId Id="2020" Count="4" />
+      <LineId Id="62" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_AxisPower">
+      <LineId Id="49" Count="16" />
+      <LineId Id="41" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_CloseGripper">
+      <LineId Id="31" Count="6" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_OpenGripper">
+      <LineId Id="31" Count="5" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_ProcessDelay">
+      <LineId Id="22" Count="4" />
+      <LineId Id="13" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

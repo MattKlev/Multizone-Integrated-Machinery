@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_CarrierAbsMove" Id="{f82eb48a-1edb-4e32-a998-671d6f13fc6a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CarrierAbsMove
+VAR_INPUT
+	Execute : BOOL;
+END_VAR
+VAR_OUTPUT
+	Busy	: BOOL;
+	Done	: BOOL;
+	Error	: BOOL;
+END_VAR
+VAR
+	X_AxisMoveAbs	: MC_MoveAbsolute;
+	Z_AxisMoveAbs	: MC_MoveAbsolute;
+
+	{attribute 'hide'}
+	_X_Axis :POINTER TO AXIS_REF;
+	{attribute 'hide'}
+	_Z_Axis :POINTER TO AXIS_REF;
+	{attribute 'hide'}
+	_SetPoint : ST_CarrierSetpoint;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF _X_Axis= 0 OR _Z_Axis=0 THEN
+	RETURN;
+END_IF
+X_AxisMoveAbs(Axis			:= _X_Axis^,
+				Execute		:= Execute,
+				Position	:= _SetPoint.X_Pos,
+				Velocity	:= _SetPoint.X_Velo);
+
+Z_AxisMoveAbs(Axis			:= _Z_Axis^,
+				Execute		:= Execute,
+				Position	:= _SetPoint.Z_Pos,
+				Velocity	:= _SetPoint.Z_Velo);
+
+Busy := X_AxisMoveAbs.Busy OR Z_AxisMoveAbs.Busy;
+
+Done := X_AxisMoveAbs.Done AND Z_AxisMoveAbs.Done;
+
+Error := X_AxisMoveAbs.Error OR Z_AxisMoveAbs.Error OR X_AxisMoveAbs.CommandAborted OR Z_AxisMoveAbs.CommandAborted;
+]]></ST>
+    </Implementation>
+    <Property Name="SetPoint" Id="{94b9c827-f3c9-4ac0-918f-8a9dceb52de4}">
+      <Declaration><![CDATA[PROPERTY SetPoint : ST_CarrierSetpoint]]></Declaration>
+      <Get Name="Get" Id="{25eafc9c-8bc5-44d8-b35d-379e56231a44}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SetPoint := _SetPoint;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{cc853b00-256b-45ab-8c53-d25570d56c92}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_SetPoint := SetPoint;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="X_AxisRef" Id="{029d63ec-a45e-4322-aa2a-5f2577f51ceb}">
+      <Declaration><![CDATA[PROPERTY X_AxisRef : POINTER TO AXIS_REF]]></Declaration>
+      <Get Name="Get" Id="{dba2328f-0dbe-447c-94cc-edc93e8d0875}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[X_AxisRef := _X_Axis;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{0da32c91-1f40-43ba-bb32-3095355c2c6b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_X_Axis := X_AxisRef;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="Z_AxisRef" Id="{a0abe153-aee3-415a-8ccf-49c7d2588d6f}">
+      <Declaration><![CDATA[PROPERTY Z_AxisRef : POINTER TO AXIS_REF]]></Declaration>
+      <Get Name="Get" Id="{48402526-19d4-42d4-9a68-93d4362e5c36}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Z_AxisRef := _Z_Axis;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{a24806e0-ce42-4fe2-bb5b-609be3b27828}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_Z_Axis := Z_AxisRef;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="FB_CarrierAbsMove">
+      <LineId Id="140" Count="2" />
+      <LineId Id="125" Count="14" />
+      <LineId Id="85" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierAbsMove.SetPoint.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierAbsMove.SetPoint.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierAbsMove.X_AxisRef.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierAbsMove.X_AxisRef.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierAbsMove.Z_AxisRef.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierAbsMove.Z_AxisRef.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
