@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="F_E_State_To_String" Id="{7f9ffae4-3935-4efb-8304-33daf50f21c5}" SpecialFunc="None">
+    <Declaration><![CDATA[//Convert E_Step to a string for display on the HMI
+FUNCTION F_E_State_To_String : STRING
+VAR_INPUT
+	Step 						:E_State;
+END_VAR
+VAR
+        StepString : STRING;  // Adjust the size as needed
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+    CASE Step OF
+        E_State.Init:
+            StepString := 'Init';
+        E_State.Idel:
+            StepString := 'Idle';
+        E_State.Enable:
+            StepString := 'Enable';
+        E_State.MoveToHome:
+            StepString := 'Move To Home';
+        E_State.WaitForAToBeReady:
+            StepString := 'Wait For A To Be Ready';
+        E_State.MoveToAPickPos:
+            StepString := 'Move To A Pick Position';
+        E_State.PickFromA:
+            StepString := 'Pick From A';
+        E_State.MoveToBWaitPos:
+            StepString := 'Move To B Wait Position';
+        E_State.WaitForBToBeReady:
+            StepString := 'Wait For B To Be Ready';
+        E_State.MoveToBPlacePosition:
+            StepString := 'Move To B Place Position';
+        E_State.PlaceOnB:
+            StepString := 'Place On B';
+        E_State.MoveToBWorkPos:
+            StepString := 'Move To B Work Position';
+        E_State.BDoingWork:
+            StepString := 'B Doing Work';
+        E_State.MoveToBPickPos:
+            StepString := 'Move To B Pick Position';
+        E_State.PickPartFromB:
+            StepString := 'Pick Part From B';
+        E_State.MoveToCWaitPos:
+            StepString := 'Move To C Wait Position';
+        E_State.WaitForCToBeReady:
+            StepString := 'Wait For C To Be Ready';
+        E_State.MoveToCPlacePos:
+            StepString := 'Move To C Place Position';
+        E_State.PlaceOnC:
+            StepString := 'Place On C';
+        E_State.MoveToCWorkPos:
+            StepString := 'Move To C Work Position';
+        E_State.CDoingWork:
+            StepString := 'C Doing Work';
+        E_State.Stopping:
+            StepString := 'Stopping';
+        E_State.Stopped:
+            StepString := 'Stopped';
+        E_State.Error:
+            StepString := 'Error';
+        E_State.Reset:
+            StepString := 'Reset';
+        E_State.Reseting:
+            StepString := 'Resetting';
+        ELSE
+            StepString := 'Unknown';
+    END_CASE;
+    
+F_E_State_To_String := StepString;
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="F_E_State_To_String">
+      <LineId Id="22" Count="59" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

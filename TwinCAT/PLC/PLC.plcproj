@@ -18,10 +18,7 @@
     <LibraryReferences>{71725c76-8ec3-4f7c-8e5b-63530519a248}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DUTs\E_Mode.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DUTs\E_Step.TcDUT">
+    <Compile Include="DUTs\E_State.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DUTs\ST_CarrierSetpoint.TcDUT">
@@ -43,6 +40,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FB_CarrierAbsMove.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\F_E_State_To_String.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
