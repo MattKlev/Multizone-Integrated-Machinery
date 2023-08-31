@@ -8,12 +8,17 @@ VAR_OUTPUT
 END_VAR
 VAR
 	Mode				: E_Mode;
-	Start AT %I*		: BOOL;
+	Start 				: ST_LEDButton;
 	rtStart				: R_TRIG;
-	Stop AT %I*			: BOOL;
+	Stop 				: ST_LEDButton;
 	rtStop				: R_TRIG;
-	Reset AT %I*		: BOOL;
+	Reset 				: ST_LEDButton;
 	rtReset				: R_TRIG;
+	
+	//Button LED
+	StartLEDBlink	:BLINK;
+	ResetLEDBlink	:BLINK;
+	StopLEDBlink		:BLINK;
 
 	TwinSAFEGroupErrAck	AT %Q*	: BOOL;
 	TwinSAFEGroupState	AT %I*	: USINT;
@@ -21,13 +26,15 @@ VAR
 
 	AxisPowerStatus		: BOOL; //All Axis ready
 	AxisInError			: BOOL; //One or more axis in error
-	AxisEnable AT %I*	: BOOL := TRUE; //TwinSAFE E-stop out
-
+	
 	X_Axis				: AXIS_REF;
 	Z_Axis				: AXIS_REF;
 	fbCarrierReset		: FB_CarrierReset;
+	
+	fbCarrierStop		:FB_CarrierStop;
 
-	Step : E_Step;
+	StepToReturnToAfterStop		: E_Step;
+	Step 						: E_Step;
 
 	fbMoveCarrier		: FB_CarrierAbsMove;
 	HomePosSetPoint		: ST_CarrierSetPoint	:= (X_Pos := 100, X_Velo := 500, Z_Pos := 100, Z_Velo := 800);
@@ -59,9 +66,10 @@ VAR CONSTANT
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[rtStart(CLK := Start);
-rtStop(CLK := Stop);
-rtReset(CLK := Reset);
+      <ST><![CDATA[rtStart(CLK := Start.Button);
+rtReset(CLK := Reset.Button);
+rtStop(CLK := Stop.Button);
+
 
 CASE Step OF
 	E_Step.Init:
@@ -73,6 +81,10 @@ CASE Step OF
 		fbCarrierReset(Execute := FALSE);
 		fbCarrierReset.X_AxisRef	:= ADR(X_Axis);
 		fbCarrierReset.Z_AxisRef	:= ADR(Z_Axis);
+		
+		fbCarrierStop(Execute:=FALSE);
+		fbCarrierStop.X_AxisRef		:=ADR(X_Axis);
+		fbCarrierStop.Z_AxisRef		:=ADR(Z_Axis);
 
 		Step := E_Step.Idel;
 
@@ -88,6 +100,7 @@ CASE Step OF
 		ELSE
 			Step := E_Step.Error;
 		END_IF
+		
 
 	E_Step.Enable:
 		IF AxisPowerStatus AND TwinSAFEGroupState=1 THEN
@@ -97,6 +110,7 @@ CASE Step OF
 		END_IF
 
 	E_Step.MoveToHome:
+		StepToReturnToAfterStop:=Step;
 		fbMoveCarrier.SetPoint := HomePosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
@@ -108,11 +122,13 @@ CASE Step OF
 		END_IF
 
 	E_Step.WaitForAToBeReady:
+		StepToReturnToAfterStop:=Step;
 		IF M_ProcessDelay(WaitTimeForAToBeReady) THEN
 			Step := E_Step.MoveToAPickPos;
 		END_IF
 
 	E_Step.MoveToAPickPos:
+		StepToReturnToAfterStop:=Step;
 		fbMoveCarrier.SetPoint := APickPosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
@@ -124,11 +140,13 @@ CASE Step OF
 		END_IF
 
 	E_Step.PickFromA:
+		StepToReturnToAfterStop:=Step;
 		IF M_CloseGripper() THEN
 			Step := E_Step.MoveToBWaitPos;
 		END_IF
 
 	E_Step.MoveToBWaitPos:
+		StepToReturnToAfterStop:=Step;
 		fbMoveCarrier.SetPoint := BWaitPosSetpoint;
 		fbMoveCarrier(Execute := TRUE);
 
@@ -140,11 +158,13 @@ CASE Step OF
 		END_IF
 
 	E_Step.WaitForBToBeReady:
+		StepToReturnToAfterStop:=Step;
 		IF M_ProcessDelay(WaitTimeForBtoBeReady) THEN
 			Step := E_Step.MoveToBPlacePosition;
 		END_IF
 
 	E_Step.MoveToBPlacePosition:
+		StepToReturnToAfterStop:=Step;
 		fbMoveCarrier.SetPoint := BPlacePosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
@@ -156,11 +176,13 @@ CASE Step OF
 		END_IF
 
 	E_Step.PlaceOnB:
+		StepToReturnToAfterStop:=Step;
 		IF M_OpenGripper() THEN
 			Step := E_Step.MoveToBWorkPos;
 		END_IF
 
 	E_Step.MoveToBWorkPos:
+		StepToReturnToAfterStop:=Step;
 		fbMoveCarrier.SetPoint := BWorkPosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
@@ -172,11 +194,13 @@ CASE Step OF
 		END_IF
 
 	E_Step.BDoingWork:
+		StepToReturnToAfterStop:=Step;
 		IF M_ProcessDelay(BDoingWorkTime) THEN
 			Step := E_Step.MoveToBPickPos;
 		END_IF
 
 	E_Step.MoveToBPickPos:
+		StepToReturnToAfterStop:=Step;
 		fbMoveCarrier.SetPoint := BPickPosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
@@ -188,11 +212,13 @@ CASE Step OF
 		END_IF
 
 	E_Step.PickPartFromB:
+		StepToReturnToAfterStop:=Step;
 		IF M_CloseGripper() THEN
 			Step := E_Step.MoveToCWaitPos;
 		END_IF
 
 	E_Step.MoveToCWaitPos:
+		StepToReturnToAfterStop:=Step;
 		fbMoveCarrier.SetPoint := CWaitPosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
@@ -204,11 +230,13 @@ CASE Step OF
 		END_IF
 
 	E_Step.WaitForCToBeReady:
+		StepToReturnToAfterStop:=Step;
 		IF M_ProcessDelay(WaitTimeForCtoBeReady) THEN
 			Step := E_Step.MoveToCPlacePos;
 		END_IF
 
 	E_Step.MoveToCPlacePos:
+		StepToReturnToAfterStop:=Step;
 		fbMoveCarrier.SetPoint := CPlacePosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
@@ -220,11 +248,13 @@ CASE Step OF
 		END_IF
 
 	E_Step.PlaceOnC:
+		StepToReturnToAfterStop:=Step;
 		IF M_OpenGripper() THEN
 			Step := E_Step.MoveToCWorkPos;
 		END_IF
 
 	E_Step.MoveToCWorkPos:
+		StepToReturnToAfterStop:=Step;
 		fbMoveCarrier.SetPoint := CWorkPosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
@@ -236,6 +266,7 @@ CASE Step OF
 		END_IF
 
 	E_Step.CDoingWork:
+		StepToReturnToAfterStop:=Step;
 		IF M_ProcessDelay(CDoingWorkTime) THEN
 			IF Mode = E_Mode.Auto THEN
 				Step := E_Step.MoveToHome;
@@ -243,7 +274,22 @@ CASE Step OF
 				Step := E_Step.Idel;
 			END_IF
 		END_IF
-
+		
+	E_Step.Stopping:
+		fbCarrierStop(Execute:=TRUE);
+		IF fbCarrierStop.Done THEN
+			fbCarrierStop(Execute:=FALSE);
+			Step := E_Step.Stopped;
+		ELSIF fbCarrierStop.Error THEN
+			Step := E_Step.Error;
+		END_IF
+		
+	E_Step.Stopped:
+		IF rtStart.Q THEN
+			fbMoveCarrier(Execute:=FALSE);
+			Step 		:= StepToReturnToAfterStop;
+		END_IF
+		
 	E_Step.Error:
 		IF rtReset.Q THEN
 			Step := E_Step.Reseting;
@@ -260,7 +306,70 @@ CASE Step OF
 
 END_CASE
 
-M_AxisPower();]]></ST>
+M_AxisPower();
+
+//Start
+CASE Step OF	
+	E_Step.Init:
+		Start.LED:=FALSE;
+	E_Step.Idel:
+		StartLEDBlink.TIMEHIGH:=T#1S;
+		StartLEDBlink.TIMELOW:=T#1S;
+		Start.LED:=StartLEDBlink.out;
+	E_Step.Enable:
+		StartLEDBlink.TIMEHIGH:=T#500MS;
+		StartLEDBlink.TIMELOW:=T#500MS;
+		Start.LED:=StartLEDBlink.out;
+	E_Step.MoveToHome..E_Step.CDoingWork:
+		Start.LED:=TRUE;
+	E_Step.Stopping:
+		Start.LED:=FALSE;
+	E_Step.Stopped:
+		StartLEDBlink.TIMEHIGH:=T#200MS;
+		StartLEDBlink.TIMELOW:=T#200MS;
+		Start.LED:=StartLEDBlink.out;		
+	E_Step.Error..E_Step.Reseting:
+		Start.LED:=FALSE;
+END_CASE
+StartLEDBlink(ENABLE:=TRUE);
+ 
+ 
+ //Reset
+CASE Step OF	
+	E_Step.Init..E_Step.CDoingWork:
+		Reset.LED:=FALSE;
+	E_Step.Error:
+		ResetLEDBlink.TIMEHIGH:=T#1S;
+		ResetLEDBlink.TIMELOW:=T#1S;
+		Reset.LED:=ResetLEDBlink.OUT;
+	E_Step.Reset..E_Step.Reseting:
+		ResetLEDBlink.TIMEHIGH:=T#500MS;
+		ResetLEDBlink.TIMELOW:=T#500MS;
+		Reset.LED:=ResetLEDBlink.OUT;		
+END_CASE	
+  ResetLEDBlink(ENABLE:=TRUE);
+  
+  
+ //Stop
+CASE Step OF
+	E_Step.Init..E_Step.Enable:
+		Stop.LED:=FALSE;
+	E_Step.MoveToHome..E_Step.CDoingWork:
+		IF rtStop.Q THEN
+			Step:=E_Step.Stopping;
+		END_IF
+		Stop.LED:=TRUE;
+	E_Step.Stopping:
+		StopLEDBlink.TIMEHIGH:=T#500MS;
+		StopLEDBlink.TIMELOW:=T#500MS;
+		Stop.LED:=StopLEDBlink.OUT;
+	E_Step.Stopped..E_Step.Reseting:
+		Stop.LED:=FALSE;
+END_CASE
+
+StopLEDBlink(ENABLE:=TRUE);
+
+]]></ST>
     </Implementation>
     <Method Name="M_AxisPower" Id="{677ce463-30f2-4570-893a-c6b140cbb6b7}">
       <Declaration><![CDATA[METHOD M_AxisPower : BOOL
@@ -272,13 +381,13 @@ VAR_INST
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[X_Power(Axis			:= X_Axis,
-		Enable			:= AxisEnable,
+		Enable			:= TRUE,
 		Enable_Positive	:= TRUE,
 		Enable_Negative	:= TRUE,
 		Override		:= 100.0);
 
 Z_Power(Axis			:= Z_Axis,
-		Enable			:= AxisEnable,
+		Enable			:= TRUE,
 		Enable_Positive	:= TRUE,
 		Enable_Negative	:= TRUE,
 		Override		:= 100.0);
@@ -346,15 +455,22 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_Machine">
-      <LineId Id="1829" Count="17" />
-      <LineId Id="2082" Count="0" />
-      <LineId Id="1847" Count="6" />
-      <LineId Id="2084" Count="1" />
-      <LineId Id="2083" Count="0" />
-      <LineId Id="1854" Count="165" />
-      <LineId Id="2025" Count="0" />
-      <LineId Id="2020" Count="4" />
-      <LineId Id="62" Count="0" />
+      <LineId Id="3370" Count="0" />
+      <LineId Id="3372" Count="254" />
+      <LineId Id="3732" Count="2" />
+      <LineId Id="3736" Count="1" />
+      <LineId Id="3735" Count="0" />
+      <LineId Id="3627" Count="26" />
+      <LineId Id="3728" Count="2" />
+      <LineId Id="3654" Count="1" />
+      <LineId Id="3722" Count="1" />
+      <LineId Id="3656" Count="0" />
+      <LineId Id="3726" Count="1" />
+      <LineId Id="3657" Count="0" />
+      <LineId Id="3725" Count="0" />
+      <LineId Id="3724" Count="0" />
+      <LineId Id="3658" Count="0" />
+      <LineId Id="2952" Count="0" />
     </LineIds>
     <LineIds Name="FB_Machine.M_AxisPower">
       <LineId Id="49" Count="16" />

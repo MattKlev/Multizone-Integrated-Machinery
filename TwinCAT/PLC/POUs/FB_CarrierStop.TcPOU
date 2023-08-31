@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_CarrierStop" Id="{a062c842-c83b-4547-ab8a-140807b3c80c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CarrierStop
+VAR_INPUT
+	Execute : BOOL;
+END_VAR
+VAR_OUTPUT
+	Busy	: BOOL;
+	Done	: BOOL;
+	Error	: BOOL;
+END_VAR
+VAR
+	_Decel : LREAL:=100000.0;
+	
+	X_AxisHalt	: MC_Halt;
+	Z_AxisHalt	: MC_Halt;
+
+	{attribute 'hide'}
+	_X_Axis :POINTER TO AXIS_REF;
+	{attribute 'hide'}
+	_Z_Axis :POINTER TO AXIS_REF;
+	
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF _X_Axis= 0 OR _Z_Axis=0 THEN
+	RETURN;
+END_IF
+X_AxisHalt(Axis			:= _X_Axis^,
+				Deceleration:=_Decel,
+				Execute		:= Execute);
+
+Z_AxisHalt(Axis			:= _Z_Axis^,
+				Deceleration:=_Decel,
+				Execute		:= Execute);
+
+Busy := X_AxisHalt.Busy OR Z_AxisHalt.Busy;
+
+Done := X_AxisHalt.Done AND Z_AxisHalt.Done;
+
+Error := X_AxisHalt.Error OR Z_AxisHalt.Error;
+]]></ST>
+    </Implementation>
+    <Property Name="Decel" Id="{080b320a-4ba7-4644-9ead-5e310b431ad5}">
+      <Declaration><![CDATA[PROPERTY Decel : LREAL]]></Declaration>
+      <Get Name="Get" Id="{12a8b3e8-589d-4813-bb88-6c0e410fd5ed}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Decel:=_Decel;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{66c29c50-7ad3-4da2-ba25-d350335babfe}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_Decel:=Decel;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="X_AxisRef" Id="{c7b24212-2b13-4cd0-9843-8e793b748229}">
+      <Declaration><![CDATA[PROPERTY X_AxisRef : POINTER TO AXIS_REF]]></Declaration>
+      <Get Name="Get" Id="{6401a6d1-7498-43f7-a188-0ea04789146e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[X_AxisRef := _X_Axis;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{808d9c69-d330-40e3-9002-cbaf2b20db18}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_X_Axis := X_AxisRef;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="Z_AxisRef" Id="{a1ee128e-c87d-4a21-bd67-97a118d85bed}">
+      <Declaration><![CDATA[PROPERTY Z_AxisRef : POINTER TO AXIS_REF]]></Declaration>
+      <Get Name="Get" Id="{0198970b-9682-4c06-8cae-1dc08f3e872f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Z_AxisRef := _Z_Axis;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{11f6ad41-b755-42c9-afb9-de9a0ec70674}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_Z_Axis := Z_AxisRef;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="FB_CarrierStop">
+      <LineId Id="140" Count="2" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="181" Count="0" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="129" Count="1" />
+      <LineId Id="182" Count="0" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="134" Count="5" />
+      <LineId Id="85" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierStop.Decel.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierStop.Decel.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierStop.X_AxisRef.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierStop.X_AxisRef.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierStop.Z_AxisRef.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_CarrierStop.Z_AxisRef.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

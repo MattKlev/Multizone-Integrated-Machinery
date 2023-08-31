@@ -27,6 +27,8 @@ TYPE
 		PlaceOnC,			// Open Grippers
 		MoveToCWorkPos,		// Move Carrier up and out of the wayt for C to do work
 		CDoingWork,
+		Stopping,
+		Stopped,
 		Error,
 		Reset,
 		Reseting

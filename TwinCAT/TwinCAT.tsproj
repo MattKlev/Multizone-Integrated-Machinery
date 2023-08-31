@@ -1675,6 +1675,7 @@ External Setpoint Generation:
 				<Axis Id="1" CreateSymbols="true" AxisType="1">
 					<Name>X</Name>
 					<AxisPara>
+						<Dynamic AccelerationMaximum="100000" DecelerationMaximum="100000" Acceleration="8000" Deceleration="40000" Jerk="800000"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="19">
@@ -1814,6 +1815,7 @@ External Setpoint Generation:
 				<Axis Id="2" CreateSymbols="true" AxisType="1">
 					<Name>Z</Name>
 					<AxisPara>
+						<Dynamic AccelerationMaximum="100000" DecelerationMaximum="100000" Acceleration="8000" Deceleration="40000" Jerk="800000"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="19">
@@ -1954,21 +1956,21 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{0C5A0548-FA4F-4B8E-B05E-82A0037B3227}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{827D617B-C25C-C750-5DBC-77AE4D86CC60}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{B25737FE-0633-570E-BF21-9CA0174FDB2F}">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
-							<Name>MAIN.Machine.Start</Name>
+							<Name>MAIN.Machine.Start.Button</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.Machine.Stop</Name>
+							<Name>MAIN.Machine.Stop.Button</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.Machine.Reset</Name>
+							<Name>MAIN.Machine.Reset.Button</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -1978,11 +1980,6 @@ External Setpoint Generation:
 						<Var>
 							<Name>MAIN.Machine.TwinSAFEGroupDiag</Name>
 							<Type>USINT</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.Machine.AxisEnable</Name>
-							<Comment><![CDATA[TwinSAFE E-stop out]]></Comment>
-							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.Machine.X_Axis.NcToPlc</Name>
@@ -1995,6 +1992,18 @@ External Setpoint Generation:
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>MAIN.Machine.Start.LED</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.Stop.LED</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.Reset.LED</Name>
+							<Type>BOOL</Type>
+						</Var>
 						<Var>
 							<Name>MAIN.Machine.TwinSAFEGroupErrAck</Name>
 							<Type>BOOL</Type>
@@ -5103,56 +5112,90 @@ Bit 8 - 15 : reserved]]></Comment>
 						</EtherCAT>
 					</Box>
 					<Box Id="10" BoxType="9099">
-						<Name>Machine Buttons (EL1114)</Name>
+						<Name>Machine Control Buttons (EL1859)</Name>
 						<ImageId>7</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x045a3052" RevisionNo="#x00110000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1114 4Ch. Dig. Input 24V, 10µs, Sensor Power" Desc="EL1114" PortABoxInfo="#x01000005">
-							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
+						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07433052" RevisionNo="#x00120000" RepeatSupport="true" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL1859 8Ch. Dig. Input 24V, 3ms, 8Ch. Dig. Output 24V, 0.5A" Desc="EL1859" PortABoxInfo="#x01000005">
+							<SyncMan>010f01004400010003000000010001000100010f44090000</SyncMan>
+							<SyncMan>001001000000010004000000010001000100001000010000</SyncMan>
+							<Fmmu>0000000000000000010f00020100000001000000000000000000000000000000</Fmmu>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
-							<Pdo Name="Start" Index="#x1a00" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6000" Sub="#x01">
+							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="1">
+								<Entry Name="Start" Index="#x6000" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="Stop" Index="#x1a01" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6010" Sub="#x01">
+							<Pdo Name="Channel 2" Index="#x1a01" Flags="#x0011" SyncMan="1">
+								<Entry Name="Stop" Index="#x6010" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="Reset" Index="#x1a02" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6020" Sub="#x01">
+							<Pdo Name="Channel 3" Index="#x1a02" Flags="#x0011" SyncMan="1">
+								<Entry Name="Reset" Index="#x6020" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="Channel 4" Index="#x1a03" Flags="#x0011" SyncMan="0">
+							<Pdo Name="Channel 4" Index="#x1a03" Flags="#x0011" SyncMan="1">
 								<Entry Name="Input" Index="#x6030" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
-						</EtherCAT>
-					</Box>
-					<Box Id="16" BoxType="9099">
-						<Name>Machine LEDs (EL2024)</Name>
-						<ImageId>1001</ImageId>
-						<EtherCAT SlaveType="1" PdiType="#x0104" CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x07e83052" RevisionNo="#x00110000" RepeatSupport="true" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL2024 4Ch. Dig. Output 24V, 2A" Desc="EL2024" PortABoxInfo="#x0100000a">
-							<SyncMan>000f01004400010003000000000000000000000f44090000</SyncMan>
-							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
-							<Pdo Name="Start" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7000" Sub="#x01">
+							<Pdo Name="Channel 5" Index="#x1a04" Flags="#x0011" SyncMan="1">
+								<Entry Name="Input" Index="#x6040" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="Stop" Index="#x1601" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7010" Sub="#x01">
+							<Pdo Name="Channel 6" Index="#x1a05" Flags="#x0011" SyncMan="1">
+								<Entry Name="Input" Index="#x6050" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="Reset" Index="#x1602" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7020" Sub="#x01">
+							<Pdo Name="Channel 7" Index="#x1a06" Flags="#x0011" SyncMan="1">
+								<Entry Name="Input" Index="#x6060" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="Channel 4" Index="#x1603" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7030" Sub="#x01">
+							<Pdo Name="Channel 8" Index="#x1a07" Flags="#x0011" SyncMan="1">
+								<Entry Name="Input" Index="#x6070" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 9" Index="#x1608" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Start" Index="#x7080" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 10" Index="#x1609" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Stop" Index="#x7090" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 11" Index="#x160a" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Reset" Index="#x70a0" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 12" Index="#x160b" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x70b0" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 13" Index="#x160c" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x70c0" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 14" Index="#x160d" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x70d0" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 15" Index="#x160e" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x70e0" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="Channel 16" Index="#x160f" InOut="1" Flags="#x0011" SyncMan="0">
+								<Entry Name="Output" Index="#x70f0" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
@@ -5161,7 +5204,7 @@ Bit 8 - 15 : reserved]]></Comment>
 					<Box Id="18" BoxType="9099">
 						<Name>End Cap (EL9011)</Name>
 						<ImageId>1010</ImageId>
-						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x01000010"/>
+						<EtherCAT CycleMBoxPollingTime="0" VendorId="#x00000002" ProductCode="#x23333050" InfoDataState="false" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL9011 End Terminal" Desc="EL9011" PortABoxInfo="#x0100000a"/>
 					</Box>
 				</Box>
 				<EtherCAT/>
@@ -5250,6 +5293,14 @@ Bit 8 - 15 : reserved]]></Comment>
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TIPC^PLC^PLC Instance">
+			<OwnerB Name="TIID^Real IO^Term 3 (EK1101)^Machine Control Buttons (EL1859)">
+				<Link VarA="PlcTask Inputs^MAIN.Machine.Reset.Button" VarB="Channel 3^Reset"/>
+				<Link VarA="PlcTask Inputs^MAIN.Machine.Start.Button" VarB="Channel 1^Start"/>
+				<Link VarA="PlcTask Inputs^MAIN.Machine.Stop.Button" VarB="Channel 2^Stop"/>
+				<Link VarA="PlcTask Outputs^MAIN.Machine.Reset.LED" VarB="Channel 11^Reset"/>
+				<Link VarA="PlcTask Outputs^MAIN.Machine.Start.LED" VarB="Channel 9^Start"/>
+				<Link VarA="PlcTask Outputs^MAIN.Machine.Stop.LED" VarB="Channel 10^Stop"/>
+			</OwnerB>
 			<OwnerB Name="TIID^Real IO^Term 3 (EK1101)^Machine Safety Controller (EL6910)">
 				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFEGroupDiag" VarB="TwinSAFE Group Info Data^TwinSafeGroup1 Info Data^Diag"/>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFEGroupState" VarB="TwinSAFE Group Info Data^TwinSafeGroup1 Info Data^State"/>
