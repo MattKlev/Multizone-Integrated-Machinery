@@ -1,4 +1,4 @@
-<div id="Desktop" data-tchmi-type="TcHmi.Controls.System.TcHmiView" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width-unit="%" data-tchmi-width="100" data-tchmi-height-unit="%" data-tchmi-height="100" data-tchmi-background-image-width-unit="%" data-tchmi-background-image-height-unit="%" data-tchmi-background-image-width="100" data-tchmi-background-image-height="100">
+<div id="Desktop" data-tchmi-type="TcHmi.Controls.System.TcHmiView" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width-unit="%" data-tchmi-width="100" data-tchmi-height-unit="%" data-tchmi-height="100" data-tchmi-background-image-width-unit="%" data-tchmi-background-image-height-unit="%" data-tchmi-background-image-width="100" data-tchmi-background-image-height="100" data-tchmi-creator-viewport-width="1024" data-tchmi-creator-viewport-height="480">
   
 <div id="Navigation_Left" data-tchmi-type="TcHmi.Controls.BaseTemplate.TcHmiNavigation" data-tchmi-width="320" data-tchmi-left="0" data-tchmi-top="0" data-tchmi-bottom="0" data-tchmi-target-region="%ctrl%Region_Center%/ctrl%" data-tchmi-navigation-orientation="Vertical" data-tchmi-keep-lowest-level="true" data-tchmi-show-back-button="false">
 
@@ -37,7 +37,7 @@
     "icon_p": "%tr%TR_Icon_Settings_pressed%/tr%"
   }
 ]
-</script></div><div id="Header_Top" data-tchmi-type="TcHmi.Controls.BaseTemplate.TcHmiHeader" data-tchmi-height="80" data-tchmi-left="%ctrl%Navigation_Left::Width%/ctrl%" data-tchmi-top="0" data-tchmi-right="0">
+</script></div><div id="Header_Top" data-tchmi-type="TcHmi.Controls.BaseTemplate.TcHmiHeader" data-tchmi-height="80" data-tchmi-left="%ctrl%Navigation_Left::Width%/ctrl%" data-tchmi-top="0" data-tchmi-right="0" data-tchmi-height-unit="px">
 <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">[
 "divider",
 "divider-top"
@@ -218,4 +218,5 @@
                         } 
                     ] 
                 } 
-            ]</script></div>
+            ]</script>
+</div>
