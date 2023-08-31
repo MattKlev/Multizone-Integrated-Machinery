@@ -208,7 +208,7 @@
 }
 </script>
 </div>
-<div id="TcHmiRadialGauge" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRadialGauge" data-tchmi-base-animation-time="1000" data-tchmi-gauge-alignment="Center" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="2" data-tchmi-height-unit="px" data-tchmi-label-range="20" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-show-labels="true" data-tchmi-show-ticks="true" data-tchmi-show-value-text="true" data-tchmi-start-from-zero="true" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-editable="true" data-tchmi-right="0" data-tchmi-bottom="0" data-tchmi-min-value="5" data-tchmi-max-value="100" data-tchmi-unit="%" data-tchmi-label-position="Inside" data-tchmi-value="%s%PLC1.MAIN.Machine.Override|BindingMode=TwoWay%/s%">
+<div id="TcHmiRadialGauge" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRadialGauge" data-tchmi-base-animation-time="1000" data-tchmi-gauge-alignment="Center" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="2" data-tchmi-height-unit="px" data-tchmi-label-range="20" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-show-labels="true" data-tchmi-show-ticks="true" data-tchmi-show-value-text="false" data-tchmi-start-from-zero="true" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-editable="true" data-tchmi-right="0" data-tchmi-bottom="0" data-tchmi-min-value="5" data-tchmi-max-value="100" data-tchmi-unit="%" data-tchmi-label-position="Inside" data-tchmi-value="%s%PLC1.MAIN.Machine.Override|BindingMode=TwoWay%/s%">
 <script data-tchmi-target-attribute="data-tchmi-range" type="application/json">
 [
   {
