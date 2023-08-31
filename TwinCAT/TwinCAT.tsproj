@@ -1956,7 +1956,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{0C5A0548-FA4F-4B8E-B05E-82A0037B3227}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{B25737FE-0633-570E-BF21-9CA0174FDB2F}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{4F596C1F-1D53-BB30-D612-58035F897A5C}">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -1975,10 +1975,6 @@ External Setpoint Generation:
 						</Var>
 						<Var>
 							<Name>MAIN.Machine.TwinSAFEGroupState</Name>
-							<Type>USINT</Type>
-						</Var>
-						<Var>
-							<Name>MAIN.Machine.TwinSAFEGroupDiag</Name>
 							<Type>USINT</Type>
 						</Var>
 						<Var>
@@ -5302,7 +5298,6 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.Stop.LED" VarB="Channel 10^Stop"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Real IO^Term 3 (EK1101)^Machine Safety Controller (EL6910)">
-				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFEGroupDiag" VarB="TwinSAFE Group Info Data^TwinSafeGroup1 Info Data^Diag"/>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFEGroupState" VarB="TwinSAFE Group Info Data^TwinSafeGroup1 Info Data^State"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupErrAck" VarB="StandardOutputs^Standard In Var 1"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupRun" VarB="StandardOutputs^Standard In Var 2"/>
