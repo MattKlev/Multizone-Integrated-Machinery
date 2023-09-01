@@ -1630,6 +1630,32 @@ External Setpoint Generation:
 				<Elements>2</Elements>
 			</ArrayInfo>
 		</DataType>
+		<DataType>
+			<Name GUID="{9791AE4D-587C-4ACF-8C74-5503E5B8EC7F}" Namespace="NC" PersistentType="true">DriveErrors</Name>
+			<DisplayName TxtId=""><![CDATA[NewEventClass_DisplayText]]></DisplayName>
+			<EventId>
+				<Name Id="4650">DriveHardwareNotReadyToOperate</Name>
+				<DisplayName TxtId=""><![CDATA[{0} Drive hardware not ready to operate]]></DisplayName>
+				<DescriptionText TxtId=""><![CDATA[The drive hardware is not ready for operation.]]></DescriptionText>
+				<Severity>Error</Severity>
+				<CauseRemedy Idx="1">
+					<Cause TxtId=""><![CDATA[the drive is in error state (hardware error)]]></Cause>
+				</CauseRemedy>
+				<CauseRemedy Idx="2">
+					<Cause TxtId=""><![CDATA[the drive is in the start-up phase (e.g. after an axis reset preceded by a hardware error)]]></Cause>
+				</CauseRemedy>
+				<CauseRemedy Idx="3">
+					<Cause TxtId=""><![CDATA[the drive lacks the controller enable (ENABLE)]]></Cause>
+				</CauseRemedy>
+			</EventId>
+			<Hides>
+				<Hide GUID="{21DB8AB5-CD63-4C7B-B8D0-D1662E011E79}"/>
+				<Hide GUID="{175E1A35-5FF0-4775-B225-0755523C3B0D}"/>
+				<Hide GUID="{358D35A3-15C3-46F8-8F8A-84AB4992F547}"/>
+				<Hide GUID="{DD9F5638-0113-4176-A73B-16B578FEAEEC}"/>
+				<Hide GUID="{6EF1179A-36E2-4919-A172-7E778AFF537C}"/>
+			</Hides>
+		</DataType>
 	</DataTypes>
 	<ImageDatas>
 		<ImageData Id="1000">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
@@ -1652,6 +1678,7 @@ External Setpoint Generation:
 			<Licenses>
 				<Target>
 					<ManualSelect>{1C20D4D8-C732-464D-AF34-6EA5D2180E06}</ManualSelect>
+					<ManualSelect>{927A7313-A412-4376-8911-4A8F60EC8651}</ManualSelect>
 					<ManualSelect>{27326EE5-AB30-4084-B15B-8CCA96CCBF0B}</ManualSelect>
 					<ManualSelect>{3DDCAB25-BF0E-412C-A721-DC77C1B8099C}</ManualSelect>
 				</Target>
@@ -1963,7 +1990,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{0C5A0548-FA4F-4B8E-B05E-82A0037B3227}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{AEF10BB6-61D8-4D9E-E836-8D67745211FD}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{C366D78F-0A84-8E6A-6372-212A8B47C85C}">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">

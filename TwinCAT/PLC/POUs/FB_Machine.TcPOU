@@ -72,6 +72,11 @@ VAR
 
 	//Machine D
 	Machine_D_Carrier_Gripper AT %Q* : BIT;
+	
+	//Event Logger - Clear messages on reset
+	fbEventLogger		:FB_TcEventLogger;
+	
+	iResetingStep		:UDINT;
 END_VAR
 VAR CONSTANT
 	TwinSAFEGroupRun AT %Q* : BOOL := TRUE;
@@ -105,9 +110,9 @@ CASE State OF
 		fbCarrierStop.X_AxisRef	:= ADR(X_Axis);
 		fbCarrierStop.Z_AxisRef	:= ADR(Z_Axis);
 
-		State		:= E_State.Idel;
-		NextState	:= E_State.Idel;
-
+		State				:= E_State.Idel;
+		NextState			:= E_State.Idel;
+		iResetingStep		:= 0;
 	E_State.Idel:
 		NextState := E_State.Enable;
 
@@ -115,7 +120,7 @@ CASE State OF
 			IF rtStart.Q THEN
 				State := E_State.Enable;
 			ELSIF rtReset.Q THEN
-				State := E_State.Reset;
+				State := E_State.Reseting;
 			ELSIF AxisInError THEN
 				State := E_State.Error;
 			END_IF
@@ -343,91 +348,170 @@ CASE State OF
 		NextState				:= E_State.Reseting;
 		IF rtReset.Q THEN
 			State				:= E_State.Reseting;
-			TwinSAFEGroupErrAck	:= TRUE;
-		END_IF
-
+		END_IF			
+	
+	
 	E_State.Reseting:
 		NextState				:= E_State.Init;
-		fbCarrierReset(Execute := TRUE);
-		TwinSAFEGroupErrAck := FALSE;
+		CASE iResetingStep OF
+			0://Clear out event logger
+				IF fbEventLogger.ClearLoggedEvents(0)THEN
+					iResetingStep:=10;
+				END_IF	
+				
+			10://Toggle TS group Err ack
+				TwinSAFEGroupErrAck	:= TRUE;	
+				iResetingStep:=20;	
+				
+			20://Clear axis error
+				fbCarrierReset(Execute := TRUE);
+				TwinSAFEGroupErrAck := FALSE;
+        		
+				IF NOT fbCarrierReset.Busy THEN
+					fbCarrierReset(Execute := FALSE);
+					State := E_State.Init;
+				END_IF			
+		END_CASE
 
-		IF NOT fbCarrierReset.Busy THEN
-			fbCarrierReset(Execute := FALSE);
-			State := E_State.Init;
-		END_IF
 
 END_CASE
 
+//HMI Display strings
 sPreviouseState	:= F_E_State_To_String(previousState);
 sState			:= F_E_State_To_String(State);
 sNextState		:= F_E_State_To_String(NextState);
 
 
 M_AxisPower();
+M_Alarms();
 
-//Start
-CASE State OF
-	E_State.Init:
-		Start.LED := FALSE;
-	E_State.Idel:
-		StartLEDBlink.TIMEHIGH	:= T#1S;
-		StartLEDBlink.TIMELOW	:= T#1S;
-		Start.LED				:= StartLEDBlink.out;
-	E_State.Enable:
-		StartLEDBlink.TIMEHIGH	:= T#500MS;
-		StartLEDBlink.TIMELOW	:= T#500MS;
-		Start.LED				:= StartLEDBlink.out;
-	E_State.MoveToHome..E_State.CDoingWork:
-		Start.LED := TRUE;
-	E_State.Stopping:
-		Start.LED := FALSE;
-	E_State.Stopped:
-		StartLEDBlink.TIMEHIGH	:= T#200MS;
-		StartLEDBlink.TIMELOW	:= T#200MS;
-		Start.LED				:= StartLEDBlink.out;
-	E_State.Error..E_State.Reseting:
-		Start.LED := FALSE;
-END_CASE
 
-StartLEDBlink(ENABLE := TRUE);
-
-//Reset
-CASE State OF
-	E_State.Init..E_State.CDoingWork:
-		Reset.LED := FALSE;
-	E_State.Error:
-		ResetLEDBlink.TIMEHIGH	:= T#1S;
-		ResetLEDBlink.TIMELOW	:= T#1S;
-		Reset.LED				:= ResetLEDBlink.OUT;
-	E_State.Reset..E_State.Reseting:
-		ResetLEDBlink.TIMEHIGH	:= T#500MS;
-		ResetLEDBlink.TIMELOW	:= T#500MS;
-		Reset.LED				:= ResetLEDBlink.OUT;
-END_CASE
-
-ResetLEDBlink(ENABLE := TRUE);
-
-//Stop
-CASE State OF
-	E_State.Init..E_State.Enable:
-		Stop.LED := FALSE;
-	E_State.MoveToHome..E_State.CDoingWork:
-		IF rtStop.Q THEN
-			State := E_State.Stopping;
-		END_IF
-
-		Stop.LED := TRUE;
-	E_State.Stopping:
-		StopLEDBlink.TIMEHIGH	:= T#500MS;
-		StopLEDBlink.TIMELOW	:= T#500MS;
-		Stop.LED				:= StopLEDBlink.OUT;
-	E_State.Stopped..E_State.Reseting:
-		Stop.LED := FALSE;
-END_CASE
-
-StopLEDBlink(ENABLE := TRUE);
-]]></ST>
+//Buttons
+	//Start
+	CASE State OF
+		E_State.Init:
+			Start.LED := FALSE;
+		E_State.Idel:
+			StartLEDBlink.TIMEHIGH	:= T#1S;
+			StartLEDBlink.TIMELOW	:= T#1S;
+			Start.LED				:= StartLEDBlink.out;
+		E_State.Enable:
+			StartLEDBlink.TIMEHIGH	:= T#500MS;
+			StartLEDBlink.TIMELOW	:= T#500MS;
+			Start.LED				:= StartLEDBlink.out;
+		E_State.MoveToHome..E_State.CDoingWork:
+			Start.LED := TRUE;
+		E_State.Stopping:
+			Start.LED := FALSE;
+		E_State.Stopped:
+			StartLEDBlink.TIMEHIGH	:= T#200MS;
+			StartLEDBlink.TIMELOW	:= T#200MS;
+			Start.LED				:= StartLEDBlink.out;
+		E_State.Error..E_State.Reseting:
+			Start.LED := FALSE;
+	END_CASE
+	
+	StartLEDBlink(ENABLE := TRUE);
+	
+	//Reset
+	CASE State OF
+		E_State.Init..E_State.CDoingWork:
+			Reset.LED := FALSE;
+		E_State.Error:
+			ResetLEDBlink.TIMEHIGH	:= T#1S;
+			ResetLEDBlink.TIMELOW	:= T#1S;
+			Reset.LED				:= ResetLEDBlink.OUT;
+		E_State.Reseting:
+			ResetLEDBlink.TIMEHIGH	:= T#500MS;
+			ResetLEDBlink.TIMELOW	:= T#500MS;
+			Reset.LED				:= ResetLEDBlink.OUT;
+	END_CASE
+	
+	ResetLEDBlink(ENABLE := TRUE);
+	
+	//Stop
+	CASE State OF
+		E_State.Init..E_State.Enable:
+			Stop.LED := FALSE;
+		E_State.MoveToHome..E_State.CDoingWork:
+			IF rtStop.Q THEN
+				State := E_State.Stopping;
+			END_IF
+	
+			Stop.LED := TRUE;
+		E_State.Stopping:
+			StopLEDBlink.TIMEHIGH	:= T#500MS;
+			StopLEDBlink.TIMELOW	:= T#500MS;
+			Stop.LED				:= StopLEDBlink.OUT;
+		E_State.Stopped..E_State.Reseting:
+			Stop.LED := FALSE;
+	END_CASE
+	
+	StopLEDBlink(ENABLE := TRUE);
+	]]></ST>
     </Implementation>
+    <Method Name="M_Alarms" Id="{0d27ec4f-fbc2-4610-bb3d-2907967d60dc}">
+      <Declaration><![CDATA[METHOD M_Alarms
+VAR_INPUT
+END_VAR
+VAR_INST
+	rtX4650			:R_TRIG;
+	X_4650			:FB_TcMessage;
+	rtZ4650			:R_TRIG;
+	Z_4650			:FB_TcMessage;
+	InitStep		:UDINT:=0;
+	initDone		:BOOL:=FALSE;
+	
+	fbReadXAxis		:MC_ReadParameterSet;
+	XParams 		:ST_AxisParameterSet;
+	fbReadZAxis		:MC_ReadParameterSet;
+	ZParams 		:ST_AxisParameterSet;	
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT initDone THEN
+	CASE InitStep OF
+		0:
+			X_4650.CreateEx(stEventEntry:=TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate , ipSourceInfo:=0);
+			Z_4650.CreateEX(stEventEntry:=TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate , ipSourceInfo:=0);
+			InitStep:=10;
+		10:	
+			fbReadXAxis(
+				Parameter:=XParams , 
+				Axis:=X_Axis , 
+				Execute:=TRUE);
+			fbReadZAxis(
+				Parameter:=ZParams , 
+				Axis:=Z_Axis , 
+				Execute:=TRUE);
+			IF NOT fbReadXAxis.Busy AND NOT fbReadZAxis.Busy THEN
+ 				InitStep:=20;
+			END_IF
+		20:
+			X_4650.ipArguments.Clear();
+			X_4650.ipArguments.AddString(XParams.sAxisName);	
+			
+			Z_4650.ipArguments.Clear();
+			Z_4650.ipArguments.AddString(ZParams.sAxisName);	
+			InitStep:=30;
+			initDone:=TRUE;
+	END_CASE
+	RETURN;
+END_IF
+
+
+rtX4650(CLK:=X_Axis.Status.ErrorID=16#4650);
+IF rtX4650.Q THEN
+	X_4650.Send(0);
+END_IF
+
+
+
+rtZ4650(CLK:=Z_Axis.Status.ErrorID=16#4650);
+IF rtZ4650.Q THEN
+	Z_4650.Send(0);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_AxisPower" Id="{677ce463-30f2-4570-893a-c6b140cbb6b7}">
       <Declaration><![CDATA[METHOD M_AxisPower : BOOL
 VAR_INPUT
@@ -512,16 +596,58 @@ END_IF]]></ST>
     <LineIds Name="FB_Machine">
       <LineId Id="5839" Count="261" />
       <LineId Id="6186" Count="0" />
-      <LineId Id="6101" Count="5" />
+      <LineId Id="6283" Count="1" />
+      <LineId Id="6277" Count="1" />
+      <LineId Id="6268" Count="0" />
+      <LineId Id="6106" Count="0" />
       <LineId Id="6187" Count="0" />
-      <LineId Id="6107" Count="8" />
+      <LineId Id="6287" Count="1" />
+      <LineId Id="6306" Count="1" />
+      <LineId Id="6290" Count="0" />
+      <LineId Id="6314" Count="0" />
+      <LineId Id="6310" Count="3" />
+      <LineId Id="6291" Count="0" />
+      <LineId Id="6300" Count="5" />
+      <LineId Id="6293" Count="0" />
+      <LineId Id="6289" Count="0" />
+      <LineId Id="6113" Count="2" />
+      <LineId Id="6319" Count="0" />
       <LineId Id="6183" Count="0" />
       <LineId Id="6116" Count="1" />
       <LineId Id="6119" Count="0" />
       <LineId Id="6185" Count="0" />
       <LineId Id="6184" Count="0" />
-      <LineId Id="6120" Count="62" />
+      <LineId Id="6120" Count="0" />
+      <LineId Id="6316" Count="2" />
+      <LineId Id="6121" Count="61" />
       <LineId Id="2952" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_Alarms">
+      <LineId Id="41" Count="0" />
+      <LineId Id="44" Count="1" />
+      <LineId Id="51" Count="2" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="56" Count="3" />
+      <LineId Id="67" Count="2" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="70" Count="1" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="74" Count="5" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="26" Count="2" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="30" Count="1" />
+      <LineId Id="29" Count="0" />
     </LineIds>
     <LineIds Name="FB_Machine.M_AxisPower">
       <LineId Id="72" Count="14" />

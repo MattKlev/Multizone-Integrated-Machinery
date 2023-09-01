@@ -11,7 +11,15 @@
       },
       {
         "publishServerExtension": true,
+        "name": "TcHmiEventLogger"
+      },
+      {
+        "publishServerExtension": true,
         "name": "TcHmiLua"
+      },
+      {
+        "publishServerExtension": true,
+        "name": "TcHmiScope"
       },
       {
         "publishServerExtension": true,

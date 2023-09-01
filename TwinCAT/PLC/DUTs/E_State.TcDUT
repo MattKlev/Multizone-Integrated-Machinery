@@ -30,7 +30,6 @@ TYPE
 		Stopping,
 		Stopped,
 		Error,
-		Reset,
 		Reseting
 	);
 END_TYPE

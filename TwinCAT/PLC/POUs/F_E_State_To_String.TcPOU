@@ -61,8 +61,6 @@ END_VAR
             StepString := 'Stopped';
         E_State.Error:
             StepString := 'Error';
-        E_State.Reset:
-            StepString := 'Reset';
         E_State.Reseting:
             StepString := 'Resetting';
         ELSE
@@ -74,7 +72,8 @@ F_E_State_To_String := StepString;
 ]]></ST>
     </Implementation>
     <LineIds Name="F_E_State_To_String">
-      <LineId Id="22" Count="59" />
+      <LineId Id="22" Count="49" />
+      <LineId Id="74" Count="7" />
       <LineId Id="7" Count="0" />
     </LineIds>
   </POU>

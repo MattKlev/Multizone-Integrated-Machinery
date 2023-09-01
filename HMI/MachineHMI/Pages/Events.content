@@ -17,8 +17,14 @@
 
     <div id="TcHmiEventGrid_Events_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiEventGrid" data-tchmi-height-unit="px" data-tchmi-left="16" data-tchmi-left-unit="px" data-tchmi-show-menu-bar="True" data-tchmi-top="16" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-right="16" data-tchmi-bottom="16">
       <script data-tchmi-target-attribute="data-tchmi-filter" type="application/json">
-        []
-      </script>
+[
+  {
+    "path": "sourceDomain",
+    "comparator": "==",
+    "value": "TcHmiEventLogger"
+  }
+]
+</script>
       <script data-tchmi-target-attribute="data-tchmi-columns" type="application/json">
         [
         {
@@ -54,4 +60,15 @@
       </script>
     </div>
   </div>
+<div id="TcHmiCombobox" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiCombobox" data-tchmi-auto-focus-out="true" data-tchmi-combobox-text="Select" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="1044" data-tchmi-left-unit="px" data-tchmi-top="21" data-tchmi-top-unit="px" data-tchmi-width="264" data-tchmi-width-unit="px">
+<script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
+{
+  "top": 3,
+  "right": 3,
+  "bottom": 3,
+  "left": 3
+}
+</script>
+
+</div>
 </div>

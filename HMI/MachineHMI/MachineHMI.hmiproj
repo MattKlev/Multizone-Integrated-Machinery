@@ -144,9 +144,6 @@
     <Content Include="Pages\Events.content">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Pages\Scope.content">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Pages\Settings.content">
       <SubType>Content</SubType>
     </Content>
