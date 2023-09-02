@@ -10,7 +10,7 @@
       <Children>
         <Node>
           <Title>DataPool</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -41,7 +41,7 @@
         </Node>
         <Node>
           <Title>X and Z Position</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -105,7 +105,7 @@
             </Node>
             <Node>
               <Title>EL5101 Counts</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>

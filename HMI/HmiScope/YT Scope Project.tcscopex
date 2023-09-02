@@ -3,7 +3,7 @@
   <AutoDeleteCapacity>0</AutoDeleteCapacity>
   <AutoDeleteMode>Disabled</AutoDeleteMode>
   <AutoDeleteOlderThan>0</AutoDeleteOlderThan>
-  <AutoRestartRecord>false</AutoRestartRecord>
+  <AutoRestartRecord>true</AutoRestartRecord>
   <AutoSaveExportConfigurationString>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;ExportConfiguration&gt;
   &lt;Silent&gt;False&lt;/Silent&gt;
@@ -41,7 +41,7 @@
 &lt;/Layout&gt;</Layout>
   <MainServer>127.0.0.1.1.1</MainServer>
   <Name>Scope Project</Name>
-  <RecordTime>6000000000</RecordTime>
+  <RecordTime>1200000000</RecordTime>
   <ServerVersions>
     <Version>3.4.3147.18</Version>
   </ServerVersions>
@@ -859,7 +859,7 @@
               <Title>ChartMenuStyle_29</Title>
               <ToolStripFontSize>8.25</ToolStripFontSize>
               <UseLongTimeFormat>true</UseLongTimeFormat>
-              <VisibleTimeStrip>true</VisibleTimeStrip>
+              <VisibleTimeStrip>false</VisibleTimeStrip>
               <VisibleToolStrip>true</VisibleToolStrip>
             </ChartMenuStyle>
           </SubMember>
@@ -1171,7 +1171,7 @@
   <TargetConnectionIds />
   <Title>ScopeProject_3</Title>
   <UseAutoSave>false</UseAutoSave>
-  <UseFileStore>true</UseFileStore>
+  <UseFileStore>false</UseFileStore>
   <Version>1.0.0.3</Version>
   <ViewDetailLevel>Default</ViewDetailLevel>
 </ScopeProject>

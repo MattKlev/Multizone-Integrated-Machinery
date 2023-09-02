@@ -2110,7 +2110,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{0C5A0548-FA4F-4B8E-B05E-82A0037B3227}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{CC1CDA2F-BAE5-7FD3-A173-96F773EE469B}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{592C06A4-1E80-395A-ABC3-B1C693E34E55}">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -3352,7 +3352,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 								<Entry Name="TSC__Slave Cmd" BitLen="8" Index="#x6020" Sub="#x01">
 									<Type>USINT</Type>
 								</Entry>
-								<Entry Name="TSC__Counter value" BitLen="16" Index="#x6010" Sub="#x1d">
+								<Entry Name="TSC__Counter value" BitLen="16" Index="#x6010" Sub="#x1d" Flags="#x00008020">
 									<Type>UINT</Type>
 								</Entry>
 								<Entry Name="TSC__Slave CRC_0" BitLen="16" Index="#x6020" Sub="#x03">
