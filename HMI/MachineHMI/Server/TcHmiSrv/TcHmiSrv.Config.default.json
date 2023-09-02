@@ -2530,6 +2530,66 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.MAIN.Machine.HMI_Reset.Button": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::Machine::HMI_Reset::Button",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        },
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.MAIN.Machine.HMI_Start.Button": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::Machine::HMI_Start::Button",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        },
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.MAIN.Machine.HMI_Stop.Button": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::Machine::HMI_Stop::Button",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        },
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
         "PLC1.MAIN.Machine.Override": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -2543,66 +2603,6 @@
                     {
                         "comment": "Overide",
                         "propertyOrder": 7
-                    }
-                ]
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.MAIN.Machine.Reset.Button": {
-            "ACCESS": 3,
-            "DOMAIN": "ADS",
-            "DYNAMIC": true,
-            "MAPPING": "PLC1::MAIN::Machine::Reset::Button",
-            "SCHEMA": {
-                "allOf": [
-                    {
-                        "$ref": "tchmi:general#/definitions/BOOL"
-                    },
-                    {
-                        "attributes": {
-                            "TcAddressType": "Input"
-                        },
-                        "propertyOrder": 1
-                    }
-                ]
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.MAIN.Machine.Start.Button": {
-            "ACCESS": 3,
-            "DOMAIN": "ADS",
-            "DYNAMIC": true,
-            "MAPPING": "PLC1::MAIN::Machine::Start::Button",
-            "SCHEMA": {
-                "allOf": [
-                    {
-                        "$ref": "tchmi:general#/definitions/BOOL"
-                    },
-                    {
-                        "attributes": {
-                            "TcAddressType": "Input"
-                        },
-                        "propertyOrder": 1
-                    }
-                ]
-            },
-            "USEMAPPING": true
-        },
-        "PLC1.MAIN.Machine.Stop.Button": {
-            "ACCESS": 3,
-            "DOMAIN": "ADS",
-            "DYNAMIC": true,
-            "MAPPING": "PLC1::MAIN::Machine::Stop::Button",
-            "SCHEMA": {
-                "allOf": [
-                    {
-                        "$ref": "tchmi:general#/definitions/BOOL"
-                    },
-                    {
-                        "attributes": {
-                            "TcAddressType": "Input"
-                        },
-                        "propertyOrder": 1
                     }
                 ]
             },
@@ -8543,6 +8543,9 @@
                 "LocalizeText": 3,
                 "Login": 3,
                 "Logout": 3,
+                "PLC1.MAIN.Machine.HMI_Reset.Button": 3,
+                "PLC1.MAIN.Machine.HMI_Start.Button": 3,
+                "PLC1.MAIN.Machine.HMI_Stop.Button": 3,
                 "PLC1.MAIN.Machine.Override": 3,
                 "PLC1.MAIN.Machine.Reset.Button": 3,
                 "PLC1.MAIN.Machine.Start.Button": 3,
@@ -8655,8 +8658,11 @@
         "/": "..\\..\\MachineHMI\\",
         "/Beckhoff.TwinCAT.HMI.BaseTemplate": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.BaseTemplate.12.760.48\\runtimes\\native1.12-tchmi",
         "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.760.48\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.EcDiagnostics.Meta": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnostics.Meta.1.1.109",
         "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnosticsControl.12.760.48\\runtimes\\native1.12-tchmi",
         "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.760.48\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Scope": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Scope.14.1.109",
+        "/Beckhoff.TwinCAT.HMI.Scope.Meta": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Scope.Meta.1.1.109",
         "/Beckhoff.TwinCAT.HMI.ScopeControl": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.ScopeControl.12.760.48\\runtimes\\native1.12-tchmi",
         "/bin": "..\\..\\MachineHMI\\bin\\",
         "/bin/framework": "..\\..\\MachineHMI\\bin\\framework",

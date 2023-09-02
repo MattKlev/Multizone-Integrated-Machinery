@@ -307,7 +307,7 @@
   }
 ]
 </script>
-<div id="BtnStart" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height-unit="px" data-tchmi-left="1" data-tchmi-left-unit="px" data-tchmi-text="Start" data-tchmi-top="1" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-right="1" data-tchmi-bottom="1" data-tchmi-state-symbol="%s%PLC1.MAIN.Machine.Start.Button%/s%">
+<div id="BtnStart" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height-unit="px" data-tchmi-left="1" data-tchmi-left-unit="px" data-tchmi-text="Start" data-tchmi-top="1" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-right="1" data-tchmi-bottom="1" data-tchmi-state-symbol="%s%PLC1.MAIN.Machine.HMI_Start.Button%/s%">
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
@@ -321,7 +321,7 @@
 }
 </script>
 </div>
-<div id="btnStop" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="1" data-tchmi-height-unit="px" data-tchmi-left="1" data-tchmi-left-unit="px" data-tchmi-text="Stop" data-tchmi-top="1" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-right="1" data-tchmi-bottom="1" data-tchmi-state-symbol="%s%PLC1.MAIN.Machine.Stop.Button%/s%">
+<div id="btnStop" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="1" data-tchmi-height-unit="px" data-tchmi-left="1" data-tchmi-left-unit="px" data-tchmi-text="Stop" data-tchmi-top="1" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-right="1" data-tchmi-bottom="1" data-tchmi-state-symbol="%s%PLC1.MAIN.Machine.HMI_Stop.Button%/s%">
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
@@ -335,7 +335,7 @@
 }
 </script>
 </div>
-<div id="BtnReset" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="2" data-tchmi-height-unit="px" data-tchmi-left="1" data-tchmi-left-unit="px" data-tchmi-text="Reset" data-tchmi-top="1" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-right="1" data-tchmi-bottom="1" data-tchmi-state-symbol="%s%PLC1.MAIN.Machine.Reset.Button%/s%">
+<div id="BtnReset" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="2" data-tchmi-height-unit="px" data-tchmi-left="1" data-tchmi-left-unit="px" data-tchmi-text="Reset" data-tchmi-top="1" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-right="1" data-tchmi-bottom="1" data-tchmi-state-symbol="%s%PLC1.MAIN.Machine.HMI_Reset.Button%/s%">
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
@@ -357,9 +357,11 @@
 
 
 
+
+
 <script data-tchmi-target-attribute="data-tchmi-scope-config" type="application/json">
 {
-  "name": "XAndZPos",
+  "name": "XAndZ",
   "chart": "X and Z Position"
 }
 </script>
