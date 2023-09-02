@@ -37,7 +37,7 @@
     "icon_p": "%tr%TR_Icon_Settings_pressed%/tr%"
   }
 ]
-</script></div><div id="Header_Top" data-tchmi-type="TcHmi.Controls.BaseTemplate.TcHmiHeader" data-tchmi-height="80" data-tchmi-left="%ctrl%Navigation_Left::Width%/ctrl%" data-tchmi-top="0" data-tchmi-right="0" data-tchmi-height-unit="px">
+</script></div>><div id="Header_Top" data-tchmi-type="TcHmi.Controls.BaseTemplate.TcHmiHeader" data-tchmi-height="80" data-tchmi-left="%ctrl%Navigation_Left::Width%/ctrl%" data-tchmi-top="0" data-tchmi-right="0" data-tchmi-height-unit="px">
 <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">[
 "divider",
 "divider-top"
