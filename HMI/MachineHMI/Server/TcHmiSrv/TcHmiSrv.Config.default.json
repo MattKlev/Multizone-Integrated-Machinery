@@ -2548,6 +2548,66 @@
             },
             "USEMAPPING": true
         },
+        "PLC1.MAIN.Machine.Reset.Button": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::Machine::Reset::Button",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        },
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.MAIN.Machine.Start.Button": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::Machine::Start::Button",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        },
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
+        "PLC1.MAIN.Machine.Stop.Button": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "PLC1::MAIN::Machine::Stop::Button",
+            "SCHEMA": {
+                "allOf": [
+                    {
+                        "$ref": "tchmi:general#/definitions/BOOL"
+                    },
+                    {
+                        "attributes": {
+                            "TcAddressType": "Input"
+                        },
+                        "propertyOrder": 1
+                    }
+                ]
+            },
+            "USEMAPPING": true
+        },
         "PLC1.MAIN.Machine.sNextState": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -8484,6 +8544,9 @@
                 "Login": 3,
                 "Logout": 3,
                 "PLC1.MAIN.Machine.Override": 3,
+                "PLC1.MAIN.Machine.Reset.Button": 3,
+                "PLC1.MAIN.Machine.Start.Button": 3,
+                "PLC1.MAIN.Machine.Stop.Button": 3,
                 "PLC1.MAIN.Machine.sNextState": 3,
                 "PLC1.MAIN.Machine.sPreviouseState": 3,
                 "PLC1.MAIN.Machine.sState": 3,

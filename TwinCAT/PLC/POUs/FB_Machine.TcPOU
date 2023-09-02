@@ -8,12 +8,15 @@ VAR_OUTPUT
 END_VAR
 VAR
 	//Buttons
-	Start	: ST_LEDButton;
-	rtStart	: R_TRIG;
-	Stop	: ST_LEDButton;
-	rtStop	: R_TRIG;
-	Reset	: ST_LEDButton;
-	rtReset	: R_TRIG;
+	Start		: ST_LEDButton;
+	HMI_Start	: ST_LEDButton;
+	rtStart		: R_TRIG;
+	Stop		: ST_LEDButton;
+	HMI_Stop	: ST_LEDButton;
+	rtStop		: R_TRIG;
+	Reset		: ST_LEDButton;
+	HMI_Reset	: ST_LEDButton;
+	rtReset		: R_TRIG;
 	
 	//Overide
 	Override	:LREAL:=30.0;

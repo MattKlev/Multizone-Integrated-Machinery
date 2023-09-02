@@ -6,11 +6,11 @@
     <Node>
       <Title>YT Scope Project</Title>
       <Expanded>True</Expanded>
-      <FileName>C:\Users\MattK\source\repos\Multizone-Integrated-Machinery\HMI\HmiScope\YT Scope Project.tcscopex</FileName>
+      <FileName>C:\Users\MattK\Source\Repos\Multizone-Integrated-Machinery\HMI\HmiScope\YT Scope Project.tcscopex</FileName>
       <Children>
         <Node>
           <Title>DataPool</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -25,18 +25,6 @@
               <FileName></FileName>
               <Children />
             </Node>
-            <Node>
-              <Title>Carrier X Safety Encoder (EL5101-0090)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Carrier Z Safety Encoder (EL5101-0090)</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
           </Children>
         </Node>
         <Node>
@@ -46,17 +34,17 @@
           <Children>
             <Node>
               <Title>NC Act Pos</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
                   <Title>X_Axis.ActPos</Title>
-                  <Expanded>True</Expanded>
+                  <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children>
                     <Node>
                       <Title>Machine A</Title>
-                      <Expanded>True</Expanded>
+                      <Expanded>False</Expanded>
                       <FileName></FileName>
                       <Children>
                         <Node>
@@ -69,7 +57,7 @@
                     </Node>
                     <Node>
                       <Title>Machine B</Title>
-                      <Expanded>True</Expanded>
+                      <Expanded>False</Expanded>
                       <FileName></FileName>
                       <Children>
                         <Node>
@@ -82,7 +70,7 @@
                     </Node>
                     <Node>
                       <Title>Machine C</Title>
-                      <Expanded>True</Expanded>
+                      <Expanded>False</Expanded>
                       <FileName></FileName>
                       <Children>
                         <Node>
@@ -105,22 +93,9 @@
             </Node>
             <Node>
               <Title>EL5101 Counts</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>X Encoder (EL5101-0090)</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Z Encoder (EL5101-0090)</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-              </Children>
+              <Children />
             </Node>
           </Children>
         </Node>

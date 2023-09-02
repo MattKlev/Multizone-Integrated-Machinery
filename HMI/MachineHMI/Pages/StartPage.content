@@ -27,7 +27,7 @@
 <script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
 [
   {
-    "height": 0.5,
+    "height": 0.2,
     "heightUnit": "factor",
     "heightMode": "Value",
     "maxHeightUnit": "px",
@@ -35,7 +35,7 @@
     "overflow": false
   },
   {
-    "height": 0.1,
+    "height": 0.05,
     "heightUnit": "factor",
     "heightMode": "Value",
     "maxHeightUnit": "px",
@@ -43,7 +43,7 @@
     "overflow": false
   },
   {
-    "height": 1.0,
+    "height": 0.75,
     "heightUnit": "factor",
     "heightMode": "Value",
     "maxHeightUnit": "px",
@@ -208,7 +208,7 @@
 }
 </script>
 </div>
-<div id="TcHmiRadialGauge" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRadialGauge" data-tchmi-base-animation-time="1000" data-tchmi-gauge-alignment="Center" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="2" data-tchmi-height-unit="px" data-tchmi-label-range="25" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-show-labels="true" data-tchmi-show-ticks="true" data-tchmi-show-value-text="false" data-tchmi-start-from-zero="true" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-editable="true" data-tchmi-right="0" data-tchmi-bottom="0" data-tchmi-min-value="5" data-tchmi-max-value="100" data-tchmi-unit="%" data-tchmi-label-position="Inside" data-tchmi-value="%s%PLC1.MAIN.Machine.Override|BindingMode=TwoWay%/s%" data-tchmi-label-font-size="10" data-tchmi-end-position="-40" data-tchmi-value-font-size="10">
+<div id="TcHmiRadialGauge" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiRadialGauge" data-tchmi-base-animation-time="1000" data-tchmi-gauge-alignment="Center" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="2" data-tchmi-height-unit="px" data-tchmi-label-range="25" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-show-labels="true" data-tchmi-show-ticks="true" data-tchmi-show-value-text="false" data-tchmi-start-from-zero="true" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-editable="true" data-tchmi-right="0" data-tchmi-bottom="50" data-tchmi-min-value="5" data-tchmi-max-value="100" data-tchmi-unit="%" data-tchmi-label-position="Inside" data-tchmi-value="%s%PLC1.MAIN.Machine.Override|BindingMode=TwoWay%/s%" data-tchmi-label-font-size="10" data-tchmi-end-position="-40" data-tchmi-value-font-size="10" data-tchmi-bottom-unit="%">
 
 <script data-tchmi-target-attribute="data-tchmi-value-format" type="application/json">
 {
@@ -254,7 +254,7 @@
 }
 </script>
 </div>
-<div id="tbSpeed" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="1" data-tchmi-height-unit="px" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-text="Override" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Bottom" data-tchmi-right="0" data-tchmi-bottom="0" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="150">
+<div id="tbSpeed" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="1" data-tchmi-height-unit="px" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-text="Override" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text-horizontal-alignment="Center" data-tchmi-text-vertical-alignment="Bottom" data-tchmi-right="0" data-tchmi-bottom="0" data-tchmi-text-font-size-unit="%" data-tchmi-text-font-size="100">
 
 <script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
 {
@@ -277,6 +277,78 @@
   "bottom": "None"
 }
 </script>
+</div>
+<div id="GridControlBtns" data-tchmi-type="TcHmi.Controls.System.TcHmiGrid" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="2" data-tchmi-height-unit="%" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="50" data-tchmi-top-unit="%" data-tchmi-width-unit="px" data-tchmi-right="0" data-tchmi-bottom="0" data-tchmi-height="50">
+<script data-tchmi-target-attribute="data-tchmi-row-options" type="application/json">
+[
+  {
+    "height": 1.0,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  },
+  {
+    "height": 1.0,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  },
+  {
+    "height": 1.0,
+    "heightUnit": "factor",
+    "heightMode": "Value",
+    "maxHeightUnit": "px",
+    "minHeightUnit": "px",
+    "overflow": false
+  }
+]
+</script>
+<div id="BtnStart" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height-unit="px" data-tchmi-left="1" data-tchmi-left-unit="px" data-tchmi-text="Start" data-tchmi-top="1" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-right="1" data-tchmi-bottom="1" data-tchmi-state-symbol="%s%PLC1.MAIN.Machine.Start.Button%/s%">
+
+<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
+{
+  "color": "rgba(38, 107, 24, 1)"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-text-color" type="application/json">
+{
+  "color": "rgba(255, 255, 255, 1)"
+}
+</script>
+</div>
+<div id="btnStop" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="1" data-tchmi-height-unit="px" data-tchmi-left="1" data-tchmi-left-unit="px" data-tchmi-text="Stop" data-tchmi-top="1" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-right="1" data-tchmi-bottom="1" data-tchmi-state-symbol="%s%PLC1.MAIN.Machine.Stop.Button%/s%">
+
+<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
+{
+  "color": "rgba(255, 8, 8, 1)"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-text-color" type="application/json">
+{
+  "color": "rgba(255, 255, 255, 1)"
+}
+</script>
+</div>
+<div id="BtnReset" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-grid-column-index="0" data-tchmi-grid-row-index="2" data-tchmi-height-unit="px" data-tchmi-left="1" data-tchmi-left-unit="px" data-tchmi-text="Reset" data-tchmi-top="1" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-right="1" data-tchmi-bottom="1" data-tchmi-state-symbol="%s%PLC1.MAIN.Machine.Reset.Button%/s%">
+
+<script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
+{
+  "color": "rgba(28, 57, 252, 1)"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-text-color" type="application/json">
+{
+  "color": "rgba(255, 255, 255, 1)"
+}
+</script>
+</div>
 </div>
 </div>
 <div id="TcHmiScopeControl" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiScopeControl.TcHmiScopeControl" data-tchmi-grid-column-index="1" data-tchmi-grid-row-index="0" data-tchmi-height-unit="px" data-tchmi-left="0" data-tchmi-left-unit="px" data-tchmi-top="0" data-tchmi-top-unit="px" data-tchmi-width-unit="px" data-tchmi-right="0" data-tchmi-bottom="0" data-tchmi-enable-record-controls="false" data-tchmi-chart-color-source="Theme" data-tchmi-is-enabled="true" data-tchmi-server-interval="500">

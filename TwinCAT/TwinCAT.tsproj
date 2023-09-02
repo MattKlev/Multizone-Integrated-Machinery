@@ -1712,8 +1712,68 @@ External Setpoint Generation:
 						<Dynamic AccelerationMaximum="100000" DecelerationMaximum="100000" Acceleration="8000" Deceleration="40000" Jerk="800000"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
-					<Encoder Name="Enc" EncType="19">
+					<Encoder Name="EL7211" EncType="19">
 						<EncPara MaxCount="#xffffffff"/>
+						<Vars VarGrpType="1">
+							<Name>Inputs</Name>
+							<Var>
+								<Name>In</Name>
+								<Type GUID="{901C2423-655B-45CE-B7E3-21F174F0F99F}" Namespace="MC">NCENCODERSTRUCT_IN2B</Type>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataIn1</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataIn2</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataIn3</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataIn4</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataIn5</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataIn6</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataIn7</Name>
+									<Comment><![CDATA[Drive Velocity Actual Value
+]]></Comment>
+								</SubVar>
+							</Var>
+						</Vars>
+						<Vars VarGrpType="2">
+							<Name>Outputs</Name>
+							<Var>
+								<Name>Out</Name>
+								<Type GUID="{9CC50AB2-5D79-4869-A3C2-1FA7761BAFEA}" Namespace="MC">NCENCODERSTRUCT_OUT2</Type>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataOut1</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataOut2</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataOut3</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataOut4</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataOut5</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataOut6</Name>
+								</SubVar>
+							</Var>
+						</Vars>
+					</Encoder>
+					<Encoder Name="EL5101-0090" EncId="129" EncType="4">
+						<EncPara MaxCount="#x0000ffff">
+							<Inc RefMode="2" RefSoftSyncMask="#x0000ffff"/>
+						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
 							<Var>
@@ -1852,8 +1912,68 @@ External Setpoint Generation:
 						<Dynamic AccelerationMaximum="100000" DecelerationMaximum="100000" Acceleration="8000" Deceleration="40000" Jerk="800000"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
-					<Encoder Name="Enc" EncType="19">
+					<Encoder Name="EL7211" EncType="19">
 						<EncPara MaxCount="#xffffffff"/>
+						<Vars VarGrpType="1">
+							<Name>Inputs</Name>
+							<Var>
+								<Name>In</Name>
+								<Type GUID="{901C2423-655B-45CE-B7E3-21F174F0F99F}" Namespace="MC">NCENCODERSTRUCT_IN2B</Type>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataIn1</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataIn2</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataIn3</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataIn4</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataIn5</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataIn6</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataIn7</Name>
+									<Comment><![CDATA[Drive Velocity Actual Value
+]]></Comment>
+								</SubVar>
+							</Var>
+						</Vars>
+						<Vars VarGrpType="2">
+							<Name>Outputs</Name>
+							<Var>
+								<Name>Out</Name>
+								<Type GUID="{9CC50AB2-5D79-4869-A3C2-1FA7761BAFEA}" Namespace="MC">NCENCODERSTRUCT_OUT2</Type>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataOut1</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataOut2</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataOut3</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataOut4</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataOut5</Name>
+								</SubVar>
+								<SubVar TypeFormatIndex="2">
+									<Name>nDataOut6</Name>
+								</SubVar>
+							</Var>
+						</Vars>
+					</Encoder>
+					<Encoder Name="EL5101-0090" EncId="130" EncType="4">
+						<EncPara MaxCount="#x0000ffff">
+							<Inc RefMode="2" RefSoftSyncMask="#x0000ffff"/>
+						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
 							<Var>
@@ -1990,7 +2110,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{0C5A0548-FA4F-4B8E-B05E-82A0037B3227}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{63A85EA7-55E7-89BD-99E5-F9061151A234}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{434152A6-58AF-5C59-EDB4-55B7EF191370}">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -2000,11 +2120,23 @@ External Setpoint Generation:
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>MAIN.Machine.HMI_Start.Button</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>MAIN.Machine.Stop.Button</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>MAIN.Machine.HMI_Stop.Button</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>MAIN.Machine.Reset.Button</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.HMI_Reset.Button</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -2027,11 +2159,23 @@ External Setpoint Generation:
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>MAIN.Machine.HMI_Start.LED</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>MAIN.Machine.Stop.LED</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>MAIN.Machine.HMI_Stop.LED</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>MAIN.Machine.Reset.LED</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.HMI_Reset.LED</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -2100,7 +2244,7 @@ External Setpoint Generation:
 						<DeviceData>0001052a57ee</DeviceData>
 					</Pnp>
 				</AddressInfo>
-				<Image Id="4" ImageFlags="#x00000030" AddrType="9" ImageType="3">
+				<Image Id="4" AddrType="9" ImageType="3">
 					<Name>Image</Name>
 				</Image>
 				<Box Id="23" BoxType="9099">
@@ -5265,7 +5409,6 @@ Bit 8 - 15 : reserved]]></Comment>
 			</OwnerB>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier X Safety Encoder (EL5101-0090)">
 				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_40 TxPDO" VarB="Module 1 (EL5101-0090)^TSC Outputs^TSC"/>
-				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionOutputs^Message_40 RxPDO" VarB="Module 1 (EL5101-0090)^TSC Inputs^TSC"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Machine D Safe out (EL2904)">
 				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_39 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
@@ -5280,7 +5423,6 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="Machine C (EK1100)^Machine C Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^Message_36 TxPDO"/>
 				<Link VarA="Machine C (EK1100)^Machine C Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_36 RxPDO"/>
 				<Link VarA="Machine C (EK1100)^Machine C Safe out (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^Message_37 TxPDO"/>
-				<Link VarA="Machine D (EK1100)^Carrier Z Safety Encoder (EL5101-0090)^Module 1 (EL5101-0090)^TSC Inputs^TSC" VarB="ConnectionOutputs^Message_41 RxPDO"/>
 				<Link VarA="Machine D (EK1100)^Carrier Z Safety Encoder (EL5101-0090)^Module 1 (EL5101-0090)^TSC Outputs^TSC" VarB="ConnectionInputs^Message_41 TxPDO"/>
 				<Link VarA="Machine D (EK1100)^Machine D Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^Message_38 TxPDO"/>
 				<Link VarA="Machine D (EK1100)^Machine D Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_38 RxPDO"/>
@@ -5298,10 +5440,37 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="Drive^Outputs^Out^nCtrl1" VarB="DRV Controlword^Controlword"/>
 				<Link VarA="Drive^Outputs^Out^nCtrl2" VarB="DRV Controlword^Controlword" Size="8" OffsB="8"/>
 				<Link VarA="Drive^Outputs^Out^nDataOut1" VarB="DRV Target position^Target position"/>
-				<Link VarA="Enc^Inputs^In^nDataIn1" VarB="FB Position^Position"/>
-				<Link VarA="Enc^Inputs^In^nDcInputTime" VarB="InfoData^DcInputShift"/>
-				<Link VarA="Enc^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
-				<Link VarA="Enc^Inputs^In^nState4" VarB="WcState^WcState"/>
+				<Link VarA="EL7211^Inputs^In^nDataIn1" VarB="FB Position^Position"/>
+				<Link VarA="EL7211^Inputs^In^nDcInputTime" VarB="InfoData^DcInputShift"/>
+				<Link VarA="EL7211^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
+				<Link VarA="EL7211^Inputs^In^nState4" VarB="WcState^WcState"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier X Safety Encoder (EL5101-0090)">
+				<Link VarA="EL5101-0090^Inputs^In^nDataIn1[0]" VarB="ENC Status compact^Counter value"/>
+				<Link VarA="EL5101-0090^Inputs^In^nDataIn2[0]" VarB="ENC Status compact^Latch value"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Counter overflow" Size="1" OffsA="4"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Counter underflow" Size="1" OffsA="3"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Extrapolation stall" Size="1" OffsA="7"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Latch C valid"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Latch extern valid" Size="1" OffsA="1"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Open circuit" Size="1" OffsA="6"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Set counter done" Size="1" OffsA="2"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Status of input status" Size="1" OffsA="5"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of extern latch" Size="1" OffsA="4"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input A"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input B" Size="1" OffsA="1"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input C" Size="1" OffsA="2"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input gate" Size="1" OffsA="3"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Sync error" Size="1" OffsA="5"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^TxPDO State" Size="1" OffsA="6"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^TxPDO Toggle" Size="1" OffsA="7"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState4" VarB="WcState^WcState"/>
+				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Enable latch C"/>
+				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Enable latch extern on negative edge" Size="1" OffsA="3"/>
+				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Enable latch extern on positive edge" Size="1" OffsA="1"/>
+				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Set counter" Size="1" OffsA="2"/>
+				<Link VarA="EL5101-0090^Outputs^Out^nDataOut1[0]" VarB="ENC Control compact^Set counter value"/>
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TINC^NC-Task 1 SAF^Axes^Z">
@@ -5316,10 +5485,37 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="Drive^Outputs^Out^nCtrl1" VarB="DRV Controlword^Controlword"/>
 				<Link VarA="Drive^Outputs^Out^nCtrl2" VarB="DRV Controlword^Controlword" Size="8" OffsB="8"/>
 				<Link VarA="Drive^Outputs^Out^nDataOut1" VarB="DRV Target position^Target position"/>
-				<Link VarA="Enc^Inputs^In^nDataIn1" VarB="FB Position^Position"/>
-				<Link VarA="Enc^Inputs^In^nDcInputTime" VarB="InfoData^DcInputShift"/>
-				<Link VarA="Enc^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
-				<Link VarA="Enc^Inputs^In^nState4" VarB="WcState^WcState"/>
+				<Link VarA="EL7211^Inputs^In^nDataIn1" VarB="FB Position^Position"/>
+				<Link VarA="EL7211^Inputs^In^nDcInputTime" VarB="InfoData^DcInputShift"/>
+				<Link VarA="EL7211^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
+				<Link VarA="EL7211^Inputs^In^nState4" VarB="WcState^WcState"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier Z Safety Encoder (EL5101-0090)">
+				<Link VarA="EL5101-0090^Inputs^In^nDataIn1[0]" VarB="ENC Status compact^Counter value"/>
+				<Link VarA="EL5101-0090^Inputs^In^nDataIn2[0]" VarB="ENC Status compact^Latch value"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Counter overflow" Size="1" OffsA="4"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Counter underflow" Size="1" OffsA="3"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Extrapolation stall" Size="1" OffsA="7"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Latch C valid"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Latch extern valid" Size="1" OffsA="1"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Open circuit" Size="1" OffsA="6"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Set counter done" Size="1" OffsA="2"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Status of input status" Size="1" OffsA="5"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of extern latch" Size="1" OffsA="4"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input A"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input B" Size="1" OffsA="1"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input C" Size="1" OffsA="2"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input gate" Size="1" OffsA="3"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Sync error" Size="1" OffsA="5"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^TxPDO State" Size="1" OffsA="6"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^TxPDO Toggle" Size="1" OffsA="7"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
+				<Link VarA="EL5101-0090^Inputs^In^nState4" VarB="WcState^WcState"/>
+				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Enable latch C"/>
+				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Enable latch extern on negative edge" Size="1" OffsA="3"/>
+				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Enable latch extern on positive edge" Size="1" OffsA="1"/>
+				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Set counter" Size="1" OffsA="2"/>
+				<Link VarA="EL5101-0090^Outputs^Out^nDataOut1[0]" VarB="ENC Control compact^Set counter value"/>
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TIPC^PLC^PLC Instance">
