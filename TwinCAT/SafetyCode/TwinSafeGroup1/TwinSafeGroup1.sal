@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<safetyApplication Crc="759344990" xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.4.0.0" Id="4315bf16-b832-4826-9dc7-7c79fc2e3364" name="" mapState="true" mapDiag="true" groupOrderId="0" passificationAllowed="false" temporaryDeactivationAllowed="false" permamentDeactivationAllowed="false" xmlid="0" analogFBOutputReplacementValues="Zero" verifyAnalogFBInputsIfStart="false" userFbId="00000000-0000-0000-0000-000000000000" xmlns="http://schemas.microsoft.com/dsltools/SafetyApplicationLanguage">
+<safetyApplication Crc="317991539" xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.4.0.0" Id="4315bf16-b832-4826-9dc7-7c79fc2e3364" name="" mapState="true" mapDiag="true" groupOrderId="0" passificationAllowed="false" temporaryDeactivationAllowed="false" permamentDeactivationAllowed="false" xmlid="0" analogFBOutputReplacementValues="Zero" verifyAnalogFBInputsIfStart="false" userFbId="00000000-0000-0000-0000-000000000000" xmlns="http://schemas.microsoft.com/dsltools/SafetyApplicationLanguage">
+  <comments>
+    <comment Id="8ef43ec5-1ba5-4210-a4ba-8011fc6065be" text="Add the two variables so that they are used, and that we dont get a compile error&#xD;&#xA;" currentNetworkOrderId="0">
+      <networks>
+        <commentReferencesNetworks Id="f316c878-776d-42f6-bbb6-4ffed25f5723">
+          <networkMoniker name="//Network1" />
+        </commentReferencesNetworks>
+      </networks>
+    </comment>
+  </comments>
   <networks>
     <safetyApplicationHasNetworks Id="239f62a2-c52b-4a83-9d76-2c3133e01075">
       <Network Id="1ff74438-1c69-4ee1-bd4f-f0c6ecc2d500" name="Network1" networkName="Network1" intId="1" networkOrderId="0">
@@ -365,10 +374,10 @@
           <variableHasTargetUsages Id="a0799e89-58c5-467c-a870-a1c26ec58da9">
             <variableUsages Id="16f9d8be-e7af-455c-9375-a3579bc7948c">
               <usages>
-                <variableUsagesHasUsages Id="dc70af22-0815-46b3-a18a-9fa9f4807a20">
-                  <fbPortUsage Id="c6e59bce-9dcb-48ee-92f7-7d55eff191e4">
+                <variableUsagesHasUsages Id="54b642e8-9e7c-4328-8387-c9063a1b9e44">
+                  <fbPortUsage Id="f5bb565e-b0e8-48ea-847b-6d9dde494585">
                     <functionBlockPort>
-                      <fbPortUsageReferencesFunctionBlockPort Id="ef72f7f0-0c0c-4e7f-b8c8-933cede05920">
+                      <fbPortUsageReferencesFunctionBlockPort Id="65c969bb-6782-40f2-9285-f3c3020f0df4">
                         <inPortMoniker name="//Network1/FBEstop1/Restart" />
                       </fbPortUsageReferencesFunctionBlockPort>
                     </functionBlockPort>

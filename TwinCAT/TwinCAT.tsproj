@@ -2110,7 +2110,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{0C5A0548-FA4F-4B8E-B05E-82A0037B3227}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{8B80BDBB-E0B2-D603-37D9-22B1210F13D2}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{4040A843-3BF5-923E-B23A-49EEF6A5FC5D}">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -5401,10 +5401,8 @@ Bit 8 - 15 : reserved]]></Comment>
 		<MappingInfo Identifier="{03040040-0010-0304-4000-040310000403}" Id="#x02030020" Watchdog="14000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Real IO">
 			<OwnerB Name="TIID^Real IO^Term 3 (EK1101)^Machine Safety Controller (EL6910)">
+				<Link VarA="Term 3 (EK1101)^Operator Panel Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^Message_43 TxPDO"/>
 				<Link VarA="Term 3 (EK1101)^Operator Panel Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_43 RxPDO"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Real IO^Term 3 (EK1101)^Operator Panel Safe In (EL1904)">
-				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_43 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine A (EK1100)^Machine A Safe out (EL2904)">
 				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_33 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
@@ -5413,9 +5411,11 @@ Bit 8 - 15 : reserved]]></Comment>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine B (EK1100)^Machine B Safe In (EL1904)">
 				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_34 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
 			</OwnerB>
+			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine B (EK1100)^Machine B Safe out (EL2904)">
+				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionOutputs^Message_35 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
+			</OwnerB>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine C (EK1100)^Machine C Safe In (EL1904)">
 				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_36 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
-				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionOutputs^Message_36 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine C (EK1100)^Machine C Safe out (EL2904)">
 				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionOutputs^Message_37 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
@@ -5425,7 +5425,9 @@ Bit 8 - 15 : reserved]]></Comment>
 			</OwnerB>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier Z Safety Encoder (EL5101-0090)">
 				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_41 TxPDO" VarB="Module 1 (EL5101-0090)^TSC Outputs^TSC"/>
-				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionOutputs^Message_41 RxPDO" VarB="Module 1 (EL5101-0090)^TSC Inputs^TSC"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Machine D Safe In (EL1904)">
+				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionOutputs^Message_38 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Machine D Safe out (EL2904)">
 				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_39 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
@@ -5438,11 +5440,11 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="Machine A (EK1100)^Machine A Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_32 RxPDO"/>
 				<Link VarA="Machine B (EK1100)^Machine B Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_34 RxPDO"/>
 				<Link VarA="Machine B (EK1100)^Machine B Safe out (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^Message_35 TxPDO"/>
-				<Link VarA="Machine B (EK1100)^Machine B Safe out (EL2904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_35 RxPDO"/>
+				<Link VarA="Machine C (EK1100)^Machine C Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_36 RxPDO"/>
 				<Link VarA="Machine C (EK1100)^Machine C Safe out (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^Message_37 TxPDO"/>
 				<Link VarA="Machine D (EK1100)^Carrier X Safety Encoder (EL5101-0090)^Module 1 (EL5101-0090)^TSC Outputs^TSC" VarB="ConnectionInputs^Message_40 TxPDO"/>
+				<Link VarA="Machine D (EK1100)^Carrier Z Safety Encoder (EL5101-0090)^Module 1 (EL5101-0090)^TSC Inputs^TSC" VarB="ConnectionOutputs^Message_41 RxPDO"/>
 				<Link VarA="Machine D (EK1100)^Machine D Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^Message_38 TxPDO"/>
-				<Link VarA="Machine D (EK1100)^Machine D Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_38 RxPDO"/>
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TINC^NC-Task 1 SAF^Axes^X">

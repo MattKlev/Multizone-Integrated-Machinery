@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <DUT Name="ST_LEDButton" Id="{2dd2033e-004c-422a-ae82-9363e2be75d9}">
-    <Declaration><![CDATA[TYPE ST_LEDButton :
-STRUCT
-	Button	AT%I*	:BOOL;
-	LED		AT%Q*	:BOOL;
-END_STRUCT
+    <Declaration><![CDATA[TYPE
+	ST_LEDButton :
+	STRUCT
+		Button	AT %I*	: BOOL;
+		LED		AT %Q*	: BOOL;
+	END_STRUCT
 END_TYPE
 ]]></Declaration>
   </DUT>

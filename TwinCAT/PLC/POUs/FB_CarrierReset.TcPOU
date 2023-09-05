@@ -15,13 +15,13 @@ VAR
 	Z_AxisReset	: MC_Reset;
 
 	{attribute 'hide'}
-	_X_Axis :POINTER TO AXIS_REF;
+	_X_Axis : POINTER TO AXIS_REF;
 	{attribute 'hide'}
-	_Z_Axis :POINTER TO AXIS_REF;
-	_SetPoint : ST_CarrierSetpoint;
+	_Z_Axis		: POINTER TO AXIS_REF;
+	_SetPoint	: ST_CarrierSetpoint;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF _X_Axis= 0 OR _Z_Axis=0 THEN
+      <ST><![CDATA[IF _X_Axis = 0 OR _Z_Axis = 0 THEN
 	RETURN;
 END_IF
 
@@ -76,10 +76,7 @@ END_VAR
       </Set>
     </Property>
     <LineIds Name="FB_CarrierReset">
-      <LineId Id="76" Count="1" />
-      <LineId Id="75" Count="0" />
-      <LineId Id="78" Count="0" />
-      <LineId Id="65" Count="9" />
+      <LineId Id="115" Count="13" />
       <LineId Id="9" Count="0" />
     </LineIds>
     <LineIds Name="FB_CarrierReset.X_AxisRef.Get">

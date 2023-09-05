@@ -11,29 +11,29 @@ VAR_OUTPUT
 	Error	: BOOL;
 END_VAR
 VAR
-	_Decel : LREAL:=100000.0;
-	
+	_Decel : LREAL := 100000.0;
+
 	X_AxisHalt	: MC_Halt;
 	Z_AxisHalt	: MC_Halt;
 
 	{attribute 'hide'}
-	_X_Axis :POINTER TO AXIS_REF;
+	_X_Axis : POINTER TO AXIS_REF;
 	{attribute 'hide'}
-	_Z_Axis :POINTER TO AXIS_REF;
-	
+	_Z_Axis : POINTER TO AXIS_REF;
 
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF _X_Axis= 0 OR _Z_Axis=0 THEN
+      <ST><![CDATA[IF _X_Axis = 0 OR _Z_Axis = 0 THEN
 	RETURN;
 END_IF
-X_AxisHalt(Axis			:= _X_Axis^,
-				Deceleration:=_Decel,
-				Execute		:= Execute);
 
-Z_AxisHalt(Axis			:= _Z_Axis^,
-				Deceleration:=_Decel,
-				Execute		:= Execute);
+X_AxisHalt(Axis				:= _X_Axis^,
+			Deceleration	:= _Decel,
+			Execute			:= Execute);
+
+Z_AxisHalt(Axis				:= _Z_Axis^,
+			Deceleration	:= _Decel,
+			Execute			:= Execute);
 
 Busy := X_AxisHalt.Busy OR Z_AxisHalt.Busy;
 
@@ -49,7 +49,7 @@ Error := X_AxisHalt.Error OR Z_AxisHalt.Error;
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Decel:=_Decel;]]></ST>
+          <ST><![CDATA[Decel := _Decel;]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{66c29c50-7ad3-4da2-ba25-d350335babfe}">
@@ -57,7 +57,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[_Decel:=Decel;]]></ST>
+          <ST><![CDATA[_Decel := Decel;]]></ST>
         </Implementation>
       </Set>
     </Property>
@@ -100,14 +100,7 @@ END_VAR
       </Set>
     </Property>
     <LineIds Name="FB_CarrierStop">
-      <LineId Id="140" Count="2" />
-      <LineId Id="125" Count="0" />
-      <LineId Id="181" Count="0" />
-      <LineId Id="126" Count="0" />
-      <LineId Id="129" Count="1" />
-      <LineId Id="182" Count="0" />
-      <LineId Id="131" Count="0" />
-      <LineId Id="134" Count="5" />
+      <LineId Id="224" Count="16" />
       <LineId Id="85" Count="0" />
     </LineIds>
     <LineIds Name="FB_CarrierStop.Decel.Get">

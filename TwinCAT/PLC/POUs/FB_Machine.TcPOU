@@ -17,17 +17,17 @@ VAR
 	Reset		: ST_LEDButton;
 	HMI_Reset	: ST_LEDButton;
 	rtReset		: R_TRIG;
-	
+
 	//Overide
-	Override	:LREAL:=30.0;
+	Override : LREAL := 30.0;
 
 	//Button LED
 	StartLEDBlink	: BLINK;
 	ResetLEDBlink	: BLINK;
 	StopLEDBlink	: BLINK;
 
-	TwinSAFEGroupErrAck	AT %Q*	: BOOL;
-	TwinSAFEGroupState	AT %I*	: USINT;
+	TwinSAFEGroupErrAck		AT %Q*	: BOOL;
+	TwinSAFEGroupState		AT %I*	: USINT;
 
 	AxisInError : BOOL; //One or more axis in error
 
@@ -38,18 +38,17 @@ VAR
 	fbCarrierStop : FB_CarrierStop;
 
 	StateToReturnToAfterStop	: E_State;
-	lastState				: E_State;
-	previousState			: E_State;
-	State					: E_State;
-	NextState				: E_State;
+	lastState					: E_State;
+	previousState				: E_State;
+	State						: E_State;
+	NextState					: E_State;
 
 	//HMI Display
-	sPreviouseState			: STRING;
-	
-	sState					: STRING;
+	sPreviouseState : STRING;
 
-	sNextState				: STRING;
-	
+	sState : STRING;
+
+	sNextState : STRING;
 
 	fbMoveCarrier		: FB_CarrierAbsMove;
 	HomePosSetPoint		: ST_CarrierSetPoint	:= (X_Pos := 100, X_Velo := 500, Z_Pos := 100, Z_Velo := 800);
@@ -75,11 +74,11 @@ VAR
 
 	//Machine D
 	Machine_D_Carrier_Gripper AT %Q* : BIT;
-	
+
 	//Event Logger - Clear messages on reset
-	fbEventLogger		:FB_TcEventLogger;
-	
-	iResetingStep		:UDINT;
+	fbEventLogger : FB_TcEventLogger;
+
+	iResetingStep : UDINT;
 END_VAR
 VAR CONSTANT
 	TwinSAFEGroupRun AT %Q* : BOOL := TRUE;
@@ -114,9 +113,9 @@ CASE State OF
 		fbCarrierStop.X_AxisRef	:= ADR(X_Axis);
 		fbCarrierStop.Z_AxisRef	:= ADR(Z_Axis);
 
-		State				:= E_State.Idel;
-		NextState			:= E_State.Idel;
-		iResetingStep		:= 0;
+		State			:= E_State.Idel;
+		NextState		:= E_State.Idel;
+		iResetingStep	:= 0;
 	E_State.Idel:
 		NextState := E_State.Enable;
 
@@ -142,9 +141,9 @@ CASE State OF
 		END_IF
 
 	E_State.MoveToHome:
-		NextState				:= E_State.WaitForAToBeReady;
+		NextState					:= E_State.WaitForAToBeReady;
 		StateToReturnToAfterStop	:= State;
-		fbMoveCarrier.SetPoint	:= HomePosSetPoint;
+		fbMoveCarrier.SetPoint		:= HomePosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
 		IF fbMoveCarrier.Done THEN
@@ -155,17 +154,17 @@ CASE State OF
 		END_IF
 
 	E_State.WaitForAToBeReady:
-		NextState				:= E_State.MoveToAPickPos;
-		StateToReturnToAfterStop := State;
+		NextState					:= E_State.MoveToAPickPos;
+		StateToReturnToAfterStop	:= State;
 
 		IF M_ProcessDelay(WaitTimeForAToBeReady) THEN
 			State := E_State.MoveToAPickPos;
 		END_IF
 
 	E_State.MoveToAPickPos:
-		NextState				:= E_State.PickFromA;
+		NextState					:= E_State.PickFromA;
 		StateToReturnToAfterStop	:= State;
-		fbMoveCarrier.SetPoint	:= APickPosSetPoint;
+		fbMoveCarrier.SetPoint		:= APickPosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
 		IF fbMoveCarrier.Done THEN
@@ -176,17 +175,17 @@ CASE State OF
 		END_IF
 
 	E_State.PickFromA:
-		NextState				:= E_State.MoveToBWaitPos;
-		StateToReturnToAfterStop := State;
+		NextState					:= E_State.MoveToBWaitPos;
+		StateToReturnToAfterStop	:= State;
 
 		IF M_CloseGripper() THEN
 			State := E_State.MoveToBWaitPos;
 		END_IF
 
 	E_State.MoveToBWaitPos:
-		NextState				:= E_State.WaitForBToBeReady;
+		NextState					:= E_State.WaitForBToBeReady;
 		StateToReturnToAfterStop	:= State;
-		fbMoveCarrier.SetPoint	:= BWaitPosSetpoint;
+		fbMoveCarrier.SetPoint		:= BWaitPosSetpoint;
 		fbMoveCarrier(Execute := TRUE);
 
 		IF fbMoveCarrier.Done THEN
@@ -197,17 +196,17 @@ CASE State OF
 		END_IF
 
 	E_State.WaitForBToBeReady:
-		NextState				:= E_State.MoveToBPlacePosition;
-		StateToReturnToAfterStop := State;
+		NextState					:= E_State.MoveToBPlacePosition;
+		StateToReturnToAfterStop	:= State;
 
 		IF M_ProcessDelay(WaitTimeForBtoBeReady) THEN
 			State := E_State.MoveToBPlacePosition;
 		END_IF
 
 	E_State.MoveToBPlacePosition:
-		NextState				:= E_State.PlaceOnB;
+		NextState					:= E_State.PlaceOnB;
 		StateToReturnToAfterStop	:= State;
-		fbMoveCarrier.SetPoint	:= BPlacePosSetPoint;
+		fbMoveCarrier.SetPoint		:= BPlacePosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
 		IF fbMoveCarrier.Done THEN
@@ -218,17 +217,17 @@ CASE State OF
 		END_IF
 
 	E_State.PlaceOnB:
-		NextState				:= E_State.MoveToBWorkPos;
-		StateToReturnToAfterStop := State;
+		NextState					:= E_State.MoveToBWorkPos;
+		StateToReturnToAfterStop	:= State;
 
 		IF M_OpenGripper() THEN
 			State := E_State.MoveToBWorkPos;
 		END_IF
 
 	E_State.MoveToBWorkPos:
-		NextState				:= E_State.BDoingWork;
+		NextState					:= E_State.BDoingWork;
 		StateToReturnToAfterStop	:= State;
-		fbMoveCarrier.SetPoint	:= BWorkPosSetPoint;
+		fbMoveCarrier.SetPoint		:= BWorkPosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
 		IF fbMoveCarrier.Done THEN
@@ -239,17 +238,17 @@ CASE State OF
 		END_IF
 
 	E_State.BDoingWork:
-		NextState				:= E_State.MoveToBPickPos;
-		StateToReturnToAfterStop := State;
+		NextState					:= E_State.MoveToBPickPos;
+		StateToReturnToAfterStop	:= State;
 
 		IF M_ProcessDelay(BDoingWorkTime) THEN
 			State := E_State.MoveToBPickPos;
 		END_IF
 
 	E_State.MoveToBPickPos:
-		NextState				:= E_State.PickPartFromB;
+		NextState					:= E_State.PickPartFromB;
 		StateToReturnToAfterStop	:= State;
-		fbMoveCarrier.SetPoint	:= BPickPosSetPoint;
+		fbMoveCarrier.SetPoint		:= BPickPosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
 		IF fbMoveCarrier.Done THEN
@@ -260,17 +259,17 @@ CASE State OF
 		END_IF
 
 	E_State.PickPartFromB:
-		NextState				:= E_State.MoveToCWaitPos;
-		StateToReturnToAfterStop := State;
+		NextState					:= E_State.MoveToCWaitPos;
+		StateToReturnToAfterStop	:= State;
 
 		IF M_CloseGripper() THEN
 			State := E_State.MoveToCWaitPos;
 		END_IF
 
 	E_State.MoveToCWaitPos:
-		NextState				:= E_State.WaitForCToBeReady;
+		NextState					:= E_State.WaitForCToBeReady;
 		StateToReturnToAfterStop	:= State;
-		fbMoveCarrier.SetPoint	:= CWaitPosSetPoint;
+		fbMoveCarrier.SetPoint		:= CWaitPosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
 		IF fbMoveCarrier.Done THEN
@@ -281,17 +280,17 @@ CASE State OF
 		END_IF
 
 	E_State.WaitForCToBeReady:
-		NextState				:= E_State.MoveToCPlacePos;
-		StateToReturnToAfterStop := State;
+		NextState					:= E_State.MoveToCPlacePos;
+		StateToReturnToAfterStop	:= State;
 
 		IF M_ProcessDelay(WaitTimeForCtoBeReady) THEN
 			State := E_State.MoveToCPlacePos;
 		END_IF
 
 	E_State.MoveToCPlacePos:
-		NextState				:= E_State.PlaceOnC;
+		NextState					:= E_State.PlaceOnC;
 		StateToReturnToAfterStop	:= State;
-		fbMoveCarrier.SetPoint	:= CPlacePosSetPoint;
+		fbMoveCarrier.SetPoint		:= CPlacePosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
 		IF fbMoveCarrier.Done THEN
@@ -302,17 +301,17 @@ CASE State OF
 		END_IF
 
 	E_State.PlaceOnC:
-		NextState				:= E_State.MoveToCWorkPos;
-		StateToReturnToAfterStop := State;
+		NextState					:= E_State.MoveToCWorkPos;
+		StateToReturnToAfterStop	:= State;
 
 		IF M_OpenGripper() THEN
 			State := E_State.MoveToCWorkPos;
 		END_IF
 
 	E_State.MoveToCWorkPos:
-		NextState				:= E_State.CDoingWork;
+		NextState					:= E_State.CDoingWork;
 		StateToReturnToAfterStop	:= State;
-		fbMoveCarrier.SetPoint	:= CWorkPosSetPoint;
+		fbMoveCarrier.SetPoint		:= CWorkPosSetPoint;
 		fbMoveCarrier(Execute := TRUE);
 
 		IF fbMoveCarrier.Done THEN
@@ -323,15 +322,15 @@ CASE State OF
 		END_IF
 
 	E_State.CDoingWork:
-		NextState				:= E_State.MoveToHome;
-		StateToReturnToAfterStop := State;
+		NextState					:= E_State.MoveToHome;
+		StateToReturnToAfterStop	:= State;
 
 		IF M_ProcessDelay(CDoingWorkTime) THEN
 			State := E_State.MoveToHome;
 		END_IF
 
 	E_State.Stopping:
-		NextState:=E_State.Stopped;
+		NextState := E_State.Stopped;
 		fbCarrierStop(Execute := TRUE);
 
 		IF fbCarrierStop.Done THEN
@@ -342,41 +341,42 @@ CASE State OF
 		END_IF
 
 	E_State.Stopped:
-		NextState:=StateToReturnToAfterStop;
+		NextState := StateToReturnToAfterStop;
+
 		IF rtStart.Q THEN
 			fbMoveCarrier(Execute := FALSE);
 			State := StateToReturnToAfterStop;
 		END_IF
 
 	E_State.Error:
-		NextState				:= E_State.Reseting;
+		NextState := E_State.Reseting;
+
 		IF rtReset.Q THEN
-			State				:= E_State.Reseting;
-		END_IF			
-	
-	
+			State := E_State.Reseting;
+		END_IF
+
 	E_State.Reseting:
-		NextState				:= E_State.Init;
+		NextState := E_State.Init;
+
 		CASE iResetingStep OF
-			0://Clear out event logger
-				IF fbEventLogger.ClearLoggedEvents(0)THEN
-					iResetingStep:=10;
-				END_IF	
-				
-			10://Toggle TS group Err ack
-				TwinSAFEGroupErrAck	:= TRUE;	
-				iResetingStep:=20;	
-				
-			20://Clear axis error
+			0: //Clear out event logger
+				IF fbEventLogger.ClearLoggedEvents(0) THEN
+					iResetingStep := 10;
+				END_IF
+
+			10: //Toggle TS group Err ack
+				TwinSAFEGroupErrAck	:= TRUE;
+				iResetingStep		:= 20;
+
+			20: //Clear axis error
 				fbCarrierReset(Execute := TRUE);
 				TwinSAFEGroupErrAck := FALSE;
-        		
+
 				IF NOT fbCarrierReset.Busy THEN
 					fbCarrierReset(Execute := FALSE);
 					State := E_State.Init;
-				END_IF			
+				END_IF
 		END_CASE
-
 
 END_CASE
 
@@ -385,132 +385,133 @@ sPreviouseState	:= F_E_State_To_String(previousState);
 sState			:= F_E_State_To_String(State);
 sNextState		:= F_E_State_To_String(NextState);
 
-
 M_AxisPower();
 M_Alarms();
 
-
 //Buttons
-	//Start
-	CASE State OF
-		E_State.Init:
-			Start.LED := FALSE;
-		E_State.Idel:
-			StartLEDBlink.TIMEHIGH	:= T#1S;
-			StartLEDBlink.TIMELOW	:= T#1S;
-			Start.LED				:= StartLEDBlink.out;
-		E_State.Enable:
-			StartLEDBlink.TIMEHIGH	:= T#500MS;
-			StartLEDBlink.TIMELOW	:= T#500MS;
-			Start.LED				:= StartLEDBlink.out;
-		E_State.MoveToHome..E_State.CDoingWork:
-			Start.LED := TRUE;
-		E_State.Stopping:
-			Start.LED := FALSE;
-		E_State.Stopped:
-			StartLEDBlink.TIMEHIGH	:= T#200MS;
-			StartLEDBlink.TIMELOW	:= T#200MS;
-			Start.LED				:= StartLEDBlink.out;
-		E_State.Error..E_State.Reseting:
-			Start.LED := FALSE;
-	END_CASE
-	HMI_Start.LED:=Start.LED;
-	StartLEDBlink(ENABLE := TRUE);
-	
-	//Reset
-	CASE State OF
-		E_State.Init..E_State.CDoingWork:
-			Reset.LED := FALSE;
-		E_State.Error:
-			ResetLEDBlink.TIMEHIGH	:= T#1S;
-			ResetLEDBlink.TIMELOW	:= T#1S;
-			Reset.LED				:= ResetLEDBlink.OUT;
-		E_State.Reseting:
-			ResetLEDBlink.TIMEHIGH	:= T#500MS;
-			ResetLEDBlink.TIMELOW	:= T#500MS;
-			Reset.LED				:= ResetLEDBlink.OUT;
-	END_CASE
-	HMI_Reset.LED:=Reset.LED;
-	ResetLEDBlink(ENABLE := TRUE);
-	
-	//Stop
-	CASE State OF
-		E_State.Init..E_State.Enable:
-			Stop.LED := FALSE;
-		E_State.MoveToHome..E_State.CDoingWork:
-			IF rtStop.Q THEN
-				State := E_State.Stopping;
-			END_IF
-	
-			Stop.LED := TRUE;
-		E_State.Stopping:
-			StopLEDBlink.TIMEHIGH	:= T#500MS;
-			StopLEDBlink.TIMELOW	:= T#500MS;
-			Stop.LED				:= StopLEDBlink.OUT;
-		E_State.Stopped..E_State.Reseting:
-			Stop.LED := FALSE;
-	END_CASE
-	HMI_Stop.LED:=Stop.LED;
-	StopLEDBlink(ENABLE := TRUE);
-	]]></ST>
+//Start
+CASE State OF
+	E_State.Init:
+		Start.LED := FALSE;
+	E_State.Idel:
+		StartLEDBlink.TIMEHIGH	:= T#1S;
+		StartLEDBlink.TIMELOW	:= T#1S;
+		Start.LED				:= StartLEDBlink.out;
+	E_State.Enable:
+		StartLEDBlink.TIMEHIGH	:= T#500MS;
+		StartLEDBlink.TIMELOW	:= T#500MS;
+		Start.LED				:= StartLEDBlink.out;
+	E_State.MoveToHome..E_State.CDoingWork:
+		Start.LED := TRUE;
+	E_State.Stopping:
+		Start.LED := FALSE;
+	E_State.Stopped:
+		StartLEDBlink.TIMEHIGH	:= T#200MS;
+		StartLEDBlink.TIMELOW	:= T#200MS;
+		Start.LED				:= StartLEDBlink.out;
+	E_State.Error..E_State.Reseting:
+		Start.LED := FALSE;
+END_CASE
+
+HMI_Start.LED := Start.LED;
+StartLEDBlink(ENABLE := TRUE);
+
+//Reset
+CASE State OF
+	E_State.Init..E_State.CDoingWork:
+		Reset.LED := FALSE;
+	E_State.Error:
+		ResetLEDBlink.TIMEHIGH	:= T#1S;
+		ResetLEDBlink.TIMELOW	:= T#1S;
+		Reset.LED				:= ResetLEDBlink.OUT;
+	E_State.Reseting:
+		ResetLEDBlink.TIMEHIGH	:= T#500MS;
+		ResetLEDBlink.TIMELOW	:= T#500MS;
+		Reset.LED				:= ResetLEDBlink.OUT;
+END_CASE
+
+HMI_Reset.LED := Reset.LED;
+ResetLEDBlink(ENABLE := TRUE);
+
+//Stop
+CASE State OF
+	E_State.Init..E_State.Enable:
+		Stop.LED := FALSE;
+	E_State.MoveToHome..E_State.CDoingWork:
+		IF rtStop.Q THEN
+			State := E_State.Stopping;
+		END_IF
+
+		Stop.LED := TRUE;
+	E_State.Stopping:
+		StopLEDBlink.TIMEHIGH	:= T#500MS;
+		StopLEDBlink.TIMELOW	:= T#500MS;
+		Stop.LED				:= StopLEDBlink.OUT;
+	E_State.Stopped..E_State.Reseting:
+		Stop.LED := FALSE;
+END_CASE
+
+HMI_Stop.LED := Stop.LED;
+StopLEDBlink(ENABLE := TRUE);
+]]></ST>
     </Implementation>
     <Method Name="M_Alarms" Id="{0d27ec4f-fbc2-4610-bb3d-2907967d60dc}">
       <Declaration><![CDATA[METHOD M_Alarms
 VAR_INPUT
 END_VAR
 VAR_INST
-	rtX4650			:R_TRIG;
-	X_4650			:FB_TcMessage;
-	rtZ4650			:R_TRIG;
-	Z_4650			:FB_TcMessage;
-	InitStep		:UDINT:=0;
-	initDone		:BOOL:=FALSE;
-	
-	fbReadXAxis		:MC_ReadParameterSet;
-	XParams 		:ST_AxisParameterSet;
-	fbReadZAxis		:MC_ReadParameterSet;
-	ZParams 		:ST_AxisParameterSet;	
+	rtX4650		: R_TRIG;
+	X_4650		: FB_TcMessage;
+	rtZ4650		: R_TRIG;
+	Z_4650		: FB_TcMessage;
+	InitStep	: UDINT	:= 0;
+	initDone	: BOOL	:= FALSE;
+
+	fbReadXAxis	: MC_ReadParameterSet;
+	XParams		: ST_AxisParameterSet;
+	fbReadZAxis	: MC_ReadParameterSet;
+	ZParams		: ST_AxisParameterSet;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT initDone THEN
 	CASE InitStep OF
 		0:
-			X_4650.CreateEx(stEventEntry:=TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate , ipSourceInfo:=0);
-			Z_4650.CreateEX(stEventEntry:=TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate , ipSourceInfo:=0);
-			InitStep:=10;
-		10:	
-			fbReadXAxis(
-				Parameter:=XParams , 
-				Axis:=X_Axis , 
-				Execute:=TRUE);
-			fbReadZAxis(
-				Parameter:=ZParams , 
-				Axis:=Z_Axis , 
-				Execute:=TRUE);
+			X_4650.CreateEx(stEventEntry := TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate, ipSourceInfo := 0);
+			Z_4650.CreateEX(stEventEntry := TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate, ipSourceInfo := 0);
+			InitStep := 10;
+		10:
+			fbReadXAxis(Parameter	:= XParams,
+						Axis		:= X_Axis,
+						Execute		:= TRUE);
+
+			fbReadZAxis(Parameter	:= ZParams,
+						Axis		:= Z_Axis,
+						Execute		:= TRUE);
+
 			IF NOT fbReadXAxis.Busy AND NOT fbReadZAxis.Busy THEN
- 				InitStep:=20;
+				InitStep := 20;
 			END_IF
 		20:
 			X_4650.ipArguments.Clear();
-			X_4650.ipArguments.AddString(XParams.sAxisName);	
-			
+			X_4650.ipArguments.AddString(XParams.sAxisName);
+
 			Z_4650.ipArguments.Clear();
-			Z_4650.ipArguments.AddString(ZParams.sAxisName);	
-			InitStep:=30;
-			initDone:=TRUE;
+			Z_4650.ipArguments.AddString(ZParams.sAxisName);
+			InitStep	:= 30;
+			initDone	:= TRUE;
 	END_CASE
+
 	RETURN;
 END_IF
 
+rtX4650(CLK := X_Axis.Status.ErrorID = 16#4650);
 
-rtX4650(CLK:=X_Axis.Status.ErrorID=16#4650);
 IF rtX4650.Q THEN
 	X_4650.Send(0);
 END_IF
 
+rtZ4650(CLK := Z_Axis.Status.ErrorID = 16#4650);
 
-
-rtZ4650(CLK:=Z_Axis.Status.ErrorID=16#4650);
 IF rtZ4650.Q THEN
 	Z_4650.Send(0);
 END_IF]]></ST>
@@ -598,77 +599,28 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_Machine">
-      <LineId Id="5839" Count="0" />
-      <LineId Id="6403" Count="0" />
-      <LineId Id="5840" Count="260" />
-      <LineId Id="6186" Count="0" />
-      <LineId Id="6283" Count="1" />
-      <LineId Id="6277" Count="1" />
-      <LineId Id="6268" Count="0" />
-      <LineId Id="6106" Count="0" />
-      <LineId Id="6187" Count="0" />
-      <LineId Id="6287" Count="1" />
-      <LineId Id="6306" Count="1" />
-      <LineId Id="6290" Count="0" />
-      <LineId Id="6314" Count="0" />
-      <LineId Id="6310" Count="3" />
-      <LineId Id="6291" Count="0" />
-      <LineId Id="6300" Count="5" />
-      <LineId Id="6293" Count="0" />
-      <LineId Id="6289" Count="0" />
-      <LineId Id="6113" Count="2" />
-      <LineId Id="6319" Count="0" />
-      <LineId Id="6183" Count="0" />
-      <LineId Id="6116" Count="1" />
-      <LineId Id="6119" Count="0" />
-      <LineId Id="6185" Count="0" />
-      <LineId Id="6184" Count="0" />
-      <LineId Id="6120" Count="0" />
-      <LineId Id="6316" Count="2" />
-      <LineId Id="6121" Count="61" />
+      <LineId Id="6572" Count="2" />
+      <LineId Id="6576" Count="364" />
       <LineId Id="2952" Count="0" />
     </LineIds>
     <LineIds Name="FB_Machine.M_Alarms">
-      <LineId Id="41" Count="0" />
-      <LineId Id="44" Count="1" />
-      <LineId Id="51" Count="2" />
-      <LineId Id="48" Count="0" />
-      <LineId Id="56" Count="3" />
-      <LineId Id="67" Count="2" />
-      <LineId Id="65" Count="0" />
-      <LineId Id="70" Count="1" />
-      <LineId Id="73" Count="0" />
-      <LineId Id="72" Count="0" />
-      <LineId Id="66" Count="0" />
-      <LineId Id="74" Count="5" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="46" Count="0" />
-      <LineId Id="43" Count="0" />
-      <LineId Id="80" Count="0" />
-      <LineId Id="47" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="26" Count="2" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="30" Count="1" />
+      <LineId Id="111" Count="40" />
       <LineId Id="29" Count="0" />
     </LineIds>
     <LineIds Name="FB_Machine.M_AxisPower">
-      <LineId Id="72" Count="14" />
+      <LineId Id="99" Count="14" />
       <LineId Id="41" Count="0" />
     </LineIds>
     <LineIds Name="FB_Machine.M_CloseGripper">
-      <LineId Id="44" Count="6" />
+      <LineId Id="63" Count="6" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Machine.M_OpenGripper">
-      <LineId Id="42" Count="5" />
+      <LineId Id="58" Count="5" />
       <LineId Id="11" Count="0" />
     </LineIds>
     <LineIds Name="FB_Machine.M_ProcessDelay">
-      <LineId Id="34" Count="4" />
+      <LineId Id="53" Count="4" />
       <LineId Id="13" Count="0" />
     </LineIds>
   </POU>
