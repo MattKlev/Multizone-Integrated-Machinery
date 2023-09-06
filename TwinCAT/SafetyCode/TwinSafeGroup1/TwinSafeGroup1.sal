@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<safetyApplication Crc="1775806125" xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.4.0.0" Id="4315bf16-b832-4826-9dc7-7c79fc2e3364" name="" mapState="true" mapDiag="true" groupOrderId="0" passificationAllowed="false" temporaryDeactivationAllowed="false" permamentDeactivationAllowed="false" xmlid="0" analogFBOutputReplacementValues="Zero" verifyAnalogFBInputsIfStart="false" userFbId="00000000-0000-0000-0000-000000000000" xmlns="http://schemas.microsoft.com/dsltools/SafetyApplicationLanguage">
+<safetyApplication Crc="1015122934" xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.4.0.0" Id="4315bf16-b832-4826-9dc7-7c79fc2e3364" name="" mapState="true" mapDiag="true" groupOrderId="0" passificationAllowed="false" temporaryDeactivationAllowed="false" permamentDeactivationAllowed="false" xmlid="0" analogFBOutputReplacementValues="Zero" verifyAnalogFBInputsIfStart="false" userFbId="00000000-0000-0000-0000-000000000000" xmlns="http://schemas.microsoft.com/dsltools/SafetyApplicationLanguage">
   <networks>
     <safetyApplicationHasNetworks Id="239f62a2-c52b-4a83-9d76-2c3133e01075">
       <Network Id="1ff74438-1c69-4ee1-bd4f-f0c6ecc2d500" name="Network1" networkName="Network1" intId="1" networkOrderId="0">
@@ -299,7 +299,7 @@
                   <parameterPort Id="cef7d9c2-96f2-41bb-ba64-d95b8ad4ffa5" name="Scaling Factor Multiplier" portNum="5" objectIndex="0" varId="0" filter="0" portDataType="0" timing="10" userFbPortName="Scaling Factor Multiplier" useInUserFb="false" />
                 </functionBlockHasParamPorts>
                 <functionBlockHasParamPorts Id="cee87a90-1615-43f8-aca2-98930892c249">
-                  <parameterPort Id="e9169d1d-09b3-44a3-87f6-409ee3c4c76a" name="Scaling Factor Divisor" portName="Scaling Factor" portNum="6" objectIndex="0" varId="0" filter="0" portDataType="0" timing="1024" userFbPortName="Scaling Factor Divisor" useInUserFb="false" />
+                  <parameterPort Id="e9169d1d-09b3-44a3-87f6-409ee3c4c76a" name="Scaling Factor Divisor" portName="Scaling Factor" portNum="6" objectIndex="0" varId="0" filter="0" portDataType="0" timing="4096" userFbPortName="Scaling Factor Divisor" useInUserFb="false" />
                 </functionBlockHasParamPorts>
                 <functionBlockHasParamPorts Id="5a977325-42a2-45cc-bafd-68e5f3333528">
                   <parameterPort Id="58faea01-5911-4157-93b4-3516a1c29bb9" name="Scaling Offset" portName="Scaling Offset" portNum="7" objectIndex="0" varId="0" filter="0" portDataType="0" timing="0" userFbPortName="Scaling Offset" useInUserFb="false" />
@@ -953,38 +953,6 @@
         </targetUsages>
       </variable>
     </safetyApplicationHasVariables>
-    <safetyApplicationHasVariables Id="983bcb03-3430-4fcd-ae82-9e7d6a1878d4">
-      <variable Id="9ef7fefe-8847-4029-ab99-1b362412749a" name="X_Axis_ActPosFromPLC" isLocal="false">
-        <sourceUsages>
-          <variableHasSourceUsages Id="ff645360-c86e-404b-8f35-3487338821b8">
-            <variableUsages Id="7b6d20b0-2e02-415d-a51e-9df2f98bb448">
-              <usages>
-                <variableUsagesHasUsages Id="a15d2b38-c27e-487a-a652-501f6fd6a2ec">
-                  <aliasDeviceIoUsage Id="53076c77-8273-4368-9ead-8098a262d9fe" sdsId="46" channelId="1" functionId="489125186" />
-                </variableUsagesHasUsages>
-              </usages>
-            </variableUsages>
-          </variableHasSourceUsages>
-        </sourceUsages>
-        <targetUsages>
-          <variableHasTargetUsages Id="2ef72ad7-3104-41cd-8d45-a8aa8ee5d5be">
-            <variableUsages Id="968468a5-bb60-4524-a647-9d9427214246">
-              <usages>
-                <variableUsagesHasUsages Id="17360ce7-0a01-4d0e-8da7-e57f2f0f58ab">
-                  <fbPortUsage Id="5ff18fd2-cfb9-4c06-8cd4-ff55202b22e9">
-                    <functionBlockPort>
-                      <fbPortUsageReferencesFunctionBlockPort Id="bc080f21-597c-49dd-8ec3-7b760481d6d1">
-                        <inPortMoniker name="//Network1/FBCompare1/CompIn1" />
-                      </fbPortUsageReferencesFunctionBlockPort>
-                    </functionBlockPort>
-                  </fbPortUsage>
-                </variableUsagesHasUsages>
-              </usages>
-            </variableUsages>
-          </variableHasTargetUsages>
-        </targetUsages>
-      </variable>
-    </safetyApplicationHasVariables>
     <safetyApplicationHasVariables Id="01f275c8-9096-4da0-b77c-ff526a8b47c8">
       <variable Id="6f4f2a7e-6aa4-4c88-acce-3688d2251ec5" name="X_SafetyEncoder_EL5001" isLocal="false">
         <sourceUsages>
@@ -1007,6 +975,38 @@
                     <functionBlockPort>
                       <fbPortUsageReferencesFunctionBlockPort Id="0e0efe02-3db5-46d3-98ee-30c691c7204c">
                         <inPortMoniker name="//Network1/FBScaling1/AnalogIn" />
+                      </fbPortUsageReferencesFunctionBlockPort>
+                    </functionBlockPort>
+                  </fbPortUsage>
+                </variableUsagesHasUsages>
+              </usages>
+            </variableUsages>
+          </variableHasTargetUsages>
+        </targetUsages>
+      </variable>
+    </safetyApplicationHasVariables>
+    <safetyApplicationHasVariables Id="7c77f0e7-754c-4dfe-ad6f-8d65f01c7efd">
+      <variable Id="24ae6782-3a12-4fc9-b2a9-a623ead2172a" name="X_ActPosFromPLC" isLocal="false">
+        <sourceUsages>
+          <variableHasSourceUsages Id="45842441-a30a-49ca-8440-58772b187714">
+            <variableUsages Id="0bf7231d-cc8b-4d35-8154-c02df73b6984">
+              <usages>
+                <variableUsagesHasUsages Id="e30e171b-872c-423c-b99a-820d54edbfd0">
+                  <aliasDeviceIoUsage Id="708f8671-ab48-482c-b067-1660aff540bc" sdsId="51" channelId="1" functionId="489125186" />
+                </variableUsagesHasUsages>
+              </usages>
+            </variableUsages>
+          </variableHasSourceUsages>
+        </sourceUsages>
+        <targetUsages>
+          <variableHasTargetUsages Id="11fe7d8e-adaa-40ff-ac6b-fc94fcc28af2">
+            <variableUsages Id="ba2245a8-9754-4df5-904a-f29110cf6320">
+              <usages>
+                <variableUsagesHasUsages Id="6f937d39-55cf-45b7-ab15-796a3f53639a">
+                  <fbPortUsage Id="ce6e9c1b-5570-4b62-a9aa-0e287e420222">
+                    <functionBlockPort>
+                      <fbPortUsageReferencesFunctionBlockPort Id="22eaaeab-55ea-40f5-aaf5-f69c335ce11f">
+                        <inPortMoniker name="//Network1/FBCompare1/CompIn1" />
                       </fbPortUsageReferencesFunctionBlockPort>
                     </functionBlockPort>
                   </fbPortUsage>

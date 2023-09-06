@@ -2079,7 +2079,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{0C5A0548-FA4F-4B8E-B05E-82A0037B3227}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{07814B8E-4096-C42B-CB77-BFFF6348C568}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{93B0343A-D407-E180-14F6-D79AB51BCB03}">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -5964,7 +5964,7 @@ Bit 8 - 15 : reserved]]></Comment>
 								<Entry Name="Message_39 RxPDO" Index="#x6000" Sub="#x08">
 									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
 								</Entry>
-								<Entry Name="Message_43 RxPDO" Index="#x6000" Sub="#x09" Flags="#x00008000">
+								<Entry Name="Message_43 RxPDO" Index="#x6000" Sub="#x09">
 									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
 								</Entry>
 								<Entry Name="Message_48 RxPDO" Index="#x6000" Sub="#x0a">
@@ -5981,7 +5981,7 @@ Bit 8 - 15 : reserved]]></Comment>
 								<Entry>
 									<Type GUID="{18071995-0000-0000-0000-002000000006}">ARRAY [0..5] OF BIT</Type>
 								</Entry>
-								<Entry Name="Standard In Var 46" Index="#x6000" Sub="#x03">
+								<Entry Name="Standard In Var 51" Index="#x6000" Sub="#x03">
 									<Type>UDINT</Type>
 								</Entry>
 							</Pdo>
@@ -6272,7 +6272,7 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFEGroupState" VarB="TwinSAFE Group Info Data^TwinSafeGroup1 Info Data^State"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupErrAck" VarB="StandardOutputs^Standard In Var 1"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupRun" VarB="StandardOutputs^Standard In Var 2"/>
-				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFE_X_Axis_ActPos" VarB="StandardOutputs^Standard In Var 46"/>
+				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFE_X_Axis_ActPos" VarB="StandardOutputs^Standard In Var 51"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier Gripper (EL2002)">
 				<Link VarA="PlcTask Outputs^MAIN.Machine.Machine_D_Carrier_Gripper" VarB="Fingers^Output"/>

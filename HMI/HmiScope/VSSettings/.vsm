@@ -5,12 +5,12 @@
   <Children>
     <Node>
       <Title>YT Scope Project</Title>
-      <Expanded>True</Expanded>
+      <Expanded>False</Expanded>
       <FileName>C:\Users\MattK\Source\Repos\Multizone-Integrated-Machinery\HMI\HmiScope\YT Scope Project.tcscopex</FileName>
       <Children>
         <Node>
           <Title>DataPool</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -29,12 +29,12 @@
         </Node>
         <Node>
           <Title>X Axis</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>NC Act Pos</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
@@ -87,7 +87,7 @@
             </Node>
             <Node>
               <Title>EL5001 Counts</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
