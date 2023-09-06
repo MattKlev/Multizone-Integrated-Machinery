@@ -5964,7 +5964,7 @@ Bit 8 - 15 : reserved]]></Comment>
 								<Entry Name="Message_39 RxPDO" Index="#x6000" Sub="#x08">
 									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
 								</Entry>
-								<Entry Name="Message_43 RxPDO" Index="#x6000" Sub="#x09">
+								<Entry Name="Message_43 RxPDO" Index="#x6000" Sub="#x09" Flags="#x00008000">
 									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
 								</Entry>
 								<Entry Name="Message_48 RxPDO" Index="#x6000" Sub="#x0a">

@@ -25,12 +25,6 @@
               <FileName></FileName>
               <Children />
             </Node>
-            <Node>
-              <Title>TSC.Counter value</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
           </Children>
         </Node>
         <Node>
@@ -45,7 +39,7 @@
               <Children>
                 <Node>
                   <Title>X_Axis.ActPos</Title>
-                  <Expanded>True</Expanded>
+                  <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children>
                     <Node>
@@ -93,15 +87,9 @@
             </Node>
             <Node>
               <Title>EL5001 Counts</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
-                <Node>
-                  <Title>TSC.Counter value</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
                 <Node>
                   <Title>SSI Inputs.Counter value</Title>
                   <Expanded>False</Expanded>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<safetyApplication Crc="1403229580" xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.4.0.0" Id="4315bf16-b832-4826-9dc7-7c79fc2e3364" name="" mapState="true" mapDiag="true" groupOrderId="0" passificationAllowed="false" temporaryDeactivationAllowed="false" permamentDeactivationAllowed="false" xmlid="0" analogFBOutputReplacementValues="Zero" verifyAnalogFBInputsIfStart="false" userFbId="00000000-0000-0000-0000-000000000000" xmlns="http://schemas.microsoft.com/dsltools/SafetyApplicationLanguage">
+<safetyApplication Crc="1775806125" xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.4.0.0" Id="4315bf16-b832-4826-9dc7-7c79fc2e3364" name="" mapState="true" mapDiag="true" groupOrderId="0" passificationAllowed="false" temporaryDeactivationAllowed="false" permamentDeactivationAllowed="false" xmlid="0" analogFBOutputReplacementValues="Zero" verifyAnalogFBInputsIfStart="false" userFbId="00000000-0000-0000-0000-000000000000" xmlns="http://schemas.microsoft.com/dsltools/SafetyApplicationLanguage">
   <networks>
     <safetyApplicationHasNetworks Id="239f62a2-c52b-4a83-9d76-2c3133e01075">
       <Network Id="1ff74438-1c69-4ee1-bd4f-f0c6ecc2d500" name="Network1" networkName="Network1" intId="1" networkOrderId="0">
@@ -269,6 +269,46 @@
                 </functionBlockHasParamPorts>
               </parameterPorts>
             </fBCompare>
+          </networkHasFunctionBlocks>
+          <networkHasFunctionBlocks Id="758e48c7-af6b-4518-857c-a41884a7d906">
+            <fBScaling Id="8c0c6d6a-f8fb-4f71-86ba-039376ab25be" name="FBScaling1" instanceName="FBScaling1" orderOfExecution="6" mapState="false" mapDiag="false" functionName="safeScaling">
+              <inPorts>
+                <functioBlockHasInPorts Id="b54d7dbc-8597-4b56-96b9-c954cd24b80c">
+                  <inPort Id="fb0c4629-428e-4b53-8845-3a1cc5bfc770" name="AnalogIn" portName="AnalogIn" portNum="3" objectIndex="16" varId="1" filter="1974016" portDataType="4" channelInterface="Activated" deactivate1="Break Contact (NC)" maxDeviation="0" resetTime="0" />
+                </functioBlockHasInPorts>
+              </inPorts>
+              <outPorts>
+                <functionBlockHasOutPorts Id="3e419bca-8361-46f6-8d30-fd87f8851877">
+                  <outPort Id="78aa2219-ef81-49cc-b414-460f236f6a64" name="Error" portName="Error" portNum="3" objectIndex="0" varId="2" filter="73472" portDataType="1" replacementValue="0" />
+                </functionBlockHasOutPorts>
+                <functionBlockHasOutPorts Id="42550270-6cc0-4b77-9dce-668365f78e96">
+                  <outPort Id="f5ba16c2-b5ff-4b59-b2da-a3dbd881a713" name="StuckAtError" portName="StuckAtError" portNum="4" objectIndex="1" varId="3" filter="73472" portDataType="1" replacementValue="0" />
+                </functionBlockHasOutPorts>
+                <functionBlockHasOutPorts Id="bcd0ecc7-703b-4fff-91cc-519e796e9936">
+                  <outPort Id="d3466e58-8aaf-4119-bd8e-5c4c9ed7fd07" name="AnalogOut" portName="AnalogOut" portNum="5" objectIndex="16" varId="4" filter="1974016" portDataType="4" replacementValue="0">
+                    <targetFunctionBlockPorts>
+                      <wiredLink Id="f3c710f2-7e67-483f-8de1-560778924cf8">
+                        <inPortMoniker name="//Network1/FBCompare1/CompIn2" />
+                      </wiredLink>
+                    </targetFunctionBlockPorts>
+                  </outPort>
+                </functionBlockHasOutPorts>
+              </outPorts>
+              <parameterPorts>
+                <functionBlockHasParamPorts Id="024d4833-c092-43e7-b02b-8a0c11e9c88a">
+                  <parameterPort Id="cef7d9c2-96f2-41bb-ba64-d95b8ad4ffa5" name="Scaling Factor Multiplier" portNum="5" objectIndex="0" varId="0" filter="0" portDataType="0" timing="10" userFbPortName="Scaling Factor Multiplier" useInUserFb="false" />
+                </functionBlockHasParamPorts>
+                <functionBlockHasParamPorts Id="cee87a90-1615-43f8-aca2-98930892c249">
+                  <parameterPort Id="e9169d1d-09b3-44a3-87f6-409ee3c4c76a" name="Scaling Factor Divisor" portName="Scaling Factor" portNum="6" objectIndex="0" varId="0" filter="0" portDataType="0" timing="1024" userFbPortName="Scaling Factor Divisor" useInUserFb="false" />
+                </functionBlockHasParamPorts>
+                <functionBlockHasParamPorts Id="5a977325-42a2-45cc-bafd-68e5f3333528">
+                  <parameterPort Id="58faea01-5911-4157-93b4-3516a1c29bb9" name="Scaling Offset" portName="Scaling Offset" portNum="7" objectIndex="0" varId="0" filter="0" portDataType="0" timing="0" userFbPortName="Scaling Offset" useInUserFb="false" />
+                </functionBlockHasParamPorts>
+                <functionBlockHasParamPorts Id="434d7e16-c87b-440b-9c2d-07656f04fa05">
+                  <parameterPort Id="f1aff443-786f-4d63-b3d9-1db9668e9ee9" name="Watchdog (ms)" portName="Watchdog (ms)" portNum="8" objectIndex="0" varId="0" filter="0" portDataType="0" timing="0" userFbPortName="Watchdog (ms)" useInUserFb="false" />
+                </functionBlockHasParamPorts>
+              </parameterPorts>
+            </fBScaling>
           </networkHasFunctionBlocks>
         </functionBlocks>
       </Network>
@@ -962,11 +1002,11 @@
           <variableHasTargetUsages Id="fc9d39d8-6d59-4def-a6dc-0b5c90c8bb74">
             <variableUsages Id="9878e4c0-9fe3-40de-94ae-e2c7de1dff6c">
               <usages>
-                <variableUsagesHasUsages Id="625f1ef1-898e-42b2-8ac1-fe23b582b616">
-                  <fbPortUsage Id="8660563f-cccc-4ed5-93a3-5c278b5337be">
+                <variableUsagesHasUsages Id="f396e5e1-5697-4084-ad34-503195d63896">
+                  <fbPortUsage Id="c597508c-46c4-4173-91e5-f5f22db9c8b3">
                     <functionBlockPort>
-                      <fbPortUsageReferencesFunctionBlockPort Id="1c841647-d9e2-4dca-8c29-525fce1b1a1d">
-                        <inPortMoniker name="//Network1/FBCompare1/CompIn2" />
+                      <fbPortUsageReferencesFunctionBlockPort Id="0e0efe02-3db5-46d3-98ee-30c691c7204c">
+                        <inPortMoniker name="//Network1/FBScaling1/AnalogIn" />
                       </fbPortUsageReferencesFunctionBlockPort>
                     </functionBlockPort>
                   </fbPortUsage>
