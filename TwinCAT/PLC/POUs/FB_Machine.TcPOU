@@ -28,6 +28,7 @@ VAR
 
 	TwinSAFEGroupErrAck		AT %Q*	: BOOL;
 	TwinSAFEGroupState		AT %I*	: USINT;
+	TwinSAFE_X_Axis_ActPos	AT %Q*	: UDINT;
 
 	AxisInError : BOOL; //One or more axis in error
 
@@ -453,6 +454,9 @@ END_CASE
 
 HMI_Stop.LED := Stop.LED;
 StopLEDBlink(ENABLE := TRUE);
+
+
+TwinSAFE_X_Axis_ActPos	:= TO_UDINT(X_Axis.NcToPlc.ActPos);
 ]]></ST>
     </Implementation>
     <Method Name="M_Alarms" Id="{0d27ec4f-fbc2-4610-bb3d-2907967d60dc}">
@@ -601,6 +605,8 @@ END_IF]]></ST>
     <LineIds Name="FB_Machine">
       <LineId Id="6572" Count="2" />
       <LineId Id="6576" Count="364" />
+      <LineId Id="7025" Count="1" />
+      <LineId Id="7024" Count="0" />
       <LineId Id="2952" Count="0" />
     </LineIds>
     <LineIds Name="FB_Machine.M_Alarms">

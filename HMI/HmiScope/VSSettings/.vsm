@@ -5,12 +5,12 @@
   <Children>
     <Node>
       <Title>YT Scope Project</Title>
-      <Expanded>False</Expanded>
+      <Expanded>True</Expanded>
       <FileName>C:\Users\MattK\Source\Repos\Multizone-Integrated-Machinery\HMI\HmiScope\YT Scope Project.tcscopex</FileName>
       <Children>
         <Node>
           <Title>DataPool</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -20,19 +20,13 @@
               <Children />
             </Node>
             <Node>
-              <Title>Axes.Z.ActPos</Title>
+              <Title>SSI Inputs.Counter value</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>X Encoder</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Z Encoder</Title>
+              <Title>TSC.Counter value</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -40,18 +34,18 @@
           </Children>
         </Node>
         <Node>
-          <Title>X and Z Position</Title>
-          <Expanded>False</Expanded>
+          <Title>X Axis</Title>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>NC Act Pos</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
                   <Title>X_Axis.ActPos</Title>
-                  <Expanded>False</Expanded>
+                  <Expanded>True</Expanded>
                   <FileName></FileName>
                   <Children>
                     <Node>
@@ -95,27 +89,21 @@
                     </Node>
                   </Children>
                 </Node>
-                <Node>
-                  <Title>Z_Axis.ActPos</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
               </Children>
             </Node>
             <Node>
-              <Title>EL5101 Counts</Title>
+              <Title>EL5001 Counts</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>X Encoder</Title>
+                  <Title>TSC.Counter value</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Z Encoder</Title>
+                  <Title>SSI Inputs.Counter value</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />

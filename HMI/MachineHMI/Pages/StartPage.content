@@ -448,8 +448,8 @@
 
 <script data-tchmi-target-attribute="data-tchmi-scope-config" type="application/json">
 {
-  "name": "XAndZ",
-  "chart": "X and Z Position"
+  "name": "XAxisScope",
+  "chart": "X Axis"
 }
 </script>
 </div>
