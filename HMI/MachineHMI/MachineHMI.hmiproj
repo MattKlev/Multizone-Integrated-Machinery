@@ -9,7 +9,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
     <AvailablePlatforms>TwinCAT HMI</AvailablePlatforms>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <HmiTitle>MachineHMI</HmiTitle>
+    <HmiTitle>Machine HMI</HmiTitle>
     <HmiVerboseLevel>2</HmiVerboseLevel>
     <HmiVersion>1.0.0.0</HmiVersion>
     <HmiCommunicationServerPort>3001</HmiCommunicationServerPort>
