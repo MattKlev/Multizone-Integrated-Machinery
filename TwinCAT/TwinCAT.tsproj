@@ -1795,9 +1795,9 @@ External Setpoint Generation:
 							</Var>
 						</Vars>
 					</Encoder>
-					<Encoder Name="EL5101-0090" EncId="129" EncType="4">
-						<EncPara MaxCount="#x0000ffff">
-							<Inc RefMode="2" RefSoftSyncMask="#x0000ffff"/>
+					<Encoder Name="EL5001-0090" EncId="129" EncType="5">
+						<EncPara ScaleFactorNumerator="10" ScaleFactorDenominator="4096" Offset="-1035.7470703125" MaxCount="#xffffffff" ReferenceSystem="1">
+							<Inc RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -6239,6 +6239,17 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="EL7211^Inputs^In^nDcInputTime" VarB="InfoData^DcInputShift"/>
 				<Link VarA="EL7211^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
 				<Link VarA="EL7211^Inputs^In^nState4" VarB="WcState^WcState"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier X Safety Encoder (EL5001-0090)">
+				<Link VarA="EL5001-0090^Inputs^In^nDataIn1" VarB="SSI Inputs^Counter value"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState1" VarB="SSI Inputs^Status^Data error"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState1" VarB="SSI Inputs^Status^Frame error" Size="1" OffsA="1"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState1" VarB="SSI Inputs^Status^Power failure" Size="1" OffsA="2"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState2" VarB="SSI Inputs^Status^Sync error" Size="1" OffsA="5"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState2" VarB="SSI Inputs^Status^TxPDO State" Size="1" OffsA="6"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState2" VarB="SSI Inputs^Status^TxPDO Toggle" Size="1" OffsA="7"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState4" VarB="WcState^WcState"/>
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TINC^NC-Task 1 SAF^Axes^Z">
