@@ -1796,7 +1796,7 @@ External Setpoint Generation:
 						</Vars>
 					</Encoder>
 					<Encoder Name="EL5001-0090" EncId="129" EncType="5">
-						<EncPara ScaleFactorNumerator="10" ScaleFactorDenominator="4096" Offset="-1035.7470703125" MaxCount="#xffffffff" ReferenceSystem="1">
+						<EncPara ScaleFactorNumerator="10" ScaleFactorDenominator="4096" Offset="-1035.7471" MaxCount="#xffffffff" ReferenceSystem="1">
 							<Inc RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
@@ -2079,7 +2079,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{0C5A0548-FA4F-4B8E-B05E-82A0037B3227}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{E3B96F6B-1955-477E-AC3A-C5E24992CA70}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{93B0343A-D407-E180-14F6-D79AB51BCB03}">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -5897,7 +5897,7 @@ Bit 8 - 15 : reserved]]></Comment>
 							<SyncMan>001000012600010001000000000100010001001026010000</SyncMan>
 							<SyncMan>001100012200010002000000000100010001001122010000</SyncMan>
 							<SyncMan>001248002400010003000000000000000200001224010000</SyncMan>
-							<SyncMan>001d40002000010004000000000000000200001d20010000</SyncMan>
+							<SyncMan>001d44002000010004000000000000000200001d20010000</SyncMan>
 							<SyncMan>002e00002400000003000000000000000000002e24000000</SyncMan>
 							<SyncMan>002f00002000000004000000000000000000002f20000000</SyncMan>
 							<Fmmu>0000000000000000001200020100000001000000060000000200000000000000</Fmmu>
@@ -5969,6 +5969,11 @@ Bit 8 - 15 : reserved]]></Comment>
 								</Entry>
 								<Entry Name="Message_48 RxPDO" Index="#x6000" Sub="#x0a">
 									<Type GUID="{0994ABA9-6F32-EEB9-4362-7774F7A1F4F4}">FSOE_11</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="StandardInputs" Index="#x1bf0" Flags="#x2011" SyncMan="3">
+								<Entry Name="Standard Out Var 54" Index="#x7000" Sub="#x01">
+									<Type>UDINT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="StandardOutputs" Index="#x17f0" InOut="1" Flags="#x2011" SyncMan="2">

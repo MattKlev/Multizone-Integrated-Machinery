@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TargetSystemConfig Crc="2913803509" Version="1.5">
+<TargetSystemConfig Crc="3857606276" Version="1.5">
   <TargetSystemType>HSafetyPLC</TargetSystemType>
   <TargetSystemSubType>EL6910</TargetSystemSubType>
   <IsExternalDevice>false</IsExternalDevice>
   <TargetSystemObjectId>50462724</TargetSystemObjectId>
   <TargetSystemObjectName>Machine Safety Controller (EL6910)</TargetSystemObjectName>
-  <SoftwareVersion>03 (V01.09)     </SoftwareVersion>
-  <SerialNumber>1887551</SerialNumber>
-  <ProjectCRC>36115</ProjectCRC>
+  <SoftwareVersion />
+  <SerialNumber />
+  <ProjectCRC>16868</ProjectCRC>
   <MapProjectCRC>false</MapProjectCRC>
   <MapSerialNumber>false</MapSerialNumber>
   <VersionNumber>1</VersionNumber>
   <FSOEAddress>1</FSOEAddress>
-  <DipSwitch>1</DipSwitch>
+  <DipSwitch />
   <AmsNetID>5.42.87.238.2.1</AmsNetID>
   <AmsPort>1003</AmsPort>
   <ConnectionInfoDataConfigOld>false</ConnectionInfoDataConfigOld>
