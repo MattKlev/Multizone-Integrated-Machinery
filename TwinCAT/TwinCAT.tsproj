@@ -1469,6 +1469,24 @@ External Setpoint Generation:
 			</ArrayInfo>
 		</DataType>
 		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-00200000000A}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..9] OF BIT</Name>
+			<BitSize>10</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>10</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000010}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..1] OF BYTE</Name>
+			<BitSize>16</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>2</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{18071995-0000-0000-0000-00200000000D}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..12] OF BIT</Name>
 			<BitSize>13</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
@@ -1578,8 +1596,8 @@ External Setpoint Generation:
 			</SubItem>
 		</DataType>
 		<DataType>
-			<Name GUID="{B05FDAB7-3241-ACD3-D16C-0FDAF8825BC9}" AutoDeleteType="true">FSOE_7</Name>
-			<BitSize>56</BitSize>
+			<Name GUID="{0994ABA9-6F32-EEB9-4362-7774F7A1F4F4}" AutoDeleteType="true">FSOE_11</Name>
+			<BitSize>88</BitSize>
 			<SubItem>
 				<Name>FSoE CMD</Name>
 				<Type GUID="{18071995-0000-0000-0000-000000000002}">USINT</Type>
@@ -1599,10 +1617,22 @@ External Setpoint Generation:
 				<BitOffs>24</BitOffs>
 			</SubItem>
 			<SubItem>
+				<Name>FSoE Data 1</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000033}">BITARR16</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>40</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>FSoE CRC_1</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>56</BitOffs>
+			</SubItem>
+			<SubItem>
 				<Name>FSoE ConnID</Name>
 				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
 				<BitSize>16</BitSize>
-				<BitOffs>40</BitOffs>
+				<BitOffs>72</BitOffs>
 			</SubItem>
 		</DataType>
 		<DataType>
@@ -1620,15 +1650,6 @@ External Setpoint Generation:
 				<BitSize>8</BitSize>
 				<BitOffs>8</BitOffs>
 			</SubItem>
-		</DataType>
-		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000010}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..1] OF BYTE</Name>
-			<BitSize>16</BitSize>
-			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
-			<ArrayInfo>
-				<LBound>0</LBound>
-				<Elements>2</Elements>
-			</ArrayInfo>
 		</DataType>
 		<DataType>
 			<Name GUID="{9791AE4D-587C-4ACF-8C74-5503E5B8EC7F}" Namespace="NC" PersistentType="true">DriveErrors</Name>
@@ -1662,7 +1683,7 @@ External Setpoint Generation:
 		<ImageData Id="1001">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000120b0000120b00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff0000ff0000ff0000ff0000ff0000ff0000ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1002">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff00ff0000ff0000ff0000ff0000ff0000ff00c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1003">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
-		<ImageData Id="1004">424dd6020000000000003600000028000000100000000e0000000100180000000000a002000000000000000000000000000000000000000000ff00ffff00ffff00ff000000ff00ff80808080808080808000c4fd00c4fdff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ff000000ff00ffc0c0c0000000c0c0c000000000c4fdff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ff000000ff00ffc0c0c000ffffc0c0c000ffff00c4fdff00ffff00ffff00ffff00ffff00ff000000ff00ff000000ff00ff000000ff00ffc0c0c0c0c0c0c0c0c000c4fd00c4fdff00ffff00ffff00ffff00ffff00ff000000000000ff00ff000000000000ff00ffc0c0c0000000c0c0c000000000c4fdff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ff000000ff00ffc0c0c0ff0000c0c0c0ff000000c4fdff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c000c4fd00c4fdff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c000000000c4fdff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c00000ffc0c0c00000ff00c4fdff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c000c4fd00c4fdff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c000000000c4fdff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c000c4fd00c4fdff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0008000c0c0c000800000c4fdff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c000c4fd00c4fdff00ffff00ffff00ffff00ffff00ff</ImageData>
+		<ImageData Id="1004">424dd6020000000000003600000028000000100000000e0000000100180000000000a002000000000000000000000000000000000000000000ff00ffff00ffff00ff000000ff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ff000000ff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ff000000ff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ff000000ff00ff000000ff00ff000000ff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff000000000000ff00ff000000000000ff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff000000ff00ffff00ffff00ff000000ff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1005">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ff808080808080808080808080808080808080808080808080808080808080808080808080ff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0000000c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffc0c0c0c0c0c0000000000000000000000000000000000000000000c0c0c0c0c0c0808080007fff007fff007fff007fffc0c0c0c0c0c00000000000000000000000000000000000000000000000ffc0c0c0808080007fff007fff007fff007fffc0c0c0c0c0c0000000000000000000000000000000000000000000c0c0c0c0c0c0808080007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0000000c0c0c0c0c0c0000000c0c0c0c0c0c0808080007fff007fff007fff007fffc0c0c0c0c0c0000000000000000000000000c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0808080</ImageData>
 		<ImageData Id="1006">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ff808080808080808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff0000c00000c0ffffffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1007">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ff00bfffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c080808000bfff00bfff00bfff00bfff00bfffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ff00bfffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
@@ -1709,11 +1730,15 @@ External Setpoint Generation:
 				<Axis Id="1" CreateSymbols="true" AxisType="1">
 					<Name>X</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="100000" DecelerationMaximum="100000" Acceleration="8000" Deceleration="40000" Jerk="800000"/>
+						<Dynamic AccelerationMaximum="100000" DecelerationMaximum="100000" Acceleration="3082.5" Deceleration="3082.5" Jerk="9247.5"/>
+						<Velo RefSearch="20.55" RefSync="20.55" SlowManual="102.75" FastManual="616.5" Fast="2055" Maximum="2055"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="EL7211" EncType="19">
-						<EncPara MaxCount="#xffffffff"/>
+						<EncPara ScaleFactorNumerator="100" ScaleFactorDenominator="1048576" MaxCount="#xffffffff">
+							<SoftEndMinControl Enable="true"/>
+							<SoftEndMaxControl Enable="true" Range="2000"/>
+						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
 							<Var>
@@ -1770,9 +1795,9 @@ External Setpoint Generation:
 							</Var>
 						</Vars>
 					</Encoder>
-					<Encoder Name="EL5101-0090" EncId="129" EncType="4">
-						<EncPara MaxCount="#x0000ffff">
-							<Inc RefMode="2" RefSoftSyncMask="#x0000ffff"/>
+					<Encoder Name="EL5001-0090" EncId="129" EncType="5">
+						<EncPara ScaleFactorNumerator="10" ScaleFactorDenominator="4096" Offset="-1035.7470703125" MaxCount="#xffffffff" ReferenceSystem="1">
+							<Inc RefSoftSyncMask="#x0000ffff"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -1832,7 +1857,7 @@ External Setpoint Generation:
 					</Encoder>
 					<Drive Name="Drive" DrvType="16">
 						<DrvPara MaxCount="#xffffffff" DriveControlDWord="#x00020100">
-							<Analog TorqueSetpointScale="10" ScaleFactorActTorque="0.1"/>
+							<Analog VeloReferenz="2260.5" VeloScale="32" TorqueSetpointScale="10" ScaleFactorActTorque="0.1"/>
 							<TimeComp TaskDelayCycles="1"/>
 						</DrvPara>
 						<Vars VarGrpType="1">
@@ -1909,70 +1934,14 @@ External Setpoint Generation:
 				<Axis Id="2" CreateSymbols="true" AxisType="1">
 					<Name>Z</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="100000" DecelerationMaximum="100000" Acceleration="8000" Deceleration="40000" Jerk="800000"/>
+						<Dynamic AccelerationMaximum="100000" DecelerationMaximum="100000" Acceleration="3082.5" Deceleration="3082.5" Jerk="9247.5"/>
+						<Velo RefSearch="20.55" RefSync="20.55" SlowManual="102.75" FastManual="616.5" Fast="2055" Maximum="2055"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="EL7211" EncType="19">
-						<EncPara MaxCount="#xffffffff"/>
-						<Vars VarGrpType="1">
-							<Name>Inputs</Name>
-							<Var>
-								<Name>In</Name>
-								<Type GUID="{901C2423-655B-45CE-B7E3-21F174F0F99F}" Namespace="MC">NCENCODERSTRUCT_IN2B</Type>
-								<SubVar TypeFormatIndex="2">
-									<Name>nDataIn1</Name>
-								</SubVar>
-								<SubVar TypeFormatIndex="2">
-									<Name>nDataIn2</Name>
-								</SubVar>
-								<SubVar TypeFormatIndex="2">
-									<Name>nDataIn3</Name>
-								</SubVar>
-								<SubVar TypeFormatIndex="2">
-									<Name>nDataIn4</Name>
-								</SubVar>
-								<SubVar TypeFormatIndex="2">
-									<Name>nDataIn5</Name>
-								</SubVar>
-								<SubVar TypeFormatIndex="2">
-									<Name>nDataIn6</Name>
-								</SubVar>
-								<SubVar TypeFormatIndex="2">
-									<Name>nDataIn7</Name>
-									<Comment><![CDATA[Drive Velocity Actual Value
-]]></Comment>
-								</SubVar>
-							</Var>
-						</Vars>
-						<Vars VarGrpType="2">
-							<Name>Outputs</Name>
-							<Var>
-								<Name>Out</Name>
-								<Type GUID="{9CC50AB2-5D79-4869-A3C2-1FA7761BAFEA}" Namespace="MC">NCENCODERSTRUCT_OUT2</Type>
-								<SubVar TypeFormatIndex="2">
-									<Name>nDataOut1</Name>
-								</SubVar>
-								<SubVar TypeFormatIndex="2">
-									<Name>nDataOut2</Name>
-								</SubVar>
-								<SubVar TypeFormatIndex="2">
-									<Name>nDataOut3</Name>
-								</SubVar>
-								<SubVar TypeFormatIndex="2">
-									<Name>nDataOut4</Name>
-								</SubVar>
-								<SubVar TypeFormatIndex="2">
-									<Name>nDataOut5</Name>
-								</SubVar>
-								<SubVar TypeFormatIndex="2">
-									<Name>nDataOut6</Name>
-								</SubVar>
-							</Var>
-						</Vars>
-					</Encoder>
-					<Encoder Name="EL5101-0090" EncId="130" EncType="4">
-						<EncPara MaxCount="#x0000ffff">
-							<Inc RefMode="2" RefSoftSyncMask="#x0000ffff"/>
+						<EncPara ScaleFactorNumerator="100" ScaleFactorDenominator="1048576" MaxCount="#xffffffff">
+							<SoftEndMinControl Enable="true"/>
+							<SoftEndMaxControl Enable="true" Range="1500"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -2032,7 +2001,7 @@ External Setpoint Generation:
 					</Encoder>
 					<Drive Name="Drive" DrvType="16">
 						<DrvPara MaxCount="#xffffffff" DriveControlDWord="#x00020100">
-							<Analog TorqueSetpointScale="10" ScaleFactorActTorque="0.1"/>
+							<Analog VeloReferenz="2260.5" VeloScale="32" TorqueSetpointScale="10" ScaleFactorActTorque="0.1"/>
 							<TimeComp TaskDelayCycles="1"/>
 						</DrvPara>
 						<Vars VarGrpType="1">
@@ -2110,7 +2079,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{0C5A0548-FA4F-4B8E-B05E-82A0037B3227}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{4040A843-3BF5-923E-B23A-49EEF6A5FC5D}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{E3B96F6B-1955-477E-AC3A-C5E24992CA70}">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -2183,6 +2152,10 @@ External Setpoint Generation:
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
+							<Name>MAIN.Machine.TwinSAFE_X_Axis_ActPos</Name>
+							<Type>UDINT</Type>
+						</Var>
+						<Var>
 							<Name>MAIN.Machine.X_Axis.PlcToNc</Name>
 							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
@@ -2244,7 +2217,7 @@ External Setpoint Generation:
 						<DeviceData>0001052a57ee</DeviceData>
 					</Pnp>
 				</AddressInfo>
-				<Image Id="4" AddrType="9" ImageType="3">
+				<Image Id="4" ImageFlags="#x00000030" AddrType="9" ImageType="3">
 					<Name>Image</Name>
 				</Image>
 				<Box Id="23" BoxType="9099">
@@ -3033,722 +3006,93 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 							</Slot>
 						</EtherCAT>
 					</Box>
-					<Box Id="8" BoxType="9099" BoxFlags="#x00000020">
-						<Name>Carrier X Safety Encoder (EL5101-0090)</Name>
-						<ImageId>1004</ImageId>
-						<EtherCAT EtherCatAddr="1012" SlaveType="2" AdsServerAddress="000000000000f403" PdiType="#x0c05" EtherCatAddrFixed="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="15" FoeType="1" VendorId="#x00000002" ProductCode="#x13ed3052" RevisionNo="#x0011005a" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" SdoUploadWithMaxLength="true" MaxSlotCount="1" Type="EL5101-0090 1Ch. Inc. Encoder 5V, TwinSAFE SC" Desc="EL5101-0090" PortABoxInfo="#x0100000b">
-							<SyncMan>001830002600010001000000300030003000001826010000</SyncMan>
-							<SyncMan>801830002200010002000000300030003000801822010000</SyncMan>
-							<SyncMan>00100a002400010003000000000000000300001024010000</SyncMan>
-							<SyncMan>00110d002000010004000000000000000500001120010000</SyncMan>
-							<Fmmu>0000000000000000001000020100000001000000000000000000000000000000</Fmmu>
-							<Fmmu>0000000000000000001100010100000002000000000000000000000000000000</Fmmu>
-							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
-							<BootStrapData>0010f400f410f400</BootStrapData>
-							<DcMode>53796e6368726f6e00000000000000004672656552756e2f534d2d53796e6368726f6e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DcMode>
-							<DcMode>4443000000000000000000000000000044432d53796e6368726f6e000000000000000000000000000000000000000000000000000000000000000000000020030100000000000000000000000000000000000000000000000000000000000000</DcMode>
-							<DcMode>4443494e00000000000000000000000044432d53796e6368726f6e2028696e7075742062617365642900000000000000000000000000000000000000000020030100000000000000000001000000000000000000000000000000000000000000</DcMode>
-							<MBoxUserCmdData>02000300090000000000000000000000000000000000000000000000000000002082f001010000000000</MBoxUserCmdData>
-							<MBoxUserCmdData>020003000a000000070000000000000004000903000000000000000000000000202080010200000064004164647265737300</MBoxUserCmdData>
-							<MBoxUserCmdData>020003000c0000000f000000000000000400090300000000000000000000000020208002040000000f7b0100436f6e6e656374696f6e204d6f646500</MBoxUserCmdData>
-							<Pdo Name="Inputs" Index="#x1a00" Flags="#x0010">
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a03</ExcludePdo>
-								<ExcludePdo>#x1a04</ExcludePdo>
-								<ExcludePdo>#x1a05</ExcludePdo>
-								<ExcludePdo>#x1a06</ExcludePdo>
-								<ExcludePdo>#x1a07</ExcludePdo>
-								<ExcludePdo>#x1a08</ExcludePdo>
-								<ExcludePdo>#x1a10</ExcludePdo>
-								<Entry Name="Status" Index="#x6000" Sub="#x01">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Value" Index="#x6000" Sub="#x02">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="Latch" Index="#x6000" Sub="#x03">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Inputs" Index="#x1a01" Flags="#x0010">
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a03</ExcludePdo>
-								<ExcludePdo>#x1a04</ExcludePdo>
-								<ExcludePdo>#x1a05</ExcludePdo>
-								<ExcludePdo>#x1a06</ExcludePdo>
-								<ExcludePdo>#x1a07</ExcludePdo>
-								<ExcludePdo>#x1a08</ExcludePdo>
-								<ExcludePdo>#x1a10</ExcludePdo>
-								<Entry Name="Status" Index="#x6000" Sub="#x01">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry>
-									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
-								</Entry>
-								<Entry Name="Value" Index="#x6000" Sub="#x02">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="Latch" Index="#x6000" Sub="#x03">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Inputs" Index="#x1a02" Flags="#x0010">
-								<ExcludePdo>#x1a03</ExcludePdo>
-								<ExcludePdo>#x1a04</ExcludePdo>
-								<ExcludePdo>#x1a05</ExcludePdo>
-								<ExcludePdo>#x1a06</ExcludePdo>
-								<ExcludePdo>#x1a07</ExcludePdo>
-								<ExcludePdo>#x1a08</ExcludePdo>
-								<ExcludePdo>#x1a10</ExcludePdo>
-								<Entry Name="Frequency" Index="#x6000" Sub="#x04">
-									<Type>UDINT</Type>
-								</Entry>
-								<Entry Name="Period" Index="#x6000" Sub="#x05">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="Window" Index="#x6000" Sub="#x06">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Status compact" Index="#x1a03" Flags="#x0010" SyncMan="3">
-								<ExcludePdo>#x1a04</ExcludePdo>
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<Entry Name="Status__Latch C valid" Index="#x6010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Latch extern valid" Index="#x6010" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Set counter done" Index="#x6010" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Counter underflow" Index="#x6010" Sub="#x04">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Counter overflow" Index="#x6010" Sub="#x05">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input status" Index="#x6010" Sub="#x06">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Open circuit" Index="#x6010" Sub="#x07">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Extrapolation stall" Index="#x6010" Sub="#x08">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input A" Index="#x6010" Sub="#x09">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input B" Index="#x6010" Sub="#x0a">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input C" Index="#x6010" Sub="#x0b">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input gate" Index="#x6010" Sub="#x0c">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of extern latch" Index="#x6010" Sub="#x0d">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Sync error" Index="#x6010" Sub="#x0e">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__TxPDO State" Index="#x6010" Sub="#x0f">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__TxPDO Toggle" Index="#x6010" Sub="#x10">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Counter value" Index="#x6010" Sub="#x11">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="Latch value" Index="#x6010" Sub="#x12">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Status" Index="#x1a04" Flags="#x0010">
-								<ExcludePdo>#x1a03</ExcludePdo>
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<Entry Name="Status__Latch C valid" Index="#x6010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Latch extern valid" Index="#x6010" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Set counter done" Index="#x6010" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Counter underflow" Index="#x6010" Sub="#x04">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Counter overflow" Index="#x6010" Sub="#x05">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input status" Index="#x6010" Sub="#x06">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Open circuit" Index="#x6010" Sub="#x07">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Extrapolation stall" Index="#x6010" Sub="#x08">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input A" Index="#x6010" Sub="#x09">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input B" Index="#x6010" Sub="#x0a">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input C" Index="#x6010" Sub="#x0b">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input gate" Index="#x6010" Sub="#x0c">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of extern latch" Index="#x6010" Sub="#x0d">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Sync error" Index="#x6010" Sub="#x0e">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__TxPDO State" Index="#x6010" Sub="#x0f">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__TxPDO Toggle" Index="#x6010" Sub="#x10">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Counter value" Index="#x6010" Sub="#x11">
-									<Type>UDINT</Type>
-								</Entry>
-								<Entry Name="Latch value" Index="#x6010" Sub="#x12">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Frequency" Index="#x1a05" Flags="#x0010">
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<ExcludePdo>#x1a06</ExcludePdo>
-								<Entry Name="Frequency value" Index="#x6010" Sub="#x13">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Period" Index="#x1a06" Flags="#x0010">
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<ExcludePdo>#x1a05</ExcludePdo>
-								<Entry Name="Period value" Index="#x6010" Sub="#x14">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Timest." Index="#x1a07" Flags="#x0010">
-								<ExcludePdo>#x1a08</ExcludePdo>
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<Entry Name="Timestamp" Index="#x6010" Sub="#x16">
-									<Type>ULINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Timest. compact" Index="#x1a08" Flags="#x0010">
-								<ExcludePdo>#x1a07</ExcludePdo>
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<Entry Name="Timestamp" Index="#x6010" Sub="#x16">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Outputs" Index="#x1600" InOut="1" Flags="#x0010">
-								<ExcludePdo>#x1601</ExcludePdo>
-								<ExcludePdo>#x1602</ExcludePdo>
-								<ExcludePdo>#x1603</ExcludePdo>
-								<ExcludePdo>#x1610</ExcludePdo>
-								<Entry Name="Ctrl" Index="#x7000" Sub="#x01">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Value" Index="#x7000" Sub="#x02">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Outputs" Index="#x1601" InOut="1" Flags="#x0010">
-								<ExcludePdo>#x1600</ExcludePdo>
-								<ExcludePdo>#x1602</ExcludePdo>
-								<ExcludePdo>#x1603</ExcludePdo>
-								<ExcludePdo>#x1610</ExcludePdo>
-								<Entry Name="Ctrl" Index="#x7000" Sub="#x01">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry>
-									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
-								</Entry>
-								<Entry Name="Value" Index="#x7000" Sub="#x02">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Control compact" Index="#x1602" InOut="1" Flags="#x0010" SyncMan="2">
-								<ExcludePdo>#x1603</ExcludePdo>
-								<ExcludePdo>#x1600</ExcludePdo>
-								<ExcludePdo>#x1601</ExcludePdo>
-								<Entry Name="Control__Enable latch C" Index="#x7010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Enable latch extern on positive edge" Index="#x7010" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Set counter" Index="#x7010" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Enable latch extern on negative edge" Index="#x7010" Sub="#x04">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__">
-									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
-								</Entry>
-								<Entry Name="Control__">
-									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
-								</Entry>
-								<Entry Name="Set counter value" Index="#x7010" Sub="#x11">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Control" Index="#x1603" InOut="1" Flags="#x0010">
-								<ExcludePdo>#x1602</ExcludePdo>
-								<ExcludePdo>#x1600</ExcludePdo>
-								<ExcludePdo>#x1601</ExcludePdo>
-								<Entry Name="Control__Enable latch C" Index="#x7010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Enable latch extern on positive edge" Index="#x7010" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Set counter" Index="#x7010" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Enable latch extern on negative edge" Index="#x7010" Sub="#x04">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__">
-									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
-								</Entry>
-								<Entry Name="Control__">
-									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
-								</Entry>
-								<Entry Name="Set counter value" Index="#x7010" Sub="#x11">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="TSC Inputs" Index="#x1a10" Flags="#x0081" SyncMan="3">
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<Entry Name="TSC__Slave Cmd" BitLen="8" Index="#x6020" Sub="#x01">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="TSC__Counter value" BitLen="16" Index="#x6010" Sub="#x1d">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="TSC__Slave CRC_0" BitLen="16" Index="#x6020" Sub="#x03">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="TSC__Slave ConnID" BitLen="16" Index="#x6020" Sub="#x02">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="TSC Outputs" Index="#x1610" InOut="1" Flags="#x0091" SyncMan="2">
-								<ExcludePdo>#x1600</ExcludePdo>
-								<ExcludePdo>#x1601</ExcludePdo>
-								<Entry Name="TSC__Master Cmd" BitLen="8" Index="#x7020" Sub="#x01">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="TSC__" BitLen="8">
-									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
-								</Entry>
-								<Entry Name="TSC__Master CRC_0" BitLen="16" Index="#x7020" Sub="#x03">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="TSC__Master ConnID" BitLen="16" Index="#x7020" Sub="#x02">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<CoeProfile ProfileNo="33428361" DisplayName="MDP 510"/>
-							<CoeProfile ProfileNo="33493897" DisplayName="MDP 511"/>
-							<Slot Name="TSC Connection">
-								<SlotData>0000000001000400000000000000000000000000000000000000000000000000</SlotData>
-								<ModuleIdent>5101</ModuleIdent>
-								<Module Id="#x03090004" Type="EL5101-0090" Class="">
-									<Name>Module 1 (EL5101-0090)</Name>
-									<ImageId>409</ImageId>
-									<ModuleData>02000000ed130000000014000000000000000000000000000000000000000000</ModuleData>
-									<PdoIndex>6672</PdoIndex>
-									<PdoIndex>5648</PdoIndex>
-								</Module>
-							</Slot>
-						</EtherCAT>
-					</Box>
 					<Box Id="7" BoxType="9099" BoxFlags="#x00000020">
-						<Name>Carrier Z Safety Encoder (EL5101-0090)</Name>
+						<Name>Carrier X Safety Encoder (EL5001-0090)</Name>
 						<ImageId>1004</ImageId>
-						<EtherCAT EtherCatAddr="1013" SlaveType="2" AdsServerAddress="000000000000f503" PdiType="#x0c05" EtherCatAddrFixed="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="15" FoeType="1" VendorId="#x00000002" ProductCode="#x13ed3052" RevisionNo="#x0011005a" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" SdoUploadWithMaxLength="true" MaxSlotCount="1" Type="EL5101-0090 1Ch. Inc. Encoder 5V, TwinSAFE SC" Desc="EL5101-0090" PortABoxInfo="#x01000008">
-							<SyncMan>001830002600010001000000300030003000001826010000</SyncMan>
-							<SyncMan>801830002200010002000000300030003000801822010000</SyncMan>
-							<SyncMan>00100a002400010003000000000000000300001024010000</SyncMan>
-							<SyncMan>00110d002000010004000000000000000500001120010000</SyncMan>
+						<EtherCAT EtherCatAddr="1012" SlaveType="2" AdsServerAddress="000000000000f403" PdiType="#x0405" EtherCatAddrFixed="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="15" FoeType="1" VendorId="#x00000002" ProductCode="#x13893052" RevisionNo="#x0010005a" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="1" Type="EL5001-0090 1Ch. SSI Encoder, TwinSAFE SC" Desc="EL5001-0090" PortABoxInfo="#x0100000b">
+							<SyncMan>0018f6002600010001000000f600f600f600001826010000</SyncMan>
+							<SyncMan>f618f6002200010002000000f600f600f600f61822010000</SyncMan>
+							<SyncMan>001006002400010003000000000000000000001024010000</SyncMan>
+							<SyncMan>001111002000010004000000000000000600001120010000</SyncMan>
 							<Fmmu>0000000000000000001000020100000001000000000000000000000000000000</Fmmu>
 							<Fmmu>0000000000000000001100010100000002000000000000000000000000000000</Fmmu>
 							<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
 							<BootStrapData>0010f400f410f400</BootStrapData>
 							<DcMode>53796e6368726f6e00000000000000004672656552756e2f534d2d53796e6368726f6e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DcMode>
-							<DcMode>4443000000000000000000000000000044432d53796e6368726f6e000000000000000000000000000000000000000000000000000000000000000000000020030100000000000000000000000000000000000000000000000000000000000000</DcMode>
-							<DcMode>4443494e00000000000000000000000044432d53796e6368726f6e2028696e7075742062617365642900000000000000000000000000000000000000000020030100000000000000000001000000000000000000000000000000000000000000</DcMode>
+							<DcMode>4443000000000000000000000000000044432d53796e6368726f6e0000000000000000000000000000000000000000000000000000000000f8240100000000070100000000000000000000000000000000000000000000000000000000000000</DcMode>
+							<DcMode>4443494e00000000000000000000000044432d53796e6368726f6e2028696e70757420626173656429000000000000000000000000000000f8240100000000070100000000000000000001000000000000000000000000000000000000000000</DcMode>
 							<MBoxUserCmdData>02000300090000000000000000000000000000000000000000000000000000002082f001010000000000</MBoxUserCmdData>
-							<MBoxUserCmdData>020003000a000000070000000000000007000903000000000000000000000000202080010200000065004164647265737300</MBoxUserCmdData>
-							<MBoxUserCmdData>020003000c0000000f000000000000000700090300000000000000000000000020208002040000001f570200436f6e6e656374696f6e204d6f646500</MBoxUserCmdData>
-							<Pdo Name="Inputs" Index="#x1a00" Flags="#x0010">
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a03</ExcludePdo>
-								<ExcludePdo>#x1a04</ExcludePdo>
-								<ExcludePdo>#x1a05</ExcludePdo>
-								<ExcludePdo>#x1a06</ExcludePdo>
-								<ExcludePdo>#x1a07</ExcludePdo>
-								<ExcludePdo>#x1a08</ExcludePdo>
-								<ExcludePdo>#x1a10</ExcludePdo>
-								<Entry Name="Status" Index="#x6000" Sub="#x01">
+							<Pdo Name="SSI Inputs" Index="#x1a00" Flags="#x0010" SyncMan="3">
+								<Entry Name="Status__Data error" Index="#x6000" Sub="#x01">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__Frame error" Index="#x6000" Sub="#x02">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__Power failure" Index="#x6000" Sub="#x03">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__">
+									<Type GUID="{18071995-0000-0000-0000-00200000000A}">ARRAY [0..9] OF BIT</Type>
+								</Entry>
+								<Entry Name="Status__Sync error" Index="#x6000" Sub="#x0e">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO State" Index="#x6000" Sub="#x0f">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Status__TxPDO Toggle" Index="#x6000" Sub="#x10">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry Name="Counter value" Index="#x6000" Sub="#x11">
+									<Type>UDINT</Type>
+								</Entry>
+							</Pdo>
+							<Pdo Name="TSC Slave Message" Index="#x1a01" Flags="#x0081" SyncMan="3">
+								<Entry Name="TSC__Slave Cmd" BitLen="8" Index="#x6010" Sub="#x01">
 									<Type>USINT</Type>
 								</Entry>
-								<Entry Name="Value" Index="#x6000" Sub="#x02">
+								<Entry Name="TSC__Counter value" BitLen="16" Index="#x6000" Sub="#x11">
 									<Type>UINT</Type>
 								</Entry>
-								<Entry Name="Latch" Index="#x6000" Sub="#x03">
+								<Entry Name="TSC__Slave CRC_0" BitLen="16" Index="#x6010" Sub="#x03">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry BitLen="16">
+									<Type GUID="{18071995-0000-0000-0000-002000000010}">ARRAY [0..1] OF BYTE</Type>
+								</Entry>
+								<Entry Name="TSC__Slave CRC_1" BitLen="16" Index="#x6010" Sub="#x04">
+									<Type>UINT</Type>
+								</Entry>
+								<Entry Name="TSC__Slave ConnID" BitLen="16" Index="#x6010" Sub="#x02">
 									<Type>UINT</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="Inputs" Index="#x1a01" Flags="#x0010">
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a03</ExcludePdo>
-								<ExcludePdo>#x1a04</ExcludePdo>
-								<ExcludePdo>#x1a05</ExcludePdo>
-								<ExcludePdo>#x1a06</ExcludePdo>
-								<ExcludePdo>#x1a07</ExcludePdo>
-								<ExcludePdo>#x1a08</ExcludePdo>
-								<ExcludePdo>#x1a10</ExcludePdo>
-								<Entry Name="Status" Index="#x6000" Sub="#x01">
+							<Pdo Name="TSC Master Message" Index="#x1601" InOut="1" Flags="#x0081" SyncMan="2">
+								<Entry Name="TSC__Master Cmd" BitLen="8" Index="#x7010" Sub="#x01">
 									<Type>USINT</Type>
 								</Entry>
-								<Entry>
+								<Entry BitLen="8">
 									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
 								</Entry>
-								<Entry Name="Value" Index="#x6000" Sub="#x02">
+								<Entry Name="TSC__Master CRC_0" BitLen="16" Index="#x7010" Sub="#x03">
 									<Type>UINT</Type>
 								</Entry>
-								<Entry Name="Latch" Index="#x6000" Sub="#x03">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Inputs" Index="#x1a02" Flags="#x0010">
-								<ExcludePdo>#x1a03</ExcludePdo>
-								<ExcludePdo>#x1a04</ExcludePdo>
-								<ExcludePdo>#x1a05</ExcludePdo>
-								<ExcludePdo>#x1a06</ExcludePdo>
-								<ExcludePdo>#x1a07</ExcludePdo>
-								<ExcludePdo>#x1a08</ExcludePdo>
-								<ExcludePdo>#x1a10</ExcludePdo>
-								<Entry Name="Frequency" Index="#x6000" Sub="#x04">
-									<Type>UDINT</Type>
-								</Entry>
-								<Entry Name="Period" Index="#x6000" Sub="#x05">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="Window" Index="#x6000" Sub="#x06">
+								<Entry Name="TSC__Master ConnID" BitLen="16" Index="#x7010" Sub="#x02">
 									<Type>UINT</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="ENC Status compact" Index="#x1a03" Flags="#x0010" SyncMan="3">
-								<ExcludePdo>#x1a04</ExcludePdo>
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<Entry Name="Status__Latch C valid" Index="#x6010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Latch extern valid" Index="#x6010" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Set counter done" Index="#x6010" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Counter underflow" Index="#x6010" Sub="#x04">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Counter overflow" Index="#x6010" Sub="#x05">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input status" Index="#x6010" Sub="#x06">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Open circuit" Index="#x6010" Sub="#x07">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Extrapolation stall" Index="#x6010" Sub="#x08">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input A" Index="#x6010" Sub="#x09">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input B" Index="#x6010" Sub="#x0a">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input C" Index="#x6010" Sub="#x0b">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input gate" Index="#x6010" Sub="#x0c">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of extern latch" Index="#x6010" Sub="#x0d">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Sync error" Index="#x6010" Sub="#x0e">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__TxPDO State" Index="#x6010" Sub="#x0f">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__TxPDO Toggle" Index="#x6010" Sub="#x10">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Counter value" Index="#x6010" Sub="#x11">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="Latch value" Index="#x6010" Sub="#x12">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Status" Index="#x1a04" Flags="#x0010">
-								<ExcludePdo>#x1a03</ExcludePdo>
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<Entry Name="Status__Latch C valid" Index="#x6010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Latch extern valid" Index="#x6010" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Set counter done" Index="#x6010" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Counter underflow" Index="#x6010" Sub="#x04">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Counter overflow" Index="#x6010" Sub="#x05">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input status" Index="#x6010" Sub="#x06">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Open circuit" Index="#x6010" Sub="#x07">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Extrapolation stall" Index="#x6010" Sub="#x08">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input A" Index="#x6010" Sub="#x09">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input B" Index="#x6010" Sub="#x0a">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input C" Index="#x6010" Sub="#x0b">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of input gate" Index="#x6010" Sub="#x0c">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Status of extern latch" Index="#x6010" Sub="#x0d">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__Sync error" Index="#x6010" Sub="#x0e">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__TxPDO State" Index="#x6010" Sub="#x0f">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Status__TxPDO Toggle" Index="#x6010" Sub="#x10">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Counter value" Index="#x6010" Sub="#x11">
-									<Type>UDINT</Type>
-								</Entry>
-								<Entry Name="Latch value" Index="#x6010" Sub="#x12">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Frequency" Index="#x1a05" Flags="#x0010">
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<ExcludePdo>#x1a06</ExcludePdo>
-								<Entry Name="Frequency value" Index="#x6010" Sub="#x13">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Period" Index="#x1a06" Flags="#x0010">
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<ExcludePdo>#x1a05</ExcludePdo>
-								<Entry Name="Period value" Index="#x6010" Sub="#x14">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Timest." Index="#x1a07" Flags="#x0010">
-								<ExcludePdo>#x1a08</ExcludePdo>
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<Entry Name="Timestamp" Index="#x6010" Sub="#x16">
-									<Type>ULINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Timest. compact" Index="#x1a08" Flags="#x0010">
-								<ExcludePdo>#x1a07</ExcludePdo>
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<Entry Name="Timestamp" Index="#x6010" Sub="#x16">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Outputs" Index="#x1600" InOut="1" Flags="#x0010">
-								<ExcludePdo>#x1601</ExcludePdo>
-								<ExcludePdo>#x1602</ExcludePdo>
-								<ExcludePdo>#x1603</ExcludePdo>
-								<ExcludePdo>#x1610</ExcludePdo>
-								<Entry Name="Ctrl" Index="#x7000" Sub="#x01">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="Value" Index="#x7000" Sub="#x02">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="Outputs" Index="#x1601" InOut="1" Flags="#x0010">
-								<ExcludePdo>#x1600</ExcludePdo>
-								<ExcludePdo>#x1602</ExcludePdo>
-								<ExcludePdo>#x1603</ExcludePdo>
-								<ExcludePdo>#x1610</ExcludePdo>
-								<Entry Name="Ctrl" Index="#x7000" Sub="#x01">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry>
-									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
-								</Entry>
-								<Entry Name="Value" Index="#x7000" Sub="#x02">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Control compact" Index="#x1602" InOut="1" Flags="#x0010" SyncMan="2">
-								<ExcludePdo>#x1603</ExcludePdo>
-								<ExcludePdo>#x1600</ExcludePdo>
-								<ExcludePdo>#x1601</ExcludePdo>
-								<Entry Name="Control__Enable latch C" Index="#x7010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Enable latch extern on positive edge" Index="#x7010" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Set counter" Index="#x7010" Sub="#x03" Flags="#x00008020">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Enable latch extern on negative edge" Index="#x7010" Sub="#x04">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__">
-									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
-								</Entry>
-								<Entry Name="Control__">
-									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
-								</Entry>
-								<Entry Name="Set counter value" Index="#x7010" Sub="#x11">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="ENC Control" Index="#x1603" InOut="1" Flags="#x0010">
-								<ExcludePdo>#x1602</ExcludePdo>
-								<ExcludePdo>#x1600</ExcludePdo>
-								<ExcludePdo>#x1601</ExcludePdo>
-								<Entry Name="Control__Enable latch C" Index="#x7010" Sub="#x01">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Enable latch extern on positive edge" Index="#x7010" Sub="#x02">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Set counter" Index="#x7010" Sub="#x03">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__Enable latch extern on negative edge" Index="#x7010" Sub="#x04">
-									<Type>BIT</Type>
-								</Entry>
-								<Entry Name="Control__">
-									<Type GUID="{18071995-0000-0000-0000-002000000004}">ARRAY [0..3] OF BIT</Type>
-								</Entry>
-								<Entry Name="Control__">
-									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
-								</Entry>
-								<Entry Name="Set counter value" Index="#x7010" Sub="#x11">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="TSC Inputs" Index="#x1a10" Flags="#x0081" SyncMan="3">
-								<ExcludePdo>#x1a00</ExcludePdo>
-								<ExcludePdo>#x1a01</ExcludePdo>
-								<ExcludePdo>#x1a02</ExcludePdo>
-								<Entry Name="TSC__Slave Cmd" BitLen="8" Index="#x6020" Sub="#x01">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="TSC__Counter value" BitLen="16" Index="#x6010" Sub="#x1d">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="TSC__Slave CRC_0" BitLen="16" Index="#x6020" Sub="#x03">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="TSC__Slave ConnID" BitLen="16" Index="#x6020" Sub="#x02">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<Pdo Name="TSC Outputs" Index="#x1610" InOut="1" Flags="#x0091" SyncMan="2">
-								<ExcludePdo>#x1600</ExcludePdo>
-								<ExcludePdo>#x1601</ExcludePdo>
-								<Entry Name="TSC__Master Cmd" BitLen="8" Index="#x7020" Sub="#x01">
-									<Type>USINT</Type>
-								</Entry>
-								<Entry Name="TSC__" BitLen="8">
-									<Type GUID="{18071995-0000-0000-0000-002000000008}">ARRAY [0..0] OF BYTE</Type>
-								</Entry>
-								<Entry Name="TSC__Master CRC_0" BitLen="16" Index="#x7020" Sub="#x03">
-									<Type>UINT</Type>
-								</Entry>
-								<Entry Name="TSC__Master ConnID" BitLen="16" Index="#x7020" Sub="#x02">
-									<Type>UINT</Type>
-								</Entry>
-							</Pdo>
-							<CoeProfile ProfileNo="33428361" DisplayName="MDP 510"/>
-							<CoeProfile ProfileNo="33493897" DisplayName="MDP 511"/>
+							<CoeProfile ProfileNo="32838537"/>
 							<Slot Name="TSC Connection">
 								<SlotData>0000000001000400000000000000000000000000000000000000000000000000</SlotData>
-								<ModuleIdent>5101</ModuleIdent>
-								<Module Id="#x03090007" Type="EL5101-0090" Class="">
-									<Name>Module 1 (EL5101-0090)</Name>
+								<ModuleIdent>5001</ModuleIdent>
+								<Module Id="#x03090004" Type="EL5001-0090" Class="">
+									<Name>Module 1 (EL5001-0090)</Name>
 									<ImageId>409</ImageId>
-									<ModuleData>02000000ed130000000014000000000000000000000000000000000000000000</ModuleData>
-									<PdoIndex>6672</PdoIndex>
-									<PdoIndex>5648</PdoIndex>
+									<ModuleData>0200000089130000000014000000000000000000000000000000000000000000</ModuleData>
+									<PdoIndex>6657</PdoIndex>
+									<PdoIndex>5633</PdoIndex>
+									<CoeProfile ProfileNo="#x03b61389"/>
 								</Module>
 							</Slot>
 						</EtherCAT>
@@ -3756,6 +3100,716 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 					<Box Id="12" BoxType="9099" BoxFlags="#x00000020">
 						<Name>Carrier X Axis (EL7211-9014)</Name>
 						<ImageId>1005</ImageId>
+						<Xml>
+							<EL72xxDriveTool>
+								<AxisSettings>
+									<AxisSetting Channel="0">
+										<Property>
+											<Name>MotorType</Name>
+											<Value>AM8131-0FH0-0000</Value>
+										</Property>
+										<Property>
+											<Name>ConfiguedMotorType</Name>
+											<Value>AM8131-xFx0</Value>
+										</Property>
+										<Property>
+											<Name>MotorDataVersion</Name>
+											<Value>1.18.0</Value>
+										</Property>
+										<Property>
+											<Name>MotorApplication</Name>
+											<Value>Default</Value>
+										</Property>
+										<Property>
+											<Name>MotorDataLocation</Name>
+											<Value>C:\TwinCAT\3.1\Components\Base\Addins\TcDriveManager\MotorPool\Beckhoff AM813x.xeds</Value>
+										</Property>
+										<Property>
+											<Name>MotorDataSchema</Name>
+											<Value>MotorDataSheet</Value>
+										</Property>
+										<Property>
+											<Name>Feedback1Type</Name>
+											<Value>Sick#EDM35-2KF0A024A</Value>
+										</Property>
+										<Property>
+											<Name>Feedback1DataVersion</Name>
+											<Value>2.0.93</Value>
+										</Property>
+										<Property>
+											<Name>Feedback1Application</Name>
+											<Value>Default</Value>
+										</Property>
+										<Parametersets>
+											<Parameter>
+												<Comment>Motorvendor</Comment>
+												<Name>Vendor</Name>
+												<Data type="visibleString">Beckhoff</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Electric motor type</Comment>
+												<Name>ElecType</Name>
+												<Data type="visibleString">AM8131-xFx0</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Motor construction</Comment>
+												<Name>ConstrType</Name>
+												<Data type="real64">0</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Control parameter algorithm</Comment>
+												<Name>CPA</Name>
+												<Data type="real64">0</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Pole Pairs</Comment>
+												<Name>PolePairs</Name>
+												<Data type="real64">4</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Standstill Current</Comment>
+												<Name>I0rms</Name>
+												<Data type="real64" unitSiNumerator="ampere">5</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Rated Current</Comment>
+												<Name>Inrms</Name>
+												<Data type="real64" unitSiNumerator="ampere">4.95</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Peak Current</Comment>
+												<Name>Iprms</Name>
+												<Data type="real64" unitSiNumerator="ampere">27.8</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Nominal Voltage</Comment>
+												<Name>Unrms</Name>
+												<Data type="real64" unitSiNumerator="volt">33.9</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Max Voltage</Comment>
+												<Name>Umaxrms</Name>
+												<Data type="real64" unitSiNumerator="volt">96</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Max winding du/dt</Comment>
+												<Name>dudtMax</Name>
+												<Data type="real64" unitSiNumerator="volt" unitSiDenominator="second">8000000000</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Max Torque</Comment>
+												<Name>Mpeak</Name>
+												<Data type="real64" unitSiNumerator="newton metre">6.07</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Torque Constant</Comment>
+												<Name>kT</Name>
+												<Data type="real64" unitSiNumerator="newton metre" unitSiDenominator="ampere">0.27</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>M(i) curve</Comment>
+												<Name>M(i)</Name>
+												<DataTable type="real64[]" unitSiNumerator="ampere">
+													<item>2.78</item>
+													<item>5.56</item>
+													<item>8.34</item>
+													<item>11.1</item>
+													<item>13.9</item>
+													<item>16.7</item>
+													<item>19.5</item>
+													<item>22.2</item>
+													<item>25</item>
+													<item>27.8</item>
+												</DataTable>
+												<DataTable type="real64[]" unitSiNumerator="newton metre">
+													<item>0.901</item>
+													<item>1.74</item>
+													<item>2.51</item>
+													<item>3.21</item>
+													<item>3.85</item>
+													<item>4.43</item>
+													<item>4.94</item>
+													<item>5.38</item>
+													<item>5.76</item>
+													<item>6.07</item>
+												</DataTable>
+											</Parameter>
+											<Parameter>
+												<Comment>EMK</Comment>
+												<Name>kErms</Name>
+												<Data type="real64" unitSiNumerator="volt" unitSiDenominator="revolutions/minute (rpm)">0.019</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Winding resistance Ph-Ph 20°C</Comment>
+												<Name>R</Name>
+												<Data type="real64" unitSiNumerator="ohm">1.95</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Ld Ph-Ph</Comment>
+												<Name>Ld</Name>
+												<Data type="real64" unitSiNumerator="henry">0.0053</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Lq Ph-Ph</Comment>
+												<Name>Lq</Name>
+												<Data type="real64" unitSiNumerator="henry">0.0053</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Lq(i) curve</Comment>
+												<Name>Lq(i)</Name>
+												<DataTable type="real64[]" unitSiNumerator="ampere">
+													<item>2.78</item>
+													<item>5.56</item>
+													<item>8.34</item>
+													<item>11.1</item>
+													<item>13.9</item>
+													<item>16.7</item>
+													<item>19.5</item>
+													<item>22.2</item>
+													<item>25</item>
+													<item>27.8</item>
+												</DataTable>
+												<DataTable type="real64[]" unitSiNumerator="henry">
+													<item>0.00362</item>
+													<item>0.00321</item>
+													<item>0.00282</item>
+													<item>0.00251</item>
+													<item>0.00228</item>
+													<item>0.00197</item>
+													<item>0.0016</item>
+													<item>0.00124</item>
+													<item>0.00089</item>
+													<item>0.000848</item>
+												</DataTable>
+											</Parameter>
+											<Parameter>
+												<Comment>Max speed</Comment>
+												<Name>Nmax</Name>
+												<Data type="real64" unitSiNumerator="revolutions/minute (rpm)">10000</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>J motor with brake</Comment>
+												<Name>J</Name>
+												<Data type="real64" unitSiNumerator="moment of inertia">4.62E-05</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Commutation position offset (W+/V-)</Comment>
+												<Name>MechComOffs</Name>
+												<Data type="real64" unitSiNumerator="degree (angle)">0</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>T motor warn limit</Comment>
+												<Name>TMotorWarn</Name>
+												<Data type="real64" unitSiNumerator="degree Celsius">120</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>T motor shut down</Comment>
+												<Name>TMotorLimit</Name>
+												<Data type="real64" unitSiNumerator="degree Celsius">140</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Time constant i2t</Comment>
+												<Name>Ti2t</Name>
+												<Data type="real64" unitSiNumerator="second">72.1</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Motor thermal constant</Comment>
+												<Name>Mtc</Name>
+												<Data type="real64" unitSiNumerator="minute (time)">24</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Motor temp sensor R(T)</Comment>
+												<Name>TempSensorR(T)</Name>
+												<DataTable type="real64[]" unitSiNumerator="degree Celsius">
+													<item>-40</item>
+													<item>-15.5</item>
+													<item>9</item>
+													<item>33.5</item>
+													<item>58</item>
+													<item>82.5</item>
+													<item>107</item>
+													<item>132</item>
+													<item>156</item>
+													<item>181</item>
+												</DataTable>
+												<DataTable type="real64[]" unitSiNumerator="ohm">
+													<item>359</item>
+													<item>440</item>
+													<item>534</item>
+													<item>642</item>
+													<item>762</item>
+													<item>896</item>
+													<item>1043</item>
+													<item>1204</item>
+													<item>1377</item>
+													<item>1560</item>
+												</DataTable>
+											</Parameter>
+											<Parameter>
+												<Comment>Rated speeds Nn(Unrms)</Comment>
+												<Name>Nn(Unrms)</Name>
+												<DataTable type="real64[]" unitSiNumerator="volt">
+													<item>17</item>
+													<item>33.9</item>
+												</DataTable>
+												<DataTable type="real64[]" unitSiNumerator="revolutions/minute (rpm)">
+													<item>200</item>
+													<item>1000</item>
+												</DataTable>
+											</Parameter>
+											<Parameter>
+												<Comment>Rated torques Mn(Unrms)</Comment>
+												<Name>Mn(Unrms)</Name>
+												<DataTable type="real64[]" unitSiNumerator="volt">
+													<item>17</item>
+													<item>33.9</item>
+												</DataTable>
+												<DataTable type="real64[]" unitSiNumerator="newton metre">
+													<item>1.35</item>
+													<item>1.34</item>
+												</DataTable>
+											</Parameter>
+											<Parameter>
+												<Comment>Temperature sensor type</Comment>
+												<Name>TempSensorType</Name>
+												<Data type="real64">1</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Temperature sensor connection</Comment>
+												<Name>TempSensorCon</Name>
+												<Data type="real64">1</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Feedback connector</Comment>
+												<Name>FbCon</Name>
+												<Data type="real64">0</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Digital name plate</Comment>
+												<Name>NamePlate</Name>
+												<Data type="real64">2</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Feedback commutation mode</Comment>
+												<Name>FbCommutationMode</Name>
+												<Data type="real64">2</Data>
+											</Parameter>
+										</Parametersets>
+									</AxisSetting>
+								</AxisSettings>
+								<InitCmds>
+									<InitCmd Index="4339" SubIndex="5" MotorDataLevel="0" DisableMode="0">
+										<Data>0100</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="0" MotorDataLevel="0" DisableMode="0">
+										<Data>02</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>0016</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>0616</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="3" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="4" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="5" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="6" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="7" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="8" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="9" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="0" MotorDataLevel="0" DisableMode="0">
+										<Data>05</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>001a</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>011a</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="3" MotorDataLevel="0" DisableMode="0">
+										<Data>031a</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="4" MotorDataLevel="0" DisableMode="0">
+										<Data>041a</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="5" MotorDataLevel="0" DisableMode="0">
+										<Data>061a</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="6" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="7" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="8" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="9" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="10" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="11" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="12" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="13" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="14" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7218" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>0200</Data>
+									</InitCmd>
+									<InitCmd Index="7218" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>90d00300</Data>
+									</InitCmd>
+									<InitCmd Index="7218" SubIndex="8" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7219" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>0200</Data>
+									</InitCmd>
+									<InitCmd Index="7219" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>90d00300</Data>
+									</InitCmd>
+									<InitCmd Index="7219" SubIndex="8" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="28688" SubIndex="3" MotorDataLevel="0" DisableMode="0">
+										<Data>09</Data>
+									</InitCmd>
+									<InitCmd Index="28688" SubIndex="11" MotorDataLevel="0" DisableMode="0">
+										<Data>ff7f</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="13" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="17" MotorDataLevel="0" DisableMode="0">
+										<Data>03000000</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="18" MotorDataLevel="0" DisableMode="0">
+										<Data>14</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="19" MotorDataLevel="0" DisableMode="0">
+										<Data>0c</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="20" MotorDataLevel="0" DisableMode="0">
+										<Data>f401</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="21" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="23" MotorDataLevel="0" DisableMode="0">
+										<Data>00000000</Data>
+									</InitCmd>
+									<InitCmd Index="32769" SubIndex="17" MotorDataLevel="0" DisableMode="0">
+										<Data>0100</Data>
+									</InitCmd>
+									<InitCmd Index="32769" SubIndex="18" MotorDataLevel="0" DisableMode="0">
+										<Data>0200</Data>
+									</InitCmd>
+									<InitCmd Index="32776" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32776" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32776" SubIndex="3" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="17" MotorDataLevel="0" DisableMode="0">
+										<Data>01000000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="18" MotorDataLevel="1" DisableMode="0">
+										<Data>0500</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="19" MotorDataLevel="1" DisableMode="0">
+										<Data>7402</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="20" MotorDataLevel="1" DisableMode="0">
+										<Data>96000000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="21" MotorDataLevel="1" DisableMode="0">
+										<Data>97000000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="23" MotorDataLevel="0" DisableMode="0">
+										<Data>0a000000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="25" MotorDataLevel="0" DisableMode="0">
+										<Data>80bb0000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="26" MotorDataLevel="0" DisableMode="0">
+										<Data>901a0000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="27" MotorDataLevel="0" DisableMode="0">
+										<Data>60ea0000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="41" MotorDataLevel="0" DisableMode="0">
+										<Data>50</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="42" MotorDataLevel="0" DisableMode="0">
+										<Data>69</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="43" MotorDataLevel="0" DisableMode="0">
+										<Data>2003</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="44" MotorDataLevel="0" DisableMode="0">
+										<Data>e803</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="49" MotorDataLevel="0" DisableMode="0">
+										<Data>00000400</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="50" MotorDataLevel="0" DisableMode="0">
+										<Data>e803</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="51" MotorDataLevel="0" DisableMode="0">
+										<Data>0500</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="57" MotorDataLevel="0" DisableMode="0">
+										<Data>0a</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="58" MotorDataLevel="0" DisableMode="0">
+										<Data>01</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="65" MotorDataLevel="0" DisableMode="0">
+										<Data>4001</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="73" MotorDataLevel="0" DisableMode="0">
+										<Data>70f50000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="80" MotorDataLevel="0" DisableMode="0">
+										<Data>ffffffff</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="81" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="82" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="84" MotorDataLevel="0" DisableMode="0">
+										<Data>01000000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="87" MotorDataLevel="0" DisableMode="0">
+										<Data>64</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="101" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="102" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="17" MotorDataLevel="1" DisableMode="0">
+										<Data>986c0000</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="18" MotorDataLevel="1" DisableMode="0">
+										<Data>56130000</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="19" MotorDataLevel="1" DisableMode="0">
+										<Data>04</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="21" MotorDataLevel="1" DisableMode="0">
+										<Data>0e01</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="22" MotorDataLevel="1" DisableMode="0">
+										<Data>0e010000</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="24" MotorDataLevel="1" DisableMode="0">
+										<Data>ce010000</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="25" MotorDataLevel="1" DisableMode="0">
+										<Data>3500</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="27" MotorDataLevel="1" DisableMode="0">
+										<Data>d1040000</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="41" MotorDataLevel="0" DisableMode="0">
+										<Data>50</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="42" MotorDataLevel="0" DisableMode="0">
+										<Data>69</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="43" MotorDataLevel="0" DisableMode="0">
+										<Data>e803</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="44" MotorDataLevel="0" DisableMode="0">
+										<Data>dc05</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="45" MotorDataLevel="1" DisableMode="0">
+										<Data>d102</Data>
+									</InitCmd>
+									<InitCmd Index="32786" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32786" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32786" SubIndex="17" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="32786" SubIndex="18" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="32786" SubIndex="19" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="32786" SubIndex="20" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="32799" SubIndex="17" MotorDataLevel="0" DisableMode="0">
+										<Data>401f0000</Data>
+									</InitCmd>
+									<InitCmd Index="32799" SubIndex="18" MotorDataLevel="0" DisableMode="0">
+										<Data>a00f0000</Data>
+									</InitCmd>
+									<InitCmd Index="32799" SubIndex="19" MotorDataLevel="0" DisableMode="0">
+										<Data>2300</Data>
+									</InitCmd>
+									<InitCmd Index="32799" SubIndex="20" MotorDataLevel="0" DisableMode="0">
+										<Data>e02e0000</Data>
+									</InitCmd>
+									<InitCmd Index="32799" SubIndex="21" MotorDataLevel="0" DisableMode="0">
+										<Data>5702</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="7" MotorDataLevel="0" DisableMode="0">
+										<Data>6400</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="8" MotorDataLevel="0" DisableMode="0">
+										<Data>0000000000000000</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="9" MotorDataLevel="0" DisableMode="0">
+										<Data>6400</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="10" MotorDataLevel="0" DisableMode="0">
+										<Data>0a00</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="14" MotorDataLevel="0" DisableMode="0">
+										<Data>0000000001000000</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="18" MotorDataLevel="0" DisableMode="0">
+										<Data>6400</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="19" MotorDataLevel="0" DisableMode="0">
+										<Data>0000000001000000</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="20" MotorDataLevel="0" DisableMode="0">
+										<Data>0000000001000000</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="21" MotorDataLevel="0" DisableMode="0">
+										<Data>c1166c0100000000</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="22" MotorDataLevel="0" DisableMode="0">
+										<Data>1400</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="23" MotorDataLevel="0" DisableMode="0">
+										<Data>7017</Data>
+									</InitCmd>
+									<InitCmd Index="32817" SubIndex="19" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32817" SubIndex="20" MotorDataLevel="0" DisableMode="0">
+										<Data>01</Data>
+									</InitCmd>
+									<InitCmd Index="32817" SubIndex="25" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32817" SubIndex="26" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32817" SubIndex="27" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="45057" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>0700</Data>
+									</InitCmd>
+									<InitCmd Index="45057" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="45057" SubIndex="3" MotorDataLevel="0" DisableMode="0">
+										<Data>00000000</Data>
+									</InitCmd>
+									<InitCmd Index="45057" SubIndex="4" MotorDataLevel="0" DisableMode="0">
+										<Data>00000000</Data>
+									</InitCmd>
+									<InitCmd Index="45057" SubIndex="5" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="61448" SubIndex="0" MotorDataLevel="0" DisableMode="0">
+										<Data>00000000</Data>
+									</InitCmd>
+									<InitCmd Index="61456" SubIndex="0" MotorDataLevel="0" DisableMode="0">
+										<Data>04</Data>
+									</InitCmd>
+									<InitCmd Index="61456" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>01020000</Data>
+									</InitCmd>
+									<InitCmd Index="61456" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>e6020000</Data>
+									</InitCmd>
+									<InitCmd Index="61456" SubIndex="3" MotorDataLevel="0" DisableMode="0">
+										<Data>00000000</Data>
+									</InitCmd>
+									<InitCmd Index="61456" SubIndex="4" MotorDataLevel="0" DisableMode="0">
+										<Data>ee020000</Data>
+									</InitCmd>
+									<InitCmd Index="61569" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>36232000</Data>
+									</InitCmd>
+								</InitCmds>
+								<StatusBar>
+									<Element option="0" SortOder="0" SubIdx="1">
+										<Index>24592</Index>
+										<Width>100</Width>
+									</Element>
+									<Element option="0" SortOder="0" SubIdx="18">
+										<Index>36880</Index>
+										<Width>105</Width>
+									</Element>
+									<Element option="0" SortOder="0" SubIdx="17">
+										<Index>36888</Index>
+										<Width>100</Width>
+									</Element>
+									<Element option="0" SortOder="0" SubIdx="17">
+										<Index>36880</Index>
+										<Width>100</Width>
+									</Element>
+									<Element option="0" SortOder="0" SubIdx="3">
+										<Index>24592</Index>
+										<Width>200</Width>
+									</Element>
+								</StatusBar>
+							</EL72xxDriveTool>
+						</Xml>
 						<EtherCAT SlaveType="2" PdiType="#x0405" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x1c2b3052" RevisionNo="#x00202336" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" SdoUploadWithMaxLength="true" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL7211-9014 1Ch. MDP742 Servo motor output stage with OCT (50V, 4.5A RMS) and STO input" Desc="EL7211-9014" PortABoxInfo="#x01000007">
 							<SyncMan>001080002600010001000000500080008000001026010000</SyncMan>
 							<SyncMan>801080002200010002000000500080008000801022010000</SyncMan>
@@ -3768,9 +3822,22 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 							<DcData>000700000000000030750000e80300000100ffff000000000000000000000000</DcData>
 							<DcMode>4443000000000000000000000000000044432d53796e6368726f6e0000000000000000000000000000000000000000000000000030750000e8030000ffff00070100000000000000000000000000000000000000000000000000000000000000</DcMode>
 							<DcMode>44430000000000000000000000000000534d2d53796e6368726f6e0000000000000000000000000000000000000000000000000030750000e8030000ffff01000100000000000000000000000000000000000000000000000000000000000000</DcMode>
-							<MBoxUserCmdData>004003000c0000000000000003000000000000000000000000000000000000002081f001040000003623200000</MBoxUserCmdData>
-							<MBoxUserCmdData>004003000a00000000000000030010000000000000000000000000000000000020f3100502000000010000</MBoxUserCmdData>
-							<MBoxUserCmdData>020003000900000012000000030000000000000000000000000000000000000020108039010000000a53656c65637420696e666f2064617461203100</MBoxUserCmdData>
+							<MBoxUserCmdData>004003000c0000000000000000000000000000000000000000000000000000002081f001040000003623200000</MBoxUserCmdData>
+							<MBoxUserCmdData>004003000a00000000000000000000000000000000000000000000000000000020f3100502000000010000</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000900000012000000000000000000000000000000000000000000000020108039010000000a53656c65637420696e666f2064617461203100</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000001000000000000000000000000000000000000000000000002011801301000000044d6f746f7220706f6c6520706169727300</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000000d000000000000000000000000000000000000000000000020118012040000005613000052617465642063757272656e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000000b00000000000000000000000000000000000000000000002011801104000000986c00004d61782063757272656e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000000f000000000000000000000000000000000000000000000020118016040000000e010000546f7271756520636f6e7374616e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000001200000000000000000000000000000000000000000000002011801902000000350057696e64696e6720696e64756374616e636500</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000001700000000000000000000000000000000000000000000002011801804000000ce010000526f746f72206d6f6d656e74206f6620696e657274696100</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a00000012000000000000000000000000000000000000000000000020118015020000000e01436f6d6d75746174696f6e206f666673657400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000001b00000000000000000000000000000000000000000000002011802d02000000d1024d6f746f7220746865726d616c2074696d6520636f6e7374616e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000001600000000000000000000000000000000000000000000002011801b04000000d10400004d6f746f72207370656564206c696d69746174696f6e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000001e00000000000000000000000000000000000000000000002010801302000000740243757272656e74206c6f6f702070726f706f7274696f6e616c206761696e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000001a00000000000000000000000000000000000000000000002010801202000000050043757272656e74206c6f6f7020696e74656772616c2074696d6500</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000001f000000000000000000000000000000000000000000000020108015040000009700000056656c6f63697479206c6f6f702070726f706f7274696f6e616c206761696e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000001b000000000000000000000000000000000000000000000020108014040000009600000056656c6f63697479206c6f6f7020696e74656772616c2074696d6500</MBoxUserCmdData>
 							<Pdo Name="FB Position" Index="#x1a00" Flags="#x0010" SyncMan="3">
 								<Entry Name="Position" Index="#x6000" Sub="#x11">
 									<Type>UDINT</Type>
@@ -4393,6 +4460,716 @@ Bit 8 - 15 : reserved]]></Comment>
 					<Box Id="15" BoxType="9099" BoxFlags="#x00000020">
 						<Name>Carrier Z Axis (EL7211-9014)</Name>
 						<ImageId>1005</ImageId>
+						<Xml>
+							<EL72xxDriveTool>
+								<AxisSettings>
+									<AxisSetting Channel="0">
+										<Property>
+											<Name>MotorType</Name>
+											<Value>AM8131-0FH0-0000</Value>
+										</Property>
+										<Property>
+											<Name>ConfiguedMotorType</Name>
+											<Value>AM8131-xFx0</Value>
+										</Property>
+										<Property>
+											<Name>MotorDataVersion</Name>
+											<Value>1.18.0</Value>
+										</Property>
+										<Property>
+											<Name>MotorApplication</Name>
+											<Value>Default</Value>
+										</Property>
+										<Property>
+											<Name>MotorDataLocation</Name>
+											<Value>C:\TwinCAT\3.1\Components\Base\Addins\TcDriveManager\MotorPool\Beckhoff AM813x.xeds</Value>
+										</Property>
+										<Property>
+											<Name>MotorDataSchema</Name>
+											<Value>MotorDataSheet</Value>
+										</Property>
+										<Property>
+											<Name>Feedback1Type</Name>
+											<Value>Sick#EDM35-2KF0A024A</Value>
+										</Property>
+										<Property>
+											<Name>Feedback1DataVersion</Name>
+											<Value>2.0.93</Value>
+										</Property>
+										<Property>
+											<Name>Feedback1Application</Name>
+											<Value>Default</Value>
+										</Property>
+										<Parametersets>
+											<Parameter>
+												<Comment>Motorvendor</Comment>
+												<Name>Vendor</Name>
+												<Data type="visibleString">Beckhoff</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Electric motor type</Comment>
+												<Name>ElecType</Name>
+												<Data type="visibleString">AM8131-xFx0</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Motor construction</Comment>
+												<Name>ConstrType</Name>
+												<Data type="real64">0</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Control parameter algorithm</Comment>
+												<Name>CPA</Name>
+												<Data type="real64">0</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Pole Pairs</Comment>
+												<Name>PolePairs</Name>
+												<Data type="real64">4</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Standstill Current</Comment>
+												<Name>I0rms</Name>
+												<Data type="real64" unitSiNumerator="ampere">5</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Rated Current</Comment>
+												<Name>Inrms</Name>
+												<Data type="real64" unitSiNumerator="ampere">4.95</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Peak Current</Comment>
+												<Name>Iprms</Name>
+												<Data type="real64" unitSiNumerator="ampere">27.8</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Nominal Voltage</Comment>
+												<Name>Unrms</Name>
+												<Data type="real64" unitSiNumerator="volt">33.9</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Max Voltage</Comment>
+												<Name>Umaxrms</Name>
+												<Data type="real64" unitSiNumerator="volt">96</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Max winding du/dt</Comment>
+												<Name>dudtMax</Name>
+												<Data type="real64" unitSiNumerator="volt" unitSiDenominator="second">8000000000</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Max Torque</Comment>
+												<Name>Mpeak</Name>
+												<Data type="real64" unitSiNumerator="newton metre">6.07</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Torque Constant</Comment>
+												<Name>kT</Name>
+												<Data type="real64" unitSiNumerator="newton metre" unitSiDenominator="ampere">0.27</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>M(i) curve</Comment>
+												<Name>M(i)</Name>
+												<DataTable type="real64[]" unitSiNumerator="ampere">
+													<item>2.78</item>
+													<item>5.56</item>
+													<item>8.34</item>
+													<item>11.1</item>
+													<item>13.9</item>
+													<item>16.7</item>
+													<item>19.5</item>
+													<item>22.2</item>
+													<item>25</item>
+													<item>27.8</item>
+												</DataTable>
+												<DataTable type="real64[]" unitSiNumerator="newton metre">
+													<item>0.901</item>
+													<item>1.74</item>
+													<item>2.51</item>
+													<item>3.21</item>
+													<item>3.85</item>
+													<item>4.43</item>
+													<item>4.94</item>
+													<item>5.38</item>
+													<item>5.76</item>
+													<item>6.07</item>
+												</DataTable>
+											</Parameter>
+											<Parameter>
+												<Comment>EMK</Comment>
+												<Name>kErms</Name>
+												<Data type="real64" unitSiNumerator="volt" unitSiDenominator="revolutions/minute (rpm)">0.019</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Winding resistance Ph-Ph 20°C</Comment>
+												<Name>R</Name>
+												<Data type="real64" unitSiNumerator="ohm">1.95</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Ld Ph-Ph</Comment>
+												<Name>Ld</Name>
+												<Data type="real64" unitSiNumerator="henry">0.0053</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Lq Ph-Ph</Comment>
+												<Name>Lq</Name>
+												<Data type="real64" unitSiNumerator="henry">0.0053</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Lq(i) curve</Comment>
+												<Name>Lq(i)</Name>
+												<DataTable type="real64[]" unitSiNumerator="ampere">
+													<item>2.78</item>
+													<item>5.56</item>
+													<item>8.34</item>
+													<item>11.1</item>
+													<item>13.9</item>
+													<item>16.7</item>
+													<item>19.5</item>
+													<item>22.2</item>
+													<item>25</item>
+													<item>27.8</item>
+												</DataTable>
+												<DataTable type="real64[]" unitSiNumerator="henry">
+													<item>0.00362</item>
+													<item>0.00321</item>
+													<item>0.00282</item>
+													<item>0.00251</item>
+													<item>0.00228</item>
+													<item>0.00197</item>
+													<item>0.0016</item>
+													<item>0.00124</item>
+													<item>0.00089</item>
+													<item>0.000848</item>
+												</DataTable>
+											</Parameter>
+											<Parameter>
+												<Comment>Max speed</Comment>
+												<Name>Nmax</Name>
+												<Data type="real64" unitSiNumerator="revolutions/minute (rpm)">10000</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>J motor with brake</Comment>
+												<Name>J</Name>
+												<Data type="real64" unitSiNumerator="moment of inertia">4.62E-05</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Commutation position offset (W+/V-)</Comment>
+												<Name>MechComOffs</Name>
+												<Data type="real64" unitSiNumerator="degree (angle)">0</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>T motor warn limit</Comment>
+												<Name>TMotorWarn</Name>
+												<Data type="real64" unitSiNumerator="degree Celsius">120</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>T motor shut down</Comment>
+												<Name>TMotorLimit</Name>
+												<Data type="real64" unitSiNumerator="degree Celsius">140</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Time constant i2t</Comment>
+												<Name>Ti2t</Name>
+												<Data type="real64" unitSiNumerator="second">72.1</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Motor thermal constant</Comment>
+												<Name>Mtc</Name>
+												<Data type="real64" unitSiNumerator="minute (time)">24</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Motor temp sensor R(T)</Comment>
+												<Name>TempSensorR(T)</Name>
+												<DataTable type="real64[]" unitSiNumerator="degree Celsius">
+													<item>-40</item>
+													<item>-15.5</item>
+													<item>9</item>
+													<item>33.5</item>
+													<item>58</item>
+													<item>82.5</item>
+													<item>107</item>
+													<item>132</item>
+													<item>156</item>
+													<item>181</item>
+												</DataTable>
+												<DataTable type="real64[]" unitSiNumerator="ohm">
+													<item>359</item>
+													<item>440</item>
+													<item>534</item>
+													<item>642</item>
+													<item>762</item>
+													<item>896</item>
+													<item>1043</item>
+													<item>1204</item>
+													<item>1377</item>
+													<item>1560</item>
+												</DataTable>
+											</Parameter>
+											<Parameter>
+												<Comment>Rated speeds Nn(Unrms)</Comment>
+												<Name>Nn(Unrms)</Name>
+												<DataTable type="real64[]" unitSiNumerator="volt">
+													<item>17</item>
+													<item>33.9</item>
+												</DataTable>
+												<DataTable type="real64[]" unitSiNumerator="revolutions/minute (rpm)">
+													<item>200</item>
+													<item>1000</item>
+												</DataTable>
+											</Parameter>
+											<Parameter>
+												<Comment>Rated torques Mn(Unrms)</Comment>
+												<Name>Mn(Unrms)</Name>
+												<DataTable type="real64[]" unitSiNumerator="volt">
+													<item>17</item>
+													<item>33.9</item>
+												</DataTable>
+												<DataTable type="real64[]" unitSiNumerator="newton metre">
+													<item>1.35</item>
+													<item>1.34</item>
+												</DataTable>
+											</Parameter>
+											<Parameter>
+												<Comment>Temperature sensor type</Comment>
+												<Name>TempSensorType</Name>
+												<Data type="real64">1</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Temperature sensor connection</Comment>
+												<Name>TempSensorCon</Name>
+												<Data type="real64">1</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Feedback connector</Comment>
+												<Name>FbCon</Name>
+												<Data type="real64">0</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Digital name plate</Comment>
+												<Name>NamePlate</Name>
+												<Data type="real64">2</Data>
+											</Parameter>
+											<Parameter>
+												<Comment>Feedback commutation mode</Comment>
+												<Name>FbCommutationMode</Name>
+												<Data type="real64">2</Data>
+											</Parameter>
+										</Parametersets>
+									</AxisSetting>
+								</AxisSettings>
+								<InitCmds>
+									<InitCmd Index="4339" SubIndex="5" MotorDataLevel="0" DisableMode="0">
+										<Data>0100</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="0" MotorDataLevel="0" DisableMode="0">
+										<Data>02</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>0016</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>0616</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="3" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="4" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="5" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="6" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="7" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="8" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7186" SubIndex="9" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="0" MotorDataLevel="0" DisableMode="0">
+										<Data>05</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>001a</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>011a</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="3" MotorDataLevel="0" DisableMode="0">
+										<Data>031a</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="4" MotorDataLevel="0" DisableMode="0">
+										<Data>041a</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="5" MotorDataLevel="0" DisableMode="0">
+										<Data>061a</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="6" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="7" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="8" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="9" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="10" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="11" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="12" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="13" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7187" SubIndex="14" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7218" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>0200</Data>
+									</InitCmd>
+									<InitCmd Index="7218" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>90d00300</Data>
+									</InitCmd>
+									<InitCmd Index="7218" SubIndex="8" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="7219" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>0200</Data>
+									</InitCmd>
+									<InitCmd Index="7219" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>90d00300</Data>
+									</InitCmd>
+									<InitCmd Index="7219" SubIndex="8" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="28688" SubIndex="3" MotorDataLevel="0" DisableMode="0">
+										<Data>09</Data>
+									</InitCmd>
+									<InitCmd Index="28688" SubIndex="11" MotorDataLevel="0" DisableMode="0">
+										<Data>ff7f</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="13" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="17" MotorDataLevel="0" DisableMode="0">
+										<Data>03000000</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="18" MotorDataLevel="0" DisableMode="0">
+										<Data>14</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="19" MotorDataLevel="0" DisableMode="0">
+										<Data>0c</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="20" MotorDataLevel="0" DisableMode="0">
+										<Data>f401</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="21" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32768" SubIndex="23" MotorDataLevel="0" DisableMode="0">
+										<Data>00000000</Data>
+									</InitCmd>
+									<InitCmd Index="32769" SubIndex="17" MotorDataLevel="0" DisableMode="0">
+										<Data>0100</Data>
+									</InitCmd>
+									<InitCmd Index="32769" SubIndex="18" MotorDataLevel="0" DisableMode="0">
+										<Data>0200</Data>
+									</InitCmd>
+									<InitCmd Index="32776" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32776" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32776" SubIndex="3" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="17" MotorDataLevel="0" DisableMode="0">
+										<Data>01000000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="18" MotorDataLevel="1" DisableMode="0">
+										<Data>0500</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="19" MotorDataLevel="1" DisableMode="0">
+										<Data>7402</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="20" MotorDataLevel="1" DisableMode="0">
+										<Data>96000000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="21" MotorDataLevel="1" DisableMode="0">
+										<Data>97000000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="23" MotorDataLevel="0" DisableMode="0">
+										<Data>0a000000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="25" MotorDataLevel="0" DisableMode="0">
+										<Data>80bb0000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="26" MotorDataLevel="0" DisableMode="0">
+										<Data>901a0000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="27" MotorDataLevel="0" DisableMode="0">
+										<Data>60ea0000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="41" MotorDataLevel="0" DisableMode="0">
+										<Data>50</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="42" MotorDataLevel="0" DisableMode="0">
+										<Data>69</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="43" MotorDataLevel="0" DisableMode="0">
+										<Data>2003</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="44" MotorDataLevel="0" DisableMode="0">
+										<Data>e803</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="49" MotorDataLevel="0" DisableMode="0">
+										<Data>00000400</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="50" MotorDataLevel="0" DisableMode="0">
+										<Data>e803</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="51" MotorDataLevel="0" DisableMode="0">
+										<Data>0500</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="57" MotorDataLevel="0" DisableMode="0">
+										<Data>0a</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="58" MotorDataLevel="0" DisableMode="0">
+										<Data>01</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="65" MotorDataLevel="0" DisableMode="0">
+										<Data>4001</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="73" MotorDataLevel="0" DisableMode="0">
+										<Data>70f50000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="80" MotorDataLevel="0" DisableMode="0">
+										<Data>ffffffff</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="81" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="82" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="84" MotorDataLevel="0" DisableMode="0">
+										<Data>01000000</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="87" MotorDataLevel="0" DisableMode="0">
+										<Data>64</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="101" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32784" SubIndex="102" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="17" MotorDataLevel="1" DisableMode="0">
+										<Data>986c0000</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="18" MotorDataLevel="1" DisableMode="0">
+										<Data>56130000</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="19" MotorDataLevel="1" DisableMode="0">
+										<Data>04</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="21" MotorDataLevel="1" DisableMode="0">
+										<Data>0e01</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="22" MotorDataLevel="1" DisableMode="0">
+										<Data>0e010000</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="24" MotorDataLevel="1" DisableMode="0">
+										<Data>ce010000</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="25" MotorDataLevel="1" DisableMode="0">
+										<Data>3500</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="27" MotorDataLevel="1" DisableMode="0">
+										<Data>d1040000</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="41" MotorDataLevel="0" DisableMode="0">
+										<Data>50</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="42" MotorDataLevel="0" DisableMode="0">
+										<Data>69</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="43" MotorDataLevel="0" DisableMode="0">
+										<Data>e803</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="44" MotorDataLevel="0" DisableMode="0">
+										<Data>dc05</Data>
+									</InitCmd>
+									<InitCmd Index="32785" SubIndex="45" MotorDataLevel="1" DisableMode="0">
+										<Data>d102</Data>
+									</InitCmd>
+									<InitCmd Index="32786" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32786" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32786" SubIndex="17" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="32786" SubIndex="18" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="32786" SubIndex="19" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="32786" SubIndex="20" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="32799" SubIndex="17" MotorDataLevel="0" DisableMode="0">
+										<Data>401f0000</Data>
+									</InitCmd>
+									<InitCmd Index="32799" SubIndex="18" MotorDataLevel="0" DisableMode="0">
+										<Data>a00f0000</Data>
+									</InitCmd>
+									<InitCmd Index="32799" SubIndex="19" MotorDataLevel="0" DisableMode="0">
+										<Data>2300</Data>
+									</InitCmd>
+									<InitCmd Index="32799" SubIndex="20" MotorDataLevel="0" DisableMode="0">
+										<Data>e02e0000</Data>
+									</InitCmd>
+									<InitCmd Index="32799" SubIndex="21" MotorDataLevel="0" DisableMode="0">
+										<Data>5702</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="7" MotorDataLevel="0" DisableMode="0">
+										<Data>6400</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="8" MotorDataLevel="0" DisableMode="0">
+										<Data>0000000000000000</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="9" MotorDataLevel="0" DisableMode="0">
+										<Data>6400</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="10" MotorDataLevel="0" DisableMode="0">
+										<Data>0a00</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="14" MotorDataLevel="0" DisableMode="0">
+										<Data>0000000001000000</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="18" MotorDataLevel="0" DisableMode="0">
+										<Data>6400</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="19" MotorDataLevel="0" DisableMode="0">
+										<Data>0000000001000000</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="20" MotorDataLevel="0" DisableMode="0">
+										<Data>0000000001000000</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="21" MotorDataLevel="0" DisableMode="0">
+										<Data>c1166c0100000000</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="22" MotorDataLevel="0" DisableMode="0">
+										<Data>1400</Data>
+									</InitCmd>
+									<InitCmd Index="32816" SubIndex="23" MotorDataLevel="0" DisableMode="0">
+										<Data>7017</Data>
+									</InitCmd>
+									<InitCmd Index="32817" SubIndex="19" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32817" SubIndex="20" MotorDataLevel="0" DisableMode="0">
+										<Data>01</Data>
+									</InitCmd>
+									<InitCmd Index="32817" SubIndex="25" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32817" SubIndex="26" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="32817" SubIndex="27" MotorDataLevel="0" DisableMode="0">
+										<Data>00</Data>
+									</InitCmd>
+									<InitCmd Index="45057" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>0700</Data>
+									</InitCmd>
+									<InitCmd Index="45057" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="45057" SubIndex="3" MotorDataLevel="0" DisableMode="0">
+										<Data>00000000</Data>
+									</InitCmd>
+									<InitCmd Index="45057" SubIndex="4" MotorDataLevel="0" DisableMode="0">
+										<Data>00000000</Data>
+									</InitCmd>
+									<InitCmd Index="45057" SubIndex="5" MotorDataLevel="0" DisableMode="0">
+										<Data>0000</Data>
+									</InitCmd>
+									<InitCmd Index="61448" SubIndex="0" MotorDataLevel="0" DisableMode="0">
+										<Data>00000000</Data>
+									</InitCmd>
+									<InitCmd Index="61456" SubIndex="0" MotorDataLevel="0" DisableMode="0">
+										<Data>04</Data>
+									</InitCmd>
+									<InitCmd Index="61456" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>01020000</Data>
+									</InitCmd>
+									<InitCmd Index="61456" SubIndex="2" MotorDataLevel="0" DisableMode="0">
+										<Data>e6020000</Data>
+									</InitCmd>
+									<InitCmd Index="61456" SubIndex="3" MotorDataLevel="0" DisableMode="0">
+										<Data>00000000</Data>
+									</InitCmd>
+									<InitCmd Index="61456" SubIndex="4" MotorDataLevel="0" DisableMode="0">
+										<Data>ee020000</Data>
+									</InitCmd>
+									<InitCmd Index="61569" SubIndex="1" MotorDataLevel="0" DisableMode="0">
+										<Data>36232000</Data>
+									</InitCmd>
+								</InitCmds>
+								<StatusBar>
+									<Element option="0" SortOder="0" SubIdx="1">
+										<Index>24592</Index>
+										<Width>100</Width>
+									</Element>
+									<Element option="0" SortOder="0" SubIdx="18">
+										<Index>36880</Index>
+										<Width>105</Width>
+									</Element>
+									<Element option="0" SortOder="0" SubIdx="17">
+										<Index>36888</Index>
+										<Width>100</Width>
+									</Element>
+									<Element option="0" SortOder="0" SubIdx="17">
+										<Index>36880</Index>
+										<Width>100</Width>
+									</Element>
+									<Element option="0" SortOder="0" SubIdx="3">
+										<Index>24592</Index>
+										<Width>200</Width>
+									</Element>
+								</StatusBar>
+							</EL72xxDriveTool>
+						</Xml>
 						<EtherCAT SlaveType="2" PdiType="#x0405" MboxDataLinkLayer="true" StateMBoxPolling="true" CfgModeSafeOp="true" CycleMBoxPollingTime="0" CoeType="39" FoeType="1" VendorId="#x00000002" ProductCode="#x1c2b3052" RevisionNo="#x00202336" InfoDataAddr="true" InfoDataSoeDS401="true" InfoDataDcTimes="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" SdoUploadWithMaxLength="true" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL7211-9014 1Ch. MDP742 Servo motor output stage with OCT (50V, 4.5A RMS) and STO input" Desc="EL7211-9014" PortABoxInfo="#x0100000c">
 							<SyncMan>001080002600010001000000500080008000001026010000</SyncMan>
 							<SyncMan>801080002200010002000000500080008000801022010000</SyncMan>
@@ -4405,9 +5182,22 @@ Bit 8 - 15 : reserved]]></Comment>
 							<DcData>000700000000000030750000e80300000100ffff000000000000000000000000</DcData>
 							<DcMode>4443000000000000000000000000000044432d53796e6368726f6e0000000000000000000000000000000000000000000000000030750000e8030000ffff00070100000000000000000000000000000000000000000000000000000000000000</DcMode>
 							<DcMode>44430000000000000000000000000000534d2d53796e6368726f6e0000000000000000000000000000000000000000000000000030750000e8030000ffff01000100000000000000000000000000000000000000000000000000000000000000</DcMode>
-							<MBoxUserCmdData>004003000c0000000000000003000000000000000000000000000000000000002081f001040000003623200000</MBoxUserCmdData>
-							<MBoxUserCmdData>004003000a00000000000000030010000000000000000000000000000000000020f3100502000000010000</MBoxUserCmdData>
-							<MBoxUserCmdData>020003000900000012000000030000000000000000000000000000000000000020108039010000000a53656c65637420696e666f2064617461203100</MBoxUserCmdData>
+							<MBoxUserCmdData>004003000c0000000000000000000000000000000000000000000000000000002081f001040000003623200000</MBoxUserCmdData>
+							<MBoxUserCmdData>004003000a00000000000000000000000000000000000000000000000000000020f3100502000000010000</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000900000012000000000000000000000000000000000000000000000020108039010000000a53656c65637420696e666f2064617461203100</MBoxUserCmdData>
+							<MBoxUserCmdData>02000300090000001000000000000000000000000000000000000000000000002011801301000000044d6f746f7220706f6c6520706169727300</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000000d000000000000000000000000000000000000000000000020118012040000005613000052617465642063757272656e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000000b00000000000000000000000000000000000000000000002011801104000000986c00004d61782063757272656e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000000f000000000000000000000000000000000000000000000020118016040000000e010000546f7271756520636f6e7374616e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000001200000000000000000000000000000000000000000000002011801902000000350057696e64696e6720696e64756374616e636500</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000001700000000000000000000000000000000000000000000002011801804000000ce010000526f746f72206d6f6d656e74206f6620696e657274696100</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a00000012000000000000000000000000000000000000000000000020118015020000000e01436f6d6d75746174696f6e206f666673657400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000001b00000000000000000000000000000000000000000000002011802d02000000d1024d6f746f7220746865726d616c2074696d6520636f6e7374616e7400</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000001600000000000000000000000000000000000000000000002011801b04000000d10400004d6f746f72207370656564206c696d69746174696f6e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000001e00000000000000000000000000000000000000000000002010801302000000740243757272656e74206c6f6f702070726f706f7274696f6e616c206761696e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000a0000001a00000000000000000000000000000000000000000000002010801202000000050043757272656e74206c6f6f7020696e74656772616c2074696d6500</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000001f000000000000000000000000000000000000000000000020108015040000009700000056656c6f63697479206c6f6f702070726f706f7274696f6e616c206761696e00</MBoxUserCmdData>
+							<MBoxUserCmdData>020003000c0000001b000000000000000000000000000000000000000000000020108014040000009600000056656c6f63697479206c6f6f7020696e74656772616c2074696d6500</MBoxUserCmdData>
 							<Pdo Name="FB Position" Index="#x1a00" Flags="#x0010" SyncMan="3">
 								<Entry Name="Position" Index="#x6000" Sub="#x11">
 									<Type>UDINT</Type>
@@ -5106,8 +5896,8 @@ Bit 8 - 15 : reserved]]></Comment>
 						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x1afe3052" RevisionNo="#x00120000" InfoDataAddr="true" RepeatSupport="true" TimeoutStateChange1="5000" TimeoutMailbox2="10000" TComSupport="true" PortPhys="51" DebugMemory="8" SafetyLogicSupported="true" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6910, TwinSAFE PLC" Desc="EL6910" PortABoxInfo="#x01000003">
 							<SyncMan>001000012600010001000000000100010001001026010000</SyncMan>
 							<SyncMan>001100012200010002000000000100010001001122010000</SyncMan>
-							<SyncMan>001247002400010003000000000000000200001224010000</SyncMan>
-							<SyncMan>001d48002000010004000000000000000200001d20010000</SyncMan>
+							<SyncMan>001248002400010003000000000000000200001224010000</SyncMan>
+							<SyncMan>001d40002000010004000000000000000200001d20010000</SyncMan>
 							<SyncMan>002e00002400000003000000000000000000002e24000000</SyncMan>
 							<SyncMan>002f00002000000004000000000000000000002f20000000</SyncMan>
 							<Fmmu>0000000000000000001200020100000001000000060000000200000000000000</Fmmu>
@@ -5142,13 +5932,10 @@ Bit 8 - 15 : reserved]]></Comment>
 								<Entry Name="Message_39 TxPDO" Index="#x7000" Sub="#x08">
 									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
 								</Entry>
-								<Entry Name="Message_40 TxPDO" Index="#x7000" Sub="#x09">
+								<Entry Name="Message_43 TxPDO" Index="#x7000" Sub="#x09">
 									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
 								</Entry>
-								<Entry Name="Message_41 TxPDO" Index="#x7000" Sub="#x0a">
-									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
-								</Entry>
-								<Entry Name="Message_43 TxPDO" Index="#x7000" Sub="#x0b">
+								<Entry Name="Message_48 TxPDO" Index="#x7000" Sub="#x0a">
 									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
 								</Entry>
 							</Pdo>
@@ -5177,19 +5964,11 @@ Bit 8 - 15 : reserved]]></Comment>
 								<Entry Name="Message_39 RxPDO" Index="#x6000" Sub="#x08">
 									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
 								</Entry>
-								<Entry Name="Message_40 RxPDO" Index="#x6000" Sub="#x09">
-									<Type GUID="{B05FDAB7-3241-ACD3-D16C-0FDAF8825BC9}">FSOE_7</Type>
-								</Entry>
-								<Entry Name="Message_41 RxPDO" Index="#x6000" Sub="#x0a">
-									<Type GUID="{B05FDAB7-3241-ACD3-D16C-0FDAF8825BC9}">FSOE_7</Type>
-								</Entry>
-								<Entry Name="Message_43 RxPDO" Index="#x6000" Sub="#x0b">
+								<Entry Name="Message_43 RxPDO" Index="#x6000" Sub="#x09">
 									<Type GUID="{2438F91B-E188-4ED7-8594-54354F9ED6A4}" Namespace="Safety">FSOE_6</Type>
 								</Entry>
-							</Pdo>
-							<Pdo Name="StandardInputs" Index="#x1bf0" Flags="#x2011" SyncMan="3">
-								<Entry Name="Standard Out Var 24" Index="#x7000" Sub="#x01">
-									<Type>UINT</Type>
+								<Entry Name="Message_48 RxPDO" Index="#x6000" Sub="#x0a">
+									<Type GUID="{0994ABA9-6F32-EEB9-4362-7774F7A1F4F4}">FSOE_11</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="StandardOutputs" Index="#x17f0" InOut="1" Flags="#x2011" SyncMan="2">
@@ -5201,6 +5980,9 @@ Bit 8 - 15 : reserved]]></Comment>
 								</Entry>
 								<Entry>
 									<Type GUID="{18071995-0000-0000-0000-002000000006}">ARRAY [0..5] OF BIT</Type>
+								</Entry>
+								<Entry Name="Standard In Var 51" Index="#x6000" Sub="#x03">
+									<Type>UDINT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="TwinSAFE Group Info Data" Index="#x1bfa" Flags="#x2011" SyncMan="3">
@@ -5402,14 +6184,16 @@ Bit 8 - 15 : reserved]]></Comment>
 		<OwnerA Name="TIID^Real IO">
 			<OwnerB Name="TIID^Real IO^Term 3 (EK1101)^Machine Safety Controller (EL6910)">
 				<Link VarA="Term 3 (EK1101)^Operator Panel Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^Message_43 TxPDO"/>
-				<Link VarA="Term 3 (EK1101)^Operator Panel Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_43 RxPDO"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine A (EK1100)^Machine A Safe out (EL2904)">
-				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_33 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
-				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionOutputs^Message_33 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
+			<OwnerB Name="TIID^Real IO^Term 3 (EK1101)^Operator Panel Safe In (EL1904)">
+				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionOutputs^Message_43 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine A (EK1100)^Machine A Safe In (EL1904)">
+				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_32 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine B (EK1100)^Machine B Safe In (EL1904)">
 				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_34 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
+				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionOutputs^Message_34 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine B (EK1100)^Machine B Safe out (EL2904)">
 				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionOutputs^Message_35 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
@@ -5417,34 +6201,26 @@ Bit 8 - 15 : reserved]]></Comment>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine C (EK1100)^Machine C Safe In (EL1904)">
 				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_36 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine C (EK1100)^Machine C Safe out (EL2904)">
-				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionOutputs^Message_37 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier X Safety Encoder (EL5101-0090)">
-				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionOutputs^Message_40 RxPDO" VarB="Module 1 (EL5101-0090)^TSC Inputs^TSC"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier Z Safety Encoder (EL5101-0090)">
-				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_41 TxPDO" VarB="Module 1 (EL5101-0090)^TSC Outputs^TSC"/>
-			</OwnerB>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Machine D Safe In (EL1904)">
-				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionOutputs^Message_38 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
+				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_38 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Machine D Safe out (EL2904)">
-				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionInputs^Message_39 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
 				<Link VarA="Term 3 (EK1101)^Machine Safety Controller (EL6910)^ConnectionOutputs^Message_39 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TIID^Sim IO C6017 LAN 4">
 			<OwnerB Name="TIID^Real IO^Term 3 (EK1101)^Machine Safety Controller (EL6910)">
-				<Link VarA="Machine A (EK1100)^Machine A Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^Message_32 TxPDO"/>
 				<Link VarA="Machine A (EK1100)^Machine A Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_32 RxPDO"/>
-				<Link VarA="Machine B (EK1100)^Machine B Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_34 RxPDO"/>
+				<Link VarA="Machine A (EK1100)^Machine A Safe out (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^Message_33 TxPDO"/>
+				<Link VarA="Machine A (EK1100)^Machine A Safe out (EL2904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_33 RxPDO"/>
 				<Link VarA="Machine B (EK1100)^Machine B Safe out (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^Message_35 TxPDO"/>
 				<Link VarA="Machine C (EK1100)^Machine C Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_36 RxPDO"/>
 				<Link VarA="Machine C (EK1100)^Machine C Safe out (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^Message_37 TxPDO"/>
-				<Link VarA="Machine D (EK1100)^Carrier X Safety Encoder (EL5101-0090)^Module 1 (EL5101-0090)^TSC Outputs^TSC" VarB="ConnectionInputs^Message_40 TxPDO"/>
-				<Link VarA="Machine D (EK1100)^Carrier Z Safety Encoder (EL5101-0090)^Module 1 (EL5101-0090)^TSC Inputs^TSC" VarB="ConnectionOutputs^Message_41 RxPDO"/>
-				<Link VarA="Machine D (EK1100)^Machine D Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^Message_38 TxPDO"/>
+				<Link VarA="Machine C (EK1100)^Machine C Safe out (EL2904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_37 RxPDO"/>
+				<Link VarA="Machine D (EK1100)^Carrier X Safety Encoder (EL5001-0090)^Module 1 (EL5001-0090)^TSC Master Message^TSC" VarB="ConnectionInputs^Message_48 TxPDO"/>
+				<Link VarA="Machine D (EK1100)^Carrier X Safety Encoder (EL5001-0090)^Module 1 (EL5001-0090)^TSC Slave Message^TSC" VarB="ConnectionOutputs^Message_48 RxPDO"/>
+				<Link VarA="Machine D (EK1100)^Machine D Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^Message_38 RxPDO"/>
+				<Link VarA="Machine D (EK1100)^Machine D Safe out (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^Message_39 TxPDO"/>
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TINC^NC-Task 1 SAF^Axes^X">
@@ -5464,32 +6240,16 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="EL7211^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
 				<Link VarA="EL7211^Inputs^In^nState4" VarB="WcState^WcState"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier X Safety Encoder (EL5101-0090)">
-				<Link VarA="EL5101-0090^Inputs^In^nDataIn1[0]" VarB="ENC Status compact^Counter value"/>
-				<Link VarA="EL5101-0090^Inputs^In^nDataIn2[0]" VarB="ENC Status compact^Latch value"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Counter overflow" Size="1" OffsA="4"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Counter underflow" Size="1" OffsA="3"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Extrapolation stall" Size="1" OffsA="7"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Latch C valid"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Latch extern valid" Size="1" OffsA="1"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Open circuit" Size="1" OffsA="6"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Set counter done" Size="1" OffsA="2"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Status of input status" Size="1" OffsA="5"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of extern latch" Size="1" OffsA="4"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input A"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input B" Size="1" OffsA="1"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input C" Size="1" OffsA="2"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input gate" Size="1" OffsA="3"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Sync error" Size="1" OffsA="5"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^TxPDO State" Size="1" OffsA="6"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^TxPDO Toggle" Size="1" OffsA="7"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState4" VarB="WcState^WcState"/>
-				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Enable latch C"/>
-				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Enable latch extern on negative edge" Size="1" OffsA="3"/>
-				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Enable latch extern on positive edge" Size="1" OffsA="1"/>
-				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Set counter" Size="1" OffsA="2"/>
-				<Link VarA="EL5101-0090^Outputs^Out^nDataOut1[0]" VarB="ENC Control compact^Set counter value"/>
+			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier X Safety Encoder (EL5001-0090)">
+				<Link VarA="EL5001-0090^Inputs^In^nDataIn1" VarB="SSI Inputs^Counter value"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState1" VarB="SSI Inputs^Status^Data error"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState1" VarB="SSI Inputs^Status^Frame error" Size="1" OffsA="1"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState1" VarB="SSI Inputs^Status^Power failure" Size="1" OffsA="2"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState2" VarB="SSI Inputs^Status^Sync error" Size="1" OffsA="5"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState2" VarB="SSI Inputs^Status^TxPDO State" Size="1" OffsA="6"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState2" VarB="SSI Inputs^Status^TxPDO Toggle" Size="1" OffsA="7"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
+				<Link VarA="EL5001-0090^Inputs^In^nState4" VarB="WcState^WcState"/>
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TINC^NC-Task 1 SAF^Axes^Z">
@@ -5509,33 +6269,6 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="EL7211^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
 				<Link VarA="EL7211^Inputs^In^nState4" VarB="WcState^WcState"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier Z Safety Encoder (EL5101-0090)">
-				<Link VarA="EL5101-0090^Inputs^In^nDataIn1[0]" VarB="ENC Status compact^Counter value"/>
-				<Link VarA="EL5101-0090^Inputs^In^nDataIn2[0]" VarB="ENC Status compact^Latch value"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Counter overflow" Size="1" OffsA="4"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Counter underflow" Size="1" OffsA="3"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Extrapolation stall" Size="1" OffsA="7"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Latch C valid"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Latch extern valid" Size="1" OffsA="1"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Open circuit" Size="1" OffsA="6"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Set counter done" Size="1" OffsA="2"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState1" VarB="ENC Status compact^Status^Status of input status" Size="1" OffsA="5"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of extern latch" Size="1" OffsA="4"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input A"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input B" Size="1" OffsA="1"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input C" Size="1" OffsA="2"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Status of input gate" Size="1" OffsA="3"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^Sync error" Size="1" OffsA="5"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^TxPDO State" Size="1" OffsA="6"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState2" VarB="ENC Status compact^Status^TxPDO Toggle" Size="1" OffsA="7"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
-				<Link VarA="EL5101-0090^Inputs^In^nState4" VarB="WcState^WcState"/>
-				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Enable latch C"/>
-				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Enable latch extern on negative edge" Size="1" OffsA="3"/>
-				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Enable latch extern on positive edge" Size="1" OffsA="1"/>
-				<Link VarA="EL5101-0090^Outputs^Out^nCtrl1" VarB="ENC Control compact^Control^Set counter" Size="1" OffsA="2"/>
-				<Link VarA="EL5101-0090^Outputs^Out^nDataOut1[0]" VarB="ENC Control compact^Set counter value"/>
-			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TIPC^PLC^PLC Instance">
 			<OwnerB Name="TIID^Real IO^Term 3 (EK1101)^Machine Control Buttons (EL1859)">
@@ -5550,6 +6283,7 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFEGroupState" VarB="TwinSAFE Group Info Data^TwinSafeGroup1 Info Data^State"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupErrAck" VarB="StandardOutputs^Standard In Var 1"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupRun" VarB="StandardOutputs^Standard In Var 2"/>
+				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFE_X_Axis_ActPos" VarB="StandardOutputs^Standard In Var 51"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier Gripper (EL2002)">
 				<Link VarA="PlcTask Outputs^MAIN.Machine.Machine_D_Carrier_Gripper" VarB="Fingers^Output"/>

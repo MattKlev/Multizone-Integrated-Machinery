@@ -20,19 +20,7 @@
               <Children />
             </Node>
             <Node>
-              <Title>Axes.Z.ActPos</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>X Encoder</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children />
-            </Node>
-            <Node>
-              <Title>Z Encoder</Title>
+              <Title>SSI Inputs.Counter value</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -40,7 +28,7 @@
           </Children>
         </Node>
         <Node>
-          <Title>X and Z Position</Title>
+          <Title>X Axis</Title>
           <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
@@ -95,27 +83,15 @@
                     </Node>
                   </Children>
                 </Node>
-                <Node>
-                  <Title>Z_Axis.ActPos</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
               </Children>
             </Node>
             <Node>
-              <Title>EL5101 Counts</Title>
+              <Title>EL5001 Counts</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>X Encoder</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
-                </Node>
-                <Node>
-                  <Title>Z Encoder</Title>
+                  <Title>SSI Inputs.Counter value</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />

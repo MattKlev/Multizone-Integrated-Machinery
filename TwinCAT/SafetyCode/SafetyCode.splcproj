@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Crc="3292683851" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project Crc="820743757" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
@@ -16,7 +16,7 @@
     <IntProjName>SafetyCode</IntProjName>
     <IsNewCreated>false</IsNewCreated>
     <SPlcProjVersion>1.7.0.0</SPlcProjVersion>
-    <NextSdsId>45</NextSdsId>
+    <NextSdsId>54</NextSdsId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>false</DebugSymbols>
@@ -25,8 +25,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="TwinSafeGroup1\Alias Devices\Carrier X Safety Encoder %28EL5101-0090%29 - Module 1 %28EL5101-0090%29.sds" />
-    <None Include="TwinSafeGroup1\Alias Devices\Carrier Z Safety Encoder %28EL5101-0090%29 - Module 1 %28EL5101-0090%29.sds" />
+    <None Include="TwinSafeGroup1\Alias Devices\Carrier X Safety Encoder %28EL5001-0090%29 - Module 1 %28EL5001-0090%29.sds" />
     <None Include="TwinSafeGroup1\Alias Devices\Machine A Safe In %28EL1904%29 - Module 1 %28FSOES%29.sds" />
     <None Include="TwinSafeGroup1\Alias Devices\Machine A Safe out %28EL2904%29 - Module 1 %28FSOES%29.sds" />
     <None Include="TwinSafeGroup1\Alias Devices\Machine B Safe In %28EL1904%29 - Module 1 %28FSOES%29.sds" />
@@ -36,7 +35,7 @@
     <None Include="TwinSafeGroup1\Alias Devices\Machine D Safe In %28EL1904%29 - Module 1 %28FSOES%29.sds" />
     <None Include="TwinSafeGroup1\Alias Devices\Machine D Safe out %28EL2904%29 - Module 1 %28FSOES%29.sds" />
     <None Include="TwinSafeGroup1\Alias Devices\Operator Panel Safe In %28EL1904%29 - Module 1 %28FSOES%29.sds" />
-    <None Include="TwinSafeGroup1\Alias Devices\Sum_A_and_Z.sds" />
+    <None Include="TwinSafeGroup1\Alias Devices\X_ActPosFromPLC.sds" />
     <None Include="TwinSafeGroup1\TwinSafeGroup1.sal" />
     <None Include="TwinSafeGroup1\TwinSafeGroup1.sal.diagram">
       <DependentUpon>TwinSafeGroup1\TwinSafeGroup1.sal</DependentUpon>
@@ -44,6 +43,11 @@
     </None>
     <None Include="TargetSystemConfig.xml">
       <Visible>false</Visible>
+    </None>
+    <None Include="User FBs\Machine_X.ufb" />
+    <None Include="User FBs\Machine_X.ufb.diagram">
+      <Visible>false</Visible>
+      <DependentUpon>User FBs\Machine_X.ufb</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
