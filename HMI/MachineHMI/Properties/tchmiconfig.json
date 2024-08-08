@@ -1,6 +1,6 @@
 {
-  "$schema": "./../Packages/Beckhoff.TwinCAT.HMI.Framework.12.760.48/runtimes/native1.12-tchmi/Schema/TchmiConfig.Schema.json",
-  "basePath": "./framework",
+  "$schema": "./../Packages/Beckhoff.TwinCAT.HMI.Framework.14.1.15/runtimes/native1.12-tchmi/Schema/TchmiConfig.Schema.json",
+  "basePath": "./Beckhoff.TwinCAT.HMI.Framework",
   "scaleMode": "None",
   "startupView": "Desktop.view",
   "loginPage": "/Pages/LoginPage.html",
@@ -300,7 +300,7 @@
     },
     {
       "name": "Beckhoff.TwinCAT.HMI.Framework",
-      "basePath": "/framework"
+      "basePath": "/Beckhoff.TwinCAT.HMI.Framework"
     },
     {
       "name": "Beckhoff.TwinCAT.HMI.Functions",
@@ -324,6 +324,7 @@
   ],
   "systemKeyboard": {
     "providerName": "",
+    "autoOpen": false,
     "projectKeyboardMapping": {
       "de": {
         "text": "KeyboardLayouts/German - compact.keyboard.json",

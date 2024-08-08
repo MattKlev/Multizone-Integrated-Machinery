@@ -9,7 +9,7 @@
     <WriteProductVersion>true</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>PLC</Name>
-    <ProgramVersion>3.1.4024.0</ProgramVersion>
+    <ProgramVersion>3.1.4026.9</ProgramVersion>
     <Application>{2af80a8b-f60d-41b6-b634-027bfe91393b}</Application>
     <TypeSystem>{5f772cca-9888-4012-91f2-749ea1130ccd}</TypeSystem>
     <Implicit_Task_Info>{37dbce48-f226-4177-9f51-84b83bea1a92}</Implicit_Task_Info>
@@ -70,6 +70,7 @@
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_EventLogger">
       <DefaultResolution>Tc3_EventLogger, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc3_EventLogger</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>

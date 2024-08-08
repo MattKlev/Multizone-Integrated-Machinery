@@ -2,6 +2,8 @@
     "CERTIFICATEEXPIRATION": "P14000D",
     "REQUIREAUTH": 0,
     "VIRTUALDIRECTORIES": {
-        "/": "www"
+        "/": "www",
+        "/Beckhoff.TwinCAT.HMI.EcDiagnostics.Meta": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnostics.Meta.1.1.109",
+        "/Beckhoff.TwinCAT.HMI.Scope.Meta": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Scope.Meta.1.1.109"
     }
 }

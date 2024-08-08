@@ -1,8 +1,9 @@
 {
     "LIMIT_EVENT_COUNT": 1000,
+    "PRELOAD_TRANSLATIONS": false,
     "TARGET_SYSTEMS": {
         "Local": {
-            "ADDRESS": "5.42.87.238.1.1",
+            "ADDRESS": "5.126.34.230.1.1",
             "ENABLED": true
         }
     },

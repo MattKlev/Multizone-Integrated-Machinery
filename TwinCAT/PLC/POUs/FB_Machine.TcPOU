@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.8">
   <POU Name="FB_Machine" Id="{477547fc-3ea9-469c-94c5-8bd12891e1bc}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Machine
 VAR_INPUT
@@ -80,13 +80,14 @@ VAR
 	fbEventLogger : FB_TcEventLogger;
 
 	iResetingStep : UDINT;
-END_VAR
-VAR CONSTANT
+	
 	TwinSAFEGroupRun AT %Q* : BOOL := TRUE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[rtStart(CLK := Start.Button OR HMI_Start.Button);
+      <ST><![CDATA[TwinSAFEGroupRun:=TRUE;
+
+rtStart(CLK := Start.Button OR HMI_Start.Button);
 rtStop(CLK := Stop.Button OR HMI_Stop.Button);
 rtReset(CLK := Reset.Button OR HMI_Reset.Button);
 
@@ -603,6 +604,7 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_Machine">
+      <LineId Id="7027" Count="1" />
       <LineId Id="6572" Count="2" />
       <LineId Id="6576" Count="364" />
       <LineId Id="7025" Count="1" />

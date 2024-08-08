@@ -2,13 +2,13 @@
     "devices": {
         "Real IO": {
             "enabled": true,
-            "masterNetId": "5.42.87.238.2.1",
-            "targetNetId": "5.42.87.238.1.1"
+            "masterNetId": "5.126.34.230.2.1",
+            "targetNetId": "5.126.34.230.1.1"
         },
         "Sim IO": {
             "enabled": true,
-            "masterNetId": "5.42.87.238.3.1",
-            "targetNetId": "5.42.87.238.1.1"
+            "masterNetId": "5.126.34.230.3.1",
+            "targetNetId": "5.126.34.230.1.1"
         }
     },
     "updateIntervals": {
