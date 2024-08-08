@@ -22,6 +22,14 @@
     "path": "sourceDomain",
     "comparator": "==",
     "value": "TcHmiEventLogger"
+  },
+  {
+    "logic": "AND"
+  },
+  {
+    "path": "alarmState",
+    "comparator": "==",
+    "value": 0
   }
 ]
 </script>

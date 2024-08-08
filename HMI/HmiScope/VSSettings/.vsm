@@ -5,7 +5,7 @@
   <Children>
     <Node>
       <Title>YT Scope Project</Title>
-      <Expanded>True</Expanded>
+      <Expanded>False</Expanded>
       <FileName>C:\Source\Multizone-Integrated-Machinery\HMI\HmiScope\YT Scope Project.tcscopex</FileName>
       <Children>
         <Node>
@@ -29,22 +29,22 @@
         </Node>
         <Node>
           <Title>X Axis</Title>
-          <Expanded>True</Expanded>
+          <Expanded>False</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
               <Title>NC Act Pos</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
                   <Title>X_Axis.ActPos</Title>
-                  <Expanded>True</Expanded>
+                  <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children>
                     <Node>
                       <Title>Machine A</Title>
-                      <Expanded>True</Expanded>
+                      <Expanded>False</Expanded>
                       <FileName></FileName>
                       <Children>
                         <Node>
@@ -57,7 +57,7 @@
                     </Node>
                     <Node>
                       <Title>Machine B</Title>
-                      <Expanded>True</Expanded>
+                      <Expanded>False</Expanded>
                       <FileName></FileName>
                       <Children>
                         <Node>
@@ -87,7 +87,7 @@
             </Node>
             <Node>
               <Title>EL5001 Counts</Title>
-              <Expanded>True</Expanded>
+              <Expanded>False</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>

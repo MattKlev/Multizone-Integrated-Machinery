@@ -75,13 +75,7 @@
     "accessRights": [],
     "messageFormat": [
       {
-        "name": "timeRaised"
-      },
-      {
-        "text": " | "
-      },
-      {
-        "name": "domain"
+        "name": "severity"
       },
       {
         "text": " | "
@@ -97,12 +91,12 @@
         "value": "TcHmiEventLogger"
       },
       {
-        "logic": "OR"
+        "logic": "AND"
       },
       {
-        "path": "domain",
+        "path": "alarmState",
         "comparator": "==",
-        "value": "TcHmiAlarm"
+        "value": 0
       }
     ],
     "targetRegion": "%ctrl%Region_Center%/ctrl%",
@@ -120,20 +114,7 @@
     "minWidthUnit": "px",
     "classList": [],
     "accessRights": [],
-    "adsRuntime": "TcSysService",
-    "iconWidth": 48.0,
-    "iconWidthUnit": "px",
-    "text": "TwinCAT",
-    "textPosition": "Left",
-    "serverInterval": 1000.0,
-    "serverDomain": "ADS",
-    "stateImages": {
-      "Fallback": "Images/TwinCAT/twincat-fallback.svg",
-      "Run": "Images/TwinCAT/twincat-run.svg",
-      "Stop": "Images/TwinCAT/twincat-stop.svg",
-      "Config": "Images/TwinCAT/twincat-config.svg",
-      "Exception": "Images/TwinCAT/twincat-exeption.svg"
-    }
+    "timeDisplayLayout": "TimeDateMultiLine"
   },
   {
     "itemType": "AdsState",
@@ -147,20 +128,7 @@
     "minWidthUnit": "px",
     "classList": [],
     "accessRights": [],
-    "adsRuntime": "PLC1",
-    "iconWidth": 48.0,
-    "iconWidthUnit": "px",
-    "text": "PLC",
-    "textPosition": "Left",
-    "serverInterval": 1000.0,
-    "serverDomain": "ADS",
-    "stateImages": {
-      "Fallback": "Images/PLC/plc-fallback.svg",
-      "Run": "Images/PLC/plc-run.svg",
-      "Stop": "Images/PLC/plc-stop.svg",
-      "Config": "Images/PLC/plc-config.svg",
-      "Exception": "Images/PLC/plc-exeption.svg"
-    }
+    "timeDisplayLayout": "TimeDateMultiLine"
   },
   {
     "itemType": "Time",

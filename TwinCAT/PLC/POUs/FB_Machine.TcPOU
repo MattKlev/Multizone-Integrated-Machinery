@@ -17,6 +17,14 @@ VAR
 	Reset		: ST_LEDButton;
 	HMI_Reset	: ST_LEDButton;
 	rtReset		: R_TRIG;
+	
+	
+	//Inputs
+	LocalEstop		AT%I*:BOOL;
+	MachineAIn		:ST_MachineModuleInputs;
+	MachineBIn		:ST_MachineModuleInputs;
+	MachineCIn		:ST_MachineModuleInputs;
+	MachineDIn		:ST_MachineModuleInputs;
 
 	//Overide
 	Override : LREAL := 30.0;
@@ -29,6 +37,8 @@ VAR
 	TwinSAFEGroupErrAck		AT %Q*	: BOOL;
 	TwinSAFEGroupState		AT %I*	: USINT;
 	TwinSAFE_X_Axis_ActPos	AT %Q*	: UDINT;
+
+	TwinSAFE_ResetAllEstopZones	AT%Q* :BOOL;
 
 	AxisInError : BOOL; //One or more axis in error
 
@@ -458,6 +468,10 @@ StopLEDBlink(ENABLE := TRUE);
 
 
 TwinSAFE_X_Axis_ActPos	:= TO_UDINT(X_Axis.NcToPlc.ActPos);
+
+
+TwinSAFE_ResetAllEstopZones:=Reset.Button OR HMI_Reset.Button;
+
 ]]></ST>
     </Implementation>
     <Method Name="M_Alarms" Id="{0d27ec4f-fbc2-4610-bb3d-2907967d60dc}">
@@ -465,26 +479,60 @@ TwinSAFE_X_Axis_ActPos	:= TO_UDINT(X_Axis.NcToPlc.ActPos);
 VAR_INPUT
 END_VAR
 VAR_INST
-	rtX4650		: R_TRIG;
-	X_4650		: FB_TcMessage;
-	rtZ4650		: R_TRIG;
-	Z_4650		: FB_TcMessage;
+
 	InitStep	: UDINT	:= 0;
 	initDone	: BOOL	:= FALSE;
+	//Drive not ready error
+	X_AxisDriveNotReady	:FB_AlarmWrapper;
+	Z_AxisDriveNotReady	:FB_AlarmWrapper;
+
+	//Catch all error
+	X_AxisError		: FB_AlarmWrapper;
+	Z_AxisError		: FB_AlarmWrapper;
 
 	fbReadXAxis	: MC_ReadParameterSet;
 	XParams		: ST_AxisParameterSet;
 	fbReadZAxis	: MC_ReadParameterSet;
 	ZParams		: ST_AxisParameterSet;
-END_VAR]]></Declaration>
+	
+	
+	AlarmLocalEstopPressed 		:FB_AlarmWrapper;
+	AlarmMachineAEstopPressed	:FB_AlarmWrapper;
+	AlarmMachineBEstopPressed	:FB_AlarmWrapper;
+	AlarmMachineCEstopPressed	:FB_AlarmWrapper;
+	AlarmMachineDEstopPressed	:FB_AlarmWrapper;
+	
+	AlarmMachineALightCurtain	:FB_AlarmWrapper;
+	AlarmMachineBLightCurtain	:FB_AlarmWrapper;
+	AlarmMachineCLightCurtain	:FB_AlarmWrapper;	
+	
+END_VAR
+]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT initDone THEN
 	CASE InitStep OF
-		0:
-			X_4650.CreateEx(stEventEntry := TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate, ipSourceInfo := 0);
-			Z_4650.CreateEX(stEventEntry := TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate, ipSourceInfo := 0);
+		0://Create events
+			X_AxisError.Create(stEventEntry := TC_EVENTS.DriveErrors.AxisInError);
+			Z_AxisError.Create(stEventEntry := TC_EVENTS.DriveErrors.AxisInError);
+			
+			X_AxisDriveNotReady.Create(stEventEntry:=TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate);
+			Z_AxisDriveNotReady.Create(stEventEntry:=TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate);
+				
+		
+			AlarmLocalEstopPressed.Create(stEventEntry:=TC_EVENTS.SafetyApplication.EstopBtnPressed);
+			AlarmMachineAEstopPressed.Create(stEventEntry:=TC_EVENTS.SafetyApplication.EstopBtnPressed);
+			AlarmMachineBEstopPressed.Create(stEventEntry:=TC_EVENTS.SafetyApplication.EstopBtnPressed);
+			AlarmMachineCEstopPressed.Create(stEventEntry:=TC_EVENTS.SafetyApplication.EstopBtnPressed);
+			AlarmMachineDEstopPressed.Create(stEventEntry:=TC_EVENTS.SafetyApplication.EstopBtnPressed);	
+			
+			AlarmMachineALightCurtain.Create(stEventEntry:=TC_EVENTS.SafetyApplication.LightCurtainTripped);
+			AlarmMachineBLightCurtain.Create(stEventEntry:=TC_EVENTS.SafetyApplication.LightCurtainTripped);
+			AlarmMachineCLightCurtain.Create(stEventEntry:=TC_EVENTS.SafetyApplication.LightCurtainTripped);
+		
+
 			InitStep := 10;
-		10:
+			
+		10://Get data for arguments
 			fbReadXAxis(Parameter	:= XParams,
 						Axis		:= X_Axis,
 						Execute		:= TRUE);
@@ -496,12 +544,23 @@ END_VAR]]></Declaration>
 			IF NOT fbReadXAxis.Busy AND NOT fbReadZAxis.Busy THEN
 				InitStep := 20;
 			END_IF
+			
 		20:
-			X_4650.ipArguments.Clear();
-			X_4650.ipArguments.AddString(XParams.sAxisName);
+			AlarmLocalEstopPressed.Arg0:='Local';
 
-			Z_4650.ipArguments.Clear();
-			Z_4650.ipArguments.AddString(ZParams.sAxisName);
+			AlarmMachineAEstopPressed.Arg0:='Machine A';
+			AlarmMachineBEstopPressed.Arg0:='Machine B';
+			AlarmMachineCEstopPressed.Arg0:='Machine C';			
+			AlarmMachineDEstopPressed.Arg0:='Machine D';	
+
+			AlarmMachineALightCurtain.Arg0:='Machine A';
+			AlarmMachineBLightCurtain.Arg0:='Machine B';
+			AlarmMachineCLightCurtain.Arg0:='Machine C';			
+				
+			X_AxisError.Arg0:=XParams.sAxisName;
+
+			Z_AxisError.Arg0:=ZParams.sAxisName;
+			
 			InitStep	:= 30;
 			initDone	:= TRUE;
 	END_CASE
@@ -509,17 +568,31 @@ END_VAR]]></Declaration>
 	RETURN;
 END_IF
 
-rtX4650(CLK := X_Axis.Status.ErrorID = 16#4650);
+//Trigger events
 
-IF rtX4650.Q THEN
-	X_4650.Send(0);
-END_IF
+//Estops
+AlarmLocalEstopPressed.Cyclic(AlarmState:=LocalEstop);
 
-rtZ4650(CLK := Z_Axis.Status.ErrorID = 16#4650);
+AlarmMachineAEstopPressed.Cyclic(AlarmState:=NOT MachineAIn.EstopBtn);
 
-IF rtZ4650.Q THEN
-	Z_4650.Send(0);
-END_IF]]></ST>
+AlarmMachineBEstopPressed.Cyclic(AlarmState:=NOT MachineBIn.EstopBtn);
+
+AlarmMachineCEstopPressed.Cyclic(AlarmState:=NOT MachineCIn.EstopBtn);
+
+AlarmMachineDEstopPressed.Cyclic(AlarmState:=NOT MachineDIn.EstopBtn);
+
+
+X_AxisDriveNotReady.Cyclic(AlarmState:=X_Axis.Status.ErrorID =16#4650);
+
+X_AxisError.Arg1:=TO_STRING(X_Axis.Status.ErrorID);
+X_AxisError.Cyclic(AlarmState:=X_Axis.Status.ErrorID<>0 AND X_Axis.Status.ErrorID<>16#4650);
+
+Z_AxisError.Arg1:=TO_STRING(Z_Axis.Status.ErrorID);
+Z_AxisError.Cyclic(AlarmState:=Z_Axis.Status.ErrorID<>0 AND Z_Axis.Status.ErrorID<>16#4650);
+
+
+
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_AxisPower" Id="{677ce463-30f2-4570-893a-c6b140cbb6b7}">
@@ -609,10 +682,65 @@ END_IF]]></ST>
       <LineId Id="6576" Count="364" />
       <LineId Id="7025" Count="1" />
       <LineId Id="7024" Count="0" />
+      <LineId Id="7030" Count="2" />
+      <LineId Id="7029" Count="0" />
       <LineId Id="2952" Count="0" />
     </LineIds>
     <LineIds Name="FB_Machine.M_Alarms">
-      <LineId Id="111" Count="40" />
+      <LineId Id="111" Count="2" />
+      <LineId Id="246" Count="0" />
+      <LineId Id="248" Count="1" />
+      <LineId Id="280" Count="1" />
+      <LineId Id="279" Count="0" />
+      <LineId Id="247" Count="0" />
+      <LineId Id="152" Count="1" />
+      <LineId Id="155" Count="1" />
+      <LineId Id="154" Count="0" />
+      <LineId Id="212" Count="0" />
+      <LineId Id="214" Count="1" />
+      <LineId Id="213" Count="0" />
+      <LineId Id="211" Count="0" />
+      <LineId Id="115" Count="1" />
+      <LineId Id="158" Count="0" />
+      <LineId Id="117" Count="11" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="129" Count="0" />
+      <LineId Id="162" Count="0" />
+      <LineId Id="166" Count="0" />
+      <LineId Id="165" Count="0" />
+      <LineId Id="168" Count="0" />
+      <LineId Id="171" Count="0" />
+      <LineId Id="163" Count="0" />
+      <LineId Id="217" Count="0" />
+      <LineId Id="219" Count="0" />
+      <LineId Id="222" Count="0" />
+      <LineId Id="225" Count="0" />
+      <LineId Id="285" Count="0" />
+      <LineId Id="287" Count="0" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="301" Count="0" />
+      <LineId Id="135" Count="5" />
+      <LineId Id="174" Count="0" />
+      <LineId Id="141" Count="0" />
+      <LineId Id="245" Count="0" />
+      <LineId Id="244" Count="0" />
+      <LineId Id="290" Count="0" />
+      <LineId Id="292" Count="1" />
+      <LineId Id="180" Count="0" />
+      <LineId Id="186" Count="0" />
+      <LineId Id="291" Count="0" />
+      <LineId Id="191" Count="0" />
+      <LineId Id="294" Count="1" />
+      <LineId Id="177" Count="0" />
+      <LineId Id="296" Count="1" />
+      <LineId Id="300" Count="0" />
+      <LineId Id="299" Count="0" />
+      <LineId Id="298" Count="0" />
+      <LineId Id="302" Count="2" />
+      <LineId Id="252" Count="0" />
+      <LineId Id="254" Count="0" />
+      <LineId Id="266" Count="0" />
       <LineId Id="29" Count="0" />
     </LineIds>
     <LineIds Name="FB_Machine.M_AxisPower">

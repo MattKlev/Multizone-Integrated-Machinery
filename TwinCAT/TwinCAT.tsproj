@@ -1636,6 +1636,15 @@ External Setpoint Generation:
 			</SubItem>
 		</DataType>
 		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-002000000007}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..6] OF BIT</Name>
+			<BitSize>7</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>7</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
 			<Name GUID="{1553EE7F-0490-4879-4F41-423085C83887}" AutoDeleteType="true">INFODATA_GRP_3</Name>
 			<BitSize>16</BitSize>
 			<SubItem>
@@ -1652,8 +1661,30 @@ External Setpoint Generation:
 			</SubItem>
 		</DataType>
 		<DataType>
-			<Name GUID="{9791AE4D-587C-4ACF-8C74-5503E5B8EC7F}" Namespace="NC" PersistentType="true">DriveErrors</Name>
-			<DisplayName TxtId=""><![CDATA[NewEventClass_DisplayText]]></DisplayName>
+			<Name GUID="{66EF9C3B-0FCB-4894-BD9C-8DE7ACC46788}" Namespace="TwinSAFE" PersistentType="true">SafetyApplication</Name>
+			<DisplayName TxtId=""><![CDATA[SafetyApplication]]></DisplayName>
+			<EventId>
+				<Name Id="1">EstopBtnPressed</Name>
+				<DisplayName TxtId=""><![CDATA[{0} E-Stop Button Pressed]]></DisplayName>
+				<Severity>Warning</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">LightCurtainTripped</Name>
+				<DisplayName TxtId=""><![CDATA[{0} Light Curtain Tripped]]></DisplayName>
+				<Severity>Warning</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{EC726318-4B11-4992-9213-0EDCBC00173D}"/>
+				<Hide GUID="{E8352029-B585-495C-A608-6B0DB5B1C460}"/>
+				<Hide GUID="{9E6BC852-9147-46C1-81A1-3C6CC5FB9385}"/>
+				<Hide GUID="{6EB7D264-5A3E-405C-9990-3F91C4D83D5E}"/>
+				<Hide GUID="{BC67D138-BCFA-4503-9EE7-532E214D7DED}"/>
+				<Hide GUID="{7E05E9DA-3DE9-4AAD-9545-5CB5EBF6C483}"/>
+			</Hides>
+		</DataType>
+		<DataType>
+			<Name GUID="{5AC57F49-D147-45C6-979F-CA51478BA6BD}" Namespace="NC" PersistentType="true">DriveErrors</Name>
+			<DisplayName TxtId=""><![CDATA[Drive Errors]]></DisplayName>
 			<EventId>
 				<Name Id="4650">DriveHardwareNotReadyToOperate</Name>
 				<DisplayName TxtId=""><![CDATA[{0} Drive hardware not ready to operate]]></DisplayName>
@@ -1669,12 +1700,20 @@ External Setpoint Generation:
 					<Cause TxtId=""><![CDATA[the drive lacks the controller enable (ENABLE)]]></Cause>
 				</CauseRemedy>
 			</EventId>
+			<EventId>
+				<Name Id="2">AxisInError</Name>
+				<DisplayName TxtId=""><![CDATA[{0} NC Axis Error {1}]]></DisplayName>
+				<Severity>Error</Severity>
+			</EventId>
 			<Hides>
 				<Hide GUID="{21DB8AB5-CD63-4C7B-B8D0-D1662E011E79}"/>
 				<Hide GUID="{175E1A35-5FF0-4775-B225-0755523C3B0D}"/>
 				<Hide GUID="{358D35A3-15C3-46F8-8F8A-84AB4992F547}"/>
 				<Hide GUID="{DD9F5638-0113-4176-A73B-16B578FEAEEC}"/>
 				<Hide GUID="{6EF1179A-36E2-4919-A172-7E778AFF537C}"/>
+				<Hide GUID="{9791AE4D-587C-4ACF-8C74-5503E5B8EC7F}"/>
+				<Hide GUID="{9A92081B-E957-42F4-8B1C-C59FED9DB5FA}"/>
+				<Hide GUID="{D9E6D07D-E376-43F9-82A3-644FE824B6E2}"/>
 			</Hides>
 		</DataType>
 	</DataTypes>
@@ -1694,7 +1733,8 @@ External Setpoint Generation:
 				<Cpu CpuId="3"/>
 			</Settings>
 			<Licenses>
-				<Target>
+				<Target BkhfOrder="123456789" CustomOrder="Christopher Woller">
+					<CustomComment><![CDATA[TwinSAFE simulation stand EC Master PC]]></CustomComment>
 					<ManualSelect>{927A7313-A412-4376-8911-4A8F60EC8651}</ManualSelect>
 					<ManualSelect>{27326EE5-AB30-4084-B15B-8CCA96CCBF0B}</ManualSelect>
 					<ManualSelect>{1C20D4D8-C732-464D-AF34-6EA5D2180E06}</ManualSelect>
@@ -2076,7 +2116,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{0C5A0548-FA4F-4B8E-B05E-82A0037B3227}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{BB292294-AB77-7D33-7B13-28DCCEABEF73}" TmcPath="PLC\PLC.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{E026249D-5D54-E3B1-C8D3-CD2C42F00765}" TmcPath="PLC\PLC.tmc">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -2112,6 +2152,10 @@ External Setpoint Generation:
 						<Var>
 							<Name>MAIN.Machine.TwinSAFE_X_Axis_ActPos</Name>
 							<Type>UDINT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.TwinSAFE_ResetAllEstopZones</Name>
+							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.Machine.X_Axis.PlcToNc</Name>
@@ -2155,6 +2199,43 @@ External Setpoint Generation:
 						</Var>
 						<Var>
 							<Name>MAIN.Machine.HMI_Reset.Button</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.LocalEstop</Name>
+							<Comment><![CDATA[Inputs]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.MachineAIn.EstopBtn</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.MachineAIn.LightCurtain</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.MachineBIn.EstopBtn</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.MachineBIn.LightCurtain</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.MachineCIn.EstopBtn</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.MachineCIn.LightCurtain</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.MachineDIn.EstopBtn</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Machine.MachineDIn.LightCurtain</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -5883,7 +5964,7 @@ Bit 8 - 15 : reserved]]></Comment>
 						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x1afe3052" RevisionNo="#x00120000" InfoDataAddr="true" RepeatSupport="true" TimeoutStateChange1="5000" TimeoutMailbox2="10000" TComSupport="true" PortPhys="51" DebugMemory="8" SafetyLogicSupported="true" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6910, TwinSAFE PLC" Desc="EL6910" PortABoxInfo="#x01000001">
 							<SyncMan>001000012600010001000000000100010001001026010000</SyncMan>
 							<SyncMan>001100012200010002000000000100010001001122010000</SyncMan>
-							<SyncMan>001248002400010003000000000000000200001224010000</SyncMan>
+							<SyncMan>001249002400010003000000000000000200001224010000</SyncMan>
 							<SyncMan>001d44002000010004000000000000000200001d20010000</SyncMan>
 							<SyncMan>002e00002400000003000000000000000000002e24000000</SyncMan>
 							<SyncMan>002f00002000000004000000000000000000002f20000000</SyncMan>
@@ -5975,6 +6056,12 @@ Bit 8 - 15 : reserved]]></Comment>
 								</Entry>
 								<Entry Name="Standard In Var 51" Index="#x6000" Sub="#x03">
 									<Type>UDINT</Type>
+								</Entry>
+								<Entry Name="Standard In Var 55" Index="#x6000" Sub="#x04">
+									<Type>BIT</Type>
+								</Entry>
+								<Entry>
+									<Type GUID="{18071995-0000-0000-0000-002000000007}">ARRAY [0..6] OF BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="TwinSAFE Group Info Data" Index="#x1bfa" Flags="#x2011" SyncMan="3">
@@ -6159,6 +6246,7 @@ Bit 8 - 15 : reserved]]></Comment>
 		</OwnerA>
 		<OwnerA Name="TIPC^PLC^PLC Instance">
 			<OwnerB Name="TIID^CP Push Buttons (USB)^Box 0 (CPX8XX)">
+				<Link VarA="PlcTask Inputs^MAIN.Machine.LocalEstop" VarB="Term 1 (CPx9xx-4)^Channel 1^Estop"/>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.Reset.Button" VarB="Term 1 (CPx9xx-4)^Channel 1^BlueBtn"/>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.Start.Button" VarB="Term 1 (CPx9xx-4)^Channel 1^GreenBtn"/>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.Stop.Button" VarB="Term 1 (CPx9xx-4)^Channel 1^RedBtn"/>
@@ -6170,10 +6258,26 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFEGroupState" VarB="TwinSAFE Group Info Data^TwinSafeGroup1 Info Data^State"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupErrAck" VarB="StandardOutputs^Standard In Var 1"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupRun" VarB="StandardOutputs^Standard In Var 2"/>
+				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFE_ResetAllEstopZones" VarB="StandardOutputs^Standard In Var 55"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFE_X_Axis_ActPos" VarB="StandardOutputs^Standard In Var 51"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine A (EK1100)^Machine A Safe In (EL1904)">
+				<Link VarA="PlcTask Inputs^MAIN.Machine.MachineAIn.EstopBtn" VarB="Module 1 (FSOES)^TxPDO^FSOE^E-Stop PB"/>
+				<Link VarA="PlcTask Inputs^MAIN.Machine.MachineAIn.LightCurtain" VarB="Module 1 (FSOES)^TxPDO^FSOE^Light Curtain"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine B (EK1100)^Machine B Safe In (EL1904)">
+				<Link VarA="PlcTask Inputs^MAIN.Machine.MachineBIn.EstopBtn" VarB="Module 1 (FSOES)^TxPDO^FSOE^E-Stop PB"/>
+				<Link VarA="PlcTask Inputs^MAIN.Machine.MachineBIn.LightCurtain" VarB="Module 1 (FSOES)^TxPDO^FSOE^Light Curtain"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine C (EK1100)^Machine C Safe In (EL1904)">
+				<Link VarA="PlcTask Inputs^MAIN.Machine.MachineCIn.EstopBtn" VarB="Module 1 (FSOES)^TxPDO^FSOE^E-Stop PB"/>
+				<Link VarA="PlcTask Inputs^MAIN.Machine.MachineCIn.LightCurtain" VarB="Module 1 (FSOES)^TxPDO^FSOE^Light Curtain"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier Gripper (EL2002)">
 				<Link VarA="PlcTask Outputs^MAIN.Machine.Machine_D_Carrier_Gripper" VarB="Fingers^Output"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Machine D Safe In (EL1904)">
+				<Link VarA="PlcTask Inputs^MAIN.Machine.MachineDIn.EstopBtn" VarB="Module 1 (FSOES)^TxPDO^FSOE^E-Stop PB"/>
 			</OwnerB>
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^X">
 				<Link VarA="PlcTask Inputs^MAIN.Machine.X_Axis.NcToPlc" VarB="Outputs^ToPlc"/>

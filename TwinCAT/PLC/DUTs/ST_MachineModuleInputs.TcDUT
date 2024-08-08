@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.8">
+  <DUT Name="ST_MachineModuleInputs" Id="{12b6d54d-9807-460f-9e4a-f7b1cfb15daa}">
+    <Declaration><![CDATA[TYPE ST_MachineModuleInputs :
+STRUCT
+	EstopBtn		AT%I*		:BOOL;
+	LightCurtain	AT%I* 		:BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>
