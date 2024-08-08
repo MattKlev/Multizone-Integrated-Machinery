@@ -2335,8 +2335,8 @@ External Setpoint Generation:
 			</Project>
 		</Safety>
 		<Io>
-			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="0.0.0.0.3.1" RemoteName="Sim IO C6017 LAN 4" InfoImageId="5">
-				<Name>Sim IO C6017 LAN 4</Name>
+			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="0.0.0.0.3.1" RemoteName="Sim IO" InfoImageId="5">
+				<Name>Sim IO</Name>
 				<AddressInfo>
 					<Pnp>
 						<DeviceDesc>X001 (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) </DeviceDesc>
@@ -6236,7 +6236,7 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="Term 1 (EK1200)^Operator Panel Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Operator Panel Safe In (EL1904) - Module 1 (FSOES)_43 RxPDO"/>
 			</OwnerB>
 		</OwnerA>
-		<OwnerA Name="TIID^Sim IO C6017 LAN 4">
+		<OwnerA Name="TIID^Sim IO">
 			<OwnerB Name="TIID^Real IO^Term 1 (EK1200)^Machine Safety Controller (EL6910)">
 				<Link VarA="Machine A (EK1100)^Machine A Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine A Safe In (EL1904) - Module 1 (FSOES)_32 TxPDO"/>
 				<Link VarA="Machine A (EK1100)^Machine A Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine A Safe In (EL1904) - Module 1 (FSOES)_32 RxPDO"/>
@@ -6259,7 +6259,7 @@ Bit 8 - 15 : reserved]]></Comment>
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TINC^NC-Task 1 SAF^Axes^X">
-			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier X Axis (EL7211-9014)">
+			<OwnerB Name="TIID^Sim IO^Machine D (EK1100)^Carrier X Axis (EL7211-9014)">
 				<Link VarA="Drive^Inputs^In^nDataIn1" VarB="DRV Following error actual value^Following error actual value"/>
 				<Link VarA="Drive^Inputs^In^nDataIn3[0]" VarB="DRV Torque actual value^Torque actual value"/>
 				<Link VarA="Drive^Inputs^In^nDcOutputTime" VarB="InfoData^DcOutputShift"/>
@@ -6275,7 +6275,7 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="EL7211^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
 				<Link VarA="EL7211^Inputs^In^nState4" VarB="WcState^WcState"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier X Safety Encoder (EL5001-0090)">
+			<OwnerB Name="TIID^Sim IO^Machine D (EK1100)^Carrier X Safety Encoder (EL5001-0090)">
 				<Link VarA="EL5001-0090^Inputs^In^nDataIn1" VarB="SSI Inputs^Counter value"/>
 				<Link VarA="EL5001-0090^Inputs^In^nState1" VarB="SSI Inputs^Status^Data error"/>
 				<Link VarA="EL5001-0090^Inputs^In^nState1" VarB="SSI Inputs^Status^Frame error" Size="1" OffsA="1"/>
@@ -6288,7 +6288,7 @@ Bit 8 - 15 : reserved]]></Comment>
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TINC^NC-Task 1 SAF^Axes^Z">
-			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier Z Axis (EL7211-9014)">
+			<OwnerB Name="TIID^Sim IO^Machine D (EK1100)^Carrier Z Axis (EL7211-9014)">
 				<Link VarA="Drive^Inputs^In^nDataIn1" VarB="DRV Following error actual value^Following error actual value"/>
 				<Link VarA="Drive^Inputs^In^nDataIn3[0]" VarB="DRV Torque actual value^Torque actual value"/>
 				<Link VarA="Drive^Inputs^In^nDcOutputTime" VarB="InfoData^DcOutputShift"/>
@@ -6326,22 +6326,22 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFE_ResetAllEstopZones" VarB="StandardOutputs^TwinSafeGroup1.ResetAllZones_55"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFE_X_Axis_ActPos" VarB="StandardOutputs^TwinSafeGroup1.X_ActPosFromPLC_51"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine A (EK1100)^Machine A Safe In (EL1904)">
+			<OwnerB Name="TIID^Sim IO^Machine A (EK1100)^Machine A Safe In (EL1904)">
 				<Link VarA="PlcTask Inputs^MAIN.Machine.MachineAIn.EstopBtn" VarB="Module 1 (FSOES)^TxPDO^FSOE^E-Stop PB"/>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.MachineAIn.LightCurtain" VarB="Module 1 (FSOES)^TxPDO^FSOE^Light Curtain"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine B (EK1100)^Machine B Safe In (EL1904)">
+			<OwnerB Name="TIID^Sim IO^Machine B (EK1100)^Machine B Safe In (EL1904)">
 				<Link VarA="PlcTask Inputs^MAIN.Machine.MachineBIn.EstopBtn" VarB="Module 1 (FSOES)^TxPDO^FSOE^E-Stop PB"/>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.MachineBIn.LightCurtain" VarB="Module 1 (FSOES)^TxPDO^FSOE^Light Curtain"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine C (EK1100)^Machine C Safe In (EL1904)">
+			<OwnerB Name="TIID^Sim IO^Machine C (EK1100)^Machine C Safe In (EL1904)">
 				<Link VarA="PlcTask Inputs^MAIN.Machine.MachineCIn.EstopBtn" VarB="Module 1 (FSOES)^TxPDO^FSOE^E-Stop PB"/>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.MachineCIn.LightCurtain" VarB="Module 1 (FSOES)^TxPDO^FSOE^Light Curtain"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Carrier Gripper (EL2002)">
+			<OwnerB Name="TIID^Sim IO^Machine D (EK1100)^Carrier Gripper (EL2002)">
 				<Link VarA="PlcTask Outputs^MAIN.Machine.Machine_D_Carrier_Gripper" VarB="Fingers^Output"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Sim IO C6017 LAN 4^Machine D (EK1100)^Machine D Safe In (EL1904)">
+			<OwnerB Name="TIID^Sim IO^Machine D (EK1100)^Machine D Safe In (EL1904)">
 				<Link VarA="PlcTask Inputs^MAIN.Machine.MachineDIn.EstopBtn" VarB="Module 1 (FSOES)^TxPDO^FSOE^E-Stop PB"/>
 			</OwnerB>
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^X">
