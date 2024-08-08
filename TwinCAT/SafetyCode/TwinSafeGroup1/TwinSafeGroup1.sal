@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<safetyApplication Crc="1196807256" xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.5.0.0" Id="4315bf16-b832-4826-9dc7-7c79fc2e3364" name="" mapState="true" mapDiag="true" groupOrderId="0" passificationAllowed="false" temporaryDeactivationAllowed="false" permamentDeactivationAllowed="false" xmlid="0" analogFBOutputReplacementValues="Zero" verifyAnalogFBInputsIfStart="false" userFbId="00000000-0000-0000-0000-000000000000" xmlns="http://schemas.microsoft.com/dsltools/SafetyApplicationLanguage">
+<safetyApplication Crc="3213199480" xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.5.0.0" Id="4315bf16-b832-4826-9dc7-7c79fc2e3364" name="" mapState="true" mapDiag="true" groupOrderId="0" passificationAllowed="false" temporaryDeactivationAllowed="false" permamentDeactivationAllowed="false" xmlid="0" analogFBOutputReplacementValues="Zero" verifyAnalogFBInputsIfStart="false" userFbId="00000000-0000-0000-0000-000000000000" xmlns="http://schemas.microsoft.com/dsltools/SafetyApplicationLanguage">
   <comments>
     <comment Id="66b99a2d-6cb6-4790-8d28-309502c5018d" text="Machine A 0-666 mm&#xD;&#xA;Machine B 667 - 1333&#xD;&#xA;Machine C 1334 - 2000.0" currentNetworkOrderId="1">
       <networks>
@@ -14,7 +14,7 @@
       <Network Id="1ff74438-1c69-4ee1-bd4f-f0c6ecc2d500" name="Network1" networkName="MachineA" intId="1" networkOrderId="2">
         <functionBlocks>
           <networkHasFunctionBlocks Id="0df8ff56-fa3b-49d2-97b8-45c7bf531dd2">
-            <fBEstop Id="75b82e37-7156-402b-96e9-11a86a48c0f3" name="FBEstop1" instanceName="Machine_A_Estop" orderOfExecution="5" mapState="false" mapDiag="false" functionName="safeEstop" safeInputsAfterDiscError="false">
+            <fBEstop Id="75b82e37-7156-402b-96e9-11a86a48c0f3" name="FBEstop1" instanceName="Machine_A_Estop" orderOfExecution="5" mapState="true" mapDiag="true" functionName="safeEstop" safeInputsAfterDiscError="false">
               <inPorts>
                 <functioBlockHasInPorts Id="160619af-627d-4a23-8d3e-730a5ddbe13d">
                   <inPort Id="5223c2e2-cfd5-43ea-9abc-07dd2d93db17" name="Restart" portName="Restart" portNum="2" objectIndex="0" varId="1" filter="3" portDataType="1" maxDeviation="0" resetTime="0" />
@@ -116,7 +116,7 @@
       <Network Id="768172fe-051c-4e33-ad18-dc0dd9bc1b39" name="Network2" networkName="MachineB" intId="2" networkOrderId="3">
         <functionBlocks>
           <networkHasFunctionBlocks Id="91f0a4f6-beaa-4991-b332-c4d9eb7b8f8f">
-            <fBEstop Id="cfc7c1d1-578f-4602-8945-922c68b3587d" name="FBEstop1" instanceName="Machine_B_Estop" orderOfExecution="7" mapState="false" mapDiag="false" functionName="safeEstop" safeInputsAfterDiscError="false">
+            <fBEstop Id="cfc7c1d1-578f-4602-8945-922c68b3587d" name="FBEstop1" instanceName="Machine_B_Estop" orderOfExecution="7" mapState="true" mapDiag="true" functionName="safeEstop" safeInputsAfterDiscError="false">
               <inPorts>
                 <functioBlockHasInPorts Id="8d04ad48-c859-4cf1-aa1d-6596aa44c584">
                   <inPort Id="92e009c0-c411-458f-a4d1-7640d2e25444" name="Restart" portName="Restart" portNum="2" objectIndex="0" varId="1" filter="3" portDataType="1" maxDeviation="0" resetTime="0">
@@ -218,7 +218,7 @@
       <Network Id="d9b9d88d-8999-4677-88de-0a25188b6f1b" name="Network3" networkName="MachineC" intId="3" networkOrderId="4">
         <functionBlocks>
           <networkHasFunctionBlocks Id="5f3a6aad-cc7b-4075-9e26-d0ae3735ed14">
-            <fBEstop Id="6b84cb21-1933-4efc-a891-91b26384ba32" name="FBEstop1" instanceName="Machine_C_Estop" orderOfExecution="9" mapState="false" mapDiag="false" functionName="safeEstop" safeInputsAfterDiscError="false">
+            <fBEstop Id="6b84cb21-1933-4efc-a891-91b26384ba32" name="FBEstop1" instanceName="Machine_C_Estop" orderOfExecution="9" mapState="true" mapDiag="true" functionName="safeEstop" safeInputsAfterDiscError="false">
               <inPorts>
                 <functioBlockHasInPorts Id="c398249a-f187-4188-8bb8-98d1a4f21698">
                   <inPort Id="0d5decff-9de8-492a-9054-c775da55bd5e" name="Restart" portName="Restart" portNum="2" objectIndex="0" varId="1" filter="3" portDataType="1" maxDeviation="0" resetTime="0">
@@ -320,7 +320,7 @@
       <Network Id="9b90c593-957f-426a-ae4f-5bcf3561366a" name="Network4" networkName="MachineD" intId="4" networkOrderId="5">
         <functionBlocks>
           <networkHasFunctionBlocks Id="3ccd764e-41ac-4e83-b823-2496b6603702">
-            <fBEstop Id="8c92947f-aba5-470c-bd31-c0add0d656c5" name="FBEstop4" instanceName="Machine_D_Estop" orderOfExecution="11" mapState="false" mapDiag="false" functionName="safeEstop" safeInputsAfterDiscError="false">
+            <fBEstop Id="8c92947f-aba5-470c-bd31-c0add0d656c5" name="FBEstop4" instanceName="Machine_D_Estop" orderOfExecution="11" mapState="true" mapDiag="true" functionName="safeEstop" safeInputsAfterDiscError="false">
               <inPorts>
                 <functioBlockHasInPorts Id="fac7ec5e-1b79-441f-93cd-c1e3797d5938">
                   <inPort Id="31a8ce48-b493-46d4-abee-25ba1840774c" name="Restart" portName="Restart" portNum="2" objectIndex="0" varId="1" filter="3" portDataType="1" maxDeviation="0" resetTime="0">

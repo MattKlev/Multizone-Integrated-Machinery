@@ -7,6 +7,14 @@
             "READ_ONLY": false,
             "SYMBOLS": {},
             "USE_WHITELISTING": false
+        },
+        "TcSysService": {
+            "ENABLED": true,
+            "NETID": "127.0.0.1.1.1",
+            "PORT": 10000,
+            "READ_ONLY": false,
+            "SYMBOLS": {},
+            "USE_WHITELISTING": false
         }
     }
 }
