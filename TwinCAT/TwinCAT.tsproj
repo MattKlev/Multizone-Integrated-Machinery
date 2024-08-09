@@ -1749,6 +1749,44 @@ External Setpoint Generation:
 				<Hide GUID="{CB3307CE-C728-4BD2-857B-252C2B57C1B9}"/>
 			</Hides>
 		</DataType>
+		<DataType>
+			<Name GUID="{CB3307CE-C728-4BD2-857B-252C2B57C1B9}" Namespace="TwinSAFE" PersistentType="true">SafetyApplication</Name>
+			<DisplayName TxtId=""><![CDATA[SafetyApplication]]></DisplayName>
+			<EventId>
+				<Name Id="1">EstopBtnPressed</Name>
+				<DisplayName TxtId=""><![CDATA[Machine {0} E-Stop Button Pressed]]></DisplayName>
+				<Severity>Warning</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">LightCurtainTripped</Name>
+				<DisplayName TxtId=""><![CDATA[Machine {0} Light Curtain Tripped]]></DisplayName>
+				<Severity>Warning</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="3">MachineXEstopTripped</Name>
+				<DisplayName TxtId=""><![CDATA[Machine {0} E-Stop is tripped]]></DisplayName>
+				<Severity>Info</Severity>
+				<CauseRemedy Idx="1">
+					<Cause TxtId=""><![CDATA[The logical E-Stop for this zone is active]]></Cause>
+					<Remedy TxtId=""><![CDATA[release the estop button and press reset]]></Remedy>
+				</CauseRemedy>
+			</EventId>
+			<Hides>
+				<Hide GUID="{EC726318-4B11-4992-9213-0EDCBC00173D}"/>
+				<Hide GUID="{E8352029-B585-495C-A608-6B0DB5B1C460}"/>
+				<Hide GUID="{9E6BC852-9147-46C1-81A1-3C6CC5FB9385}"/>
+				<Hide GUID="{6EB7D264-5A3E-405C-9990-3F91C4D83D5E}"/>
+				<Hide GUID="{BC67D138-BCFA-4503-9EE7-532E214D7DED}"/>
+				<Hide GUID="{7E05E9DA-3DE9-4AAD-9545-5CB5EBF6C483}"/>
+				<Hide GUID="{66EF9C3B-0FCB-4894-BD9C-8DE7ACC46788}"/>
+				<Hide GUID="{6F688D40-6237-4F19-813E-A9DE5EFA0B6E}"/>
+				<Hide GUID="{F5B52C6D-3BFD-4B74-B018-FAC85BBAEE9B}"/>
+				<Hide GUID="{AFF7615E-4AF0-41FD-A582-09C4241C1A14}"/>
+				<Hide GUID="{A0F827F8-E4CA-436D-86D2-5C64AE89880B}"/>
+				<Hide GUID="{DA2EDA84-0FE5-4EFF-935C-BD29A8587855}"/>
+				<Hide GUID="{5536FD7D-F1B3-43B0-A2FE-B7A0F166C242}"/>
+			</Hides>
+		</DataType>
 	</DataTypes>
 	<ImageDatas>
 		<ImageData Id="1000">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
@@ -1768,8 +1806,8 @@ External Setpoint Generation:
 			<Licenses>
 				<Target BkhfOrder="123456789" CustomOrder="Christopher Woller">
 					<CustomComment><![CDATA[TwinSAFE simulation stand EC Master PC]]></CustomComment>
-					<ManualSelect>{927A7313-A412-4376-8911-4A8F60EC8651}</ManualSelect>
 					<ManualSelect>{27326EE5-AB30-4084-B15B-8CCA96CCBF0B}</ManualSelect>
+					<ManualSelect>{927A7313-A412-4376-8911-4A8F60EC8651}</ManualSelect>
 					<ManualSelect>{1C20D4D8-C732-464D-AF34-6EA5D2180E06}</ManualSelect>
 					<ManualSelect>{3DDCAB25-BF0E-412C-A721-DC77C1B8099C}</ManualSelect>
 				</Target>
@@ -2149,7 +2187,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{0C5A0548-FA4F-4B8E-B05E-82A0037B3227}" Name="PLC" PrjFilePath="PLC\PLC.plcproj" TmcFilePath="PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{634EA20E-3F4B-611C-08C3-5966E87ECEF3}" TmcPath="PLC\PLC.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{46B2860A-C0F3-0ABA-1433-EEE40418FACC}" TmcPath="PLC\PLC.tmc">
 					<Name>PLC Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="2" AreaNo="1">
@@ -6231,9 +6269,12 @@ Bit 8 - 15 : reserved]]></Comment>
 		<MappingInfo Identifier="{03040010-0010-0304-1000-040310000403}" Id="#x02030080" Watchdog="04000000040000000400000004000000"/>
 		<MappingInfo Identifier="{03040040-0010-0304-4000-040310000403}" Id="#x02030020" Watchdog="14000000040000000400000004000000"/>
 		<OwnerA Name="TIID^Real IO">
-			<OwnerB Name="TIID^Real IO^Term 1 (EK1200)^Machine Safety Controller (EL6910)">
-				<Link VarA="Term 1 (EK1200)^Operator Panel Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Operator Panel Safe In (EL1904) - Module 1 (FSOES)_43 TxPDO"/>
-				<Link VarA="Term 1 (EK1200)^Operator Panel Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Operator Panel Safe In (EL1904) - Module 1 (FSOES)_43 RxPDO"/>
+			<OwnerB Name="TIID^Real IO^Term 1 (EK1200)^Operator Panel Safe In (EL1904)">
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionInputs^TwinSafeGroup1.Operator Panel Safe In (EL1904) - Module 1 (FSOES)_43 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionOutputs^TwinSafeGroup1.Operator Panel Safe In (EL1904) - Module 1 (FSOES)_43 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO^Machine B (EK1100)^Machine B Safe out (EL2904)">
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionInputs^TwinSafeGroup1.Machine B Safe out (EL2904) - Module 1 (FSOES)_35 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TIID^Sim IO">
@@ -6244,7 +6285,6 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="Machine A (EK1100)^Machine A Safe out (EL2904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine A Safe out (EL2904) - Module 1 (FSOES)_33 RxPDO"/>
 				<Link VarA="Machine B (EK1100)^Machine B Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine B Safe In (EL1904) - Module 1 (FSOES)_34 TxPDO"/>
 				<Link VarA="Machine B (EK1100)^Machine B Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine B Safe In (EL1904) - Module 1 (FSOES)_34 RxPDO"/>
-				<Link VarA="Machine B (EK1100)^Machine B Safe out (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine B Safe out (EL2904) - Module 1 (FSOES)_35 TxPDO"/>
 				<Link VarA="Machine B (EK1100)^Machine B Safe out (EL2904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine B Safe out (EL2904) - Module 1 (FSOES)_35 RxPDO"/>
 				<Link VarA="Machine C (EK1100)^Machine C Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine C Safe In (EL1904) - Module 1 (FSOES)_36 TxPDO"/>
 				<Link VarA="Machine C (EK1100)^Machine C Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine C Safe In (EL1904) - Module 1 (FSOES)_36 RxPDO"/>
