@@ -1661,6 +1661,32 @@ External Setpoint Generation:
 			</SubItem>
 		</DataType>
 		<DataType>
+			<Name GUID="{91BA7A38-806B-5E06-59E6-F04F15D6B8FF}" AutoDeleteType="true">INFODATA_FB_5</Name>
+			<BitSize>16</BitSize>
+			<SubItem>
+				<Name>State</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000002}">USINT</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Diag</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000002}">USINT</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>8</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{73F57572-A2C9-F88F-FFC6-9BA3A895E419}" AutoDeleteType="true">INFODATA_FB_1</Name>
+			<BitSize>8</BitSize>
+			<SubItem>
+				<Name>State</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000002}">USINT</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
 			<Name GUID="{1553EE7F-0490-4879-4F41-423085C83887}" AutoDeleteType="true">INFODATA_GRP_3</Name>
 			<BitSize>16</BitSize>
 			<SubItem>
@@ -1806,8 +1832,8 @@ External Setpoint Generation:
 			<Licenses>
 				<Target BkhfOrder="123456789" CustomOrder="Christopher Woller">
 					<CustomComment><![CDATA[TwinSAFE simulation stand EC Master PC]]></CustomComment>
-					<ManualSelect>{27326EE5-AB30-4084-B15B-8CCA96CCBF0B}</ManualSelect>
 					<ManualSelect>{927A7313-A412-4376-8911-4A8F60EC8651}</ManualSelect>
+					<ManualSelect>{27326EE5-AB30-4084-B15B-8CCA96CCBF0B}</ManualSelect>
 					<ManualSelect>{1C20D4D8-C732-464D-AF34-6EA5D2180E06}</ManualSelect>
 					<ManualSelect>{3DDCAB25-BF0E-412C-A721-DC77C1B8099C}</ManualSelect>
 				</Target>
@@ -6052,7 +6078,7 @@ Bit 8 - 15 : reserved]]></Comment>
 							<SyncMan>001000012600010001000000000100010001001026010000</SyncMan>
 							<SyncMan>001100012200010002000000000100010001001122010000</SyncMan>
 							<SyncMan>001249002400010003000000000000000200001224010000</SyncMan>
-							<SyncMan>001d50002000010004000000000000000200001d20010000</SyncMan>
+							<SyncMan>001d5d002000010004000000000000000200001d20010000</SyncMan>
 							<SyncMan>002e00002400000003000000000000000000002e24000000</SyncMan>
 							<SyncMan>002f00002000000004000000000000000000002f20000000</SyncMan>
 							<Fmmu>0000000000000000001200020100000001000000060000000200000000000000</Fmmu>
@@ -6126,11 +6152,6 @@ Bit 8 - 15 : reserved]]></Comment>
 									<Type GUID="{0994ABA9-6F32-EEB9-4362-7774F7A1F4F4}">FSOE_11</Type>
 								</Entry>
 							</Pdo>
-							<Pdo Name="StandardInputs" Index="#x1bf0" Flags="#x2011" SyncMan="3">
-								<Entry Name="TwinSafeGroup1.DummyVar_54" Index="#x7000" Sub="#x01">
-									<Type>UDINT</Type>
-								</Entry>
-							</Pdo>
 							<Pdo Name="StandardOutputs" Index="#x17f0" InOut="1" Flags="#x2011" SyncMan="2">
 								<Entry Name="TwinSafeGroup1.ErrorAcknowledgement_1" Index="#x6000" Sub="#x01">
 									<Type>BIT</Type>
@@ -6152,17 +6173,53 @@ Bit 8 - 15 : reserved]]></Comment>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Function Block Info Data" Index="#x1bf8" Flags="#x2011" SyncMan="3">
-								<Entry Name="TwinSafeGroup1.MachineA.Machine_A_Estop Info Data" Index="#x7000" Sub="#x01">
+								<Entry Name="TwinSafeGroup1.MachineD.Machine_D_Estop Info Data" Index="#x7000" Sub="#x01">
 									<Type GUID="{2B008623-51EE-EF6A-ACDE-0017707F5BB8}">INFODATA_FB_3</Type>
 								</Entry>
-								<Entry Name="TwinSafeGroup1.MachineB.Machine_B_Estop Info Data" Index="#x7000" Sub="#x02">
+								<Entry Name="TwinSafeGroup1.X_Axis.FBScaling1 Info Data" Index="#x7000" Sub="#x02">
+									<Type GUID="{91BA7A38-806B-5E06-59E6-F04F15D6B8FF}">INFODATA_FB_5</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.X_Axis.FBCompare1 Info Data" Index="#x7000" Sub="#x03">
+									<Type GUID="{91BA7A38-806B-5E06-59E6-F04F15D6B8FF}">INFODATA_FB_5</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.MachineA.Machine_A.FBEstop1 Info Data" Index="#x7000" Sub="#x04">
 									<Type GUID="{2B008623-51EE-EF6A-ACDE-0017707F5BB8}">INFODATA_FB_3</Type>
 								</Entry>
-								<Entry Name="TwinSafeGroup1.MachineC.Machine_C_Estop Info Data" Index="#x7000" Sub="#x03">
+								<Entry Name="TwinSafeGroup1.MachineA.Machine_A.FBLimit1 Info Data" Index="#x7000" Sub="#x05">
+									<Type GUID="{91BA7A38-806B-5E06-59E6-F04F15D6B8FF}">INFODATA_FB_5</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.MachineA.Machine_A.FBAnd1 Info Data" Index="#x7000" Sub="#x06">
+									<Type GUID="{73F57572-A2C9-F88F-FFC6-9BA3A895E419}">INFODATA_FB_1</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.MachineA.Machine_A.FBOr1 Info Data" Index="#x7000" Sub="#x07">
+									<Type GUID="{73F57572-A2C9-F88F-FFC6-9BA3A895E419}">INFODATA_FB_1</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.MachineB.Machine_B.FBEstop1 Info Data" Index="#x7000" Sub="#x08">
 									<Type GUID="{2B008623-51EE-EF6A-ACDE-0017707F5BB8}">INFODATA_FB_3</Type>
 								</Entry>
-								<Entry Name="TwinSafeGroup1.MachineD.Machine_D_Estop Info Data" Index="#x7000" Sub="#x04">
+								<Entry Name="TwinSafeGroup1.MachineB.Machine_B.FBLimit1 Info Data" Index="#x7000" Sub="#x09">
+									<Type GUID="{91BA7A38-806B-5E06-59E6-F04F15D6B8FF}">INFODATA_FB_5</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.MachineB.Machine_B.FBAnd1 Info Data" Index="#x7000" Sub="#x0a">
+									<Type GUID="{73F57572-A2C9-F88F-FFC6-9BA3A895E419}">INFODATA_FB_1</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.MachineB.Machine_B.FBOr1 Info Data" Index="#x7000" Sub="#x0b">
+									<Type GUID="{73F57572-A2C9-F88F-FFC6-9BA3A895E419}">INFODATA_FB_1</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.MachineC.Machine_C.FBEstop1 Info Data" Index="#x7000" Sub="#x0c">
 									<Type GUID="{2B008623-51EE-EF6A-ACDE-0017707F5BB8}">INFODATA_FB_3</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.MachineC.Machine_C.FBLimit1 Info Data" Index="#x7000" Sub="#x0d">
+									<Type GUID="{91BA7A38-806B-5E06-59E6-F04F15D6B8FF}">INFODATA_FB_5</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.MachineC.Machine_C.FBAnd1 Info Data" Index="#x7000" Sub="#x0e">
+									<Type GUID="{73F57572-A2C9-F88F-FFC6-9BA3A895E419}">INFODATA_FB_1</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.MachineC.Machine_C.FBOr1 Info Data" Index="#x7000" Sub="#x0f">
+									<Type GUID="{73F57572-A2C9-F88F-FFC6-9BA3A895E419}">INFODATA_FB_1</Type>
+								</Entry>
+								<Entry Name="TwinSafeGroup1.MachineD.FBAnd1 Info Data" Index="#x7000" Sub="#x10">
+									<Type GUID="{73F57572-A2C9-F88F-FFC6-9BA3A895E419}">INFODATA_FB_1</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="TwinSAFE Group Info Data" Index="#x1bfa" Flags="#x2011" SyncMan="3">
@@ -6357,9 +6414,6 @@ Bit 8 - 15 : reserved]]></Comment>
 			</OwnerB>
 			<OwnerB Name="TIID^Real IO^Term 1 (EK1200)^Machine Safety Controller (EL6910)">
 				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFEGroupState" VarB="TwinSAFE Group Info Data^TwinSafeGroup1 Info Data^State"/>
-				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFE_Machine_A_Estop_State" VarB="Function Block Info Data^TwinSafeGroup1.MachineA.Machine_A_Estop Info Data^State"/>
-				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFE_Machine_B_Estop_State" VarB="Function Block Info Data^TwinSafeGroup1.MachineB.Machine_B_Estop Info Data^State"/>
-				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFE_Machine_C_Estop_State" VarB="Function Block Info Data^TwinSafeGroup1.MachineC.Machine_C_Estop Info Data^State"/>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFE_Machine_D_Estop_State" VarB="Function Block Info Data^TwinSafeGroup1.MachineD.Machine_D_Estop Info Data^State"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupErrAck" VarB="StandardOutputs^TwinSafeGroup1.ErrorAcknowledgement_1"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupRun" VarB="StandardOutputs^TwinSafeGroup1.Run_2"/>
