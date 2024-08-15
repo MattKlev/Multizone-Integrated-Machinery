@@ -75,18 +75,6 @@
     "accessRights": [],
     "messageFormat": [
       {
-        "name": "timeRaised"
-      },
-      {
-        "text": " | "
-      },
-      {
-        "name": "domain"
-      },
-      {
-        "text": " | "
-      },
-      {
         "name": "text"
       }
     ],
@@ -97,12 +85,12 @@
         "value": "TcHmiEventLogger"
       },
       {
-        "logic": "OR"
+        "logic": "AND"
       },
       {
-        "path": "domain",
+        "path": "alarmState",
         "comparator": "==",
-        "value": "TcHmiAlarm"
+        "value": 0
       }
     ],
     "targetRegion": "%ctrl%Region_Center%/ctrl%",

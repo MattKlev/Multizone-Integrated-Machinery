@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="FB_Machine" Id="{477547fc-3ea9-469c-94c5-8bd12891e1bc}" SpecialFunc="None">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_Machine" Id="{b7e2ee06-f24d-46a5-a5b3-e60b99cad5e4}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Machine
 VAR_INPUT
 END_VAR
@@ -18,17 +18,26 @@ VAR
 	HMI_Reset	: ST_LEDButton;
 	rtReset		: R_TRIG;
 
+	//Inputs
+	LocalEstop AT %I*	: BOOL;
+	MachineAIn			: ST_MachineModuleInputs;
+	MachineBIn			: ST_MachineModuleInputs;
+	MachineCIn			: ST_MachineModuleInputs;
+	MachineDIn			: ST_MachineModuleInputs;
+
 	//Overide
 	Override : LREAL := 30.0;
 
-	//Button LED
-	StartLEDBlink	: BLINK;
-	ResetLEDBlink	: BLINK;
-	StopLEDBlink	: BLINK;
+	TwinSAFEGroupRun			AT %Q*	: BOOL := TRUE;
+	TwinSAFEGroupErrAck			AT %Q*	: BOOL;
+	TwinSAFEGroupState			AT %I*	: USINT;
+	TwinSAFE_X_Axis_ActPos		AT %Q*	: UDINT;
+	TwinSAFE_ResetAllEstopZones	AT %Q*	: BOOL;
 
-	TwinSAFEGroupErrAck		AT %Q*	: BOOL;
-	TwinSAFEGroupState		AT %I*	: USINT;
-	TwinSAFE_X_Axis_ActPos	AT %Q*	: UDINT;
+	TwinSAFE_Machine_A_Estop_State	AT %I*	: USINT;
+	TwinSAFE_Machine_B_Estop_State	AT %I*	: USINT;
+	TwinSAFE_Machine_C_Estop_State	AT %I*	: USINT;
+	TwinSAFE_Machine_D_Estop_State	AT %I*	: USINT;
 
 	AxisInError : BOOL; //One or more axis in error
 
@@ -44,7 +53,7 @@ VAR
 	State						: E_State;
 	NextState					: E_State;
 
-	//HMI Display
+	//HMI Display               		
 	sPreviouseState : STRING;
 
 	sState : STRING;
@@ -62,14 +71,14 @@ VAR
 	CPlacePosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 1700, X_Velo := 500, Z_Pos := 1000, Z_Velo := 800);
 	CWorkPosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 1800, X_Velo := 500, Z_Pos := 100, Z_Velo := 800);
 
-	//Machine A
+	//Machine A                 		
 	WaitTimeForAToBeReady : TIME := T#1S;
 
-	//Machine B
+	//Machine B             		
 	WaitTimeForBtoBeReady	: TIME	:= T#1.5S;
 	BDoingWorkTime			: TIME	:= T#2S;
 
-	//Machine C
+	//Machine C             			
 	WaitTimeForCtoBeReady	: TIME	:= T#0.5S;
 	CDoingWorkTime			: TIME	:= T#750MS;
 
@@ -77,27 +86,46 @@ VAR
 	Machine_D_Carrier_Gripper AT %Q* : BIT;
 
 	//Event Logger - Clear messages on reset
-	fbEventLogger : FB_TcEventLogger;
+	//fbEventLogger : FB_TcEventLogger;
 
 	iResetingStep : UDINT;
-END_VAR
-VAR CONSTANT
-	TwinSAFEGroupRun AT %Q* : BOOL := TRUE;
+
+	//Alarms
+	//Drive not ready error
+	X_AxisDriveNotReady	: FB_AlarmWrapper;
+	Z_AxisDriveNotReady	: FB_AlarmWrapper;
+
+	//Catch all axis error      		
+	X_AxisError	: FB_AlarmWrapper;
+	Z_AxisError	: FB_AlarmWrapper;
+
+	//one of the Estop buttons is pressed
+	AlarmLocalEstopPressed		: FB_AlarmWrapper;
+	AlarmMachineAEstopPressed	: FB_AlarmWrapper;
+	AlarmMachineBEstopPressed	: FB_AlarmWrapper;
+	AlarmMachineCEstopPressed	: FB_AlarmWrapper;
+	AlarmMachineDEstopPressed	: FB_AlarmWrapper;
+
+	//one of the light curtains is tripped
+	AlarmMachineALightCurtain	: FB_AlarmWrapper;
+	AlarmMachineBLightCurtain	: FB_AlarmWrapper;
+	AlarmMachineCLightCurtain	: FB_AlarmWrapper;
+
+	//The TwinSAFE E-Stop fuction block is tripped
+	AlarmMachineAEstopTripped	: FB_AlarmWrapper;
+	AlarmMachineBEstopTripped	: FB_AlarmWrapper;
+	AlarmMachineCEstopTripped	: FB_AlarmWrapper;
+	AlarmMachineDEstopTripped	: FB_AlarmWrapper;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[rtStart(CLK := Start.Button OR HMI_Start.Button);
+      <ST><![CDATA[
+
+rtStart(CLK := Start.Button OR HMI_Start.Button);
 rtStop(CLK := Stop.Button OR HMI_Stop.Button);
 rtReset(CLK := Reset.Button OR HMI_Reset.Button);
 
-
-(* Check if state has changed since the last cycle *)
-IF lastState <> State THEN
-	previousState := lastState; (* Update previous state *)
-END_IF;
-
-(* Update lastState for the next cycle *)
-lastState := State;
+M_HMI_Display();
 
 CASE State OF
 	E_State.Init:
@@ -361,9 +389,9 @@ CASE State OF
 
 		CASE iResetingStep OF
 			0: //Clear out event logger
-				IF fbEventLogger.ClearLoggedEvents(0) THEN
-					iResetingStep := 10;
-				END_IF
+				//IF fbEventLogger.ClearLoggedEvents(0) THEN
+				iResetingStep := 10;
+			//END_IF
 
 			10: //Toggle TS group Err ack
 				TwinSAFEGroupErrAck	:= TRUE;
@@ -381,15 +409,167 @@ CASE State OF
 
 END_CASE
 
-//HMI Display strings
-sPreviouseState	:= F_E_State_To_String(previousState);
-sState			:= F_E_State_To_String(State);
-sNextState		:= F_E_State_To_String(NextState);
-
 M_AxisPower();
 M_Alarms();
+M_BtnLights();
+M_ToTwinSAFE();
 
-//Buttons
+]]></ST>
+    </Implementation>
+    <Method Name="M_Alarms" Id="{0d27ec4f-fbc2-4610-bb3d-2907967d60dc}">
+      <Declaration><![CDATA[METHOD M_Alarms
+VAR_INPUT
+END_VAR
+VAR_INST
+
+	InitStep	: UDINT	:= 0;
+	initDone	: BOOL	:= FALSE;
+
+	fbReadXAxis	: MC_ReadParameterSet;
+	XParams		: ST_AxisParameterSet;
+	fbReadZAxis	: MC_ReadParameterSet;
+	ZParams		: ST_AxisParameterSet;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT initDone THEN
+	CASE InitStep OF
+		0: //Create events
+			X_AxisError.Create(stEventEntry := TC_EVENTS.DriveErrors.AxisInError);
+			Z_AxisError.Create(stEventEntry := TC_EVENTS.DriveErrors.AxisInError);
+
+			X_AxisDriveNotReady.Create(stEventEntry := TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate);
+			Z_AxisDriveNotReady.Create(stEventEntry := TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate);
+
+			AlarmLocalEstopPressed.Create(stEventEntry := TC_EVENTS.SafetyApplication.EstopBtnPressed);
+			AlarmMachineAEstopPressed.Create(stEventEntry := TC_EVENTS.SafetyApplication.EstopBtnPressed);
+			AlarmMachineBEstopPressed.Create(stEventEntry := TC_EVENTS.SafetyApplication.EstopBtnPressed);
+			AlarmMachineCEstopPressed.Create(stEventEntry := TC_EVENTS.SafetyApplication.EstopBtnPressed);
+			AlarmMachineDEstopPressed.Create(stEventEntry := TC_EVENTS.SafetyApplication.EstopBtnPressed);
+
+			AlarmMachineALightCurtain.Create(stEventEntry := TC_EVENTS.SafetyApplication.LightCurtainTripped);
+			AlarmMachineBLightCurtain.Create(stEventEntry := TC_EVENTS.SafetyApplication.LightCurtainTripped);
+			AlarmMachineCLightCurtain.Create(stEventEntry := TC_EVENTS.SafetyApplication.LightCurtainTripped);
+
+			AlarmMachineAEstopTripped.Create(stEventEntry := TC_EVENTS.SafetyApplication.MachineXEstopTripped);
+			AlarmMachineBEstopTripped.Create(stEventEntry := TC_EVENTS.SafetyApplication.MachineXEstopTripped);
+			AlarmMachineCEstopTripped.Create(stEventEntry := TC_EVENTS.SafetyApplication.MachineXEstopTripped);
+			AlarmMachineDEstopTripped.Create(stEventEntry := TC_EVENTS.SafetyApplication.MachineXEstopTripped);
+
+			InitStep := 10;
+
+		10: //Get data for arguments
+			fbReadXAxis(Parameter := XParams,
+						Axis	:= X_Axis,
+						Execute := TRUE);
+
+			fbReadZAxis(Parameter := ZParams,
+						Axis	:= Z_Axis,
+						Execute := TRUE);
+
+			IF NOT fbReadXAxis.Busy AND NOT fbReadZAxis.Busy THEN
+				InitStep := 20;
+			END_IF
+
+		20:
+			AlarmLocalEstopPressed.Arg0 := 'Local';
+
+			AlarmMachineAEstopPressed.Arg0	:= 'A';
+			AlarmMachineBEstopPressed.Arg0	:= 'B';
+			AlarmMachineCEstopPressed.Arg0	:= 'C';
+			AlarmMachineDEstopPressed.Arg0	:= 'D';
+
+			AlarmMachineALightCurtain.Arg0	:= 'A';
+			AlarmMachineBLightCurtain.Arg0	:= 'B';
+			AlarmMachineCLightCurtain.Arg0	:= 'C';
+
+			AlarmMachineAEstopTripped.Arg0	:= 'A';
+			AlarmMachineBEstopTripped.Arg0	:= 'B';
+			AlarmMachineCEstopTripped.Arg0	:= 'C';
+			AlarmMachineDEstopTripped.Arg0	:= 'D';
+
+			X_AxisDriveNotReady.Arg0	:= XParams.sAxisName;
+			X_AxisError.Arg0			:= XParams.sAxisName;
+
+			Z_AxisDriveNotReady.Arg0	:= ZParams.sAxisName;
+			Z_AxisError.Arg0			:= ZParams.sAxisName;
+
+			InitStep	:= 30;
+			initDone	:= TRUE;
+	END_CASE
+
+	RETURN;
+END_IF
+
+//Trigger events
+
+//Estop buttons
+AlarmLocalEstopPressed.Cyclic(AlarmState := LocalEstop);
+
+AlarmMachineAEstopPressed.Cyclic(AlarmState := NOT MachineAIn.EstopBtn);
+AlarmMachineBEstopPressed.Cyclic(AlarmState := NOT MachineBIn.EstopBtn);
+AlarmMachineCEstopPressed.Cyclic(AlarmState := NOT MachineCIn.EstopBtn);
+AlarmMachineDEstopPressed.Cyclic(AlarmState := NOT MachineDIn.EstopBtn);
+
+AlarmMachineALightCurtain.Cyclic(AlarmState := NOT MachineAIn.LightCurtain);
+AlarmMachineBLightCurtain.Cyclic(AlarmState := NOT MachineBIn.LightCurtain);
+AlarmMachineCLightCurtain.Cyclic(AlarmState := NOT MachineCIn.LightCurtain);
+
+//TwinSAFE logic
+AlarmMachineAEstopTripped.Cyclic(AlarmState := TwinSAFE_Machine_A_Estop_State > 1);
+AlarmMachineBEstopTripped.Cyclic(AlarmState := TwinSAFE_Machine_B_Estop_State > 1);
+AlarmMachineCEstopTripped.Cyclic(AlarmState := TwinSAFE_Machine_C_Estop_State > 1);
+AlarmMachineDEstopTripped.Cyclic(AlarmState := TwinSAFE_Machine_D_Estop_State > 1);
+
+//Axis
+X_AxisDriveNotReady.Cyclic(AlarmState := X_Axis.Status.ErrorID = 16#4650);
+X_AxisError.Arg1 := TO_STRING(X_Axis.Status.ErrorID);
+X_AxisError.Cyclic(AlarmState := X_Axis.Status.ErrorID <> 0 AND X_Axis.Status.ErrorID <> 16#4650);
+
+Z_AxisDriveNotReady.Cyclic(AlarmState := Z_Axis.Status.ErrorID = 16#4650);
+Z_AxisError.Arg1 := TO_STRING(Z_Axis.Status.ErrorID);
+Z_AxisError.Cyclic(AlarmState := Z_Axis.Status.ErrorID <> 0 AND Z_Axis.Status.ErrorID <> 16#4650);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_AxisPower" Id="{677ce463-30f2-4570-893a-c6b140cbb6b7}">
+      <Declaration><![CDATA[METHOD M_AxisPower : BOOL
+VAR_INPUT
+END_VAR
+VAR_INST
+	X_Power	: MC_Power;
+	Z_Power	: MC_Power;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[X_Power(Axis			:= X_Axis,
+		Enable			:= TRUE,
+		Enable_Positive := TRUE,
+		Enable_Negative := TRUE,
+		Override		:= Override);
+
+Z_Power(Axis			:= Z_Axis,
+		Enable			:= TRUE,
+		Enable_Positive := TRUE,
+		Enable_Negative := TRUE,
+		Override		:= Override);
+
+X_Axis.ReadStatus();
+Z_Axis.ReadStatus();
+
+AxisInError := X_Axis.Status.Error OR Z_Axis.Status.Error;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_BtnLights" Id="{af046070-a77a-47ce-80e9-2f5b081ed094}">
+      <Declaration><![CDATA[METHOD M_BtnLights
+VAR_INPUT
+END_VAR
+VAR_INST					
+	StartLEDBlink	: BLINK;
+	ResetLEDBlink	: BLINK;
+	StopLEDBlink	: BLINK;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//Buttons
 //Start
 CASE State OF
 	E_State.Init:
@@ -453,99 +633,7 @@ CASE State OF
 END_CASE
 
 HMI_Stop.LED := Stop.LED;
-StopLEDBlink(ENABLE := TRUE);
-
-
-TwinSAFE_X_Axis_ActPos	:= TO_UDINT(X_Axis.NcToPlc.ActPos);
-]]></ST>
-    </Implementation>
-    <Method Name="M_Alarms" Id="{0d27ec4f-fbc2-4610-bb3d-2907967d60dc}">
-      <Declaration><![CDATA[METHOD M_Alarms
-VAR_INPUT
-END_VAR
-VAR_INST
-	rtX4650		: R_TRIG;
-	X_4650		: FB_TcMessage;
-	rtZ4650		: R_TRIG;
-	Z_4650		: FB_TcMessage;
-	InitStep	: UDINT	:= 0;
-	initDone	: BOOL	:= FALSE;
-
-	fbReadXAxis	: MC_ReadParameterSet;
-	XParams		: ST_AxisParameterSet;
-	fbReadZAxis	: MC_ReadParameterSet;
-	ZParams		: ST_AxisParameterSet;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF NOT initDone THEN
-	CASE InitStep OF
-		0:
-			X_4650.CreateEx(stEventEntry := TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate, ipSourceInfo := 0);
-			Z_4650.CreateEX(stEventEntry := TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate, ipSourceInfo := 0);
-			InitStep := 10;
-		10:
-			fbReadXAxis(Parameter	:= XParams,
-						Axis		:= X_Axis,
-						Execute		:= TRUE);
-
-			fbReadZAxis(Parameter	:= ZParams,
-						Axis		:= Z_Axis,
-						Execute		:= TRUE);
-
-			IF NOT fbReadXAxis.Busy AND NOT fbReadZAxis.Busy THEN
-				InitStep := 20;
-			END_IF
-		20:
-			X_4650.ipArguments.Clear();
-			X_4650.ipArguments.AddString(XParams.sAxisName);
-
-			Z_4650.ipArguments.Clear();
-			Z_4650.ipArguments.AddString(ZParams.sAxisName);
-			InitStep	:= 30;
-			initDone	:= TRUE;
-	END_CASE
-
-	RETURN;
-END_IF
-
-rtX4650(CLK := X_Axis.Status.ErrorID = 16#4650);
-
-IF rtX4650.Q THEN
-	X_4650.Send(0);
-END_IF
-
-rtZ4650(CLK := Z_Axis.Status.ErrorID = 16#4650);
-
-IF rtZ4650.Q THEN
-	Z_4650.Send(0);
-END_IF]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_AxisPower" Id="{677ce463-30f2-4570-893a-c6b140cbb6b7}">
-      <Declaration><![CDATA[METHOD M_AxisPower : BOOL
-VAR_INPUT
-END_VAR
-VAR_INST
-	X_Power	: MC_Power;
-	Z_Power	: MC_Power;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[X_Power(Axis			:= X_Axis,
-		Enable			:= TRUE,
-		Enable_Positive	:= TRUE,
-		Enable_Negative	:= TRUE,
-		Override		:= Override);
-
-Z_Power(Axis			:= Z_Axis,
-		Enable			:= TRUE,
-		Enable_Positive	:= TRUE,
-		Enable_Negative	:= TRUE,
-		Override		:= Override);
-
-X_Axis.ReadStatus();
-Z_Axis.ReadStatus();
-
-AxisInError := X_Axis.Status.Error OR Z_Axis.Status.Error;]]></ST>
+StopLEDBlink(ENABLE := TRUE);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_CloseGripper" Id="{bb5f6fbc-361e-4823-9fe0-7bae5c45e5a8}">
@@ -565,6 +653,28 @@ IF tonDelay.Q THEN
 	tonDelay(IN := FALSE);
 	M_CloseGripper := TRUE;
 END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_Display" Id="{2b28b642-ef01-438d-ac1c-6fcbb9133807}">
+      <Declaration><![CDATA[METHOD M_HMI_Display
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[(* Check if state has changed since the last cycle *)
+IF lastState <> State THEN
+	previousState := lastState; (* Update previous state *)
+END_IF;
+
+(* Update lastState for the next cycle *)
+lastState := State;
+
+//HMI Display strings
+sPreviouseState	:= F_E_State_To_String(previousState);
+sState			:= F_E_State_To_String(State);
+sNextState		:= F_E_State_To_String(NextState);
+
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_OpenGripper" Id="{bc5ae333-e81c-4a39-98d0-d42ee8d75e01}">
@@ -602,32 +712,63 @@ IF tonDelay.Q THEN
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_ToTwinSAFE" Id="{cf48c3d9-39ce-4201-a195-96504adf0d58}">
+      <Declaration><![CDATA[METHOD M_ToTwinSAFE
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TwinSAFE_X_Axis_ActPos := TO_UDINT(X_Axis.NcToPlc.ActPos);
+
+TwinSAFE_ResetAllEstopZones := Reset.Button OR HMI_Reset.Button;
+
+
+TwinSAFEGroupRun := TRUE;]]></ST>
+      </Implementation>
+    </Method>
     <LineIds Name="FB_Machine">
-      <LineId Id="6572" Count="2" />
-      <LineId Id="6576" Count="364" />
-      <LineId Id="7025" Count="1" />
-      <LineId Id="7024" Count="0" />
-      <LineId Id="2952" Count="0" />
+      <LineId Id="997" Count="292" />
+      <LineId Id="1291" Count="0" />
+      <LineId Id="1294" Count="0" />
+      <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Machine.M_Alarms">
-      <LineId Id="111" Count="40" />
-      <LineId Id="29" Count="0" />
+      <LineId Id="131" Count="96" />
+      <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Machine.M_AxisPower">
-      <LineId Id="99" Count="14" />
-      <LineId Id="41" Count="0" />
+      <LineId Id="30" Count="14" />
+      <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Machine.M_CloseGripper">
-      <LineId Id="63" Count="6" />
+    <LineIds Name="FB_Machine.M_BtnLights">
+      <LineId Id="6" Count="63" />
       <LineId Id="5" Count="0" />
     </LineIds>
+    <LineIds Name="FB_Machine.M_CloseGripper">
+      <LineId Id="22" Count="6" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_HMI_Display">
+      <LineId Id="13" Count="5" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="6" Count="2" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
     <LineIds Name="FB_Machine.M_OpenGripper">
-      <LineId Id="58" Count="5" />
-      <LineId Id="11" Count="0" />
+      <LineId Id="19" Count="5" />
+      <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Machine.M_ProcessDelay">
-      <LineId Id="53" Count="4" />
-      <LineId Id="13" Count="0" />
+      <LineId Id="22" Count="4" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_ToTwinSAFE">
+      <LineId Id="6" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="1" />
+      <LineId Id="8" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

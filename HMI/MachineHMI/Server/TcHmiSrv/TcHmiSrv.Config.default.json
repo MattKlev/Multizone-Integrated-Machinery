@@ -34,8 +34,7 @@
     "DISCOVERY": 2,
     "ENABLE_SERVER_UPDATE": true,
     "ENDPOINTS": [
-        "http://192.168.1.30:13001",
-        "http://192.168.1.30:3001",
+        "http://127.0.0.1:13001",
         "http://127.0.0.1:3001"
     ],
     "ETAGENABLED": true,
@@ -51,14 +50,14 @@
         "TcHmiEcDiagnostics": {
             "ENABLED": true,
             "NAME": "TcHmiEcDiagnostics",
-            "PATH": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnostics.19.0.109\\runtimes\\win-x64\\native\\",
+            "PATH": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnostics.19.0.120\\runtimes\\win-x64\\native\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
         "TcHmiEventLogger": {
             "ENABLED": true,
             "NAME": "TcHmiEventLogger",
-            "PATH": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.EventLogger.19.0.109\\runtimes\\win-x64\\native\\",
+            "PATH": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.EventLogger.19.0.120\\runtimes\\win-x64\\native\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
@@ -73,7 +72,7 @@
         "TcHmiScope": {
             "ENABLED": true,
             "NAME": "TcHmiScope",
-            "PATH": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Scope.14.1.109\\runtimes\\win\\net472\\",
+            "PATH": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Scope.14.1.120\\runtimes\\win\\net472\\",
             "REQUIRED": false,
             "STARTUPTYPE": 1
         },
@@ -8656,16 +8655,16 @@
     "VIDEOSEGMENTSIZE": 1048576,
     "VIRTUALDIRECTORIES": {
         "/": "..\\..\\MachineHMI\\",
-        "/Beckhoff.TwinCAT.HMI.BaseTemplate": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.BaseTemplate.12.760.48\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.760.48\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.BaseTemplate": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.BaseTemplate.12.760.59\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Controls": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Controls.12.760.59\\runtimes\\native1.12-tchmi",
         "/Beckhoff.TwinCAT.HMI.EcDiagnostics.Meta": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnostics.Meta.1.1.109",
-        "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnosticsControl.12.760.48\\runtimes\\native1.12-tchmi",
-        "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.760.48\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.EcDiagnosticsControl": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.EcDiagnosticsControl.12.760.59\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.Functions": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Functions.12.760.59\\runtimes\\native1.12-tchmi",
         "/Beckhoff.TwinCAT.HMI.Scope": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Scope.14.1.109",
         "/Beckhoff.TwinCAT.HMI.Scope.Meta": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Scope.Meta.1.1.109",
-        "/Beckhoff.TwinCAT.HMI.ScopeControl": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.ScopeControl.12.760.48\\runtimes\\native1.12-tchmi",
+        "/Beckhoff.TwinCAT.HMI.ScopeControl": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.ScopeControl.12.760.59\\runtimes\\native1.12-tchmi",
         "/bin": "..\\..\\MachineHMI\\bin\\",
         "/bin/framework": "..\\..\\MachineHMI\\bin\\framework",
-        "/framework": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.760.48\\runtimes\\native1.12-tchmi"
+        "/framework": "..\\..\\MachineHMI\\Packages\\Beckhoff.TwinCAT.HMI.Framework.12.760.59\\runtimes\\native1.12-tchmi"
     }
 }

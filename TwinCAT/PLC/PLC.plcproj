@@ -27,7 +27,13 @@
     <Compile Include="DUTs\ST_LEDButton.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DUTs\ST_MachineModuleInputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\FB_AlarmWrapper.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FB_CarrierStop.TcPOU">
@@ -36,10 +42,10 @@
     <Compile Include="POUs\FB_CarrierReset.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FB_Machine.TcPOU">
+    <Compile Include="POUs\FB_CarrierAbsMove.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FB_CarrierAbsMove.TcPOU">
+    <Compile Include="POUs\FB_Machine.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\F_E_State_To_String.TcPOU">
@@ -84,6 +90,24 @@
     <None Include="PLC.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <SubObject Include="FB_AlarmWrapper.Arg0" />
+    <SubObject Include="FB_AlarmWrapper.Arg0.Get" />
+    <SubObject Include="FB_AlarmWrapper.Arg0.Set" />
+    <SubObject Include="FB_AlarmWrapper.Arg1" />
+    <SubObject Include="FB_AlarmWrapper.Arg1.Get" />
+    <SubObject Include="FB_AlarmWrapper.Arg1.Set" />
+    <SubObject Include="FB_AlarmWrapper.Create" />
+    <SubObject Include="FB_AlarmWrapper.Cyclic" />
+    <SubObject Include="FB_AlarmWrapper.Debounce" />
+    <SubObject Include="FB_AlarmWrapper.Debounce.Get" />
+    <SubObject Include="FB_AlarmWrapper.Debounce.Set" />
+    <SubObject Include="FB_Machine.M_Alarms" />
+    <SubObject Include="FB_Machine.M_AxisPower" />
+    <SubObject Include="FB_Machine.M_CloseGripper" />
+    <SubObject Include="FB_Machine.M_OpenGripper" />
+    <SubObject Include="FB_Machine.M_ProcessDelay" />
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_AlarmWrapper" Id="{4d29e7d6-d429-4f96-8000-dc4a0e7efb46}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AlarmWrapper
+VAR
+	_Arg0			:STRING;
+	_Arg1			:STRING;	
+	_Debounce		:TIME:=T#50MS;
+	hrCreate		:HRESULT;
+	FirstScan		:BOOL:=TRUE;
+	FbTcAlarm		:FB_TcAlarm;
+	
+	rtRaise			:R_TRIG;
+	ftClear			:F_TRIG;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="Arg0" Id="{29be2dda-d832-4cf3-b910-6cd4dfc7dbf9}">
+      <Declaration><![CDATA[PROPERTY Arg0 : STRING]]></Declaration>
+      <Get Name="Get" Id="{3c3ff968-3930-4b20-b1a7-f9746915f585}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Arg0:=_Arg0;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{a34d4d9d-372d-4541-b964-1dcb0a8030f5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_Arg0:=Arg0;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="Arg1" Id="{f0a3ce7d-0fb3-471d-ae94-c724b90c5ef2}">
+      <Declaration><![CDATA[PROPERTY Arg1 : STRING]]></Declaration>
+      <Get Name="Get" Id="{6db887fb-4286-45dd-a92d-0cb1859c2c44}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Arg1:=_Arg1;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{9d6d48ae-948b-4f32-8e74-84e5636c8be9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_Arg1:=Arg1;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Create" Id="{6d0b4a2d-a64f-496b-b8cb-a11acf4d4fc9}">
+      <Declaration><![CDATA[METHOD Create : BOOL
+VAR_INPUT
+	stEventEntry		:TcEventEntry;	
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[hrCreate:=FbTcAlarm.CreateEx(stEventEntry:=stEventEntry , bWithConfirmation:=FALSE , ipSourceInfo:=0);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Cyclic" Id="{ccffe7c0-1330-4f7c-b54e-1945fa4ffb96}">
+      <Declaration><![CDATA[METHOD Cyclic
+VAR_INPUT
+	AlarmState	:BOOL;
+END_VAR
+VAR_INST
+	tonDebounce	:TON;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[tonDebounce(IN:=AlarmState , PT:=_Debounce , Q=> , ET=> );
+
+rtRaise(CLK:=tonDebounce.Q);
+IF rtRaise.Q THEN
+	FbTcAlarm.ipArguments.Clear();
+	IF _Arg0<>'' THEN
+		FbTcAlarm.ipArguments.AddString(_Arg0);
+	END_IF
+	IF _Arg1<>'' THEN
+		FbTcAlarm.ipArguments.AddString(_Arg1);
+	END_IF	
+	
+	FbTcAlarm.Raise(0);
+END_IF
+
+
+ftClear(CLK:=tonDebounce.Q);
+IF ftClear.Q THEN
+	FbTcAlarm.Clear(0,0);
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Debounce" Id="{66035808-c942-4504-9673-413464e1c641}">
+      <Declaration><![CDATA[PROPERTY Debounce : TIME]]></Declaration>
+      <Get Name="Get" Id="{4f0602eb-5c0a-4257-b96a-dd59ec8d3538}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Debounce:=_Debounce;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{ca677803-9b65-4fa9-969c-82dd0afdc9d2}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_Debounce:=Debounce;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="FB_AlarmWrapper">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AlarmWrapper.Arg0.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AlarmWrapper.Arg0.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AlarmWrapper.Arg1.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AlarmWrapper.Arg1.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AlarmWrapper.Create">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AlarmWrapper.Cyclic">
+      <LineId Id="3" Count="19" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AlarmWrapper.Debounce.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_AlarmWrapper.Debounce.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

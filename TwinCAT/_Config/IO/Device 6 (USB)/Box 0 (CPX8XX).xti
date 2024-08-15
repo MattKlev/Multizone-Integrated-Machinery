@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.59" ClassName="CBk9500Def" SubType="9591">
+	<Box Id="2" BoxType="9591" AmsPort="28160">
+		<Name>__FILENAME__</Name>
+		<ImageId>88</ImageId>
+		<Vars VarGrpType="1">
+			<Name>Inputs</Name>
+			<Var>
+				<Name>PanelState</Name>
+				<Type>BITARR32</Type>
+			</Var>
+			<Var>
+				<Name>CouplerState</Name>
+				<Comment><![CDATA[0x0000 = No error
+0x0001 = Terminal bus error
+0x0002 = Configuration error]]></Comment>
+				<Type>UINT</Type>
+				<BitOffs>32</BitOffs>
+			</Var>
+			<Var>
+				<Name>BoxState</Name>
+				<Comment><![CDATA[0x0000 = No error
+0x0001 = No actual inputs
+0x0004 = Not found
+]]></Comment>
+				<Type>UINT</Type>
+				<BitOffs>56</BitOffs>
+			</Var>
+			<Var>
+				<Name>MissedCnt</Name>
+				<Comment><![CDATA[Incremented each time new
+inputs missed]]></Comment>
+				<Type>UINT</Type>
+				<BitOffs>72</BitOffs>
+			</Var>
+		</Vars>
+		<Vars VarGrpType="2">
+			<Name>Outputs</Name>
+			<Var>
+				<Name>PanelCtrl</Name>
+				<Comment><![CDATA[PanelCtrl[5] = Back Light Off
+]]></Comment>
+				<Type>BITARR32</Type>
+			</Var>
+		</Vars>
+		<BusCoupler ComplexTermSupport="true" NewHardware="true">
+			<Flags SupportVirtualTerms="true" HasNoEndTerm="true"/>
+			<Term Id="1" TermType="#x360026ac" Fieldbus="9">
+				<Name>Term 1 (CPx9xx-4)</Name>
+				<ImageId>62</ImageId>
+				<Vars VarGrpType="3">
+					<Name>Channel 1</Name>
+					<Var>
+						<Name>Estop</Name>
+						<Type>BIT</Type>
+						<BitOffs>48</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>GreenBtn</Name>
+						<Type>BIT</Type>
+						<BitOffs>49</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>RedBtn</Name>
+						<Type>BIT</Type>
+						<BitOffs>50</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>BlueBtn</Name>
+						<Type>BIT</Type>
+						<BitOffs>51</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>LED 1</Name>
+						<Type>BIT</Type>
+						<BitOffs>32</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var>
+						<Name>GreenBtnLight</Name>
+						<Type>BIT</Type>
+						<BitOffs>33</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var>
+						<Name>RedBtnLight</Name>
+						<Type>BIT</Type>
+						<BitOffs>34</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+					<Var>
+						<Name>BlueBtnLight</Name>
+						<Type>BIT</Type>
+						<BitOffs>35</BitOffs>
+						<InOut>1</InOut>
+					</Var>
+				</Vars>
+			</Term>
+		</BusCoupler>
+		<Usb DeviceHandle="\\?\usb#vid_0978&amp;pid_2801#8&amp;2401030&amp;0&amp;6#{7e0092ca-e39e-4116-85d5-b32dfc26eeda}" AutoDivider="true"/>
+	</Box>
+</TcSmItem>

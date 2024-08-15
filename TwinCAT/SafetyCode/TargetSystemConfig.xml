@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TargetSystemConfig Crc="3857606276" Version="1.5">
+<TargetSystemConfig Crc="2240366955" Version="1.5">
   <TargetSystemType>HSafetyPLC</TargetSystemType>
   <TargetSystemSubType>EL6910</TargetSystemSubType>
   <IsExternalDevice>false</IsExternalDevice>
   <TargetSystemObjectId>50462724</TargetSystemObjectId>
   <TargetSystemObjectName>Machine Safety Controller (EL6910)</TargetSystemObjectName>
-  <SoftwareVersion />
-  <SerialNumber />
-  <ProjectCRC>16868</ProjectCRC>
-  <MapProjectCRC>false</MapProjectCRC>
-  <MapSerialNumber>false</MapSerialNumber>
+  <SoftwareVersion>05 (V01.14)     </SoftwareVersion>
+  <SerialNumber>4185452</SerialNumber>
+  <ProjectCRC>61114</ProjectCRC>
+  <MapProjectCRC>true</MapProjectCRC>
+  <MapSerialNumber>true</MapSerialNumber>
   <VersionNumber>1</VersionNumber>
   <FSOEAddress>1</FSOEAddress>
-  <DipSwitch />
-  <AmsNetID>5.42.87.238.2.1</AmsNetID>
-  <AmsPort>1003</AmsPort>
+  <DipSwitch>1</DipSwitch>
+  <AmsNetID>0.0.0.0.2.1</AmsNetID>
+  <AmsPort>1001</AmsPort>
   <ConnectionInfoDataConfigOld>false</ConnectionInfoDataConfigOld>
-  <TakeOverSafetyAliasDeviceNamesInProcessImage>false</TakeOverSafetyAliasDeviceNamesInProcessImage>
-  <TakeOverStandardAliasDeviceNamesInProcessImage>false</TakeOverStandardAliasDeviceNamesInProcessImage>
+  <TakeOverSafetyAliasDeviceNamesInProcessImage>true</TakeOverSafetyAliasDeviceNamesInProcessImage>
+  <TakeOverStandardAliasDeviceNamesInProcessImage>true</TakeOverStandardAliasDeviceNamesInProcessImage>
   <BackupRestore Needed="0" Activated="false" RestoreUserAdministration="false" />
 </TargetSystemConfig>

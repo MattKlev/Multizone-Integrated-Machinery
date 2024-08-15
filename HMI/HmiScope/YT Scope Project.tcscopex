@@ -56,7 +56,7 @@
       <SortPriority>0</SortPriority>
       <SubMember>
         <AdsAcquisition AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-          <AmsNetId>5.42.87.238.1.1</AmsNetId>
+          <AmsNetId>5.126.34.230.1.1</AmsNetId>
           <Area>Local</Area>
           <ArrayLength>0</ArrayLength>
           <BaseSampleTime>20000</BaseSampleTime>
@@ -126,7 +126,20 @@
           <SaveOption>IncludeDataInSVDX</SaveOption>
           <ServerHandle>0</ServerHandle>
           <SortPriority>10</SortPriority>
-          <SubMember />
+          <SubMember>
+            <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+              <Comment />
+              <DetailLevel>
+                <Int32>0</Int32>
+              </DetailLevel>
+              <DisplayColor>Black</DisplayColor>
+              <Guid>04e88e23-9ec1-4e2b-9e73-30e138130160</Guid>
+              <Name>NameRelationInfo_43</Name>
+              <SortPriority>100</SortPriority>
+              <Title>NameRelationInfo_43</Title>
+              <UsedNameType>Custom</UsedNameType>
+            </NameRelationInfo>
+          </SubMember>
           <SymbolBased>true</SymbolBased>
           <SymbolName>Axes.X.ActPos</SymbolName>
           <TargetPort>501</TargetPort>
@@ -138,7 +151,7 @@
           <VariableSize>8</VariableSize>
         </AdsAcquisition>
         <AdsAcquisition AssemblyName="TwinCAT.Measurement.Scope.API.Model">
-          <AmsNetId>5.42.87.238.1.1</AmsNetId>
+          <AmsNetId>5.126.34.230.1.1</AmsNetId>
           <Area>Output</Area>
           <ArrayLength>0</ArrayLength>
           <BaseSampleTime>20000</BaseSampleTime>
@@ -208,7 +221,20 @@
           <SaveOption>IncludeDataInSVDX</SaveOption>
           <ServerHandle>0</ServerHandle>
           <SortPriority>10</SortPriority>
-          <SubMember />
+          <SubMember>
+            <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+              <Comment />
+              <DetailLevel>
+                <Int32>0</Int32>
+              </DetailLevel>
+              <DisplayColor>Black</DisplayColor>
+              <Guid>e58ab65d-d939-4a48-8009-52b304e1f84b</Guid>
+              <Name>NameRelationInfo_44</Name>
+              <SortPriority>100</SortPriority>
+              <Title>NameRelationInfo_44</Title>
+              <UsedNameType>Custom</UsedNameType>
+            </NameRelationInfo>
+          </SubMember>
           <SymbolBased>true</SymbolBased>
           <SymbolName>Carrier X Safety Encoder (EL5001-0090).SSI Inputs.Counter value</SymbolName>
           <TargetPort>27908</TargetPort>
@@ -229,11 +255,16 @@
       <Comment />
       <ConnectedTimeMemberGuid>00000000-0000-0000-0000-000000000000</ConnectedTimeMemberGuid>
       <DefaultDisplayWidth>100000000</DefaultDisplayWidth>
-      <DisplayColor>-1118478</DisplayColor>
+      <DisplayColor>-986896</DisplayColor>
       <DisplayOverwriteMode>false</DisplayOverwriteMode>
       <DurationLength>0</DurationLength>
-      <ForeColor>-14803426</ForeColor>
+      <ForeColor>-16777216</ForeColor>
       <Guid>4c0ca1b4-3daf-4ae0-8b53-15da3870fa31</Guid>
+      <LayerEndConnectedTimeMemberGuid>00000000-0000-0000-0000-000000000000</LayerEndConnectedTimeMemberGuid>
+      <LayerEndTimeRefreshMode>NoTime</LayerEndTimeRefreshMode>
+      <LayerEndTimestamp>0</LayerEndTimestamp>
+      <LayerEndTriggerGroupOffset>0</LayerEndTriggerGroupOffset>
+      <LayerLength>0</LayerLength>
       <MasterChart>00000000-0000-0000-0000-000000000000</MasterChart>
       <Name>X Axis</Name>
       <ShowImageChart>false</ShowImageChart>
@@ -242,7 +273,7 @@
         <AxisGroup AssemblyName="TwinCAT.Measurement.Scope.API.Model">
           <ChannelRelatedGuid>00000000-0000-0000-0000-000000000000</ChannelRelatedGuid>
           <Comment />
-          <DisplayColor>-657931</DisplayColor>
+          <DisplayColor>-1</DisplayColor>
           <Enabled>true</Enabled>
           <Guid>76ccb2a9-01ba-4a3d-ab3f-49df23fd1c37</Guid>
           <Name>NC Act Pos</Name>
@@ -250,6 +281,7 @@
           <SortPriority>10</SortPriority>
           <SubMember>
             <TimeAxis AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+              <AbsoluteTimesFormat>HH:mm:ss.fff</AbsoluteTimesFormat>
               <Comment />
               <DisplayColor>Black</DisplayColor>
               <Guid>fb8a05bb-a3dd-40e4-8656-c5d1251dc9d8</Guid>
@@ -260,15 +292,16 @@
               <Name>Time Axis</Name>
               <Orientation>X</Orientation>
               <ScalingMode>MinMax</ScalingMode>
+              <ShowAbsoluteTimes>None</ShowAbsoluteTimes>
               <SortPriority>100</SortPriority>
               <SubMember>
                 <AxisStyle AssemblyName="TwinCAT.Measurement.Scope.API.Model">
                   <ChannelRelatedGuid>00000000-0000-0000-0000-000000000000</ChannelRelatedGuid>
                   <ColorMode>CustomColor</ColorMode>
                   <Comment />
-                  <DisplayColor>-14803426</DisplayColor>
+                  <DisplayColor>-16777216</DisplayColor>
                   <Grid>true</Grid>
-                  <GridColor>-14803426</GridColor>
+                  <GridColor>-16777216</GridColor>
                   <GridDivisions>10</GridDivisions>
                   <GridLineWidth>1</GridLineWidth>
                   <Guid>5ed0eb11-ce10-4db7-bb49-e34c18e35d4a</Guid>
@@ -276,6 +309,7 @@
                   <Name>Axis Style (1)</Name>
                   <Precision>6</Precision>
                   <ShowName>False</ShowName>
+                  <ShowUnit>None</ShowUnit>
                   <SortPriority>100</SortPriority>
                   <SubGrid>false</SubGrid>
                   <SubGridDivisions>5</SubGridDivisions>
@@ -303,9 +337,9 @@
                   <ChannelRelatedGuid>00000000-0000-0000-0000-000000000000</ChannelRelatedGuid>
                   <ColorMode>CustomColor</ColorMode>
                   <Comment />
-                  <DisplayColor>-14803426</DisplayColor>
+                  <DisplayColor>-16777216</DisplayColor>
                   <Grid>true</Grid>
-                  <GridColor>-14803426</GridColor>
+                  <GridColor>-16777216</GridColor>
                   <GridDivisions>10</GridDivisions>
                   <GridLineWidth>1</GridLineWidth>
                   <Guid>6336aa33-561a-42c3-820a-196e3114aeea</Guid>
@@ -313,6 +347,7 @@
                   <Name>Axis Style</Name>
                   <Precision>6</Precision>
                   <ShowName>Name</ShowName>
+                  <ShowUnit>AllChannels</ShowUnit>
                   <SortPriority>100</SortPriority>
                   <SubGrid>false</SubGrid>
                   <SubGridDivisions>5</SubGridDivisions>
@@ -387,7 +422,20 @@
                   <ScaleFactor>1</ScaleFactor>
                   <ShortInfo />
                   <SortPriority>2</SortPriority>
-                  <SubMember />
+                  <SubMember>
+                    <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                      <Comment />
+                      <DetailLevel>
+                        <Int32>0</Int32>
+                      </DetailLevel>
+                      <DisplayColor>Black</DisplayColor>
+                      <Guid>5cf0fae2-cc51-4cae-937a-30a15bb8f52c</Guid>
+                      <Name>NameRelationInfo_45</Name>
+                      <SortPriority>100</SortPriority>
+                      <Title>NameRelationInfo_45</Title>
+                      <UsedNameType>Acquisition</UsedNameType>
+                    </NameRelationInfo>
+                  </SubMember>
                   <Title>AcquisitionInterpreter_45</Title>
                   <Usage>Y</Usage>
                 </AcquisitionInterpreter>
@@ -534,6 +582,18 @@
                   </SubMember>
                   <Title>DynamicStyleContainer_51</Title>
                 </DynamicStyleContainer>
+                <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                  <Comment />
+                  <DetailLevel>
+                    <Int32>0</Int32>
+                  </DetailLevel>
+                  <DisplayColor>Black</DisplayColor>
+                  <Guid>39707728-73f6-48ca-a95b-a8768b9d3a54</Guid>
+                  <Name>NameRelationInfo_46</Name>
+                  <SortPriority>100</SortPriority>
+                  <Title>NameRelationInfo_46</Title>
+                  <UsedNameType>Custom</UsedNameType>
+                </NameRelationInfo>
               </SubMember>
               <Title>Channel_43</Title>
             </Channel>
@@ -542,8 +602,8 @@
         </AxisGroup>
         <OverviewChart AssemblyName="TwinCAT.Measurement.Scope.API.Model">
           <Comment />
-          <DisplayColor>-657931</DisplayColor>
-          <ForeColor>-14803426</ForeColor>
+          <DisplayColor>-1</DisplayColor>
+          <ForeColor>-16777216</ForeColor>
           <Guid>4a6e25a0-85d5-422f-b64b-34248f70f4d2</Guid>
           <Name>Overview Chart</Name>
           <OverviewVisible>false</OverviewVisible>
@@ -606,7 +666,7 @@
         <AxisGroup AssemblyName="TwinCAT.Measurement.Scope.API.Model">
           <ChannelRelatedGuid>00000000-0000-0000-0000-000000000000</ChannelRelatedGuid>
           <Comment />
-          <DisplayColor>-657931</DisplayColor>
+          <DisplayColor>-1</DisplayColor>
           <Enabled>true</Enabled>
           <Guid>d991cb5b-8b59-4bd7-b2fd-a0f3ef348611</Guid>
           <Name>EL5001 Counts</Name>
@@ -631,9 +691,9 @@
                   <ChannelRelatedGuid>00000000-0000-0000-0000-000000000000</ChannelRelatedGuid>
                   <ColorMode>CustomColor</ColorMode>
                   <Comment />
-                  <DisplayColor>-14803426</DisplayColor>
+                  <DisplayColor>-16777216</DisplayColor>
                   <Grid>true</Grid>
-                  <GridColor>-14803426</GridColor>
+                  <GridColor>-16777216</GridColor>
                   <GridDivisions>10</GridDivisions>
                   <GridLineWidth>1</GridLineWidth>
                   <Guid>6995d0bd-b3cd-4715-9a56-3a6540eb264d</Guid>
@@ -641,6 +701,7 @@
                   <Name>Axis Style (2)</Name>
                   <Precision>6</Precision>
                   <ShowName>Name</ShowName>
+                  <ShowUnit>AllChannels</ShowUnit>
                   <SortPriority>100</SortPriority>
                   <SubGrid>false</SubGrid>
                   <SubGridDivisions>5</SubGridDivisions>
@@ -715,7 +776,20 @@
                   <ScaleFactor>1</ScaleFactor>
                   <ShortInfo />
                   <SortPriority>2</SortPriority>
-                  <SubMember />
+                  <SubMember>
+                    <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                      <Comment />
+                      <DetailLevel>
+                        <Int32>0</Int32>
+                      </DetailLevel>
+                      <DisplayColor>Black</DisplayColor>
+                      <Guid>24267174-7553-4c78-86ee-c2c064ed08f4</Guid>
+                      <Name>NameRelationInfo_47</Name>
+                      <SortPriority>100</SortPriority>
+                      <Title>NameRelationInfo_47</Title>
+                      <UsedNameType>Acquisition</UsedNameType>
+                    </NameRelationInfo>
+                  </SubMember>
                   <Title>AcquisitionInterpreter_62</Title>
                   <Usage>Y</Usage>
                 </AcquisitionInterpreter>
@@ -765,6 +839,18 @@
                   <Title>ChannelStyle_64</Title>
                   <Visible>true</Visible>
                 </ChannelStyle>
+                <NameRelationInfo AssemblyName="TwinCAT.Measurement.Scope.API.Model">
+                  <Comment />
+                  <DetailLevel>
+                    <Int32>0</Int32>
+                  </DetailLevel>
+                  <DisplayColor>Black</DisplayColor>
+                  <Guid>56e776bc-eccf-45a3-be8f-04541ce8fa44</Guid>
+                  <Name>NameRelationInfo_48</Name>
+                  <SortPriority>100</SortPriority>
+                  <Title>NameRelationInfo_48</Title>
+                  <UsedNameType>Custom</UsedNameType>
+                </NameRelationInfo>
               </SubMember>
               <Title>Channel_60</Title>
             </Channel>
@@ -792,6 +878,6 @@
   <Title>ScopeProject_3</Title>
   <UseAutoSave>false</UseAutoSave>
   <UseFileStore>false</UseFileStore>
-  <Version>1.0.0.3</Version>
+  <Version>1.0.0.4</Version>
   <ViewDetailLevel>Default</ViewDetailLevel>
 </ScopeProject>

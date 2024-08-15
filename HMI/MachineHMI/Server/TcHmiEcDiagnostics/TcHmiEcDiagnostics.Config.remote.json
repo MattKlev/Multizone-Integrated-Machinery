@@ -1,8 +1,13 @@
 {
     "devices": {
-        "Device1": {
+        "Real IO": {
             "enabled": true,
             "masterNetId": "0.0.0.0.2.1",
+            "targetNetId": "0.0.0.0.1.1"
+        },
+        "SIM IO": {
+            "enabled": true,
+            "masterNetId": "0.0.0.0.3.1",
             "targetNetId": "0.0.0.0.1.1"
         }
     }

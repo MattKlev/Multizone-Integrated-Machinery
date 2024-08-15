@@ -16,7 +16,7 @@
     "RUNTIMES": {
         "PLC1": {
             "ENABLED": true,
-            "NETID": "5.42.87.238.1.1",
+            "NETID": "5.126.34.230.1.1",
             "PORT": 851,
             "READ_ONLY": false,
             "SYMBOLS": {},
@@ -24,7 +24,7 @@
         },
         "TcSysService": {
             "ENABLED": true,
-            "NETID": "5.42.87.238.1.1",
+            "NETID": "5.126.34.230.1.1",
             "PORT": 10000,
             "READ_ONLY": false,
             "SYMBOLS": {},
