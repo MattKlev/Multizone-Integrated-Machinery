@@ -6,7 +6,7 @@
     <Node>
       <Title>YT Scope Project</Title>
       <Expanded>True</Expanded>
-      <FileName>C:\Users\MattK\source\repos\Multizone-Integrated-Machinery\HMI\HmiScope\YT Scope Project.tcscopex</FileName>
+      <FileName>C:\source\repos\Multizone-Integrated-Machinery\HMI\HmiScope\YT Scope Project.tcscopex</FileName>
       <Children>
         <Node>
           <Title>DataPool</Title>
@@ -34,17 +34,17 @@
           <Children>
             <Node>
               <Title>NC Act Pos</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
                   <Title>X_Axis.ActPos</Title>
-                  <Expanded>False</Expanded>
+                  <Expanded>True</Expanded>
                   <FileName></FileName>
                   <Children>
                     <Node>
                       <Title>Machine A</Title>
-                      <Expanded>False</Expanded>
+                      <Expanded>True</Expanded>
                       <FileName></FileName>
                       <Children>
                         <Node>
@@ -57,7 +57,7 @@
                     </Node>
                     <Node>
                       <Title>Machine B</Title>
-                      <Expanded>False</Expanded>
+                      <Expanded>True</Expanded>
                       <FileName></FileName>
                       <Children>
                         <Node>
@@ -70,7 +70,7 @@
                     </Node>
                     <Node>
                       <Title>Machine C</Title>
-                      <Expanded>False</Expanded>
+                      <Expanded>True</Expanded>
                       <FileName></FileName>
                       <Children>
                         <Node>
@@ -82,19 +82,6 @@
                       </Children>
                     </Node>
                   </Children>
-                </Node>
-              </Children>
-            </Node>
-            <Node>
-              <Title>EL5001 Counts</Title>
-              <Expanded>False</Expanded>
-              <FileName></FileName>
-              <Children>
-                <Node>
-                  <Title>SSI Inputs.Counter value</Title>
-                  <Expanded>False</Expanded>
-                  <FileName></FileName>
-                  <Children />
                 </Node>
               </Children>
             </Node>

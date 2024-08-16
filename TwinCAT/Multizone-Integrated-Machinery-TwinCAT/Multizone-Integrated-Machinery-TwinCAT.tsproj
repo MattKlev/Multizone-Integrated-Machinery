@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.59">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{3DE183AF-AD46-4E7D-B440-584916B2CC91}" Namespace="NC" PersistentType="true">DriveErrors</Name>
+			<DisplayName TxtId=""><![CDATA[Drive Errors]]></DisplayName>
+			<EventId>
+				<Name Id="4650">DriveHardwareNotReadyToOperate</Name>
+				<DisplayName TxtId=""><![CDATA[{0} Drive hardware not ready to operate]]></DisplayName>
+				<Severity>Error</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">AxisInError</Name>
+				<DisplayName TxtId=""><![CDATA[{0} NC Axis Error {1}]]></DisplayName>
+				<Severity>Error</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{E50DBEFA-131A-4C08-98C3-38E383E3B4F5}"/>
+				<Hide GUID="{6ACAFED2-7653-4BF5-B608-E9120B60B34E}"/>
+				<Hide GUID="{00EA4ABF-CC9C-42CC-865C-262B500436DD}"/>
+				<Hide GUID="{E2D8498A-F4A8-4DF0-9266-9B9148DA8CC8}"/>
+				<Hide GUID="{A16B584B-F6C4-4FE5-BE3A-DCD62CEE450C}"/>
+				<Hide GUID="{08443C1A-EFD9-4CED-81D8-045E42F31ECE}"/>
+				<Hide GUID="{70B56B2C-E819-44B7-8940-D77C031703F9}"/>
+				<Hide GUID="{F850933E-2E3E-4B90-B403-E8A677043466}"/>
+				<Hide GUID="{E081824E-481A-4FD6-BEDA-6B155255B9B3}"/>
+			</Hides>
+		</DataType>
+		<DataType>
+			<Name GUID="{BEEF1698-C006-49EF-B186-74A61026304E}" Namespace="TwinSAFE" PersistentType="true">Safety</Name>
+			<DisplayName TxtId=""><![CDATA[SafetyApplication]]></DisplayName>
+			<EventId>
+				<Name Id="1">EstopBtn</Name>
+				<DisplayName TxtId=""><![CDATA[Machine {0} E-Stop Button Pressed]]></DisplayName>
+				<Severity>Warning</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">LightCurtainTripped</Name>
+				<DisplayName TxtId=""><![CDATA[Machine {0} Light Curtain Tripped]]></DisplayName>
+				<Severity>Warning</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="3">MachineXEstopTripped</Name>
+				<DisplayName TxtId=""><![CDATA[Machine {0} E-Stop is tripped]]></DisplayName>
+				<Severity>Warning</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{A1F50655-D775-49A2-AF48-6B9D2653BE2B}"/>
+				<Hide GUID="{FA9F0CE4-DAD1-4C83-95E5-0409960E6C6E}"/>
+				<Hide GUID="{698D76FB-A258-47D5-A1A1-C9F177E67008}"/>
+				<Hide GUID="{0A47EC16-055D-40D5-9B2C-E231DFCBE8F8}"/>
+				<Hide GUID="{DD666579-D060-45D3-8954-68FAF595C1F1}"/>
+				<Hide GUID="{1F547B84-1308-4B6C-A831-1FAC08FB8230}"/>
+				<Hide GUID="{D7CEC66C-BBDE-49FB-B1FF-C795ECB1F07D}"/>
+				<Hide GUID="{DAB9459E-0C6E-4E8A-974A-7DB7187A36EC}"/>
+				<Hide GUID="{7912C5A6-8B87-4350-89BF-CE78EBE6C9BE}"/>
+				<Hide GUID="{2BB498E7-065A-4BC3-A139-C43B8EBA39F1}"/>
+				<Hide GUID="{05F853AD-345D-4F63-BAB8-11FD38FE72E4}"/>
+			</Hides>
+		</DataType>
+	</DataTypes>
+	<Project ProjectGUID="{C3AFD091-F71D-4207-8FE7-75C2799194C1}" TargetNetId="5.126.34.230.1.1" Target64Bit="true" ShowHideConfigurations="#x346">
+		<System>
+			<Settings MaxCpus="4" NonWinCpus="1" RouterMemory="268435456">
+				<Cpu CpuId="3"/>
+			</Settings>
+			<Licenses>
+				<Target>
+					<ManualSelect>{1C20D4D8-C732-464D-AF34-6EA5D2180E06}</ManualSelect>
+					<ManualSelect>{927A7313-A412-4376-8911-4A8F60EC8651}</ManualSelect>
+					<ManualSelect>{27326EE5-AB30-4084-B15B-8CCA96CCBF0B}</ManualSelect>
+					<ManualSelect>{3DDCAB25-BF0E-412C-A721-DC77C1B8099C}</ManualSelect>
+				</Target>
+			</Licenses>
+			<Tasks>
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PlcTask</Name>
+				</Task>
+			</Tasks>
+		</System>
+		<Motion>
+			<NC File="NC.xti"/>
+		</Motion>
+		<Plc>
+			<Project File="PLC.xti"/>
+		</Plc>
+		<Safety>
+			<Project File="SafetyCode.xti"/>
+		</Safety>
+		<Io>
+			<Device File="Real IO.xti" Id="1"/>
+			<Device File="Sim IO.xti" Id="2"/>
+			<Device File="CP Buttons.xti" Id="6"/>
+		</Io>
+	</Project>
+	<Mappings>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500810000403}" Id="#x02030030"/>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500880000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{00000000-0040-0304-3000-040340000403}" Id="#x02030060"/>
+		<MappingInfo Identifier="{00000000-0050-0304-3000-040351000403}" Id="#x02030070"/>
+		<MappingInfo Identifier="{08502001-0040-0304-0020-500840000403}" Id="#x02030020" Watchdog="00000000000000000000000000000000"/>
+		<MappingInfo Identifier="{05000010-2001-0850-3000-040300205008}" Id="#x02030040" Watchdog="14000000040000000400000004000000"/>
+		<MappingInfo Identifier="{03040010-0010-0304-1000-040310000403}" Id="#x02030080" Watchdog="04000000040000000400000004000000"/>
+		<MappingInfo Identifier="{03040040-0010-0304-4000-040310000403}" Id="#x02030050" Watchdog="14000000040000000400000004000000"/>
+		<OwnerA Name="TIID^Real IO">
+			<OwnerB Name="TIID^Sim IO^Machine A (EK1100)^Machine A Safe In (EL1904)">
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionOutputs^TwinSafeGroup1.Machine A Safe In (EL1904) - Module 1 (FSOES)_32 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO^Machine B (EK1100)^Machine B Safe out (EL2904)">
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionInputs^TwinSafeGroup1.Machine B Safe out (EL2904) - Module 1 (FSOES)_35 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionOutputs^TwinSafeGroup1.Machine B Safe out (EL2904) - Module 1 (FSOES)_35 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO^Machine C (EK1100)^Machine C Safe out (EL2904)">
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionInputs^TwinSafeGroup1.Machine C Safe out (EL2904) - Module 1 (FSOES)_37 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionOutputs^TwinSafeGroup1.Machine C Safe out (EL2904) - Module 1 (FSOES)_37 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO^Machine D (EK1100)^Carrier X Safety Encoder (EL5001-0090)">
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionInputs^TwinSafeGroup1.Carrier X Safety Encoder (EL5001-0090) - Module 1 (EL5001-0090)_48 TxPDO" VarB="Module 1 (EL5001-0090)^TSC Master Message^TSC"/>
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionOutputs^TwinSafeGroup1.Carrier X Safety Encoder (EL5001-0090) - Module 1 (EL5001-0090)_48 RxPDO" VarB="Module 1 (EL5001-0090)^TSC Slave Message^TSC"/>
+			</OwnerB>
+		</OwnerA>
+		<OwnerA Name="TIID^Sim IO">
+			<OwnerB Name="TIID^Real IO^Term 1 (EK1200)^Machine Safety Controller (EL6910)">
+				<Link VarA="Machine A (EK1100)^Machine A Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine A Safe In (EL1904) - Module 1 (FSOES)_32 TxPDO"/>
+				<Link VarA="Machine A (EK1100)^Machine A Safe out (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine A Safe out (EL2904) - Module 1 (FSOES)_33 TxPDO"/>
+				<Link VarA="Machine A (EK1100)^Machine A Safe out (EL2904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine A Safe out (EL2904) - Module 1 (FSOES)_33 RxPDO"/>
+				<Link VarA="Machine B (EK1100)^Machine B Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine B Safe In (EL1904) - Module 1 (FSOES)_34 TxPDO"/>
+				<Link VarA="Machine B (EK1100)^Machine B Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine B Safe In (EL1904) - Module 1 (FSOES)_34 RxPDO"/>
+				<Link VarA="Machine C (EK1100)^Machine C Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine C Safe In (EL1904) - Module 1 (FSOES)_36 TxPDO"/>
+				<Link VarA="Machine C (EK1100)^Machine C Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine C Safe In (EL1904) - Module 1 (FSOES)_36 RxPDO"/>
+				<Link VarA="Machine D (EK1100)^Machine D Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine D Safe In (EL1904) - Module 1 (FSOES)_38 TxPDO"/>
+				<Link VarA="Machine D (EK1100)^Machine D Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine D Safe In (EL1904) - Module 1 (FSOES)_38 RxPDO"/>
+				<Link VarA="Machine D (EK1100)^Machine D Safe out (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine D Safe out (EL2904) - Module 1 (FSOES)_39 TxPDO"/>
+				<Link VarA="Machine D (EK1100)^Machine D Safe out (EL2904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine D Safe out (EL2904) - Module 1 (FSOES)_39 RxPDO"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
+</TcSmProject>

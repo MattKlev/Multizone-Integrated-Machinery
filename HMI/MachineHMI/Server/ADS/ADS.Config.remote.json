@@ -1,5 +1,13 @@
 {
     "RUNTIMES": {
+        "NC": {
+            "ENABLED": true,
+            "NETID": "127.0.0.1.1.1",
+            "PORT": 501,
+            "READ_ONLY": false,
+            "SYMBOLS": {},
+            "USE_WHITELISTING": false
+        },
         "PLC1": {
             "ENABLED": true,
             "NETID": "127.0.0.1.1.1",

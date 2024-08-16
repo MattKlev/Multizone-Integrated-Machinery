@@ -27,6 +27,8 @@
     <HmiInitial>1.12.760.48</HmiInitial>
     <HmiRecent>1.12.760.59</HmiRecent>
     <HmiServerNodeAdvancedView>False</HmiServerNodeAdvancedView>
+    <HmiCompanyName>Beckhoff</HmiCompanyName>
+    <HmiCompanyWebsite>www.beckhoff.com</HmiCompanyWebsite>
   </PropertyGroup>
   <PropertyGroup>
     <TwinCATHmi_Tasks>$(TcHmiDirectory)\MSBuild\Beckhoff.TwinCAT.HMI.tasks</TwinCATHmi_Tasks>

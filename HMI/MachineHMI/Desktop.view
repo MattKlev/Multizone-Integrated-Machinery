@@ -37,7 +37,29 @@
     "icon_p": "%tr%TR_Icon_Settings_pressed%/tr%"
   }
 ]
-</script></div>><div id="Header_Top" data-tchmi-type="TcHmi.Controls.BaseTemplate.TcHmiHeader" data-tchmi-height="80" data-tchmi-left="%ctrl%Navigation_Left::Width%/ctrl%" data-tchmi-top="0" data-tchmi-right="0" data-tchmi-height-unit="px">
+</script>
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+</div>><div id="Header_Top" data-tchmi-type="TcHmi.Controls.BaseTemplate.TcHmiHeader" data-tchmi-height="80" data-tchmi-left="%ctrl%Navigation_Left::Width%/ctrl%" data-tchmi-top="0" data-tchmi-right="0" data-tchmi-height-unit="px">
 <script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json">[
 "divider",
 "divider-top"
@@ -59,7 +81,7 @@
     "image": "Images/Beckhoff_Logo.svg",
     "altText": "Beckhoff",
     "targetRegion": "%ctrl%Region_Center%/ctrl%",
-    "targetContent": "Pages/Start Page.content"
+    "targetContent": "Pages/StartPage.content"
   },
   {
     "itemType": "EventLine",
@@ -163,26 +185,55 @@
     "classList": [],
     "accessRights": [],
     "timeDisplayLayout": "TimeDateMultiLine"
-  },
-  {
-    "itemType": "UserManagement",
-    "priority": "3",
-    "itemAlign": "Right",
-    "prefWidth": 288.0,
-    "prefWidthUnit": "px",
-    "prefHeight": 48.0,
-    "prefHeightUnit": "px",
-    "minWidth": 176.0,
-    "minWidthUnit": "px",
-    "classList": [],
-    "accessRights": [],
-    "allowLogout": true,
-    "allowSwitchUser": false
   }
 ]
-</script></div><div id="Region_Center" data-tchmi-type="TcHmi.Controls.System.TcHmiRegion" data-tchmi-left="%ctrl%Navigation_Left::Width%/ctrl%" data-tchmi-top="%ctrl%Header_Top::Height%/ctrl%" data-tchmi-scrolling="Yes" data-tchmi-bottom="0" data-tchmi-right="0">
+</script>
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
 
-<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json"></script></div><script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[ 
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+</div><div id="Region_Center" data-tchmi-type="TcHmi.Controls.System.TcHmiRegion" data-tchmi-left="%ctrl%Navigation_Left::Width%/ctrl%" data-tchmi-top="%ctrl%Header_Top::Height%/ctrl%" data-tchmi-scrolling="Yes" data-tchmi-bottom="0" data-tchmi-right="0">
+
+<script data-tchmi-target-attribute="data-tchmi-class-names" type="application/json"></script>
+<script data-tchmi-target-attribute="data-tchmi-border-width" type="application/json">
+{
+  "left": 1,
+  "right": 1,
+  "top": 1,
+  "bottom": 1,
+  "leftUnit": "px",
+  "rightUnit": "px",
+  "topUnit": "px",
+  "bottomUnit": "px"
+}
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-border-style" type="application/json">
+{
+  "left": "Solid",
+  "right": "Solid",
+  "top": "Solid",
+  "bottom": "Solid"
+}
+</script>
+</div><script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">[ 
                 {   
                     "event": "%ctrl%Desktop::RenderedWidth%/ctrl%", 
                     "actions": [ 

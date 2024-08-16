@@ -1,0 +1,776 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_Machine" Id="{b7e2ee06-f24d-46a5-a5b3-e60b99cad5e4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Machine
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	//Alarms
+	AlarmLocalEstopBtn	: FB_Alarm;
+	AlarmAEstopBtn		: FB_Alarm;
+	AlarmBEstopBtn		: FB_Alarm;
+	AlarmCEstopBtn		: FB_Alarm;
+	AlarmDEstopBtn		: FB_Alarm;
+
+	AlarmALightCurtain	: FB_Alarm;
+	AlarmBLightCurtain	: FB_Alarm;
+	AlarmCLightCurtain	: FB_Alarm;
+
+	AlarmXNotReady	: FB_Alarm;
+	AlarmZNotReady	: FB_Alarm;
+
+	AlarmXAxisError	: FB_Alarm;
+	AlarmZAxisError	: FB_Alarm;
+	
+	AlarmAEstopTripped	:FB_Alarm;
+	AlarmBEstopTripped	:FB_Alarm;
+	AlarmCEstopTripped	:FB_Alarm;
+	AlarmDEstopTripped	:FB_Alarm;
+
+	//Buttons
+	Start		: ST_LEDButton;
+	HMI_Start	: ST_LEDButton;
+	rtStart		: R_TRIG;
+	Stop		: ST_LEDButton;
+	HMI_Stop	: ST_LEDButton;
+	rtStop		: R_TRIG;
+	Reset		: ST_LEDButton;
+	HMI_Reset	: ST_LEDButton;
+	rtReset		: R_TRIG;
+
+	//Inputs
+	LocalEstop AT %I*	: BOOL;
+	MachineAIn			: ST_MachineModuleInputs;
+	MachineBIn			: ST_MachineModuleInputs;
+	MachineCIn			: ST_MachineModuleInputs;
+	MachineDIn			: ST_MachineModuleInputs;
+
+	//Overide
+	Override : LREAL := 50.0;
+
+	TwinSAFEGroupRun			AT %Q*	: BOOL := TRUE;
+	TwinSAFEGroupErrAck			AT %Q*	: BOOL;
+	TwinSAFEGroupState			AT %I*	: USINT;
+	TwinSAFE_X_Axis_ActPos		AT %Q*	: UDINT;
+	TwinSAFE_ResetAllEstopZones	AT %Q*	: BOOL;
+
+	TwinSAFE_Machine_A_Estop_State	AT %I*	: USINT;
+	TwinSAFE_Machine_B_Estop_State	AT %I*	: USINT;
+	TwinSAFE_Machine_C_Estop_State	AT %I*	: USINT;
+	TwinSAFE_Machine_D_Estop_State	AT %I*	: USINT;
+
+	AxisInError : BOOL; //One or more axis in error
+
+	X_Axis			: AXIS_REF;
+	Z_Axis			: AXIS_REF;
+	fbCarrierReset	: FB_CarrierReset;
+
+	fbCarrierStop : FB_CarrierStop;
+
+	StateToReturnToAfterStop	: E_State;
+	lastState					: E_State;
+	previousState				: E_State;
+	State						: E_State;
+	NextState					: E_State;
+
+	//HMI Display               		
+	sPreviouseState : STRING;
+
+	sState : STRING;
+
+	sNextState : STRING;
+
+	fbMoveCarrier		: FB_CarrierAbsMove;
+	HomePosSetPoint		: ST_CarrierSetPoint	:= (X_Pos := 100, X_Velo := 500, Z_Pos := 100, Z_Velo := 800);
+	APickPosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 290, X_Velo := 500, Z_Pos := 1100, Z_Velo := 800);
+	BWaitPosSetpoint	: ST_CarrierSetPoint	:= (X_Pos := 600, X_Velo := 500, Z_Pos := 100, Z_Velo := 800);
+	BPlacePosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 1000, X_Velo := 500, Z_Pos := 1200, Z_Velo := 800);
+	BWorkPosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 1000, X_Velo := 500, Z_Pos := 100, Z_Velo := 800);
+	BPickPosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 1000, X_Velo := 500, Z_Pos := 1200, Z_Velo := 800);
+	CWaitPosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 1350, X_Velo := 500, Z_Pos := 100, Z_Velo := 800);
+	CPlacePosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 1700, X_Velo := 500, Z_Pos := 1000, Z_Velo := 800);
+	CWorkPosSetPoint	: ST_CarrierSetPoint	:= (X_Pos := 1800, X_Velo := 500, Z_Pos := 100, Z_Velo := 800);
+
+	//Machine A                 		
+	WaitTimeForAToBeReady : TIME := T#1S;
+
+	//Machine B             		
+	WaitTimeForBtoBeReady	: TIME	:= T#1.5S;
+	BDoingWorkTime			: TIME	:= T#2S;
+
+	//Machine C             			
+	WaitTimeForCtoBeReady	: TIME	:= T#0.5S;
+	CDoingWorkTime			: TIME	:= T#750MS;
+
+	//Machine D
+	Machine_D_Carrier_Gripper AT %Q* : BIT;
+
+	iResetingStep : UDINT;
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT M_Init() THEN
+	RETURN;
+END_IF
+
+rtStart(CLK := Start.Button OR HMI_Start.Button);
+rtStop(CLK := Stop.Button OR HMI_Stop.Button);
+rtReset(CLK := Reset.Button OR HMI_Reset.Button);
+
+M_HMI_Display();
+
+CASE State OF
+	E_State.Init:
+		fbMoveCarrier.X_AxisRef	:= ADR(X_Axis);
+		fbMoveCarrier.Z_AxisRef	:= ADR(Z_Axis);
+		fbMoveCarrier(Execute := FALSE);
+		Machine_D_Carrier_Gripper := FALSE;
+
+		fbCarrierReset(Execute := FALSE);
+		fbCarrierReset.X_AxisRef	:= ADR(X_Axis);
+		fbCarrierReset.Z_AxisRef	:= ADR(Z_Axis);
+
+		fbCarrierStop(Execute := FALSE);
+		fbCarrierStop.X_AxisRef	:= ADR(X_Axis);
+		fbCarrierStop.Z_AxisRef	:= ADR(Z_Axis);
+
+		State			:= E_State.Idel;
+		NextState		:= E_State.Idel;
+		iResetingStep	:= 0;
+	E_State.Idel:
+		NextState := E_State.Enable;
+
+		IF TwinSAFEGroupState = 1 AND NOT AxisInError THEN
+			IF rtStart.Q THEN
+				State := E_State.Enable;
+			ELSIF rtReset.Q THEN
+				State := E_State.Reseting;
+			ELSIF AxisInError THEN
+				State := E_State.Error;
+			END_IF
+		ELSE
+			State := E_State.Error;
+		END_IF
+
+	E_State.Enable:
+		NextState := E_State.MoveToHome;
+
+		IF TwinSAFEGroupState = 1 THEN
+			State := E_State.MoveToHome;
+		ELSIF AxisInError OR TwinSAFEGroupState <> 1 THEN
+			State := E_State.Error;
+		END_IF
+
+	E_State.MoveToHome:
+		NextState					:= E_State.WaitForAToBeReady;
+		StateToReturnToAfterStop	:= State;
+		fbMoveCarrier.SetPoint		:= HomePosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			State := E_State.WaitForAToBeReady;
+		ELSIF fbMoveCarrier.Error THEN
+			State := E_State.Error;
+		END_IF
+
+	E_State.WaitForAToBeReady:
+		NextState					:= E_State.MoveToAPickPos;
+		StateToReturnToAfterStop	:= State;
+
+		IF M_ProcessDelay(WaitTimeForAToBeReady) THEN
+			State := E_State.MoveToAPickPos;
+		END_IF
+
+	E_State.MoveToAPickPos:
+		NextState					:= E_State.PickFromA;
+		StateToReturnToAfterStop	:= State;
+		fbMoveCarrier.SetPoint		:= APickPosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			State := E_State.PickFromA;
+		ELSIF fbMoveCarrier.Error THEN
+			State := E_State.Error;
+		END_IF
+
+	E_State.PickFromA:
+		NextState					:= E_State.MoveToBWaitPos;
+		StateToReturnToAfterStop	:= State;
+
+		IF M_CloseGripper() THEN
+			State := E_State.MoveToBWaitPos;
+		END_IF
+
+	E_State.MoveToBWaitPos:
+		NextState					:= E_State.WaitForBToBeReady;
+		StateToReturnToAfterStop	:= State;
+		fbMoveCarrier.SetPoint		:= BWaitPosSetpoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			State := E_State.WaitForBToBeReady;
+		ELSIF fbMoveCarrier.Error THEN
+			State := E_State.Error;
+		END_IF
+
+	E_State.WaitForBToBeReady:
+		NextState					:= E_State.MoveToBPlacePosition;
+		StateToReturnToAfterStop	:= State;
+
+		IF M_ProcessDelay(WaitTimeForBtoBeReady) THEN
+			State := E_State.MoveToBPlacePosition;
+		END_IF
+
+	E_State.MoveToBPlacePosition:
+		NextState					:= E_State.PlaceOnB;
+		StateToReturnToAfterStop	:= State;
+		fbMoveCarrier.SetPoint		:= BPlacePosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			State := E_State.PlaceOnB;
+		ELSIF fbMoveCarrier.Error THEN
+			State := E_State.Error;
+		END_IF
+
+	E_State.PlaceOnB:
+		NextState					:= E_State.MoveToBWorkPos;
+		StateToReturnToAfterStop	:= State;
+
+		IF M_OpenGripper() THEN
+			State := E_State.MoveToBWorkPos;
+		END_IF
+
+	E_State.MoveToBWorkPos:
+		NextState					:= E_State.BDoingWork;
+		StateToReturnToAfterStop	:= State;
+		fbMoveCarrier.SetPoint		:= BWorkPosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			State := E_State.BDoingWork;
+		ELSIF fbMoveCarrier.Error THEN
+			State := E_State.Error;
+		END_IF
+
+	E_State.BDoingWork:
+		NextState					:= E_State.MoveToBPickPos;
+		StateToReturnToAfterStop	:= State;
+
+		IF M_ProcessDelay(BDoingWorkTime) THEN
+			State := E_State.MoveToBPickPos;
+		END_IF
+
+	E_State.MoveToBPickPos:
+		NextState					:= E_State.PickPartFromB;
+		StateToReturnToAfterStop	:= State;
+		fbMoveCarrier.SetPoint		:= BPickPosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			State := E_State.PickPartFromB;
+		ELSIF fbMoveCarrier.Error THEN
+			State := E_State.Error;
+		END_IF
+
+	E_State.PickPartFromB:
+		NextState					:= E_State.MoveToCWaitPos;
+		StateToReturnToAfterStop	:= State;
+
+		IF M_CloseGripper() THEN
+			State := E_State.MoveToCWaitPos;
+		END_IF
+
+	E_State.MoveToCWaitPos:
+		NextState					:= E_State.WaitForCToBeReady;
+		StateToReturnToAfterStop	:= State;
+		fbMoveCarrier.SetPoint		:= CWaitPosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			State := E_State.WaitForCToBeReady;
+		ELSIF fbMoveCarrier.Error THEN
+			State := E_State.Error;
+		END_IF
+
+	E_State.WaitForCToBeReady:
+		NextState					:= E_State.MoveToCPlacePos;
+		StateToReturnToAfterStop	:= State;
+
+		IF M_ProcessDelay(WaitTimeForCtoBeReady) THEN
+			State := E_State.MoveToCPlacePos;
+		END_IF
+
+	E_State.MoveToCPlacePos:
+		NextState					:= E_State.PlaceOnC;
+		StateToReturnToAfterStop	:= State;
+		fbMoveCarrier.SetPoint		:= CPlacePosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			State := E_State.PlaceOnC;
+		ELSIF fbMoveCarrier.Error THEN
+			State := E_State.Error;
+		END_IF
+
+	E_State.PlaceOnC:
+		NextState					:= E_State.MoveToCWorkPos;
+		StateToReturnToAfterStop	:= State;
+
+		IF M_OpenGripper() THEN
+			State := E_State.MoveToCWorkPos;
+		END_IF
+
+	E_State.MoveToCWorkPos:
+		NextState					:= E_State.CDoingWork;
+		StateToReturnToAfterStop	:= State;
+		fbMoveCarrier.SetPoint		:= CWorkPosSetPoint;
+		fbMoveCarrier(Execute := TRUE);
+
+		IF fbMoveCarrier.Done THEN
+			fbMoveCarrier(Execute := FALSE);
+			State := E_State.CDoingWork;
+		ELSIF fbMoveCarrier.Error THEN
+			State := E_State.Error;
+		END_IF
+
+	E_State.CDoingWork:
+		NextState					:= E_State.MoveToHome;
+		StateToReturnToAfterStop	:= State;
+
+		IF M_ProcessDelay(CDoingWorkTime) THEN
+			State := E_State.MoveToHome;
+		END_IF
+
+	E_State.Stopping:
+		NextState := E_State.Stopped;
+		fbCarrierStop(Execute := TRUE);
+
+		IF fbCarrierStop.Done THEN
+			fbCarrierStop(Execute := FALSE);
+			State := E_State.Stopped;
+		ELSIF fbCarrierStop.Error THEN
+			State := E_State.Error;
+		END_IF
+
+	E_State.Stopped:
+		NextState := StateToReturnToAfterStop;
+
+		IF rtStart.Q THEN
+			fbMoveCarrier(Execute := FALSE);
+			State := StateToReturnToAfterStop;
+		END_IF
+
+	E_State.Error:
+		NextState := E_State.Reseting;
+
+		IF rtReset.Q THEN
+			State := E_State.Reseting;
+		END_IF
+
+	E_State.Reseting:
+		NextState := E_State.Init;
+
+		CASE iResetingStep OF
+			0: //Toggle TS group Err ack
+				TwinSAFEGroupErrAck	:= TRUE;
+				iResetingStep		:= 10;
+
+			10: //Clear axis error
+				fbCarrierReset(Execute := TRUE);
+				TwinSAFEGroupErrAck := FALSE;
+
+				IF NOT fbCarrierReset.Busy THEN
+					fbCarrierReset(Execute := FALSE);
+					State := E_State.Init;
+				END_IF
+		END_CASE
+
+END_CASE
+
+M_AxisPower();
+M_BtnLights();
+M_ToTwinSAFE();
+M_Alarms();
+]]></ST>
+    </Implementation>
+    <Method Name="M_Alarms" Id="{bb9f6439-8177-410f-842b-07bc4654e228}">
+      <Declaration><![CDATA[METHOD M_Alarms
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[AlarmLocalEstopBtn(AlarmState := LocalEstop);
+AlarmAEstopBtn(AlarmState := NOT MachineAIn.EstopBtn);
+AlarmBEstopBtn(AlarmState := NOT MachineBIn.EstopBtn);
+AlarmCEstopBtn(AlarmState := NOT MachineCIn.EstopBtn);
+AlarmDEstopBtn(AlarmState := NOT MachineDIn.EstopBtn);
+
+AlarmALightCurtain(AlarmState := NOT MachineAIn.LightCurtain);
+AlarmBLightCurtain(AlarmState := NOT MachineBIn.LightCurtain);
+AlarmCLightCurtain(AlarmState := NOT MachineCIn.LightCurtain);
+
+X_Axis.ReadStatus();
+Z_Axis.ReadStatus();
+
+AlarmXNotReady(AlarmState := X_Axis.Status.ErrorID = 16#4650);
+AlarmZNotReady(AlarmState := Z_Axis.Status.ErrorID = 16#4650);
+
+AlarmXAxisError(AlarmState := X_Axis.Status.ErrorID <> 16#4650 AND X_Axis.Status.ErrorID <> 0);
+AlarmZAxisError(AlarmState := Z_Axis.Status.ErrorID <> 16#4650 AND Z_Axis.Status.ErrorID <> 0);
+
+AlarmAEstopTripped(AlarmState := TwinSAFE_Machine_A_Estop_State<>1);
+AlarmBEstopTripped(AlarmState := TwinSAFE_Machine_B_Estop_State<>1);
+AlarmCEstopTripped(AlarmState := TwinSAFE_Machine_C_Estop_State<>1);
+AlarmDEstopTripped(AlarmState := TwinSAFE_Machine_D_Estop_State<>1);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_AxisPower" Id="{677ce463-30f2-4570-893a-c6b140cbb6b7}">
+      <Declaration><![CDATA[METHOD M_AxisPower : BOOL
+VAR_INPUT
+END_VAR
+VAR_INST
+	X_Power	: MC_Power;
+	Z_Power	: MC_Power;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[X_Power(Axis			:= X_Axis,
+		Enable			:= TRUE,
+		Enable_Positive := TRUE,
+		Enable_Negative := TRUE,
+		Override		:= Override);
+
+Z_Power(Axis			:= Z_Axis,
+		Enable			:= TRUE,
+		Enable_Positive := TRUE,
+		Enable_Negative := TRUE,
+		Override		:= Override);
+
+X_Axis.ReadStatus();
+Z_Axis.ReadStatus();
+
+AxisInError := X_Axis.Status.Error OR Z_Axis.Status.Error;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_BtnLights" Id="{af046070-a77a-47ce-80e9-2f5b081ed094}">
+      <Declaration><![CDATA[METHOD M_BtnLights
+VAR_INPUT
+END_VAR
+VAR_INST
+	StartLEDBlink	: BLINK;
+	ResetLEDBlink	: BLINK;
+	StopLEDBlink	: BLINK;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//Buttons
+//Start
+CASE State OF
+	E_State.Init:
+		Start.LED := FALSE;
+	E_State.Idel:
+		StartLEDBlink.TIMEHIGH	:= T#1S;
+		StartLEDBlink.TIMELOW	:= T#1S;
+		Start.LED				:= StartLEDBlink.out;
+	E_State.Enable:
+		StartLEDBlink.TIMEHIGH	:= T#500MS;
+		StartLEDBlink.TIMELOW	:= T#500MS;
+		Start.LED				:= StartLEDBlink.out;
+	E_State.MoveToHome..E_State.CDoingWork:
+		Start.LED := TRUE;
+	E_State.Stopping:
+		Start.LED := FALSE;
+	E_State.Stopped:
+		StartLEDBlink.TIMEHIGH	:= T#200MS;
+		StartLEDBlink.TIMELOW	:= T#200MS;
+		Start.LED				:= StartLEDBlink.out;
+	E_State.Error..E_State.Reseting:
+		Start.LED := FALSE;
+END_CASE
+
+HMI_Start.LED := Start.LED;
+StartLEDBlink(ENABLE := TRUE);
+
+//Reset
+CASE State OF
+	E_State.Init..E_State.CDoingWork:
+		Reset.LED := FALSE;
+	E_State.Error:
+		ResetLEDBlink.TIMEHIGH	:= T#1S;
+		ResetLEDBlink.TIMELOW	:= T#1S;
+		Reset.LED				:= ResetLEDBlink.OUT;
+	E_State.Reseting:
+		ResetLEDBlink.TIMEHIGH	:= T#500MS;
+		ResetLEDBlink.TIMELOW	:= T#500MS;
+		Reset.LED				:= ResetLEDBlink.OUT;
+END_CASE
+
+HMI_Reset.LED := Reset.LED;
+ResetLEDBlink(ENABLE := TRUE);
+
+//Stop
+CASE State OF
+	E_State.Init..E_State.Enable:
+		Stop.LED := FALSE;
+	E_State.MoveToHome..E_State.CDoingWork:
+		IF rtStop.Q THEN
+			State := E_State.Stopping;
+		END_IF
+
+		Stop.LED := TRUE;
+	E_State.Stopping:
+		StopLEDBlink.TIMEHIGH	:= T#500MS;
+		StopLEDBlink.TIMELOW	:= T#500MS;
+		Stop.LED				:= StopLEDBlink.OUT;
+	E_State.Stopped..E_State.Reseting:
+		Stop.LED := FALSE;
+END_CASE
+
+HMI_Stop.LED := Stop.LED;
+StopLEDBlink(ENABLE := TRUE);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_CloseGripper" Id="{bb5f6fbc-361e-4823-9fe0-7bae5c45e5a8}">
+      <Declaration><![CDATA[METHOD M_CloseGripper : BOOL
+VAR_INPUT
+END_VAR
+
+VAR_INST
+	tonDelay : TON;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[tonDelay(IN := TRUE, PT := T#200MS);
+
+Machine_D_Carrier_Gripper := TRUE;
+
+IF tonDelay.Q THEN
+	tonDelay(IN := FALSE);
+	M_CloseGripper := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_HMI_Display" Id="{2b28b642-ef01-438d-ac1c-6fcbb9133807}">
+      <Declaration><![CDATA[METHOD M_HMI_Display
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[(* Check if state has changed since the last cycle *)
+IF lastState <> State THEN
+	previousState := lastState; (* Update previous state *)
+END_IF;
+
+(* Update lastState for the next cycle *)
+lastState := State;
+
+//HMI Display strings
+sPreviouseState	:= F_E_State_To_String(previousState);
+sState			:= F_E_State_To_String(State);
+sNextState		:= F_E_State_To_String(NextState);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Init" Id="{f08181bd-7414-4d53-a953-ff9dd3723004}">
+      <Declaration><![CDATA[METHOD M_Init : BOOL
+VAR_INPUT
+END_VAR
+VAR_INST
+	InitStep : UDINT := 0;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE InitStep OF
+	0://Create alarms
+		//Estop buttons
+		AlarmLocalEstopBtn.Arg1 := 'local';
+		AlarmLocalEstopBtn.Create(EventEntry := TC_EVENTS.Safety.EstopBtn);
+		AlarmAEstopBtn.Arg1 := 'A';
+		AlarmAEstopBtn.Create(EventEntry := TC_EVENTS.Safety.EstopBtn);		
+		AlarmBEstopBtn.Arg1 := 'B';
+		AlarmBEstopBtn.Create(EventEntry := TC_EVENTS.Safety.EstopBtn);			
+		AlarmCEstopBtn.Arg1 := 'C';
+		AlarmCEstopBtn.Create(EventEntry := TC_EVENTS.Safety.EstopBtn);	
+		AlarmDEstopBtn.Arg1 := 'D';
+		AlarmDEstopBtn.Create(EventEntry := TC_EVENTS.Safety.EstopBtn);	
+	
+		//Light curtains
+		AlarmALightCurtain.Arg1 := 'A';
+		AlarmALightCurtain.Create(EventEntry := TC_EVENTS.Safety.LightCurtainTripped);	
+		AlarmBLightCurtain.Arg1 := 'B';
+		AlarmBLightCurtain.Create(EventEntry := TC_EVENTS.Safety.LightCurtainTripped);	
+		AlarmCLightCurtain.Arg1 := 'C';
+		AlarmCLightCurtain.Create(EventEntry := TC_EVENTS.Safety.LightCurtainTripped);
+
+		//Axis
+		AlarmXNotReady.Arg1 := 'X';
+		AlarmXNotReady.Create(EventEntry := TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate);					
+
+		AlarmZNotReady.Arg1 := 'Z';
+		AlarmZNotReady.Create(EventEntry := TC_EVENTS.DriveErrors.DriveHardwareNotReadyToOperate);
+
+		AlarmXAxisError.Arg1 := 'X';
+		AlarmXAxisError.Create(EventEntry := TC_EVENTS.DriveErrors.AxisInError);					
+
+		AlarmZAxisError.Arg1 := 'Z';
+		AlarmZAxisError.Create(EventEntry := TC_EVENTS.DriveErrors.AxisInError);
+		
+		AlarmAEstopTripped.Arg1 := 'A';
+		AlarmAEstopTripped.Create(EventEntry := TC_EVENTS.Safety.MachineXEstopTripped);	
+	
+		AlarmBEstopTripped.Arg1 := 'B';
+		AlarmBEstopTripped.Create(EventEntry := TC_EVENTS.Safety.MachineXEstopTripped);	
+	
+		AlarmCEstopTripped.Arg1 := 'C';
+		AlarmCEstopTripped.Create(EventEntry := TC_EVENTS.Safety.MachineXEstopTripped);	
+			
+		AlarmDEstopTripped.Arg1 := 'D';
+		AlarmDEstopTripped.Create(EventEntry := TC_EVENTS.Safety.MachineXEstopTripped);	
+			
+		InitStep := 20;
+	20:
+		M_Init := TRUE;
+END_CASE
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_OpenGripper" Id="{bc5ae333-e81c-4a39-98d0-d42ee8d75e01}">
+      <Declaration><![CDATA[METHOD M_OpenGripper : BOOL
+VAR_INPUT
+END_VAR
+VAR_INST
+	tonDelay : TON;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[tonDelay(IN := TRUE, PT := T#200MS);
+Machine_D_Carrier_Gripper := FALSE;
+
+IF tonDelay.Q THEN
+	tonDelay(IN := FALSE);
+	M_OpenGripper := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_ProcessDelay" Id="{3395a5bb-7516-43c6-b5c3-a43eefaec935}">
+      <Declaration><![CDATA[METHOD M_ProcessDelay : BOOL
+VAR_INPUT
+	pt : TIME;
+END_VAR
+VAR_INST
+	tonDelay : TON;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[tonDelay(IN := TRUE, PT := pt, Q =>, ET =>);
+
+IF tonDelay.Q THEN
+	M_ProcessDelay := TRUE;
+	tonDelay(IN := FALSE, PT := pt, Q =>, ET =>);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_ToTwinSAFE" Id="{cf48c3d9-39ce-4201-a195-96504adf0d58}">
+      <Declaration><![CDATA[METHOD M_ToTwinSAFE
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TwinSAFE_X_Axis_ActPos := TO_UDINT(X_Axis.NcToPlc.ActPos);
+
+TwinSAFE_ResetAllEstopZones := Reset.Button OR HMI_Reset.Button;
+
+TwinSAFEGroupRun := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_Machine">
+      <LineId Id="2277" Count="290" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_Alarms">
+      <LineId Id="27" Count="17" />
+      <LineId Id="46" Count="3" />
+      <LineId Id="23" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_AxisPower">
+      <LineId Id="57" Count="14" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_BtnLights">
+      <LineId Id="84" Count="63" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_CloseGripper">
+      <LineId Id="41" Count="6" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_HMI_Display">
+      <LineId Id="25" Count="11" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_Init">
+      <LineId Id="72" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="113" Count="0" />
+      <LineId Id="87" Count="1" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="103" Count="0" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="114" Count="0" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="110" Count="0" />
+      <LineId Id="106" Count="0" />
+      <LineId Id="112" Count="0" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="116" Count="0" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="118" Count="0" />
+      <LineId Id="117" Count="0" />
+      <LineId Id="119" Count="0" />
+      <LineId Id="121" Count="0" />
+      <LineId Id="120" Count="0" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="124" Count="3" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="137" Count="0" />
+      <LineId Id="135" Count="0" />
+      <LineId Id="143" Count="0" />
+      <LineId Id="140" Count="0" />
+      <LineId Id="139" Count="0" />
+      <LineId Id="145" Count="0" />
+      <LineId Id="142" Count="0" />
+      <LineId Id="141" Count="0" />
+      <LineId Id="148" Count="0" />
+      <LineId Id="146" Count="1" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="90" Count="3" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_OpenGripper">
+      <LineId Id="35" Count="5" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_ProcessDelay">
+      <LineId Id="41" Count="4" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Machine.M_ToTwinSAFE">
+      <LineId Id="17" Count="3" />
+      <LineId Id="8" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

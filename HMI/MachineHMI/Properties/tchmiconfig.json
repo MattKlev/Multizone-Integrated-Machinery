@@ -10,7 +10,7 @@
     "websocketSystemTimeout": 60000,
     "websocketSubscriptionMode": "Change"
   },
-  "activeTheme": "Base",
+  "activeTheme": "Base-Dark",
   "themes": {
     "Base-Dark": {
       "resources": [
@@ -57,28 +57,28 @@
     {
       "url": "Pages/EtherCATDiagnostics.content",
       "preload": false,
-      "keepAlive": false,
+      "keepAlive": true,
       "loadSync": false,
       "preloadBindings": false
     },
     {
       "url": "Pages/Events.content",
       "preload": false,
-      "keepAlive": false,
+      "keepAlive": true,
       "loadSync": false,
       "preloadBindings": false
     },
     {
       "url": "Pages/Settings.content",
       "preload": false,
-      "keepAlive": false,
+      "keepAlive": true,
       "loadSync": false,
       "preloadBindings": false
     },
     {
       "url": "Pages/StartPage.content",
       "preload": false,
-      "keepAlive": false,
+      "keepAlive": true,
       "loadSync": false,
       "preloadBindings": false
     }
@@ -87,7 +87,7 @@
     {
       "url": "Desktop.view",
       "preload": false,
-      "keepAlive": false,
+      "keepAlive": true,
       "preloadBindings": false
     }
   ],

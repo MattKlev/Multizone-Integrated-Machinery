@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="FB_Alarm" Id="{02169d60-7c0d-4d68-ae88-9c327c45c307}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Alarm
+VAR_INPUT
+	AlarmState : BOOL;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	_hrAlarm		: HRESULT;
+	_fbAlarm		: FB_TcAlarm;
+	_EventEntry		: TcEventEntry;
+	_Arg1, _Arg2	: STRING;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+IF AlarmState THEN
+	_fbAlarm.Raise(0);
+ELSE
+	_fbAlarm.Clear(0, 0);
+END_IF]]></ST>
+    </Implementation>
+    <Property Name="Arg1" Id="{27d8efcc-9c14-4464-8391-36275d6613b9}">
+      <Declaration><![CDATA[PROPERTY Arg1 : STRING]]></Declaration>
+      <Get Name="Get" Id="{8a69a0e9-362e-41a2-9e8d-9304068a8164}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Arg1 := _Arg1;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{b356882b-0416-4599-8589-b81d76a1870d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_Arg1 := Arg1;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="Arg2" Id="{c675a70d-984e-4823-99b7-b614dcb12fff}">
+      <Declaration><![CDATA[PROPERTY Arg2 : STRING]]></Declaration>
+      <Get Name="Get" Id="{693d4e2e-73de-4d13-9c79-3706b45dac12}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Arg2 := _Arg2;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{4d11c705-2412-465b-b910-f14f6e9432c0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_Arg2 := Arg2;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Create" Id="{ba5f00d6-01e7-4d06-8573-83a28497bb89}">
+      <Declaration><![CDATA[METHOD Create
+VAR_INPUT
+	EventEntry : TcEventEntry;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_EventEntry	:= EventEntry;
+_hrAlarm	:= _fbAlarm.CreateEx(stEventEntry := EventEntry, bWithConfirmation := 0, ipSourceInfo := 0);
+
+_fbAlarm.ipArguments.Clear();
+
+IF _Arg1 <> '' THEN
+	_fbAlarm.ipArguments.AddString(_Arg1);
+END_IF
+
+IF _Arg2 <> '' THEN
+	_fbAlarm.ipArguments.AddString(_Arg2);
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_Alarm">
+      <LineId Id="67" Count="4" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Alarm.Arg1.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Alarm.Arg1.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Alarm.Arg2.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Alarm.Arg2.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Alarm.Create">
+      <LineId Id="36" Count="11" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
