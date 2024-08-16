@@ -1163,6 +1163,9 @@ External Setpoint Generation:
 			</OwnerB>
 			<OwnerB Name="TIID^Real IO^Term 1 (EK1200)^Machine Safety Controller (EL6910)">
 				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFEGroupState" VarB="TwinSAFE Group Info Data^TwinSafeGroup1 Info Data^State"/>
+				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFE_Machine_A_Estop_State" VarB="Function Block Info Data^TwinSafeGroup1.MachineA.Machine_A.FBEstop1 Info Data^State"/>
+				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFE_Machine_B_Estop_State" VarB="Function Block Info Data^TwinSafeGroup1.MachineB.Machine_B.FBEstop1 Info Data^State"/>
+				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFE_Machine_C_Estop_State" VarB="Function Block Info Data^TwinSafeGroup1.MachineC.Machine_C.FBEstop1 Info Data^State"/>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFE_Machine_D_Estop_State" VarB="Function Block Info Data^TwinSafeGroup1.MachineD.Machine_D_Estop Info Data^State"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupErrAck" VarB="StandardOutputs^TwinSafeGroup1.ErrorAcknowledgement_1" Size="1"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupRun" VarB="StandardOutputs^TwinSafeGroup1.Run_2" Size="1"/>
