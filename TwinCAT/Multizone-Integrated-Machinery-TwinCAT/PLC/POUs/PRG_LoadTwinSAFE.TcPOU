@@ -3,12 +3,12 @@
   <POU Name="PRG_LoadTwinSAFE" Id="{432598c0-3dd3-4ee6-9e02-bd10e98be550}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM PRG_LoadTwinSAFE
 VAR
-	//On startup, check if the "correct" TwinSAFE program CRC is loaded.
+	//On startup, check if the "completed" TwinSAFE program CRC is loaded.
 	//System will restore it self back to "demo state" when powering up.
 	
 	LoaderAlarm				:FB_TcAlarm;
 	
-	Step					:(Init,WaitForOSToBoot,WaitForWcStateOk,CheckCRC,DownloadCode,Downloading,ActivateCode,Activating,Error,Done);
+	Step					:(Init,WaitForOSToBoot,WaitForWcStateOk,CheckCRC,Delete,Deleting,DownloadCode,Downloading,ActivateCode,Activating,Error,Done);
 	tonWaitForOSToBoot		:TON:=(PT:=T#2M);
 	ntCallTwinSAFELoader	:NT_StartProcess;
 	ProjectCRC		AT%I*	:WORD;
@@ -45,6 +45,37 @@ CASE Step OF
 		IF ProjectCRC = ExpectedProjectCRC THEN
 			Step := Done;
 		ELSE
+			Step := Delete;
+		END_IF
+
+	Delete:
+		ntCallTwinSAFELoader(NETID	:= '',
+							PATHSTR := 'C:\TwinSAFE_Loader\TwinSAFE_Loader.exe',
+							DIRNAME := 'C:\TwinSAFE_Loader\',
+							COMNDLINE :=
+							'--gw 172.16.17.50 --user Administrator --pass TwinSAFE --slave 1001 --delete',
+							START := TRUE,
+							TMOUT := T#15S);
+
+		IF NOT ntCallTwinSAFELoader.BUSY THEN
+			ntCallTwinSAFELoader(START := FALSE);
+
+			IF NOT ntCallTwinSAFELoader.ERR THEN
+				Step := Deleting;
+
+			ELSE
+				Step := Error;
+				LoaderAlarm.ipArguments.Clear();
+				LoaderAlarm.ipArguments.AddString('Deleting');
+				LoaderAlarm.ipArguments.AddUDInt(ntCallTwinSAFELoader.ERRID);
+			END_IF
+		END_IF
+
+	Deleting:
+		tonWait(IN := TRUE);
+
+		IF tonWait.Q THEN
+			tonWait(IN := FALSE);
 			Step := DownloadCode;
 		END_IF
 
@@ -125,7 +156,7 @@ END_CASE
 ]]></ST>
     </Implementation>
     <LineIds Name="PRG_LoadTwinSAFE">
-      <LineId Id="277" Count="98" />
+      <LineId Id="427" Count="129" />
       <LineId Id="14" Count="0" />
     </LineIds>
   </POU>
