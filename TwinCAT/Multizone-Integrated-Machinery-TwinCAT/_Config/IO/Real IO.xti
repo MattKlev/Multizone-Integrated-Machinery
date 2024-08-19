@@ -190,7 +190,7 @@
 			<Box Id="4" BoxType="9099" BoxFlags="#x00000020">
 				<Name>Machine Safety Controller (EL6910)</Name>
 				<ImageId>1001</ImageId>
-				<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x1afe3052" RevisionNo="#x00120000" InfoDataAddr="true" RepeatSupport="true" TimeoutStateChange1="5000" TimeoutMailbox2="10000" TComSupport="true" PortPhys="51" DebugMemory="8" SafetyLogicSupported="true" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6910, TwinSAFE PLC" Desc="EL6910" PortABoxInfo="#x01000001">
+				<EtherCAT EtherCatAddr="1001" SlaveType="2" AdsServerAddress="000000000000e903" PdiType="#x0005" EtherCatAddrFixed="true" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="3" FoeType="1" VendorId="#x00000002" ProductCode="#x1afe3052" RevisionNo="#x00120000" InfoDataAddr="true" RepeatSupport="true" TimeoutStateChange1="5000" TimeoutMailbox2="10000" TComSupport="true" PortPhys="51" DebugMemory="8" SafetyLogicSupported="true" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL6910, TwinSAFE PLC" Desc="EL6910" PortABoxInfo="#x01000001">
 					<SyncMan>001000012600010001000000000100010001001026010000</SyncMan>
 					<SyncMan>001100012200010002000000000100010001001122010000</SyncMan>
 					<SyncMan>001249002400010003000000000000000200001224010000</SyncMan>
@@ -308,10 +308,10 @@
 						</Entry>
 					</Pdo>
 					<Pdo Name="Device Info Data" Index="#x1bfe" Flags="#x2011" SyncMan="3">
-						<Entry Name="Project CRC" Index="#x7000" Sub="#x01">
+						<Entry Name="Project CRC" Index="#x7000" Sub="#x01" Flags="#x00008000">
 							<Type>WORD</Type>
 						</Entry>
-						<Entry Name="Serial Number" Index="#x7000" Sub="#x02">
+						<Entry Name="Serial Number" Index="#x7000" Sub="#x02" Flags="#x00008000">
 							<Type>UDINT</Type>
 						</Entry>
 					</Pdo>

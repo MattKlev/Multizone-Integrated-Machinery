@@ -27,7 +27,7 @@
 			</Hides>
 		</DataType>
 		<DataType>
-			<Name GUID="{BEEF1698-C006-49EF-B186-74A61026304E}" Namespace="TwinSAFE" PersistentType="true">Safety</Name>
+			<Name GUID="{8D5B7DE3-4039-4A90-8C1F-FB1AAFCDF9F0}" Namespace="TwinSAFE" PersistentType="true">Safety</Name>
 			<DisplayName TxtId=""><![CDATA[SafetyApplication]]></DisplayName>
 			<EventId>
 				<Name Id="1">EstopBtn</Name>
@@ -44,6 +44,11 @@
 				<DisplayName TxtId=""><![CDATA[Machine {0} E-Stop is tripped]]></DisplayName>
 				<Severity>Warning</Severity>
 			</EventId>
+			<EventId>
+				<Name Id="4">TwinSAFELoaderError</Name>
+				<DisplayName TxtId=""><![CDATA[Call to the TwinSAFE loader while {0} failed with error {1}]]></DisplayName>
+				<Severity>Critical</Severity>
+			</EventId>
 			<Hides>
 				<Hide GUID="{A1F50655-D775-49A2-AF48-6B9D2653BE2B}"/>
 				<Hide GUID="{FA9F0CE4-DAD1-4C83-95E5-0409960E6C6E}"/>
@@ -56,6 +61,8 @@
 				<Hide GUID="{7912C5A6-8B87-4350-89BF-CE78EBE6C9BE}"/>
 				<Hide GUID="{2BB498E7-065A-4BC3-A139-C43B8EBA39F1}"/>
 				<Hide GUID="{05F853AD-345D-4F63-BAB8-11FD38FE72E4}"/>
+				<Hide GUID="{BEEF1698-C006-49EF-B186-74A61026304E}"/>
+				<Hide GUID="{C9B85D08-C867-48CE-8ADB-545C87FC9F62}"/>
 			</Hides>
 		</DataType>
 	</DataTypes>
@@ -107,32 +114,34 @@
 				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionInputs^TwinSafeGroup1.Machine A Safe In (EL1904) - Module 1 (FSOES)_32 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
 				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionOutputs^TwinSafeGroup1.Machine A Safe In (EL1904) - Module 1 (FSOES)_32 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Sim IO^Machine A (EK1100)^Machine A Safe out (EL2904)">
-				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionInputs^TwinSafeGroup1.Machine A Safe out (EL2904) - Module 1 (FSOES)_33 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
+			<OwnerB Name="TIID^Sim IO^Machine B (EK1100)^Machine B Safe In (EL1904)">
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionOutputs^TwinSafeGroup1.Machine B Safe In (EL1904) - Module 1 (FSOES)_34 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Sim IO^Machine B (EK1100)^Machine B Safe out (EL2904)">
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionInputs^TwinSafeGroup1.Machine B Safe out (EL2904) - Module 1 (FSOES)_35 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Sim IO^Machine C (EK1100)^Machine C Safe In (EL1904)">
 				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionInputs^TwinSafeGroup1.Machine C Safe In (EL1904) - Module 1 (FSOES)_36 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionOutputs^TwinSafeGroup1.Machine C Safe In (EL1904) - Module 1 (FSOES)_36 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Sim IO^Machine C (EK1100)^Machine C Safe out (EL2904)">
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionInputs^TwinSafeGroup1.Machine C Safe out (EL2904) - Module 1 (FSOES)_37 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
 				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionOutputs^TwinSafeGroup1.Machine C Safe out (EL2904) - Module 1 (FSOES)_37 RxPDO" VarB="Module 1 (FSOES)^TxPDO^FSOE"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Sim IO^Machine D (EK1100)^Machine D Safe out (EL2904)">
-				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionInputs^TwinSafeGroup1.Machine D Safe out (EL2904) - Module 1 (FSOES)_39 TxPDO" VarB="Module 1 (FSOES)^RxPDO^FSOE"/>
+			<OwnerB Name="TIID^Sim IO^Machine D (EK1100)^Carrier X Safety Encoder (EL5001-0090)">
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionInputs^TwinSafeGroup1.Carrier X Safety Encoder (EL5001-0090) - Module 1 (EL5001-0090)_48 TxPDO" VarB="Module 1 (EL5001-0090)^TSC Master Message^TSC"/>
+				<Link VarA="Term 1 (EK1200)^Machine Safety Controller (EL6910)^ConnectionOutputs^TwinSafeGroup1.Carrier X Safety Encoder (EL5001-0090) - Module 1 (EL5001-0090)_48 RxPDO" VarB="Module 1 (EL5001-0090)^TSC Slave Message^TSC"/>
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TIID^Sim IO">
 			<OwnerB Name="TIID^Real IO^Term 1 (EK1200)^Machine Safety Controller (EL6910)">
+				<Link VarA="Machine A (EK1100)^Machine A Safe out (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine A Safe out (EL2904) - Module 1 (FSOES)_33 TxPDO"/>
 				<Link VarA="Machine A (EK1100)^Machine A Safe out (EL2904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine A Safe out (EL2904) - Module 1 (FSOES)_33 RxPDO"/>
 				<Link VarA="Machine B (EK1100)^Machine B Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine B Safe In (EL1904) - Module 1 (FSOES)_34 TxPDO"/>
-				<Link VarA="Machine B (EK1100)^Machine B Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine B Safe In (EL1904) - Module 1 (FSOES)_34 RxPDO"/>
-				<Link VarA="Machine B (EK1100)^Machine B Safe out (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine B Safe out (EL2904) - Module 1 (FSOES)_35 TxPDO"/>
 				<Link VarA="Machine B (EK1100)^Machine B Safe out (EL2904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine B Safe out (EL2904) - Module 1 (FSOES)_35 RxPDO"/>
-				<Link VarA="Machine C (EK1100)^Machine C Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine C Safe In (EL1904) - Module 1 (FSOES)_36 RxPDO"/>
-				<Link VarA="Machine C (EK1100)^Machine C Safe out (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine C Safe out (EL2904) - Module 1 (FSOES)_37 TxPDO"/>
-				<Link VarA="Machine D (EK1100)^Carrier X Safety Encoder (EL5001-0090)^Module 1 (EL5001-0090)^TSC Master Message^TSC" VarB="ConnectionInputs^TwinSafeGroup1.Carrier X Safety Encoder (EL5001-0090) - Module 1 (EL5001-0090)_48 TxPDO"/>
-				<Link VarA="Machine D (EK1100)^Carrier X Safety Encoder (EL5001-0090)^Module 1 (EL5001-0090)^TSC Slave Message^TSC" VarB="ConnectionOutputs^TwinSafeGroup1.Carrier X Safety Encoder (EL5001-0090) - Module 1 (EL5001-0090)_48 RxPDO"/>
 				<Link VarA="Machine D (EK1100)^Machine D Safe In (EL1904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine D Safe In (EL1904) - Module 1 (FSOES)_38 TxPDO"/>
 				<Link VarA="Machine D (EK1100)^Machine D Safe In (EL1904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine D Safe In (EL1904) - Module 1 (FSOES)_38 RxPDO"/>
+				<Link VarA="Machine D (EK1100)^Machine D Safe out (EL2904)^Module 1 (FSOES)^RxPDO^FSOE" VarB="ConnectionInputs^TwinSafeGroup1.Machine D Safe out (EL2904) - Module 1 (FSOES)_39 TxPDO"/>
 				<Link VarA="Machine D (EK1100)^Machine D Safe out (EL2904)^Module 1 (FSOES)^TxPDO^FSOE" VarB="ConnectionOutputs^TwinSafeGroup1.Machine D Safe out (EL2904) - Module 1 (FSOES)_39 RxPDO"/>
 			</OwnerB>
 		</OwnerA>

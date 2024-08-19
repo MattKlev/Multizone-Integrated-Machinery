@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="PRG_LoadTwinSAFE" Id="{432598c0-3dd3-4ee6-9e02-bd10e98be550}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_LoadTwinSAFE
+VAR
+	//On startup, check if the "correct" TwinSAFE program CRC is loaded.
+	//System will restore it self back to "demo state" when powering up.
+	
+	LoaderAlarm				:FB_TcAlarm;
+	
+	Step					:(Init,WaitForOSToBoot,WaitForWcStateOk,CheckCRC,DownloadCode,Downloading,ActivateCode,Activating,Error,Done);
+	tonWaitForOSToBoot		:TON:=(PT:=T#2M);
+	ntCallTwinSAFELoader	:NT_StartProcess;
+	ProjectCRC		AT%I*	:WORD;
+	
+	WcState			AT%I*	:BOOL;
+	ManDownload				:BOOL;
+	tonWait					:TON:=(PT:=T#10S);
+	
+END_VAR
+VAR CONSTANT
+	ExpectedProjectCRC		:WORD:=16#AAE7;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+CASE Step OF
+	Init:
+		LoaderAlarm.CreateEx(stEventEntry := TC_EVENTS.Safety.TwinSAFELoaderError, bWithConfirmation := FALSE, ipSourceInfo := 0);
+		Step := WaitForOSToBoot;
+
+	WaitForOSToBoot:
+		tonWaitForOSToBoot(IN := TRUE);
+
+		IF tonWaitForOSToBoot.Q THEN
+			Step := WaitForWcStateOk;
+		END_IF
+
+	WaitForWcStateOk:
+		IF WcState = FALSE THEN
+			Step := CheckCRC;
+		END_IF
+
+	CheckCRC:
+		IF ProjectCRC = ExpectedProjectCRC THEN
+			Step := Done;
+		ELSE
+			Step := DownloadCode;
+		END_IF
+
+	DownloadCode:
+		ntCallTwinSAFELoader(NETID	:= '',
+							PATHSTR := 'C:\TwinSAFE_Loader\TwinSAFE_Loader.exe',
+							DIRNAME := 'C:\TwinSAFE_Loader\',
+							COMNDLINE :=
+							'--gw 172.16.17.50 --user Administrator --pass TwinSAFE --slave 1001 --proj C:\TwinSAFE_Loader\SafetyCode.bin',
+							START := TRUE,
+							TMOUT := T#15S);
+
+		IF NOT ntCallTwinSAFELoader.BUSY THEN
+			ntCallTwinSAFELoader(START := FALSE);
+
+			IF NOT ntCallTwinSAFELoader.ERR THEN
+				Step := Downloading;
+
+			ELSE
+				Step := Error;
+				LoaderAlarm.ipArguments.Clear();
+				LoaderAlarm.ipArguments.AddString('Downloading');
+				LoaderAlarm.ipArguments.AddUDInt(ntCallTwinSAFELoader.ERRID);
+			END_IF
+		END_IF
+
+	Downloading:
+		tonWait(IN := TRUE);
+
+		IF tonWait.Q THEN
+			tonWait(IN := FALSE);
+			Step := ActivateCode;
+		END_IF
+
+	ActivateCode:
+		ntCallTwinSAFELoader(NETID	:= '',
+							PATHSTR := 'C:\TwinSAFE_Loader\TwinSAFE_Loader.exe',
+							DIRNAME := 'C:\TwinSAFE_Loader\',
+							COMNDLINE :=
+							'--gw 172.16.17.50 --user Administrator --pass TwinSAFE --slave 1001 --proj C:\TwinSAFE_Loader\SafetyCode.bin --crc 0xaae7',
+							START := TRUE,
+							TMOUT := T#15S);
+
+		IF NOT ntCallTwinSAFELoader.BUSY THEN
+			ntCallTwinSAFELoader(START := FALSE);
+
+			IF NOT ntCallTwinSAFELoader.ERR THEN
+				Step := Activating;
+				ADSLOGSTR(msgCtrlMask := ADSLOG_MSGTYPE_LOG, msgFmtStr := 'TwinSAFE code has been activated', strArg := '');
+			ELSE
+				Step := Error;
+				LoaderAlarm.ipArguments.Clear();
+				LoaderAlarm.ipArguments.AddString('activating');
+				LoaderAlarm.ipArguments.AddUDInt(ntCallTwinSAFELoader.ERRID);
+			END_IF
+		END_IF
+
+	Activating:
+		tonWait(IN := TRUE);
+
+		IF tonWait.Q THEN
+			tonWait(IN := FALSE);
+			Step := Done;
+		END_IF
+
+	Error:
+		IF ManDownload THEN
+			ManDownload	:= FALSE;
+			Step		:= DownloadCode;
+		END_IF
+	Done:
+		IF ManDownload THEN
+			ManDownload	:= FALSE;
+			Step		:= DownloadCode;
+		END_IF
+
+END_CASE
+]]></ST>
+    </Implementation>
+    <LineIds Name="PRG_LoadTwinSAFE">
+      <LineId Id="277" Count="98" />
+      <LineId Id="14" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

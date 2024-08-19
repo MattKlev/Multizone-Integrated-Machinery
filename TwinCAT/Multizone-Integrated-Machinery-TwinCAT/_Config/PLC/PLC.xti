@@ -983,7 +983,7 @@ External Setpoint Generation:
 		</DataType>
 	</DataTypes>
 	<Project GUID="{0C5A0548-FA4F-4B8E-B05E-82A0037B3227}" Name="PLC" PrjFilePath="..\..\PLC\PLC.plcproj" TmcFilePath="..\..\PLC\PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{4882AD3A-9CE7-4593-A5B0-3041A5D4669F}">
+		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC\PLC.tmc" TmcHash="{17BD551E-DDF2-1D15-51BA-971AF37BF6A2}">
 			<Name>PLC Instance</Name>
 			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 			<Vars VarGrpType="1">
@@ -1077,6 +1077,14 @@ External Setpoint Generation:
 					<Name>MAIN.Machine.Z_Axis.NcToPlc</Name>
 					<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 				</Var>
+				<Var>
+					<Name>PRG_LoadTwinSAFE.WcState</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>PRG_LoadTwinSAFE.ProjectCRC</Name>
+					<Type>WORD</Type>
+				</Var>
 			</Vars>
 			<Vars VarGrpType="2" AreaNo="1">
 				<Name>PlcTask Outputs</Name>
@@ -1167,6 +1175,8 @@ External Setpoint Generation:
 				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFE_Machine_B_Estop_State" VarB="Function Block Info Data^TwinSafeGroup1.MachineB.Machine_B.FBEstop1 Info Data^State"/>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFE_Machine_C_Estop_State" VarB="Function Block Info Data^TwinSafeGroup1.MachineC.Machine_C.FBEstop1 Info Data^State"/>
 				<Link VarA="PlcTask Inputs^MAIN.Machine.TwinSAFE_Machine_D_Estop_State" VarB="Function Block Info Data^TwinSafeGroup1.MachineD.Machine_D_Estop Info Data^State"/>
+				<Link VarA="PlcTask Inputs^PRG_LoadTwinSAFE.ProjectCRC" VarB="Device Info Data^Project CRC"/>
+				<Link VarA="PlcTask Inputs^PRG_LoadTwinSAFE.WcState" VarB="WcState^WcState" Size="1"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupErrAck" VarB="StandardOutputs^TwinSafeGroup1.ErrorAcknowledgement_1" Size="1"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFEGroupRun" VarB="StandardOutputs^TwinSafeGroup1.Run_2" Size="1"/>
 				<Link VarA="PlcTask Outputs^MAIN.Machine.TwinSAFE_ResetAllEstopZones" VarB="StandardOutputs^TwinSafeGroup1.ResetAllZones_55" Size="1"/>
